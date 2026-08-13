@@ -1,4 +1,4 @@
-<section class="intro-v3" aria-labelledby="intro-title">
+<section class="intro-v3" data-intro-gate aria-labelledby="intro-title">
   <div class="intro-v3__frame" aria-hidden="true"></div>
 
   <div class="intro-v3__art" aria-hidden="true">
@@ -36,7 +36,7 @@
         Una nueva forma de entender, mantener y controlar toda tu instalación desde un único sistema.
       </p>
 
-      <button class="intro-v3__enter" type="button" aria-label="Entrar en IsiVoltPro">
+      <button class="intro-v3__enter" data-intro-enter type="button" aria-label="Entrar en IsiVoltPro">
         <span>Entrar en IsiVoltPro</span>
         <i aria-hidden="true">→</i>
       </button>
@@ -48,3 +48,34 @@
     <p>INSTALACIONES · MANTENIMIENTO · TRAZABILIDAD</p>
   </footer>
 </section>
+
+<script is:inline>
+  (() => {
+    const gate = document.querySelector('[data-intro-gate]');
+    const enter = document.querySelector('[data-intro-enter]');
+    const video = document.querySelector('[data-hero-video]');
+    if (!(gate instanceof HTMLElement) || !(enter instanceof HTMLButtonElement)) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let leaving = false;
+
+    const openSite = () => {
+      if (leaving) return;
+      leaving = true;
+      gate.classList.add('is-leaving');
+      document.body.classList.remove('has-intro');
+
+      if (video instanceof HTMLVideoElement) {
+        try { video.currentTime = 0; } catch (_) {}
+        video.play().catch(() => {});
+      }
+
+      window.setTimeout(() => gate.remove(), reduced ? 40 : 860);
+    };
+
+    enter.addEventListener('click', openSite);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && document.body.classList.contains('has-intro')) openSite();
+    });
+  })();
+</script>

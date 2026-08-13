@@ -1,0 +1,17 @@
+body.has-intro { overflow: hidden; }
+
+.intro-v3 {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity .82s var(--ease-premium), transform .82s var(--ease-premium), visibility .82s;
+}
+
+.intro-v3.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.014);
+}

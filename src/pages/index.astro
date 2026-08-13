@@ -1,5 +1,6 @@
 ---
 import Intro from '../components/home/Intro.astro';
+import Hero from '../components/home/Hero.astro';
 import '../styles/global.css';
 import '../styles/home.css';
 ---
@@ -12,9 +13,10 @@ import '../styles/home.css';
     <meta name="theme-color" content="#03070c" />
     <title>IsiVoltPro · Gestión técnica conectada</title>
   </head>
-  <body>
+  <body class="has-intro">
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <main id="contenido">
+      <Hero />
       <Intro />
     </main>
   </body>

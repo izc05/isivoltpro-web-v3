@@ -11,7 +11,7 @@ Una fase → build → publicación → revisión → aprobación → siguiente 
 - Fase 0 · Foundation + GitHub Pages
 - Fase 1 · Portada premium
 - Fase 2 · Hero con vídeo
-- Fase 3 · Qué es IsiVoltPro
+- Fase 3 · Qué es IsiVoltPro — EN REVISIÓN
 - Fase 4 · Flujo operativo
 - Fase 5 · Ecosistema
 - Fase 6 · Aplicaciones

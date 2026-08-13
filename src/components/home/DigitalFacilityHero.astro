@@ -1,0 +1,58 @@
+---
+const base = import.meta.env.BASE_URL;
+const mediaSrc = `${base}video/hero-home-calidad-original.mp4`;
+---
+<section class="v2-hero" data-v2-hero aria-labelledby="v2-hero-title">
+  <div class="v2-hero__stage" data-v2-stage>
+    <video class="v2-hero__media" data-v2-backdrop muted playsinline preload="metadata" aria-hidden="true">
+      <source src={mediaSrc} type="video/mp4" />
+    </video>
+    <div class="v2-hero__veil" aria-hidden="true"></div>
+    <div class="v2-hero__grid" aria-hidden="true"></div>
+    <div class="v2-hero__canvas" data-v2-canvas aria-hidden="true"></div>
+
+    <header class="v2-hero__header shell">
+      <a class="v2-brand" href={base} aria-label="IsiVoltPro">
+        <span class="v2-brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>ISIVOLT<strong>PRO</strong></span>
+      </a>
+      <nav class="v2-nav" aria-label="Navegación principal">
+        <a href="#ecosistema">Ecosistema</a>
+        <a href={`${base}aplicaciones/`}>Aplicaciones</a>
+        <a href="#flujo">Cómo funciona</a>
+        <a href={`${base}empresa/`}>Empresa</a>
+      </nav>
+      <div class="v2-header__actions">
+        <a class="v2-btn" href={`${base}acceso/`}>Acceder <span>↗</span></a>
+        <a class="v2-btn v2-btn--blue v2-btn--demo" href={`${base}contacto/`}>Solicitar demo <span>→</span></a>
+      </div>
+    </header>
+
+    <div class="v2-hero__copy v2-hero__copy--left">
+      <p class="v2-kicker">DIGITAL FACILITY</p>
+      <h1 id="v2-hero-title">TODA TU<br />INSTALACIÓN</h1>
+      <p>IsiVoltPro centraliza la operación y conserva el contexto técnico de cada activo, incidencia y actuación.</p>
+    </div>
+
+    <div class="v2-hero__copy v2-hero__copy--right">
+      <p class="v2-kicker">GESTIÓN TÉCNICA CONECTADA</p>
+      <h2>CONECTADA A<br /><span>UN SOLO SISTEMA</span></h2>
+      <p>Activos, mantenimiento, órdenes de trabajo, recursos y trazabilidad dentro de una única arquitectura.</p>
+    </div>
+
+    <div class="v2-hero__label v2-hero__label--a" aria-hidden="true"><strong>Activos</strong><small>Identidad · Estado</small></div>
+    <div class="v2-hero__label v2-hero__label--b" aria-hidden="true"><strong>Mantenimiento</strong><small>Planificación · Control</small></div>
+    <div class="v2-hero__label v2-hero__label--c" aria-hidden="true"><strong>Órdenes de trabajo</strong><small>Asignación · Actuación</small></div>
+    <div class="v2-hero__label v2-hero__label--d" aria-hidden="true"><strong>Histórico</strong><small>Trazabilidad · Contexto</small></div>
+
+    <div class="v2-hero__system" aria-hidden="true"><i></i><span>SISTEMA CONECTADO</span></div>
+    <div class="v2-hero__scroll" aria-hidden="true"><span>SCROLL TO EXPLORE</span><i></i></div>
+  </div>
+</section>
+
+<script>
+  import { initHeroSceneV2 } from '../../scripts/hero-scene-v2';
+  import { initHeroScrollV2 } from '../../scripts/hero-scroll-v2';
+  initHeroSceneV2();
+  initHeroScrollV2();
+</script>

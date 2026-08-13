@@ -1,5 +1,13 @@
+---
+import HomeHeader from './HomeHeader.astro';
+import HeroCore from './HeroCore.astro';
+---
 <section class="xp-hero" id="inicio" aria-labelledby="xp-hero-title">
+  <HomeHeader />
   <div class="xp-hero__rail" aria-hidden="true"><span>01</span><i></i></div>
+  <div class="xp-hero__cross xp-hero__cross--a" aria-hidden="true">+</div>
+  <div class="xp-hero__cross xp-hero__cross--b" aria-hidden="true">+</div>
+  <div class="xp-hero__scene" aria-hidden="true"><div class="xp-hero__beam"></div><HeroCore /></div>
   <div class="xp-hero__content shell">
     <div class="xp-hero__left">
       <p class="xp-kicker"><i></i>DIGITAL FACILITY</p>
@@ -12,4 +20,5 @@
       <p>Activos, mantenimiento, órdenes de trabajo, recursos y trazabilidad dentro de una única arquitectura.</p>
     </div>
   </div>
+  <a class="xp-scroll" href="#ecosistema" aria-label="Descubrir ecosistema"><span>SCROLL TO EXPLORE</span><i>↓</i></a>
 </section>

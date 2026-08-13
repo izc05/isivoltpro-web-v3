@@ -1,0 +1,1 @@
+.v2-loader{position:fixed;z-index:4000;inset:0;display:grid;place-items:center;background:#02060a;color:#f7f9fc}.v2-loader__pro{color:#2f7cff}.v2-loader.is-leaving{opacity:0;visibility:hidden;pointer-events:none}body.v2-is-loading{overflow:hidden}

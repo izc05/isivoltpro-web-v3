@@ -1,0 +1,61 @@
+.home-foundation {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 68% 38%, rgba(23,105,255,.13), transparent 32%),
+    linear-gradient(135deg, #03070c 0%, #06101a 55%, #03070c 100%);
+}
+.home-foundation::before {
+  content: '';
+  position: absolute;
+  inset: 8% 7%;
+  border: 1px solid rgba(110,160,255,.08);
+  border-radius: 34px;
+  pointer-events: none;
+}
+.foundation-card { position: relative; z-index: 1; width: min(820px, 100%); }
+.foundation-brand {
+  margin: 0 0 28px;
+  color: var(--color-blue-soft);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .28em;
+}
+.foundation-card h1 {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(54px, 7.4vw, 118px);
+  line-height: .9;
+  letter-spacing: -.06em;
+  font-weight: 470;
+}
+.foundation-card h1 span { display: block; color: rgba(247,249,252,.98); }
+.foundation-card p {
+  max-width: 590px;
+  margin: 28px 0 0;
+  color: var(--color-muted);
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.7;
+}
+.foundation-status {
+  margin-top: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(247,249,252,.55);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.foundation-status i {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--color-success);
+  box-shadow: 0 0 18px rgba(66,218,139,.35);
+}
+@media (max-width: 700px) {
+  :root { --shell: min(100% - 32px, 1180px); }
+  .home-foundation::before { inset: 12px; border-radius: 22px; }
+}

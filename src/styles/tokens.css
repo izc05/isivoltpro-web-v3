@@ -1,0 +1,17 @@
+:root {
+  --color-ink: #03070c;
+  --color-surface: #07111d;
+  --color-surface-soft: #0b1725;
+  --color-blue: #1769ff;
+  --color-blue-soft: #6ea0ff;
+  --color-white: #f7f9fc;
+  --color-muted: #9caabd;
+  --color-success: #42da8b;
+  --color-line: rgba(160, 186, 220, 0.16);
+  --shell: min(1180px, calc(100vw - 48px));
+  --radius-sm: 12px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
+  --shadow-premium: 0 28px 90px rgba(0,0,0,.28);
+  --ease-premium: cubic-bezier(.2,.75,.2,1);
+}

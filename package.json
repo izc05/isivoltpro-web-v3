@@ -1,6 +1,6 @@
 {
   "name": "isivoltpro-web-v3",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,6 +12,8 @@
   "dependencies": {
     "@astrojs/check": "0.9.4",
     "astro": "7.1.4",
+    "gsap": "3.13.0",
+    "three": "0.179.1",
     "typescript": "5.9.3"
   },
   "engines": {

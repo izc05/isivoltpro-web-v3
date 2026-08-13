@@ -11,12 +11,21 @@ const videoSrc = `${base}video/hero-home-calidad-original.mp4`;
     playsinline
     preload="auto"
     aria-hidden="true"
+    style="object-position:56% center;filter:saturate(1) contrast(1.02) brightness(.94);transform:none"
   >
     <source src={videoSrc} type="video/mp4" />
   </video>
 
-  <div class="hero-v3__ambient" aria-hidden="true"></div>
-  <div class="hero-v3__shade" aria-hidden="true"></div>
+  <div
+    class="hero-v3__ambient"
+    aria-hidden="true"
+    style="background:radial-gradient(circle at 76% 46%,rgba(49,112,255,.07),transparent 34%),linear-gradient(180deg,rgba(3,7,12,.05),transparent 38%,rgba(3,7,12,.10))"
+  ></div>
+  <div
+    class="hero-v3__shade"
+    aria-hidden="true"
+    style="background:linear-gradient(90deg,rgba(2,6,10,.90) 0%,rgba(2,6,10,.78) 25%,rgba(2,6,10,.42) 47%,rgba(2,6,10,.10) 70%,rgba(2,6,10,.08) 100%),linear-gradient(180deg,rgba(2,6,10,.18) 0%,transparent 25%,transparent 78%,rgba(2,6,10,.26) 100%)"
+  ></div>
 
   <header class="hero-v3__header shell">
     <a class="hero-v3__brand" href={base} aria-label="IsiVoltPro">

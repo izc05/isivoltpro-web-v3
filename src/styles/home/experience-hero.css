@@ -1,1 +1,12 @@
-.xp-hero{min-height:100svh}
+.xp-hero{min-height:100svh;background:radial-gradient(circle at 63% 44%,rgba(56,102,160,.10),transparent 22%),radial-gradient(circle at 68% 52%,rgba(23,105,255,.08),transparent 38%),#03070c}
+.xp-hero__scene{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none}
+.xp-hero__scene .hero-core-v3{right:10vw;top:52%;width:min(55vw,860px);height:min(76vh,760px);opacity:.92;filter:saturate(.82) contrast(1.08)}
+.xp-hero__scene .hero-core-v3__label{opacity:.60}
+.xp-hero__content{position:relative;z-index:4;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(440px,.92fr);gap:clamp(40px,7vw,120px);align-items:end;padding-top:150px;padding-bottom:9svh}
+.xp-hero__left{align-self:center;padding-bottom:7vh}
+.xp-hero__right{justify-self:end;align-self:end;max-width:610px;padding-bottom:3vh;text-align:right}
+.xp-hero h1{margin:20px 0 0;font-size:clamp(74px,8.7vw,150px);line-height:.77;letter-spacing:-.075em;font-weight:500;text-transform:uppercase}
+.xp-hero h2{margin:22px 0 0;font-size:clamp(52px,5.3vw,90px);line-height:.84;letter-spacing:-.065em;font-weight:510;text-transform:uppercase}
+.xp-hero h2 span{color:#2e82ff}
+.xp-hero__micro{max-width:360px;margin:32px 0 0;color:rgba(223,232,244,.55);font-size:12px;line-height:1.75}
+.xp-hero__right>p:last-child{max-width:520px;margin:24px 0 0 auto;color:rgba(223,232,244,.56);font-size:13px;line-height:1.72}

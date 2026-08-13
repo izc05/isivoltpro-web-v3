@@ -1,4 +1,5 @@
 ---
+import Intro from '../components/home/Intro.astro';
 import '../styles/global.css';
 import '../styles/home.css';
 ---
@@ -9,17 +10,12 @@ import '../styles/home.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="IsiVoltPro · Plataforma inteligente para entender, mantener y controlar instalaciones técnicas." />
     <meta name="theme-color" content="#03070c" />
-    <title>IsiVoltPro · Web V3</title>
+    <title>IsiVoltPro · Gestión técnica conectada</title>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <main id="contenido" class="home-foundation">
-      <section class="shell foundation-card" aria-labelledby="v3-title">
-        <p class="foundation-brand">ISIVOLTPRO · WEB V3</p>
-        <h1 id="v3-title">Base limpia.<span>Dirección clara.</span></h1>
-        <p>Esta es únicamente la Fase 0: arquitectura, estilos base y publicación. La portada premium y el Hero con vídeo se construirán después, cada uno en su propia fase.</p>
-        <div class="foundation-status"><i></i><span>Foundation ready for review</span></div>
-      </section>
+    <main id="contenido">
+      <Intro />
     </main>
   </body>
 </html>

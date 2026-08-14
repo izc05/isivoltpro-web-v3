@@ -67,8 +67,17 @@ Licencia: CC0.
 2.6 Añadir cuadro/utility box — COMPLETADO
 2.7 Añadir unidad HVAC — COMPLETADO
 2.8 Componer instalación industrial completa — COMPLETADO
-2.9 Optimización final de FASE 2 — SIGUIENTE
-2.10 Publicar revisión visual y detenerse para aprobación
+2.9 Optimización final de FASE 2 — COMPLETADO
+2.10 Publicar revisión visual y detenerse para aprobación — SIGUIENTE
+
+## Optimización aplicada en 2.9
+- Geometría procedural compartida e instanciada para equipos repetidos.
+- Menor teselación donde no aporta diferencia visual apreciable.
+- Sombras selectivas: equipos y estructura mantienen profundidad; tuberías y conductos finos no consumen shadow pass.
+- Shadow map principal limitado y congelable tras resolver los cuatro assets externos.
+- DPR adaptativo con suelo y techo controlados para evitar caídas sostenidas de FPS.
+- Bloom y partículas reducidos sin eliminar el carácter visual de la escena.
+- Métricas visibles de FPS, DPR, draw calls y triángulos para futuras decisiones de calidad.
 
 ## Criterio de salida FASE 2
 La escena debe dejar de parecer un conjunto de cubos de Three.js y empezar a leerse como una instalación técnica real: tuberías, HVAC, cuadros/equipos y profundidad industrial, manteniendo cámara fluida y carga razonable.

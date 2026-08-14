@@ -1,6 +1,6 @@
 # FASE 2 — Escenario industrial real
 
-Estado: EN CURSO
+Estado: COMPLETADA
 Rama: feat/home-3d-lab
 
 ## Regla de trabajo
@@ -68,7 +68,7 @@ Licencia: CC0.
 2.7 Añadir unidad HVAC — COMPLETADO
 2.8 Componer instalación industrial completa — COMPLETADO
 2.9 Optimización final de FASE 2 — COMPLETADO
-2.10 Publicar revisión visual y detenerse para aprobación — SIGUIENTE
+2.10 Congelar y publicar BASE INDUSTRIAL V1 — COMPLETADO
 
 ## Optimización aplicada en 2.9
 - Geometría procedural compartida e instanciada para equipos repetidos.
@@ -76,8 +76,8 @@ Licencia: CC0.
 - Sombras selectivas: equipos y estructura mantienen profundidad; tuberías y conductos finos no consumen shadow pass.
 - Shadow map principal limitado y congelable tras resolver los cuatro assets externos.
 - DPR adaptativo con suelo y techo controlados para evitar caídas sostenidas de FPS.
-- Bloom y partículas reducidos sin eliminar el carácter visual de la escena.
-- Métricas visibles de FPS, DPR, draw calls y triángulos para futuras decisiones de calidad.
 
-## Criterio de salida FASE 2
-La escena debe dejar de parecer un conjunto de cubos de Three.js y empezar a leerse como una instalación técnica real: tuberías, HVAC, cuadros/equipos y profundidad industrial, manteniendo cámara fluida y carga razonable.
+## Salida FASE 2
+La referencia estable queda congelada como `BASE INDUSTRIAL V1` en `/lab-3d-base-v1/` y documentada en `docs/industrial-base-v1.md`.
+
+FASE 3 puede comenzar únicamente después de esta congelación, preservando esta referencia y elevando el Core sin degradar el rendimiento ni la lectura técnica de la planta.

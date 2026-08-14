@@ -1,0 +1,180 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase69Url = `${base}lab-3d-phase69/`;
+const entryUrl = `${base}lab-3d-entry-v1/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.10 · Conversión comercial</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.10</strong>
+      <span>DEMO · CONTACTO · ACCESO</span>
+      <noscript><a href={phase69Url}>Abrir Fase 6.9</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase69Url, entryUrl }}>
+      const conversionMarkup = `
+        <section class="conversion" id="conversion" aria-labelledby="conversion-title">
+          <div class="conversion__head">
+            <div>
+              <p class="eyebrow"><i></i> SIGUIENTE PASO</p>
+              <h2 id="conversion-title">DE LA INSTALACIÓN<br /><em>A UNA DEMO CON CONTEXTO.</em></h2>
+            </div>
+            <div class="conversion__copy">
+              <p class="conversion__lead">IsiVoltPro se entiende mejor cuando parte de una instalación, un equipo y una forma real de trabajar.</p>
+              <p>Por eso el cierre comercial no propone una demo genérica: primero identifica el contexto y después orienta la conversación hacia lo que realmente necesitas resolver.</p>
+            </div>
+          </div>
+
+          <div class="conversion-grid">
+            <article class="conversion-card conversion-card--demo" id="demo">
+              <div class="conversion-card__index"><span>01</span><small>RECORRIDO RECOMENDADO</small></div>
+              <div class="conversion-card__body">
+                <span>SOLICITAR DEMO</span>
+                <h3>UNA DEMO QUE EMPIEZA<br />EN TU INSTALACIÓN.</h3>
+                <p>Antes de enseñar pantallas, situamos el problema: qué instalaciones gestionas, qué disciplinas intervienen y qué información necesitas mantener conectada.</p>
+                <div class="demo-inputs" id="demo-info">
+                  <div><small>01</small><b>TIPO DE INSTALACIÓN</b><span>Hospital · industria · edificio técnico · multisitio</span></div>
+                  <div><small>02</small><b>DISCIPLINAS PRIORITARIAS</b><span>Electricidad · HVAC · agua · infraestructura</span></div>
+                  <div><small>03</small><b>PERSONAS Y ORGANIZACIÓN</b><span>Coordinación · técnicos · responsables · clientes</span></div>
+                  <div><small>04</small><b>PROBLEMA PRINCIPAL</b><span>Activos · OT · inspecciones · documentación · histórico</span></div>
+                </div>
+              </div>
+              <div class="conversion-card__status">
+                <span>CANAL DE SOLICITUD</span>
+                <strong>SE CONECTARÁ EN LA HOME FINAL</strong>
+                <p>No se simula todavía ningún envío de formulario.</p>
+              </div>
+            </article>
+
+            <article class="conversion-card conversion-card--contact" id="contacto">
+              <div class="conversion-card__minihead"><span>02</span><small>CONVERSACIÓN TÉCNICA / COMERCIAL</small></div>
+              <h3>CONTACTAR</h3>
+              <p>Para revisar alcance, integraciones, necesidades específicas o encaje del ecosistema antes de solicitar una demo.</p>
+              <ul><li>Alcance del proyecto</li><li>Integraciones</li><li>Caso de uso</li><li>Próximos pasos</li></ul>
+              <div class="conversion-card__foot"><span>CANAL DE CONTACTO</span><b>PENDIENTE DE DEFINIR</b></div>
+            </article>
+
+            <article class="conversion-card conversion-card--access" id="acceso">
+              <div class="conversion-card__minihead"><span>03</span><small>USUARIOS ISIVOLTPRO</small></div>
+              <h3>ACCEDER</h3>
+              <p>El acceso comercial quedará separado de la explicación de producto y apuntará a la plataforma real cuando la URL de producción esté definida.</p>
+              <div class="access-state"><i></i><div><span>PLATAFORMA</span><strong>CONEXIÓN FINAL PENDIENTE</strong></div></div>
+              <div class="conversion-card__foot"><span>LOGIN REAL</span><b>NO SE SIMULA EN ESTA FASE</b></div>
+            </article>
+          </div>
+
+          <div class="conversion-route" aria-label="Recorrido comercial hasta la conversión">
+            <article><span>01</span><b>ENTENDER</b><small>Qué es IsiVoltPro</small></article><i>→</i>
+            <article><span>02</span><b>VER</b><small>Producto y aplicaciones</small></article><i>→</i>
+            <article><span>03</span><b>RECORRER</b><small>Instalación + 3D</small></article><i>→</i>
+            <article><span>04</span><b>CONVERSAR</b><small>Demo o contacto</small></article><i>→</i>
+            <article><span>05</span><b>ACCEDER</b><small>Plataforma real</small></article>
+          </div>
+
+          <div class="conversion-live">
+            <div>
+              <span>EXPERIENCIA DISPONIBLE AHORA</span>
+              <strong>RECORRER EL ECOSISTEMA 3D</strong>
+              <p>Este enlace sí utiliza una experiencia ya publicada y validada.</p>
+            </div>
+            <a href="${entryUrl}">Explorar experiencia 3D <b>→</b></a>
+          </div>
+
+          <footer class="commercial-footer">
+            <div class="commercial-footer__brand"><span class="commercial-footer__mark"><i></i><i></i><i></i></span><strong>ISIVOLT<span>PRO</span></strong></div>
+            <p>OPERACIÓN TÉCNICA CON CONTEXTO</p>
+            <nav aria-label="Cierre de navegación"><a href="#que-es">Qué es</a><a href="#aplicaciones">Aplicaciones</a><a href="#sectores">Sectores</a><a href="#demo">Demo</a></nav>
+            <b>FÍSICO → DIGITAL → INTELIGENCIA</b>
+          </footer>
+        </section>`;
+
+      const conversionStyles = `
+        .conversion{padding:135px clamp(20px,5vw,92px) 42px;background:radial-gradient(circle at 22% 28%,rgba(0,145,255,.1),transparent 28%),radial-gradient(circle at 82% 40%,rgba(27,207,255,.05),transparent 24%),linear-gradient(180deg,#02070b,#06131d 42%,#02060a 78%);border-top:1px solid rgba(105,169,197,.08)}
+        .conversion__head,.conversion-grid,.conversion-route,.conversion-live,.commercial-footer{width:min(1480px,100%);margin-left:auto;margin-right:auto}
+        .conversion__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:68px}.conversion__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.8vw,98px);line-height:.87;font-weight:650;letter-spacing:-.04em}.conversion__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.74);text-shadow:0 0 36px rgba(0,145,255,.13)}
+        .conversion__copy{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}.conversion__copy p{margin:0 0 13px;color:#8198a3;font-size:12px;line-height:1.8}.conversion__copy .conversion__lead{color:#d4e4eb;font-size:15px}
+        .conversion-grid{display:grid;grid-template-columns:1.35fr .65fr;grid-template-rows:auto auto;gap:14px}.conversion-card{position:relative;border:1px solid rgba(102,183,216,.15);background:linear-gradient(150deg,rgba(8,24,35,.97),rgba(3,10,16,.96));overflow:hidden}.conversion-card--demo{grid-row:1/3;display:grid;grid-template-columns:92px 1fr 220px;min-height:570px}.conversion-card--demo::after{content:'';position:absolute;width:480px;height:480px;border-radius:50%;left:18%;top:-270px;background:#078dff;filter:blur(100px);opacity:.1;pointer-events:none}
+        .conversion-card__index{position:relative;z-index:1;padding:28px 18px;border-right:1px solid rgba(104,180,210,.12);display:flex;flex-direction:column;justify-content:space-between}.conversion-card__index span{font-family:'Barlow Condensed',Inter,sans-serif;font-size:58px;color:#244a5c;line-height:.8}.conversion-card__index small{writing-mode:vertical-rl;transform:rotate(180deg);color:#587783;font-size:6px;font-weight:850;letter-spacing:.17em}
+        .conversion-card__body{position:relative;z-index:1;padding:58px clamp(30px,4vw,66px)}.conversion-card__body>span{color:#55c7ef;font-size:7px;font-weight:850;letter-spacing:.17em}.conversion-card__body h3{margin:16px 0 22px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(46px,4.3vw,72px);line-height:.88;letter-spacing:-.035em}.conversion-card__body>p{max-width:650px;margin:0;color:#879da8;font-size:12px;line-height:1.85}
+        .demo-inputs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:34px}.demo-inputs div{min-height:104px;padding:16px;border:1px solid rgba(105,185,216,.11);background:rgba(2,11,17,.42)}.demo-inputs small{display:block;color:#355f70;font-size:6px;font-weight:900;letter-spacing:.15em}.demo-inputs b{display:block;margin:8px 0 6px;color:#bfdae5;font-size:7px;letter-spacing:.1em}.demo-inputs span{display:block;color:#6f8994;font-size:8px;line-height:1.5}
+        .conversion-card__status{position:relative;z-index:1;padding:34px 24px;border-left:1px solid rgba(104,180,210,.12);background:linear-gradient(180deg,rgba(0,121,204,.1),rgba(2,9,14,.32));display:flex;flex-direction:column;justify-content:flex-end}.conversion-card__status span{color:#597b88;font-size:6px;font-weight:850;letter-spacing:.15em}.conversion-card__status strong{margin:10px 0;color:#9eddf3;font-family:'Barlow Condensed',Inter,sans-serif;font-size:25px;line-height:.98}.conversion-card__status p{margin:0;color:#657f8a;font-size:8px;line-height:1.55}
+        .conversion-card--contact,.conversion-card--access{min-height:278px;padding:30px}.conversion-card__minihead{display:flex;justify-content:space-between;gap:20px}.conversion-card__minihead span{color:#426776;font-size:7px;font-weight:900;letter-spacing:.15em}.conversion-card__minihead small{color:#547481;font-size:6px;font-weight:850;letter-spacing:.13em}.conversion-card--contact h3,.conversion-card--access h3{margin:24px 0 12px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:42px;line-height:.9}.conversion-card--contact>p,.conversion-card--access>p{margin:0;color:#78909b;font-size:9px;line-height:1.7}.conversion-card--contact ul{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;margin:18px 0 0;padding:0;list-style:none}.conversion-card--contact li{padding-left:10px;border-left:1px solid rgba(27,207,255,.25);color:#77929e;font-size:7px;letter-spacing:.07em}
+        .conversion-card__foot{position:absolute;left:30px;right:30px;bottom:25px;display:flex;justify-content:space-between;gap:15px;padding-top:14px;border-top:1px solid rgba(102,181,212,.09)}.conversion-card__foot span{color:#52717e;font-size:6px;letter-spacing:.13em}.conversion-card__foot b{color:#78bdd7;font-size:6px;letter-spacing:.1em;text-align:right}.access-state{display:flex;align-items:center;gap:12px;margin-top:20px;padding:12px 14px;border:1px solid rgba(97,182,214,.1);background:rgba(1,10,16,.42)}.access-state>i{width:7px;height:7px;border-radius:50%;background:#d3a15c;box-shadow:0 0 10px rgba(211,161,92,.32)}.access-state span{display:block;color:#55737f;font-size:5px;letter-spacing:.14em}.access-state strong{display:block;margin-top:3px;color:#b8cdd5;font-size:7px;letter-spacing:.08em}
+        .conversion-route{display:grid;grid-template-columns:1fr 35px 1fr 35px 1fr 35px 1fr 35px 1fr;align-items:stretch;margin-top:14px;border:1px solid rgba(100,179,211,.12);background:#030c12}.conversion-route article{padding:20px}.conversion-route article span{color:#355b6b;font-size:6px;font-weight:900;letter-spacing:.14em}.conversion-route article b{display:block;margin:8px 0 4px;color:#b7d3de;font-size:8px;letter-spacing:.1em}.conversion-route article small{color:#607985;font-size:7px}.conversion-route>i{display:grid;place-items:center;color:#2f6f85;font-style:normal}
+        .conversion-live{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-top:14px;padding:28px 30px;border:1px solid rgba(27,207,255,.18);background:linear-gradient(90deg,rgba(0,114,203,.13),rgba(5,17,25,.84))}.conversion-live span{display:block;color:#5d7d89;font-size:6px;font-weight:850;letter-spacing:.15em}.conversion-live strong{display:block;margin:7px 0 4px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:25px}.conversion-live p{margin:0;color:#6f8893;font-size:8px}.conversion-live a{flex:none;padding:13px 18px;border:1px solid rgba(27,207,255,.28);background:rgba(0,126,216,.14);color:#cdeffc;font-size:8px;font-weight:850;letter-spacing:.11em}.conversion-live a:hover{background:rgba(0,147,255,.22)}.conversion-live a b{margin-left:12px;color:#1bcfff}
+        .commercial-footer{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:34px;margin-top:80px;padding:28px 0 8px;border-top:1px solid rgba(109,178,205,.11);color:#617984}.commercial-footer__brand{display:flex;align-items:center;gap:10px}.commercial-footer__brand>strong{color:#dcebf1;font-size:10px;letter-spacing:.13em}.commercial-footer__brand>strong span{color:#57cfff}.commercial-footer__mark{width:18px;display:grid;gap:2px;transform:skewY(-26deg)}.commercial-footer__mark i{height:3px;background:linear-gradient(90deg,#087dff,#1bcfff)}.commercial-footer p{margin:0;font-size:6px;letter-spacing:.14em}.commercial-footer nav{display:flex;gap:18px}.commercial-footer nav a{font-size:6px;letter-spacing:.1em}.commercial-footer nav a:hover{color:#b9e8f8}.commercial-footer>b{color:#82a9b8;font-size:6px;letter-spacing:.1em}
+        @media(max-width:1100px){.conversion-grid{grid-template-columns:1fr}.conversion-card--demo{grid-row:auto}.conversion-card--contact,.conversion-card--access{min-height:260px}.commercial-footer{grid-template-columns:1fr auto}.commercial-footer p,.commercial-footer nav{display:none}}
+        @media(max-width:800px){.conversion{padding:90px 20px 32px}.conversion__head{grid-template-columns:1fr;gap:28px}.conversion__head h2{font-size:clamp(50px,14vw,72px)}.conversion-card--demo{display:block}.conversion-card__index{display:none}.conversion-card__body{padding:38px 26px 28px}.demo-inputs{grid-template-columns:1fr}.conversion-card__status{border-left:0;border-top:1px solid rgba(104,180,210,.12);padding:26px}.conversion-card--contact,.conversion-card--access{padding:26px}.conversion-card__foot{position:static;margin-top:24px}.conversion-card--contact ul{grid-template-columns:1fr}.conversion-route{grid-template-columns:1fr}.conversion-route>i{justify-content:start;padding-left:20px;transform:rotate(90deg);width:max-content}.conversion-live{display:block}.conversion-live a{display:inline-block;margin-top:20px}.commercial-footer{grid-template-columns:1fr;gap:14px}.commercial-footer>b{justify-self:start}}
+      `;
+
+      async function buildPhase610() {
+        try {
+          const response = await fetch(phase69Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.9: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+          parsed.title = 'IsiVoltPro · Fase 6.10 · Conversión comercial';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'Descubre IsiVoltPro y el siguiente paso: demo contextual, conversación técnica y acceso futuro a la plataforma real.');
+
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#conversion"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#conversion';
+            link.textContent = 'Demo';
+            nav.appendChild(link);
+          }
+
+          const topAccess = parsed.querySelector('.topbar__actions .link');
+          if (topAccess) topAccess.setAttribute('href', '#acceso');
+          const topDemo = parsed.querySelector('.topbar__actions .button--small');
+          if (topDemo) topDemo.setAttribute('href', '#demo');
+
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el cierre comercial anterior');
+          const template = parsed.createElement('template');
+          template.innerHTML = conversionMarkup.trim();
+          bridge.replaceWith(template.content);
+
+          const style = parsed.createElement('style');
+          style.textContent = conversionStyles;
+          parsed.head.appendChild(style);
+
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.10', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase69Url;
+          fallback.textContent = 'Abrir Fase 6.9';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+
+      buildPhase610();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

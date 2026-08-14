@@ -4,570 +4,675 @@ const heroImage = `${base}images/home/isivoltpro-industrial-core.webp`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="ISIVOLTPRO connects industrial operations through edge computing, digital twins and technical intelligence."
+      content="IsiVoltPro conecta activos, mantenimiento, órdenes de trabajo e histórico técnico en un único sistema."
     />
-    <meta name="theme-color" content="#03040c" />
-    <title>ISIVOLTPRO · Industrial Intelligence</title>
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Toda tu instalación conectada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="preload" href={heroImage} as="image" type="image/webp" />
   </head>
 
   <body>
-    <header class="topbar">
-      <a class="brand" href={base} aria-label="ISIVOLTPRO home">
-        <span class="brand-mark" aria-hidden="true">
-          <i></i><i></i><i></i>
-        </span>
-        <span>ISIVOLT<strong>PRO</strong></span>
-      </a>
+    <main class="hero" aria-labelledby="hero-title">
+      <img
+        class="hero__background"
+        src={heroImage}
+        alt="Instalación industrial conectada mediante IsiVoltPro"
+        width="1000"
+        height="531"
+        fetchpriority="high"
+        decoding="async"
+      />
 
-      <nav aria-label="Primary navigation">
-        <a href={`${base}ecosistema/`}>Technology</a>
-        <a href={`${base}aplicaciones/`}>Solutions</a>
-        <a href={`${base}mantenimiento/`}>Case Studies</a>
-        <a href={`${base}empresa/`}>About Us</a>
-        <a href={`${base}contacto/`}>Contact</a>
-      </nav>
-    </header>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+      <div class="hero__core-glow" aria-hidden="true"></div>
+      <div class="hero__beam" aria-hidden="true"></div>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">INDUSTRIAL DIGITAL TWIN</p>
-          <h1 id="hero-title">
-            The Intelligence<br />
-            that Powers<br />
-            Global Industry
-          </h1>
-          <p class="hero-text">
-            Optimizing efficiency, sustainability, and security with ISIVOLTPRO's edge
-            computing and digital twin solutions.
-          </p>
-          <a class="explore-button" href={`${base}aplicaciones/`}>
-            Explore Solutions <span aria-hidden="true">→</span>
-          </a>
+      <svg class="flow" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+        <path class="flow__base" d="M125 568 C330 548 405 510 548 486 S760 474 814 467" />
+        <path class="flow__base" d="M814 467 C975 444 1085 390 1390 386" />
+        <path class="flow__base" d="M814 467 C915 548 1085 605 1435 630" />
+        <path class="flow__base" d="M814 467 C730 565 590 635 355 678" />
+        <path class="flow__pulse flow__pulse--1" d="M125 568 C330 548 405 510 548 486 S760 474 814 467" />
+        <path class="flow__pulse flow__pulse--2" d="M814 467 C975 444 1085 390 1390 386" />
+        <path class="flow__pulse flow__pulse--3" d="M814 467 C915 548 1085 605 1435 630" />
+        <path class="flow__pulse flow__pulse--4" d="M814 467 C730 565 590 635 355 678" />
+      </svg>
+
+      <div class="data-rain" aria-hidden="true">
+        <i style="--x: 45%; --delay: -0.4s; --dur: 4.8s"></i>
+        <i style="--x: 47%; --delay: -2.1s; --dur: 5.7s"></i>
+        <i style="--x: 49%; --delay: -1.2s; --dur: 4.2s"></i>
+        <i style="--x: 50.5%; --delay: -3.4s; --dur: 6.1s"></i>
+        <i style="--x: 52%; --delay: -2.8s; --dur: 5.1s"></i>
+        <i style="--x: 54%; --delay: -0.9s; --dur: 5.9s"></i>
+      </div>
+
+      <header class="topbar">
+        <a class="brand" href={base} aria-label="IsiVoltPro inicio">
+          <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand__name">ISIVOLT<strong>PRO</strong></span>
+        </a>
+
+        <nav class="nav" aria-label="Navegación principal">
+          <a href={`${base}ecosistema/`}>Ecosistema</a><b>•</b>
+          <a href={`${base}aplicaciones/`}>Aplicaciones</a><b>•</b>
+          <a href={`${base}mantenimiento/`}>Cómo funciona</a><b>•</b>
+          <a href={`${base}empresa/`}>Empresa</a><b>•</b>
+          <a href={`${base}recursos/`}>Recursos</a>
+        </nav>
+
+        <div class="topbar__actions">
+          <a class="button button--ghost" href={`${base}acceso/`}>Acceder <span>↗</span></a>
+          <a class="button button--primary" href={`${base}contacto/`}>Solicitar demo <span>→</span></a>
         </div>
+      </header>
 
-        <div class="hero-visual">
-          <div class="image-frame">
-            <img
-              src={heroImage}
-              alt="ISIVOLTPRO industrial digital twin core in a connected plant"
-              width="600"
-              height="319"
-              decoding="async"
-              fetchpriority="high"
-            />
+      <div class="hero__rail" aria-hidden="true">
+        <span>01</span><i></i>
+      </div>
 
-            <div class="data-card efficiency" aria-hidden="true">
-              <span>Efficiency</span>
-              <strong>98.7%</strong>
-              <i class="gauge"></i>
-            </div>
-
-            <div class="data-card flow" aria-hidden="true">
-              <i class="status-dot"></i>
-              <span>Flow Optimization</span>
-              <strong>Active</strong>
-            </div>
-
-            <div class="data-card thermal" aria-hidden="true">
-              <span>Thermal Status</span>
-              <strong>Ideal</strong>
-              <i class="bars"><b></b><b></b><b></b><b></b></i>
-            </div>
-
-            <div class="data-card network" aria-hidden="true">
-              <span>Network Uptime</span>
-              <strong>99.99%</strong>
-              <i class="network-icon"></i>
-            </div>
-
-            <div class="core-label" aria-hidden="true">
-              <span>ISIVOLTPRO CORE</span>
-              <strong>ONLINE</strong>
-            </div>
-
-            <span class="satellite-label" aria-hidden="true">Satellite Node</span>
+      <section class="copy copy--left">
+        <p class="kicker"><i></i>DIGITAL TWIN</p>
+        <h1 id="hero-title">TODA TU<br />INSTALACIÓN</h1>
+        <p class="lead">
+          IsiVoltPro centraliza la operación, conecta tus equipos y optimiza el rendimiento de cada activo de tu instalación.
+        </p>
+        <div class="truth">
+          <span class="truth__icon" aria-hidden="true">⌗</span>
+          <div>
+            <strong>UNA ÚNICA FUENTE DE VERDAD</strong>
+            <p>Datos en tiempo real, trazabilidad y control total.</p>
           </div>
         </div>
       </section>
+
+      <section class="copy copy--right" aria-label="Propuesta de valor">
+        <h2>CONECTADA A<br /><em>UN SOLO<br />SISTEMA</em></h2>
+        <p>
+          Gestión técnica conectada, datos en tiempo real y control total de cada activo de tu instalación.
+        </p>
+      </section>
+
+      <div class="node node--assets" aria-hidden="true">
+        <i></i><strong>ACTIVOS</strong><small>IDENTIDAD · ESTADO</small>
+      </div>
+      <div class="node node--maintenance" aria-hidden="true">
+        <i></i><strong>MANTENIMIENTO</strong><small>PLANIFICACIÓN · CONTROL</small>
+      </div>
+      <div class="node node--orders" aria-hidden="true">
+        <i></i><strong>ÓRDENES DE TRABAJO</strong><small>ASIGNACIÓN · ACTUACIÓN</small>
+      </div>
+      <div class="node node--history" aria-hidden="true">
+        <i></i><strong>HISTÓRICO</strong><small>TRAZABILIDAD · AUDITORÍA</small>
+      </div>
+
+      <div class="scroll" aria-hidden="true">
+        <span>SCROLL TO EXPLORE</span>
+        <i>↓</i>
+      </div>
     </main>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --bg: #03040c;
-    --surface: rgba(5, 12, 24, 0.82);
-    --text: #ffffff;
-    --muted: #b8bec9;
-    --cyan: #00e0fe;
-    --cyan-soft: rgba(0, 224, 254, 0.28);
-    --frame: #1c2a3e;
-    --header-h: 80px;
-    font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --blue: #087dff;
+    --blue-bright: #1594ff;
+    --cyan: #20b7ff;
+    --ink: #02060b;
+    --white: #f6f8fb;
+    --muted: rgba(232, 238, 248, 0.72);
+    font-family: 'Inter', system-ui, sans-serif;
     color-scheme: dark;
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   html,
   body {
     margin: 0;
-    min-height: 100%;
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  html {
-    overflow-x: hidden;
-  }
-
-  body {
     min-width: 320px;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    min-height: 100%;
+    background: var(--ink);
+    color: var(--white);
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background: #02060b;
+  }
+
+  .hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: -7;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    filter: saturate(1.08) contrast(1.04) brightness(0.82);
+    transform: scale(1.015);
+  }
+
+  .hero__shade,
+  .hero__vignette,
+  .hero__core-glow,
+  .hero__beam {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__shade {
+    z-index: -6;
+    background:
+      linear-gradient(90deg, rgba(1, 5, 11, 0.95) 0%, rgba(1, 5, 11, 0.69) 20%, rgba(1, 5, 11, 0.16) 43%, rgba(1, 5, 11, 0.08) 56%, rgba(1, 5, 11, 0.72) 82%, rgba(1, 5, 11, 0.94) 100%),
+      linear-gradient(180deg, rgba(1, 5, 11, 0.70) 0%, transparent 24%, transparent 68%, rgba(1, 5, 11, 0.76) 100%);
+  }
+
+  .hero__vignette {
+    z-index: -5;
+    box-shadow: inset 0 0 180px 50px rgba(0, 0, 0, 0.72);
+  }
+
+  .hero__core-glow {
+    z-index: -4;
+    left: 42%;
+    top: 33%;
+    width: 18%;
+    height: 32%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 137, 255, 0.28), rgba(0, 110, 255, 0.06) 45%, transparent 72%);
+    filter: blur(18px);
+    animation: corePulse 3.8s ease-in-out infinite;
+  }
+
+  .hero__beam {
+    z-index: -3;
+    left: 47.8%;
+    right: auto;
+    width: 5.5%;
+    height: 53%;
+    background: linear-gradient(90deg, transparent, rgba(28, 146, 255, 0.14), rgba(89, 191, 255, 0.34), rgba(28, 146, 255, 0.14), transparent);
+    filter: blur(10px);
+    transform-origin: bottom center;
+    animation: beamPulse 4.4s ease-in-out infinite;
+  }
+
+  .flow {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.62;
+  }
+
+  .flow__base,
+  .flow__pulse {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .flow__base {
+    stroke: rgba(12, 108, 219, 0.21);
+    stroke-width: 1.2;
+  }
+
+  .flow__pulse {
+    stroke: rgba(54, 173, 255, 0.9);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 3 20 55 90;
+    filter: drop-shadow(0 0 5px rgba(0, 139, 255, 0.9));
+    animation: flowMove 5.4s linear infinite;
+  }
+
+  .flow__pulse--2 { animation-delay: -1.1s; animation-duration: 6.2s; }
+  .flow__pulse--3 { animation-delay: -2.8s; animation-duration: 5.8s; }
+  .flow__pulse--4 { animation-delay: -4.1s; animation-duration: 6.6s; }
+
+  .data-rain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .data-rain i {
+    --x: 50%;
+    --delay: 0s;
+    --dur: 5s;
+    position: absolute;
+    left: var(--x);
+    top: 43%;
+    width: 2px;
+    height: 18px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, transparent, rgba(72, 185, 255, 0.95));
+    box-shadow: 0 0 10px rgba(0, 132, 255, 0.8);
+    opacity: 0;
+    animation: dataRise var(--dur) linear var(--delay) infinite;
   }
 
   .topbar {
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 100;
-    height: var(--header-h);
-    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    height: 110px;
+    display: grid;
+    grid-template-columns: 260px 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-    padding: 0 clamp(24px, 5vw, 84px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    background: linear-gradient(180deg, rgba(3, 4, 12, 0.96), rgba(3, 4, 12, 0.76));
-    backdrop-filter: blur(14px);
+    gap: 30px;
+    padding: 0 clamp(28px, 3.8vw, 72px);
+    background: linear-gradient(180deg, rgba(1, 5, 11, 0.82), rgba(1, 5, 11, 0));
   }
 
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    flex: 0 0 auto;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    gap: 15px;
+    width: max-content;
   }
 
-  .brand strong {
-    color: var(--cyan);
-    font-weight: 700;
-  }
-
-  .brand-mark {
-    width: 32px;
-    height: 32px;
+  .brand__mark {
+    width: 29px;
     display: grid;
-    align-content: center;
     gap: 4px;
+    transform: skewY(-26deg);
   }
 
-  .brand-mark i {
+  .brand__mark i {
     display: block;
-    height: 4px;
-    border-radius: 99px;
-    background: #fff;
-    transform: skewX(-24deg);
+    height: 6px;
+    border-radius: 2px;
+    background: var(--blue);
+    box-shadow: 0 0 18px rgba(0, 105, 255, 0.22);
   }
 
-  .brand-mark i:nth-child(2) {
-    width: 82%;
-  }
-
-  .brand-mark i:nth-child(3) {
-    width: 68%;
-    background: var(--cyan);
-  }
-
-  .topbar nav {
-    display: flex;
-    align-items: center;
-    gap: clamp(18px, 2.3vw, 36px);
-  }
-
-  .topbar nav a {
-    position: relative;
-    padding: 31px 0 28px;
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition: color 180ms ease;
-  }
-
-  .topbar nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 100%;
-    bottom: 20px;
-    height: 1px;
-    background: var(--cyan);
-    transition: right 180ms ease;
-  }
-
-  .topbar nav a:hover,
-  .topbar nav a:focus-visible {
-    color: #fff;
-  }
-
-  .topbar nav a:hover::after,
-  .topbar nav a:focus-visible::after {
-    right: 0;
-  }
-
-  main {
-    min-height: 100svh;
-  }
-
-  .hero {
-    position: relative;
-    width: min(1600px, 100%);
-    min-height: 100svh;
-    margin: 0 auto;
-    padding: calc(var(--header-h) + 38px) clamp(24px, 5vw, 84px) 54px;
-    display: grid;
-    grid-template-columns: minmax(320px, 0.8fr) minmax(560px, 1.25fr);
-    align-items: center;
-    gap: clamp(40px, 5vw, 88px);
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 75% 46%, rgba(0, 224, 254, 0.08), transparent 28%),
-      linear-gradient(90deg, rgba(3, 4, 12, 0.2), transparent 34%, rgba(3, 4, 12, 0.18));
-  }
-
-  .hero-copy,
-  .hero-visual {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-copy {
-    max-width: 540px;
-  }
-
-  .eyebrow {
-    margin: 0 0 18px;
-    color: var(--cyan);
-    font-size: 11px;
+  .brand__name {
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.24em;
   }
 
-  h1 {
-    margin: 0;
-    font-size: clamp(46px, 4.15vw, 72px);
-    font-weight: 700;
-    line-height: 0.98;
-    letter-spacing: -0.045em;
+  .brand__name strong { color: var(--blue); }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(16px, 1.55vw, 29px);
   }
 
-  .hero-text {
-    max-width: 500px;
-    margin: 30px 0 38px;
-    color: var(--muted);
-    font-size: clamp(15px, 1.05vw, 17px);
-    line-height: 1.7;
+  .nav a {
+    color: rgba(242, 246, 252, 0.72);
+    font-size: 13px;
+    transition: color 160ms ease, text-shadow 160ms ease;
   }
 
-  .explore-button {
-    min-width: 196px;
+  .nav a:hover,
+  .nav a:focus-visible {
+    color: #fff;
+    text-shadow: 0 0 16px rgba(0, 130, 255, 0.7);
+  }
+
+  .nav b {
+    color: var(--blue);
+    font-size: 12px;
+  }
+
+  .topbar__actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .button {
+    height: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 18px;
-    padding: 15px 24px;
-    border: 1px solid var(--cyan);
-    border-radius: 3px;
-    background: rgba(9, 22, 39, 0.78);
-    box-shadow: inset 0 0 0 1px rgba(0, 224, 254, 0.06), 0 0 30px rgba(0, 224, 254, 0.05);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
-  }
-
-  .explore-button span {
-    color: var(--cyan);
-    font-size: 18px;
-  }
-
-  .explore-button:hover,
-  .explore-button:focus-visible {
-    transform: translateY(-2px);
-    background: rgba(10, 34, 53, 0.96);
-    box-shadow: 0 0 34px rgba(0, 224, 254, 0.13);
-  }
-
-  .hero-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .image-frame {
-    position: relative;
-    width: min(100%, 820px);
-    isolation: isolate;
-  }
-
-  .image-frame::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 8% 7%;
-    border-radius: 50%;
-    background: rgba(0, 224, 254, 0.11);
-    filter: blur(52px);
-  }
-
-  .image-frame > img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 7px;
-    user-select: none;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
-  }
-
-  .data-card,
-  .core-label,
-  .satellite-label {
-    position: absolute;
-    z-index: 3;
-    border: 1px solid rgba(77, 113, 143, 0.55);
-    background: rgba(3, 8, 18, 0.76);
-    backdrop-filter: blur(7px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.48);
-  }
-
-  .data-card {
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 12px;
-    color: var(--cyan);
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    gap: 16px;
+    padding: 0 27px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
     white-space: nowrap;
   }
 
-  .data-card strong {
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 0;
+  .button--ghost {
+    border: 1px solid rgba(255, 255, 255, 0.19);
+    background: rgba(2, 7, 13, 0.36);
   }
 
-  .efficiency {
-    top: 13%;
-    left: -3%;
+  .button--ghost span { color: var(--blue-bright); }
+
+  .button--primary {
+    min-width: 180px;
+    background: linear-gradient(135deg, #006bff, #098cff);
+    box-shadow: 0 0 34px rgba(0, 111, 255, 0.20);
   }
 
-  .flow {
-    top: 43%;
-    left: -7%;
-  }
+  .button--primary span { font-size: 19px; }
 
-  .thermal {
-    top: 67%;
-    left: 1%;
-  }
-
-  .network {
-    top: 20%;
-    right: -5%;
-  }
-
-  .gauge {
-    width: 28px;
-    height: 28px;
-    margin-left: 3px;
-    border: 2px solid rgba(40, 79, 106, 0.9);
-    border-top-color: var(--cyan);
-    border-right-color: var(--cyan);
-    border-radius: 50%;
-    transform: rotate(18deg);
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 12px var(--cyan);
-  }
-
-  .bars {
-    height: 24px;
+  .hero__rail {
+    position: absolute;
+    left: clamp(19px, 1.25vw, 26px);
+    top: 46%;
+    z-index: 5;
     display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    margin-left: 3px;
+    align-items: center;
+    gap: 16px;
+    color: var(--blue-bright);
+    font-size: 11px;
+    font-weight: 700;
   }
 
-  .bars b {
-    width: 4px;
-    background: #314b62;
+  .hero__rail i {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--blue), transparent);
   }
 
-  .bars b:nth-child(1) { height: 40%; }
-  .bars b:nth-child(2) { height: 70%; background: var(--cyan); }
-  .bars b:nth-child(3) { height: 55%; }
-  .bars b:nth-child(4) { height: 92%; background: var(--cyan); }
-
-  .network-icon {
-    width: 20px;
-    height: 20px;
-    margin-left: 4px;
-    border: 1px solid #31536d;
-    box-shadow: inset 0 0 0 5px rgba(0, 224, 254, 0.28);
+  .copy {
+    position: absolute;
+    z-index: 7;
   }
 
-  .core-label {
-    right: 29%;
-    bottom: 11%;
-    padding: 8px 11px;
-    border-color: rgba(0, 224, 254, 0.6);
-    color: #fff;
-    font-size: 9px;
-    letter-spacing: 0.12em;
+  .copy--left {
+    left: clamp(58px, 6.6vw, 126px);
+    top: 18.5%;
+    width: min(38vw, 610px);
   }
 
-  .core-label strong {
-    margin-left: 8px;
-    color: var(--cyan);
-  }
-
-  .satellite-label {
-    top: 8%;
-    right: 13%;
-    padding: 6px 8px;
-    border-color: transparent;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 9px;
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 34px;
+    color: rgba(236, 242, 250, 0.52);
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.08em;
   }
 
-  @media (max-width: 1120px) {
-    .hero {
-      grid-template-columns: minmax(280px, 0.75fr) minmax(500px, 1.25fr);
-      gap: 36px;
-    }
-
-    .data-card {
-      transform: scale(0.9);
-      transform-origin: center;
-    }
+  .kicker i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 14px var(--blue);
   }
 
-  @media (max-width: 900px) {
-    :root {
-      --header-h: 70px;
+  h1,
+  h2 {
+    font-family: 'Barlow Condensed', Impact, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(76px, 9.15vw, 174px);
+    font-weight: 600;
+    line-height: 0.82;
+    color: #f2f3f5;
+    text-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  .lead {
+    max-width: 425px;
+    margin: 31px 0 0 4px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .truth {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 31px;
+  }
+
+  .truth__icon {
+    width: 66px;
+    height: 66px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 1px solid rgba(46, 135, 255, 0.25);
+    border-radius: 50%;
+    color: var(--blue-bright);
+    background: rgba(2, 10, 19, 0.45);
+    box-shadow: inset 0 0 0 8px rgba(14, 47, 86, 0.25), 0 0 26px rgba(0, 110, 255, 0.08);
+    font-size: 25px;
+  }
+
+  .truth strong {
+    display: block;
+    color: rgba(245, 248, 253, 0.87);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .truth p {
+    max-width: 265px;
+    margin: 11px 0 0;
+    color: rgba(232, 238, 248, 0.62);
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .copy--right {
+    right: clamp(55px, 5.1vw, 96px);
+    top: 34%;
+    width: min(31vw, 500px);
+    text-align: right;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(64px, 7vw, 132px);
+    font-weight: 600;
+    line-height: 0.84;
+    color: #f3f4f6;
+    text-shadow: 0 8px 35px rgba(0, 0, 0, 0.52);
+  }
+
+  h2 em {
+    display: inline-block;
+    color: var(--blue);
+    font-style: normal;
+    text-shadow: 0 0 32px rgba(0, 111, 255, 0.18);
+  }
+
+  .copy--right > p {
+    max-width: 390px;
+    margin: 24px 0 0 auto;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .node {
+    position: absolute;
+    z-index: 6;
+    display: grid;
+    grid-template-columns: 8px auto;
+    column-gap: 9px;
+    row-gap: 4px;
+    color: rgba(246, 249, 253, 0.87);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+  }
+
+  .node i {
+    grid-row: 1 / 3;
+    width: 7px;
+    height: 7px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 13px rgba(0, 128, 255, 0.95);
+  }
+
+  .node strong {
+    font-size: 10px;
+    letter-spacing: 0.13em;
+  }
+
+  .node small {
+    color: rgba(226, 233, 243, 0.42);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .node--assets { top: 19%; left: 32.5%; }
+  .node--maintenance { top: 19%; right: 18%; }
+  .node--orders { left: 36%; bottom: 19%; }
+  .node--history { right: 28%; bottom: 16.5%; }
+
+  .scroll {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    color: rgba(235, 240, 248, 0.42);
+    font-size: 8px;
+    letter-spacing: 0.48em;
+  }
+
+  .scroll i {
+    color: #fff;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 1;
+    animation: scrollBounce 1.8s ease-in-out infinite;
+  }
+
+  @keyframes flowMove {
+    to { stroke-dashoffset: -168; }
+  }
+
+  @keyframes corePulse {
+    0%, 100% { opacity: 0.65; transform: scale(0.96); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  @keyframes beamPulse {
+    0%, 100% { opacity: 0.50; transform: scaleX(0.82); }
+    50% { opacity: 0.92; transform: scaleX(1.18); }
+  }
+
+  @keyframes dataRise {
+    0% { transform: translate3d(0, 18vh, 0); opacity: 0; }
+    18% { opacity: 0.72; }
+    78% { opacity: 0.38; }
+    100% { transform: translate3d(0, -46vh, 0); opacity: 0; }
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.55; }
+    50% { transform: translateY(5px); opacity: 1; }
+  }
+
+  @media (max-width: 1180px) {
+    .topbar { grid-template-columns: auto 1fr auto; }
+    .nav { display: none; }
+    .copy--left { width: 46vw; }
+    .copy--right { width: 35vw; }
+    .node--assets { left: 39%; }
+    .node--maintenance { right: 13%; }
+  }
+
+  @media (max-width: 780px) {
+    .hero {
+      min-height: 1000px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 128px 24px 74px;
+    }
+
+    .hero__background {
+      object-position: 50% 50%;
+      filter: saturate(1.08) contrast(1.05) brightness(0.67);
+    }
+
+    .hero__shade {
+      background: linear-gradient(180deg, rgba(1,5,11,.90), rgba(1,5,11,.26) 30%, rgba(1,5,11,.28) 55%, rgba(1,5,11,.92) 100%);
     }
 
     .topbar {
-      padding-inline: 22px;
+      position: absolute;
+      height: 96px;
+      padding: 0 20px;
+      grid-template-columns: 1fr auto;
     }
 
-    .topbar nav {
-      display: none;
-    }
+    .brand__name { font-size: 15px; }
+    .topbar__actions .button--ghost { display: none; }
+    .button--primary { min-width: 0; height: 42px; padding: 0 18px; font-size: 11px; }
 
-    .hero {
-      min-height: auto;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      padding: calc(var(--header-h) + 54px) 22px 56px;
-    }
-
-    .hero-copy {
-      max-width: 680px;
-    }
-
-    h1 {
-      font-size: clamp(44px, 10vw, 68px);
-    }
-
-    .image-frame {
-      width: min(100%, 760px);
-    }
-  }
-
-  @media (max-width: 620px) {
-    .brand {
-      font-size: 17px;
-    }
-
-    .brand-mark {
-      width: 28px;
-      height: 28px;
-    }
-
-    .eyebrow {
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      font-size: clamp(38px, 11.5vw, 54px);
-    }
-
-    .hero-text {
-      margin-top: 24px;
-      margin-bottom: 30px;
-    }
-
-    .explore-button {
+    .copy {
+      position: relative;
+      inset: auto;
       width: 100%;
+      text-align: left;
     }
 
-    .data-card,
-    .core-label,
-    .satellite-label {
-      display: none;
-    }
+    .copy--left { margin-top: 20px; }
+    .copy--right { margin-top: auto; text-align: right; }
+
+    h1 { font-size: clamp(74px, 22vw, 126px); }
+    h2 { font-size: clamp(62px, 19vw, 106px); }
+    .lead { max-width: 350px; }
+    .copy--right > p { max-width: 330px; }
+
+    .truth { display: none; }
+    .node { display: none; }
+    .hero__rail { display: none; }
+    .scroll { bottom: 17px; }
+    .flow { opacity: 0.35; }
+    .hero__beam { left: 45%; width: 12%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      scroll-behavior: auto !important;
-      transition-duration: 0.01ms !important;
-    }
+    .flow__pulse,
+    .data-rain i,
+    .hero__beam,
+    .hero__core-glow,
+    .scroll i { animation: none !important; }
   }
 </style>

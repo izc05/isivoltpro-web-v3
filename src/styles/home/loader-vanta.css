@@ -1,0 +1,4 @@
+.v2-loader__vanta{position:absolute;inset:0;z-index:0;opacity:.62;filter:saturate(.72) contrast(1.18) brightness(.42)}
+.v2-loader__vanta::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 48%,rgba(28,94,210,.16),transparent 28%),linear-gradient(180deg,rgba(2,6,10,.38),rgba(2,6,10,.76));pointer-events:none}
+.v2-loader__center,.v2-loader__meta,.v2-loader__scan{z-index:2}
+@media(prefers-reduced-motion:reduce){.v2-loader__vanta{display:none}}

@@ -1,11 +1,17 @@
 # FASE 3 — ISIVOLTPRO CORE
 
-Estado: EN CURSO
+Estado: EN REVISIÓN FINAL
 Rama: feat/home-3d-lab
-Base protegida: `/lab-3d-base-v1/`
+Base industrial protegida: `/lab-3d-base-v1/`
+Base visual Core aprobada por Isi: `/lab-3d-phase31/`
 
 ## Regla de trabajo
 La BASE INDUSTRIAL V1 no se modifica ni se sustituye. Cada evolución del Core se publica en una ruta nueva y debe compararse contra la base estable.
+
+Decisión visual vigente:
+- Core 3.1 es la referencia visual aprobada y la base de evolución.
+- Core 3.2 se conserva como experimento de detalle físico, pero NO se promueve como base.
+- Core 3.3 parte directamente de Core 3.1.
 
 ## Objetivo del Core
 Crear una pieza 3D propia de IsiVoltPro que represente visualmente el punto donde convergen los sistemas técnicos de una instalación sin caer en una estética de ciencia ficción exagerada.
@@ -26,7 +32,7 @@ El Core debe leerse como:
 6. Animación lenta y funcional.
 7. Mantener el presupuesto de rendimiento fijado en FASE 2.9.
 
-## 3.1 — Arquitectura CORE V1 — COMPLETADO
+## 3.1 — Arquitectura CORE V1 — APROBADO VISUALMENTE
 Ruta de revisión: `/lab-3d-phase31/`
 Blob candidato validado: `4827c50065fe226711c2d76dd5cbd234766a62e1`
 
@@ -47,46 +53,60 @@ Arquitectura implementada:
 
 No se añadió ningún asset externo nuevo en 3.1.
 
-## 3.2 — Acabado físico CORE V2 — COMPLETADO
+## 3.2 — Acabado físico CORE V2 — EXPERIMENTO CONSERVADO / NO PROMOVIDO
 Ruta de revisión: `/lab-3d-phase32/`
 Blob candidato validado: `bc1b5573dfae4919ab928ffaf4a5ad88123604f2`
 
-3.2 conserva literalmente la arquitectura y cámara de Core 3.1 y añade una capa de ensamblaje/acabado sincronizada sobre esa referencia.
+3.2 añadió una capa de ensamblaje, juntas, tornillería, paneles, ventilación, indicadores y otros detalles físicos sobre 3.1.
 
-Detalle implementado:
-- juntas de elastómero en las transiciones vidrio/estructura;
-- anillos metálicos de retención del vidrio;
-- ocho apoyos de aislamiento/antivibración bajo el zócalo;
-- tornillería de base instanciada;
-- cuatro registros de inspección en el cuerpo inferior;
-- paneles de acceso en los cuatro montantes;
-- cierres/latches de servicio;
-- tornillería de panel instanciada;
-- retenedores del vidrio instanciados;
-- banda de ventilación técnica en la corona;
-- pequeños indicadores de estado cian y servicio ámbar;
-- collares físicos en los cuatro puertos de conexión;
-- placa neutra de servicio preparada para branding/texto posterior;
-- materiales con clearcoat controlado para mejorar lectura de metal sin incrementar bloom.
+Decisión posterior de Isi:
+- se prefiere visualmente Core 3.1;
+- 3.2 se mantiene disponible como referencia y banco de ideas;
+- sus detalles NO se incorporan automáticamente a las siguientes fases;
+- cualquier detalle de 3.2 que se recupere en el futuro deberá justificarse de forma individual.
 
-Decisiones de rendimiento:
-- tornillería, retenedores, apoyos, ventilación e indicadores repetidos usan InstancedMesh;
-- la capa 3.2 no usa postprocesado ni bloom propio;
-- no proyecta sombras adicionales;
-- reutiliza exactamente la curva de cámara y target de 3.1;
-- se mantiene el control de FPS del render base y se muestran draw calls/triángulos específicos del detalle;
-- no se añadió ningún asset externo nuevo en 3.2.
+## 3.3 — Integración funcional sobre CORE 3.1 — CANDIDATO VALIDADO
+Ruta de revisión: `/lab-3d-phase33/`
+Blob candidato validado: `5f4a3aeb227612339078948df8c711a848ed4ed3`
 
-## 3.3 — SIGUIENTE: Integración final del Core
-Objetivo: convertir Core V2 en el nodo funcional y visual que explicará el ecosistema IsiVoltPro sin cambiar de nuevo su arquitectura básica.
+3.3 conserva Core 3.1 como base visual exacta y añade únicamente una capa ligera de integración operativa sincronizada con su cámara.
 
-Siguiente alcance previsto:
-- cerrar el lenguaje físico/digital de cada puerto;
-- definir estados normal, atención, mantenimiento y alarma sin abuso de color;
-- mejorar cómo las conexiones llegan a mecánica, HVAC, climatización y electricidad;
-- preparar extensiones posteriores hacia agua, activos, mantenimiento, operaciones y AI;
-- hacer que la convergencia de sistemas sea comprensible antes de añadir textos comerciales definitivos;
-- mantener BASE INDUSTRIAL V1 y Core 3.1 disponibles como referencias A/B.
+Integración implementada:
+- cuatro rutas operativas asociadas a los cuatro puertos existentes;
+- Mechanical → zona real de bombas y tuberías;
+- HVAC → red real de conductos superiores;
+- Climate → cadena de equipos térmicos interior/exterior;
+- Electrical → bahía real de distribución eléctrica;
+- etiquetas de sistema proyectadas sobre los destinos reales;
+- pulsos de señal sobre rutas físicas existentes;
+- anillos discretos en puerto y destino;
+- selección por capítulo sin modificar el Core;
+- lenguaje común de estados NORMAL / ATTENTION / MAINTENANCE / ALARM;
+- NORMAL = cian IsiVoltPro;
+- ATTENTION = ámbar;
+- MAINTENANCE = azul técnico;
+- ALARM = rojo, únicamente sobre la ruta afectada;
+- capítulo final devuelve todos los sistemas a NORMAL para una lectura limpia de convergencia.
+
+Decisiones visuales y de rendimiento:
+- no se utiliza la capa de detalle 3.2;
+- no se modifica la geometría de Core 3.1;
+- no se añade ningún asset externo;
+- no se añade bloom ni postprocesado adicional;
+- no se añaden sombras nuevas;
+- el overlay usa una cámara y target sincronizados con 3.1;
+- las rutas permanecen tenues cuando no están seleccionadas;
+- el estado de alarma no contamina el resto de la instalación;
+- se mantienen métricas del render base y del overlay por separado.
+
+## CHECKPOINT DE SALIDA FASE 3
+Pendiente únicamente de revisión visual de Isi en `/lab-3d-phase33/`.
+
+Si 3.3 se aprueba:
+- FASE 3 se considera cerrada;
+- Core 3.1 queda como diseño visual definitivo de esta etapa;
+- 3.3 queda como lenguaje de integración y estados;
+- la siguiente fase será FASE 4 — red digital / ecosistema, ampliando desde estos cuatro sistemas hacia Water, Assets, Maintenance, Operations y AI sin rediseñar otra vez el Core.
 
 ## Criterio de salida FASE 3
 El Core debe ser reconocible como una pieza propia de IsiVoltPro, estar físicamente integrado en la planta, aportar identidad de marca, explicar visualmente la convergencia del ecosistema y mantener la fluidez de BASE INDUSTRIAL V1.

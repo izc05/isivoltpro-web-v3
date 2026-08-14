@@ -20,7 +20,7 @@ No usar una fábrica 3D monolítica pesada. La instalación se construirá como 
 
 ## Kit CC0 seleccionado
 
-### A — Tuberías industriales — PRIMER ASSET
+### A — Tuberías industriales
 Poly Haven: Modular Industrial Pipes 01
 ID: modular_industrial_pipes_01
 Formato disponible: glTF
@@ -60,11 +60,11 @@ Licencia: CC0.
 
 ## Orden de integración
 2.1 Selección/licencias/presupuesto — COMPLETADO
-2.2 Integrar SOLO Modular Industrial Pipes 01 — SIGUIENTE
-2.3 Validar escala, materiales, iluminación y FPS
-2.4 Sustituir parte de las tuberías geométricas provisionales
-2.5 Añadir HVAC circular
-2.6 Añadir cuadro/utility box
+2.2 Integrar Modular Industrial Pipes 01 — COMPLETADO
+2.3 Validar escala, materiales, iluminación y FPS — COMPLETADO
+2.4 Convertir tuberías en infraestructura real — COMPLETADO
+2.5 Añadir HVAC circular real — COMPLETADO
+2.6 Añadir cuadro/utility box — SIGUIENTE
 2.7 Añadir unidad HVAC
 2.8 Componer instalación industrial completa
 2.9 Optimización final de FASE 2

@@ -1,17 +1,20 @@
 <div class="v2-loader" data-v2-loader role="status" aria-live="polite" aria-label="Inicializando IsiVoltPro">
+  <div class="v2-loader__vanta" data-v2-vanta aria-hidden="true"></div>
   <div class="v2-loader__grid" aria-hidden="true"></div>
   <div class="v2-loader__scan" aria-hidden="true"></div>
+
   <div class="v2-loader__center">
     <div class="v2-loader__brand" aria-label="IsiVoltPro">
-      <span>ISI</span><span>VOLT</span><span class="v2-loader__pro">PRO</span>
+      <span>ISIVOLT</span><span class="v2-loader__pro">PRO</span>
     </div>
     <p class="v2-loader__status" data-v2-loader-status>INICIALIZANDO ECOSISTEMA</p>
     <div class="v2-loader__meter" aria-hidden="true">
-      <span class="v2-loader__value" data-v2-loader-value>00</span>
+      <span class="v2-loader__value" data-v2-loader-value>00%</span>
       <div class="v2-loader__track"><i data-v2-loader-bar></i><b data-v2-loader-light></b></div>
-      <small>CARGANDO SISTEMAS</small>
+      <small data-v2-loader-detail>CARGANDO RECURSOS</small>
     </div>
   </div>
+
   <div class="v2-loader__meta" aria-hidden="true">
     <span>ISV / CORE</span>
     <span>GESTIÓN TÉCNICA CONECTADA</span>
@@ -20,5 +23,7 @@
 
 <script>
   import { initLoaderV2 } from '../../scripts/loader-v2';
+  import { initLoaderVanta } from '../../scripts/loader-vanta';
   initLoaderV2();
+  initLoaderVanta();
 </script>

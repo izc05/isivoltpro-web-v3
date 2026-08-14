@@ -1,0 +1,464 @@
+---
+const base = import.meta.env.BASE_URL;
+const heroImage = `${base}images/home/isivoltpro-industrial-core.webp`;
+const entryUrl = `${base}lab-3d-entry-v1/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <meta name="description" content="Descubre el Ecosistema IsiVoltPro: instalación, activos, mantenimiento, órdenes de trabajo, documentación, histórico e inteligencia técnica conectados en un único sistema." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href={heroImage} as="image" type="image/webp" />
+    <title>IsiVoltPro · Fase 6.2 · Ecosistema</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href={base} aria-label="IsiVoltPro inicio">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>ISIVOLT<strong>PRO</strong></span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación de la Home comercial">
+        <a href="#que-es">Qué es</a>
+        <a href="#ecosistema">Ecosistema</a>
+        <a href="#como-funciona">En qué se basa</a>
+        <a href="#que-conecta">Qué conecta</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="link" href={`${base}acceso/`}>Acceder</a>
+        <a class="button button--small" href={`${base}contacto/`}>Solicitar demo <span>→</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="que-es" aria-labelledby="hero-title">
+        <img class="hero__background" src={heroImage} alt="Instalación técnica conectada mediante IsiVoltPro" width="1000" height="531" fetchpriority="high" decoding="async" />
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__grid" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__scan" aria-hidden="true"></div>
+
+        <div class="hero__content">
+          <div class="hero__copy">
+            <p class="eyebrow"><i></i> ECOSISTEMA DE OPERACIÓN TÉCNICA</p>
+            <h1 id="hero-title">TODA TU<br />INSTALACIÓN.<br /><em>UN SOLO SISTEMA.</em></h1>
+            <p class="lead">
+              IsiVoltPro conecta la instalación real con sus activos, el trabajo de mantenimiento, las órdenes de trabajo, la documentación y el histórico técnico para que toda la operación comparta el mismo contexto.
+            </p>
+
+            <div class="hero__actions">
+              <a class="button button--primary" href="#ecosistema">Entender el ecosistema <span>↓</span></a>
+              <a class="text-link" href={entryUrl}>Explorar la experiencia 3D <span>→</span></a>
+            </div>
+
+            <div class="trust" aria-label="Capacidades principales">
+              <span>INSTALACIÓN</span><i></i><span>ACTIVOS</span><i></i><span>MANTENIMIENTO</span><i></i><span>OT</span><i></i><span>HISTÓRICO</span><i></i><span>IA</span>
+            </div>
+          </div>
+
+          <aside class="system-map" aria-label="Mapa conceptual del Ecosistema IsiVoltPro">
+            <div class="map-head">
+              <span>ECOSISTEMA ISIVOLTPRO</span>
+              <strong>CONECTADO</strong>
+            </div>
+
+            <div class="map-layer map-layer--physical">
+              <span class="map-index">01</span>
+              <div>
+                <small>CAPA FÍSICA</small>
+                <strong>INSTALACIÓN</strong>
+                <p>Electricidad · Climatización · Agua · Equipos</p>
+              </div>
+              <b>ORIGEN</b>
+            </div>
+
+            <div class="map-link" aria-hidden="true"><i></i><i></i><i></i></div>
+
+            <div class="map-layer map-layer--digital">
+              <span class="map-index">02</span>
+              <div>
+                <small>CAPA DIGITAL</small>
+                <strong>OPERACIÓN</strong>
+                <p>Activos · Mantenimiento · OT · Documentación</p>
+              </div>
+              <b>CONECTA</b>
+            </div>
+
+            <div class="map-link" aria-hidden="true"><i></i><i></i><i></i></div>
+
+            <div class="map-layer map-layer--intelligence">
+              <span class="map-index">03</span>
+              <div>
+                <small>CAPA DE INTELIGENCIA</small>
+                <strong>CONTEXTO TÉCNICO</strong>
+                <p>Histórico · Datos · Conocimiento · IsiVoltPro AI</p>
+              </div>
+              <b>APOYA</b>
+            </div>
+
+            <a class="map-entry" href={entryUrl}>
+              <span><small>RECORRIDO INTERACTIVO</small><strong>ENTRAR EN LA INSTALACIÓN 3D</strong></span>
+              <b>↗</b>
+            </a>
+          </aside>
+        </div>
+
+        <div class="hero__foot" aria-hidden="true">
+          <span>01 / INICIO</span>
+          <i></i>
+          <span>FÍSICO → DIGITAL → INTELIGENCIA</span>
+        </div>
+      </section>
+
+      <section class="ecosystem" id="ecosistema" aria-labelledby="ecosystem-title">
+        <div class="section-head">
+          <p class="eyebrow"><i></i> QUÉ ES EL ECOSISTEMA ISIVOLTPRO</p>
+          <div class="section-head__grid">
+            <h2 id="ecosystem-title">LA INSTALACIÓN ES<br /><em>EL PUNTO DE PARTIDA.</em></h2>
+            <div class="section-copy">
+              <p class="section-copy__lead">IsiVoltPro no empieza en una pantalla. Empieza en la instalación que hay que mantener, conocer y hacer funcionar.</p>
+              <p>El ecosistema reúne en una misma lógica los equipos físicos, su identidad digital, las actuaciones técnicas y toda la información que se genera a lo largo de su vida.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="definition-grid">
+          <article>
+            <span>01</span>
+            <small>QUÉ ES</small>
+            <h3>UN ECOSISTEMA DE OPERACIÓN TÉCNICA</h3>
+            <p>Una capa común para organizar la instalación, saber qué activos existen y conectar el mantenimiento, las órdenes de trabajo, la documentación y el histórico.</p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <small>EN QUÉ SE BASA</small>
+            <h3>EL ACTIVO COMO CENTRO DEL CONTEXTO</h3>
+            <p>Cada actuación debe tener un origen real: un equipo, una ubicación o un sistema. Así el trabajo deja de estar aislado y pasa a formar parte de la historia técnica del activo.</p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <small>PARA QUÉ SIRVE</small>
+            <h3>CONVERTIR TRABAJO EN CONOCIMIENTO</h3>
+            <p>Cuando activos, actuaciones, documentos e histórico están conectados, la información se puede reutilizar para operar con más trazabilidad y disponer de mejor contexto técnico.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="foundation" id="como-funciona" aria-labelledby="foundation-title">
+        <div class="foundation__intro">
+          <p class="eyebrow"><i></i> EN QUÉ SE BASA</p>
+          <h2 id="foundation-title">DEL EQUIPO REAL<br />AL CONTEXTO TÉCNICO.</h2>
+          <p>El ecosistema conserva la relación entre lo que existe físicamente y todo lo que ocurre después sobre ello.</p>
+        </div>
+
+        <div class="chain" aria-label="Cadena conceptual del Ecosistema IsiVoltPro">
+          <article>
+            <span>01</span>
+            <i class="chain__node"></i>
+            <small>ORIGEN</small>
+            <strong>INSTALACIÓN</strong>
+            <p>El espacio, sistema o infraestructura real.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <i class="chain__node"></i>
+            <small>IDENTIDAD</small>
+            <strong>ACTIVOS</strong>
+            <p>Equipos identificados, ubicados y documentados.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <i class="chain__node"></i>
+            <small>OPERACIÓN</small>
+            <strong>TRABAJO TÉCNICO</strong>
+            <p>Incidencias, mantenimiento, revisiones y OT.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <i class="chain__node"></i>
+            <small>INFORMACIÓN</small>
+            <strong>DOCUMENTACIÓN</strong>
+            <p>Planos, informes, fotografías, manuales y datos.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <i class="chain__node"></i>
+            <small>TRAZABILIDAD</small>
+            <strong>HISTÓRICO</strong>
+            <p>Qué pasó, cuándo, dónde y sobre qué activo.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <i class="chain__node"></i>
+            <small>CONTEXTO</small>
+            <strong>INTELIGENCIA</strong>
+            <p>Información conectada para consulta y asistencia técnica.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="connects" id="que-conecta" aria-labelledby="connects-title">
+        <div class="connects__header">
+          <div>
+            <p class="eyebrow"><i></i> QUÉ CONECTA</p>
+            <h2 id="connects-title">UN MISMO ECOSISTEMA.<br /><em>DIFERENTES DISCIPLINAS.</em></h2>
+          </div>
+          <p>IsiVoltPro está pensado para que los distintos sistemas técnicos de una instalación puedan compartir una estructura común de activos, trabajo y trazabilidad sin perder su especialidad.</p>
+        </div>
+
+        <div class="systems">
+          <article><span>01</span><strong>ELECTRICIDAD</strong><p>Cuadros, líneas, protecciones, equipos y revisiones.</p></article>
+          <article><span>02</span><strong>CLIMATIZACIÓN Y HVAC</strong><p>UTA, producción térmica, ventilación, unidades y redes.</p></article>
+          <article><span>03</span><strong>AGUA E INSTALACIONES</strong><p>Redes, equipos hidráulicos, puntos de control y servicios.</p></article>
+          <article><span>04</span><strong>ACTIVOS Y EQUIPOS</strong><p>Identidad, ubicación, estado, documentación e histórico.</p></article>
+        </div>
+
+        <div class="connects__note">
+          <span>CAPA COMÚN DE OPERACIÓN</span>
+          <strong>ACTIVOS · MANTENIMIENTO · OT · DOCUMENTACIÓN · HISTÓRICO · IA</strong>
+        </div>
+      </section>
+
+      <section class="bridge">
+        <div>
+          <p class="eyebrow"><i></i> ECOSISTEMA 3D</p>
+          <h2>PRIMERO LO ENTIENDES.<br /><em>DESPUÉS LO RECORRES.</em></h2>
+          <p>La experiencia 3D muestra la misma idea sobre una instalación técnica: sistemas físicos, activos, operación y contexto convergiendo en IsiVoltPro.</p>
+        </div>
+        <a class="button button--primary button--large" href={entryUrl}>Explorar el Ecosistema IsiVoltPro <span>→</span></a>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --blue: #087dff;
+    --cyan: #1bcfff;
+    --ink: #02060b;
+    --panel: rgba(4, 13, 20, .72);
+    --line: rgba(132, 192, 220, .14);
+    --white: #f6fbff;
+    --muted: #8ba0aa;
+    color-scheme: dark;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    background: var(--ink);
+    color: var(--white);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; min-width: 320px; min-height: 100%; background: var(--ink); }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Barlow Condensed', Inter, sans-serif; }
+
+  .topbar {
+    position: fixed;
+    z-index: 50;
+    inset: 0 0 auto;
+    height: 82px;
+    display: grid;
+    grid-template-columns: 240px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 0 clamp(22px, 4vw, 72px);
+    border-bottom: 1px solid rgba(127, 187, 214, .08);
+    background: linear-gradient(180deg, rgba(1, 5, 10, .94), rgba(1, 5, 10, .66));
+    backdrop-filter: blur(14px);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 13px; width: max-content; font-size: 16px; font-weight: 800; letter-spacing: .16em; }
+  .brand strong { color: var(--cyan); }
+  .brand__mark { width: 25px; display: grid; gap: 3px; transform: skewY(-26deg); }
+  .brand__mark i { height: 5px; border-radius: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); box-shadow: 0 0 12px rgba(15, 193, 255, .18); }
+  .nav { display: flex; justify-content: center; gap: clamp(18px, 2vw, 34px); }
+  .nav a, .link { color: #8599a4; font-size: 11px; font-weight: 600; letter-spacing: .05em; transition: color .2s ease; }
+  .nav a:hover, .link:hover { color: #fff; }
+  .topbar__actions { display: flex; align-items: center; gap: 22px; }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    min-height: 50px;
+    padding: 0 24px;
+    border: 1px solid rgba(58, 202, 255, .28);
+    background: rgba(4, 18, 28, .62);
+    color: #eafaff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .button:hover { transform: translateY(-2px); border-color: rgba(67, 215, 255, .68); }
+  .button--primary { background: linear-gradient(135deg, rgba(6, 105, 224, .92), rgba(7, 164, 225, .78)); border-color: rgba(78, 209, 255, .54); box-shadow: 0 10px 36px rgba(0, 111, 255, .18); }
+  .button--small { min-height: 40px; padding: 0 18px; font-size: 8px; }
+  .button--large { min-width: 300px; min-height: 58px; }
+
+  .eyebrow { display: flex; align-items: center; gap: 11px; margin: 0 0 20px; color: #75909d; font-size: 9px; font-weight: 800; letter-spacing: .21em; }
+  .eyebrow i { width: 40px; height: 1px; background: linear-gradient(90deg, var(--cyan), transparent); box-shadow: 0 0 9px rgba(28, 207, 255, .55); }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 118px clamp(26px, 6vw, 108px) 70px;
+  }
+  .hero__background { position: absolute; inset: 0; z-index: -8; width: 100%; height: 100%; object-fit: cover; object-position: 51% 50%; filter: saturate(.82) contrast(1.08) brightness(.52); transform: scale(1.025); }
+  .hero__shade { position: absolute; inset: 0; z-index: -7; background: linear-gradient(90deg, rgba(1,5,10,.95) 0%, rgba(1,5,10,.82) 31%, rgba(1,5,10,.34) 54%, rgba(1,5,10,.68) 100%), linear-gradient(180deg, rgba(1,5,10,.5), transparent 34%, rgba(1,5,10,.62)); }
+  .hero__grid { position: absolute; inset: 0; z-index: -5; opacity: .18; background-image: linear-gradient(rgba(73,163,201,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(73,163,201,.07) 1px, transparent 1px); background-size: 84px 84px; mask-image: linear-gradient(90deg, black, transparent 63%); }
+  .hero__glow { position: absolute; z-index: -4; left: 45%; top: 29%; width: 28vw; height: 44vh; border-radius: 50%; background: radial-gradient(circle, rgba(0,169,255,.17), rgba(0,86,255,.045) 47%, transparent 72%); filter: blur(24px); animation: breathe 4.8s ease-in-out infinite; }
+  .hero__scan { position: absolute; z-index: -3; left: 53%; top: 16%; width: 1px; height: 68%; background: linear-gradient(transparent, rgba(30,208,255,.44), transparent); box-shadow: 0 0 18px rgba(30,208,255,.22); opacity: .5; }
+  .hero__content { width: min(1460px, 100%); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(410px, .72fr); align-items: center; gap: clamp(52px, 8vw, 140px); }
+  .hero__copy { max-width: 760px; }
+  h1 { margin: 0; font-size: clamp(66px, 7.3vw, 126px); line-height: .82; font-weight: 700; letter-spacing: -.045em; }
+  h1 em, h2 em { color: transparent; font-style: normal; -webkit-text-stroke: 1px rgba(133, 221, 255, .72); text-shadow: 0 0 34px rgba(0, 145, 255, .12); }
+  .lead { max-width: 650px; margin: 28px 0 0; color: #a6b7bf; font-size: clamp(14px, 1.12vw, 17px); line-height: 1.75; }
+  .hero__actions { display: flex; align-items: center; gap: 30px; margin-top: 34px; }
+  .text-link { color: #8fa7b3; font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+  .text-link span { margin-left: 12px; color: var(--cyan); }
+  .trust { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 46px; color: #607985; font-size: 7px; font-weight: 850; letter-spacing: .16em; }
+  .trust i { width: 3px; height: 3px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 7px rgba(27,207,255,.7); }
+
+  .system-map { position: relative; align-self: center; padding: 22px; border: 1px solid rgba(94, 178, 216, .14); background: rgba(2, 10, 16, .60); box-shadow: 0 30px 90px rgba(0,0,0,.30); backdrop-filter: blur(18px); }
+  .system-map::before { content: ''; position: absolute; left: -1px; top: 22%; width: 1px; height: 32%; background: linear-gradient(transparent, var(--cyan), transparent); box-shadow: 0 0 12px rgba(27,207,255,.5); }
+  .map-head { display: flex; justify-content: space-between; gap: 20px; padding: 3px 2px 17px; color: #607987; font-size: 7px; font-weight: 850; letter-spacing: .17em; }
+  .map-head strong { color: #74dfff; }
+  .map-layer { display: grid; grid-template-columns: 38px 1fr auto; align-items: center; gap: 15px; min-height: 98px; padding: 16px; border: 1px solid rgba(121, 184, 210, .10); background: rgba(7, 19, 27, .60); }
+  .map-layer--digital { background: linear-gradient(90deg, rgba(4,38,58,.72), rgba(7,19,27,.62)); border-color: rgba(49,190,241,.22); }
+  .map-layer--intelligence { background: linear-gradient(90deg, rgba(5,27,47,.76), rgba(7,19,27,.62)); border-color: rgba(30,132,255,.22); }
+  .map-index { color: #526c79; font-size: 9px; font-weight: 800; }
+  .map-layer small { color: #66828f; font-size: 7px; font-weight: 850; letter-spacing: .19em; }
+  .map-layer strong { display: block; margin-top: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 25px; font-weight: 700; letter-spacing: .03em; }
+  .map-layer p { margin: 5px 0 0; color: #78909b; font-size: 9px; }
+  .map-layer > b { color: #49cfff; font-size: 7px; letter-spacing: .15em; }
+  .map-link { height: 32px; display: grid; place-items: center; position: relative; }
+  .map-link::before { content: ''; width: 1px; height: 100%; background: linear-gradient(rgba(27,207,255,.12), rgba(27,207,255,.55), rgba(27,207,255,.12)); }
+  .map-link i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #1bd0ff; box-shadow: 0 0 10px #1bd0ff; animation: dataPulse 2.4s linear infinite; }
+  .map-link i:nth-child(2) { animation-delay: -.8s; }
+  .map-link i:nth-child(3) { animation-delay: -1.6s; }
+  .map-entry { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 17px; padding: 18px 16px; border: 1px solid rgba(39,195,255,.22); background: linear-gradient(90deg, rgba(0,105,220,.16), rgba(0,208,255,.06)); }
+  .map-entry small { display: block; color: #62808f; font-size: 7px; font-weight: 800; letter-spacing: .17em; }
+  .map-entry strong { display: block; margin-top: 4px; font-size: 10px; letter-spacing: .10em; }
+  .map-entry > b { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(51,205,255,.3); color: var(--cyan); }
+  .hero__foot { position: absolute; left: clamp(26px, 6vw, 108px); right: clamp(26px, 6vw, 108px); bottom: 28px; display: flex; align-items: center; gap: 14px; color: #526b77; font-size: 7px; font-weight: 800; letter-spacing: .16em; }
+  .hero__foot i { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(75,137,162,.12), rgba(27,207,255,.35), rgba(75,137,162,.08)); }
+
+  .ecosystem { padding: 125px clamp(26px, 6vw, 108px) 140px; background: radial-gradient(circle at 78% 18%, rgba(0,126,197,.08), transparent 28%), #03080d; border-top: 1px solid rgba(105,169,197,.09); }
+  .section-head, .definition-grid, .foundation__intro, .chain, .connects__header, .systems, .connects__note { width: min(1380px, 100%); margin-left: auto; margin-right: auto; }
+  .section-head { margin-bottom: 70px; }
+  .section-head__grid { display: grid; grid-template-columns: 1.1fr .72fr; gap: clamp(50px, 7vw, 120px); align-items: end; }
+  .section-head h2, .foundation h2, .connects h2, .bridge h2 { margin: 0; font-size: clamp(58px, 5.8vw, 98px); line-height: .87; font-weight: 650; letter-spacing: -.04em; }
+  .section-copy { border-left: 1px solid rgba(27,207,255,.22); padding-left: 28px; }
+  .section-copy p { margin: 0 0 16px; color: #8198a3; font-size: 13px; line-height: 1.8; }
+  .section-copy .section-copy__lead { color: #d2e4eb; font-size: 16px; line-height: 1.65; }
+  .definition-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .definition-grid article { min-height: 345px; padding: 28px clamp(25px, 3vw, 45px) 36px; border-right: 1px solid var(--line); background: linear-gradient(180deg, rgba(7,21,30,.38), transparent); }
+  .definition-grid article:last-child { border-right: 0; }
+  .definition-grid article > span { color: #4e6875; font-size: 9px; }
+  .definition-grid small { display: block; margin-top: 55px; color: #4bcaf5; font-size: 7px; font-weight: 850; letter-spacing: .19em; }
+  .definition-grid h3 { margin: 9px 0 17px; font-size: 32px; line-height: .95; letter-spacing: -.02em; }
+  .definition-grid p { margin: 0; color: #7f96a0; font-size: 12px; line-height: 1.78; }
+
+  .foundation { padding: 120px clamp(26px, 6vw, 108px) 135px; background: linear-gradient(180deg, #02070c, #04111a); border-top: 1px solid rgba(105,169,197,.09); }
+  .foundation__intro { display: grid; grid-template-columns: 1fr .58fr; gap: 70px; align-items: end; margin-bottom: 70px; }
+  .foundation__intro .eyebrow { grid-column: 1 / -1; }
+  .foundation__intro > p:last-child { margin: 0; color: #8198a3; font-size: 13px; line-height: 1.8; }
+  .chain { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid rgba(67,156,194,.16); }
+  .chain::before { content: ''; position: absolute; top: 33px; left: 4%; right: 4%; height: 1px; background: linear-gradient(90deg, rgba(27,207,255,.18), rgba(27,207,255,.76), rgba(8,125,255,.44)); }
+  .chain article { position: relative; min-height: 270px; padding: 18px 18px 24px; border-right: 1px solid rgba(89,157,185,.10); }
+  .chain article:last-child { border-right: 0; }
+  .chain article > span { color: #506977; font-size: 8px; }
+  .chain__node { position: relative; z-index: 2; display: block; width: 9px; height: 9px; margin: 10px 0 45px; border: 2px solid #081522; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 15px rgba(27,207,255,.72); }
+  .chain small { color: #526f7d; font-size: 7px; font-weight: 850; letter-spacing: .18em; }
+  .chain strong { display: block; margin-top: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: 25px; line-height: .95; }
+  .chain p { color: #738b97; font-size: 10px; line-height: 1.65; }
+
+  .connects { padding: 125px clamp(26px, 6vw, 108px) 135px; background: radial-gradient(circle at 20% 25%, rgba(0,106,190,.08), transparent 28%), #03080d; border-top: 1px solid rgba(105,169,197,.09); }
+  .connects__header { display: grid; grid-template-columns: 1fr .56fr; gap: clamp(50px, 8vw, 130px); align-items: end; margin-bottom: 68px; }
+  .connects__header > p { margin: 0; color: #8198a3; font-size: 13px; line-height: 1.8; }
+  .systems { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .systems article { min-height: 245px; padding: 28px; border-right: 1px solid var(--line); }
+  .systems article:last-child { border-right: 0; }
+  .systems span { color: #4f6976; font-size: 8px; }
+  .systems strong { display: block; margin-top: 54px; font-family: 'Barlow Condensed', sans-serif; font-size: 28px; line-height: .96; }
+  .systems p { margin: 14px 0 0; color: #738c98; font-size: 11px; line-height: 1.7; }
+  .connects__note { margin-top: 34px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 28px; border: 1px solid rgba(40,191,244,.18); background: linear-gradient(90deg, rgba(0,112,206,.12), rgba(0,203,255,.04)); }
+  .connects__note span { color: #5a7886; font-size: 7px; font-weight: 850; letter-spacing: .18em; }
+  .connects__note strong { color: #a8c8d4; font-size: 9px; letter-spacing: .12em; }
+
+  .bridge { min-height: 62vh; padding: 100px clamp(26px, 8vw, 144px); display: flex; align-items: center; justify-content: space-between; gap: 70px; background: radial-gradient(circle at 78% 50%, rgba(0,137,255,.13), transparent 28%), linear-gradient(120deg, #02070c, #04111a); border-top: 1px solid rgba(97,170,201,.10); }
+  .bridge > div { max-width: 820px; }
+  .bridge > div > p:last-child { max-width: 670px; color: #8198a3; font-size: 13px; line-height: 1.8; }
+
+  @keyframes breathe { 0%,100% { opacity: .62; transform: scale(.98); } 50% { opacity: 1; transform: scale(1.04); } }
+  @keyframes dataPulse { 0% { transform: translateY(-13px); opacity: 0; } 20%,75% { opacity: 1; } 100% { transform: translateY(13px); opacity: 0; } }
+
+  @media (max-width: 1120px) {
+    .topbar { grid-template-columns: 1fr auto; }
+    .nav { display: none; }
+    .hero__content { grid-template-columns: 1fr; gap: 48px; padding-top: 28px; }
+    .system-map { width: min(650px, 100%); }
+    .chain { grid-template-columns: repeat(3, 1fr); }
+    .chain::before { display: none; }
+    .systems { grid-template-columns: repeat(2, 1fr); }
+    .systems article:nth-child(2) { border-right: 0; }
+    .systems article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
+
+  @media (max-width: 760px) {
+    .topbar { height: 68px; padding: 0 18px; }
+    .brand { font-size: 13px; letter-spacing: .12em; }
+    .brand__mark { width: 21px; }
+    .topbar__actions .link { display: none; }
+    .button--small { padding: 0 13px; }
+    .hero { padding: 100px 20px 62px; align-items: start; }
+    .hero__background { object-position: 57% 50%; filter: saturate(.75) contrast(1.06) brightness(.40); }
+    .hero__shade { background: linear-gradient(180deg, rgba(1,5,10,.70), rgba(1,5,10,.82) 43%, rgba(1,5,10,.96) 80%); }
+    h1 { font-size: clamp(58px, 17vw, 82px); }
+    .lead { font-size: 13px; }
+    .hero__actions { align-items: flex-start; flex-direction: column; gap: 20px; }
+    .trust { gap: 8px; }
+    .system-map { padding: 13px; }
+    .map-layer { grid-template-columns: 28px 1fr; }
+    .map-layer > b { display: none; }
+    .hero__foot { display: none; }
+    .ecosystem, .foundation, .connects { padding: 88px 20px 92px; }
+    .section-head__grid, .foundation__intro, .connects__header { grid-template-columns: 1fr; gap: 28px; }
+    .section-head h2, .foundation h2, .connects h2, .bridge h2 { font-size: clamp(50px, 14vw, 72px); }
+    .definition-grid { grid-template-columns: 1fr; }
+    .definition-grid article { min-height: 270px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .definition-grid article:last-child { border-bottom: 0; }
+    .definition-grid small { margin-top: 34px; }
+    .chain { grid-template-columns: 1fr; }
+    .chain article { min-height: 180px; display: grid; grid-template-columns: 34px 1fr; column-gap: 16px; border-right: 0; border-bottom: 1px solid rgba(89,157,185,.10); }
+    .chain article > span { grid-row: 1 / 5; }
+    .chain__node { display: none; }
+    .chain small, .chain strong, .chain p { grid-column: 2; }
+    .chain small { margin-top: 4px; }
+    .systems { grid-template-columns: 1fr; }
+    .systems article { min-height: 205px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .systems article:last-child { border-bottom: 0; }
+    .connects__note { align-items: flex-start; flex-direction: column; }
+    .bridge { min-height: 72vh; padding: 80px 20px; flex-direction: column; align-items: flex-start; justify-content: center; }
+    .button--large { min-width: 0; width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>

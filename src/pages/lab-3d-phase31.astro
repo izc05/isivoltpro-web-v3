@@ -1,0 +1,530 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02050a" />
+    <meta name="description" content="ISIVOLTPRO phase 3.1 definitive Core architecture inside Industrial Base V1." />
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+    <title>ISIVOLTPRO · Phase 3.1 Core</title>
+  </head>
+  <body>
+    <canvas id="webgl" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href={base}>ISIVOLT<strong>PRO</strong></a>
+      <span class="phase">FASE 3.1 / CORE ARCHITECTURE</span>
+      <a class="back" href={`${base}lab-3d-base-v1/`}>BASE INDUSTRIAL V1</a>
+    </header>
+
+    <aside class="metrics" aria-live="polite">
+      <div><span>MECHANICAL</span><strong id="pipe-status">LOADING</strong></div>
+      <div><span>HVAC</span><strong id="hvac-status">LOADING</strong></div>
+      <div><span>HVAC UNIT</span><strong id="aircon-status">LOADING</strong></div>
+      <div><span>ELECTRICAL</span><strong id="electrical-status">LOADING</strong></div>
+      <div><span>CORE</span><strong>V1</strong></div>
+      <div><span>FPS</span><strong id="fps">--</strong></div>
+      <div><span>DPR</span><strong id="dpr">--</strong></div>
+      <div><span>CALLS</span><strong id="calls">--</strong></div>
+      <div><span>TRIS</span><strong id="tris">--</strong></div>
+    </aside>
+
+    <main id="story">
+      <section class="chapter active"><div class="copy">
+        <p class="eyebrow">ISIVOLTPRO CORE</p>
+        <h1>Installed.<br />Not floating.</h1>
+        <p class="body-copy">The Core becomes a physical technical device: structural frame, protected energy chamber, service crown and dedicated connection ports.</p>
+        <span class="scroll-hint">INSPECT THE CORE <i>↓</i></span>
+      </div></section>
+
+      <section class="chapter"><div class="copy right-copy">
+        <p class="index">02 / STRUCTURE</p><p class="eyebrow">PLINTH · FRAME · SERVICE CLEARANCE</p>
+        <h2>A machine<br />with weight.</h2>
+        <p class="body-copy">A layered octagonal plinth anchors four structural pylons around a central chamber while keeping the installation readable around it.</p>
+      </div></section>
+
+      <section class="chapter"><div class="copy">
+        <p class="index">03 / CHAMBER</p><p class="eyebrow">GLASS · BUS · CONTAINMENT</p>
+        <h2>Energy stays<br />inside.</h2>
+        <p class="body-copy">The luminous element is contained behind technical glass and metal. Blue light is concentrated in the device instead of washing the whole plant.</p>
+      </div></section>
+
+      <section class="chapter"><div class="copy right-copy">
+        <p class="index">04 / SERVICE PORTS</p><p class="eyebrow">MECHANICAL · AIR · CLIMATE · POWER</p>
+        <h2>Systems meet<br />at the base.</h2>
+        <p class="body-copy">Four low service nodes face the real plant zones. Digital pulses start from physical connection points instead of appearing from empty space.</p>
+      </div></section>
+
+      <section class="chapter"><div class="copy end-copy">
+        <p class="index">05 / CHECKPOINT</p><p class="eyebrow">CORE V1</p>
+        <h2>Identity first.<br />Effects second.</h2>
+        <p class="body-copy">This is the first definitive IsiVoltPro Core language. The next pass can refine materials, detailing and integration without changing the industrial base.</p>
+        <a class="lab-button" href={`${base}lab-3d-base-v1/`}>COMPARE WITH BASE V1 <span>→</span></a>
+      </div></section>
+    </main>
+
+    <div id="no-webgl" hidden><strong>3D unavailable</strong><p>This checkpoint needs WebGL.</p><a href={base}>Return home</a></div>
+
+    <script>
+      import * as THREE from 'three';
+      import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+      import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+      import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+      import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+      import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+      import gsap from 'gsap';
+      import ScrollTrigger from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+      THREE.Cache.enabled = true;
+
+      const PIPE_ASSET_URL = 'https://raw.githubusercontent.com/KrazIvan/GodotVR_Test/6dc918140151c3235406a3f616a765e11293285a/Ivan%20VR/models/props/pipe/modular_industrial_pipes_01_4k.gltf';
+      const HVAC_ASSET_URL = 'https://raw.githubusercontent.com/Hona/daxship/d63856c6af9aba445a4fe8bf832d0e0ecf2572e5/apps/web/public/assets/models/environment/poly-haven/modular_airduct_circular_01/modular_airduct_circular_01_1k.gltf';
+      const ELECTRICAL_ASSET_URL = 'https://raw.githubusercontent.com/adamkhatib/PeakBrake/87be08e1b90a6cfc59cd7364488cdca9053a16a3/public/assets/3d/polyhaven/utility_box_01/utility_box_01_1k.gltf';
+      const AIRCON_ASSET_URL = 'https://raw.githubusercontent.com/VoxogoBrusch/the-levels/1e7c37785504d23d9a2f669b3b922eac14cedb01/public/assets/models/exterior_aircon_unit/exterior_aircon_unit_1k.gltf';
+      const PIXEL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zf6AAAAAASUVORK5CYII=';
+
+      const canvas = document.querySelector('#webgl');
+      const pipeStatus = document.querySelector('#pipe-status');
+      const hvacStatus = document.querySelector('#hvac-status');
+      const airconStatus = document.querySelector('#aircon-status');
+      const electricalStatus = document.querySelector('#electrical-status');
+      const fpsEl = document.querySelector('#fps');
+      const dprEl = document.querySelector('#dpr');
+      const callsEl = document.querySelector('#calls');
+      const trisEl = document.querySelector('#tris');
+      const noWebgl = document.querySelector('#no-webgl');
+
+      const supportsWebGL = (() => {
+        try {
+          const test = document.createElement('canvas');
+          return Boolean(test.getContext('webgl2') || test.getContext('webgl'));
+        } catch { return false; }
+      })();
+
+      if (!supportsWebGL || !(canvas instanceof HTMLCanvasElement)) {
+        if (canvas) canvas.remove();
+        if (noWebgl instanceof HTMLElement) noWebgl.hidden = false;
+      } else {
+        const mobile = window.matchMedia('(max-width: 760px)').matches;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const dprCap = mobile ? 1.0 : 1.3;
+        const dprFloor = mobile ? 0.78 : 0.9;
+        let qualityDpr = Math.min(window.devicePixelRatio, mobile ? 0.95 : 1.25);
+
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(qualityDpr);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 0.94;
+        renderer.shadowMap.enabled = !mobile;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x02050a);
+        scene.fog = new THREE.FogExp2(0x02050a, 0.0225);
+
+        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 160);
+        camera.position.set(-17, 8.5, 20);
+
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+        composer.addPass(new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), mobile ? 0.18 : 0.32, 0.32, 0.94));
+        composer.addPass(new OutputPass());
+
+        const world = new THREE.Group();
+        scene.add(world);
+
+        const concrete = new THREE.MeshStandardMaterial({ color: 0x0b1015, metalness: 0.05, roughness: 0.92 });
+        const concreteLight = new THREE.MeshStandardMaterial({ color: 0x161d22, metalness: 0.06, roughness: 0.86 });
+        const steel = new THREE.MeshStandardMaterial({ color: 0x18232b, metalness: 0.82, roughness: 0.34 });
+        const panel = new THREE.MeshStandardMaterial({ color: 0x09131b, metalness: 0.52, roughness: 0.52 });
+        const pipeSupply = new THREE.MeshStandardMaterial({ color: 0x71828c, metalness: 0.9, roughness: 0.27 });
+        const pipeReturn = new THREE.MeshStandardMaterial({ color: 0x425864, metalness: 0.84, roughness: 0.33 });
+        const copper = new THREE.MeshStandardMaterial({ color: 0x8b5b40, metalness: 0.9, roughness: 0.28 });
+        const insulation = new THREE.MeshStandardMaterial({ color: 0x1b3440, metalness: 0.15, roughness: 0.64 });
+        const safety = new THREE.MeshStandardMaterial({ color: 0x7b6a22, emissive: 0x2e2400, emissiveIntensity: 0.4, roughness: 0.62 });
+        const warmMetal = new THREE.MeshStandardMaterial({ color: 0x53331f, metalness: 0.6, roughness: 0.45 });
+        const cyanGlow = new THREE.MeshStandardMaterial({ color: 0x042833, emissive: 0x00d9ff, emissiveIntensity: 2.8, metalness: 0.45, roughness: 0.2 });
+        const blueGlow = new THREE.MeshStandardMaterial({ color: 0x06182b, emissive: 0x0879ff, emissiveIntensity: 1.7, metalness: 0.62, roughness: 0.25 });
+        const electricGlow = new THREE.MeshStandardMaterial({ color: 0x302805, emissive: 0xffc928, emissiveIntensity: 2.0, metalness: 0.4, roughness: 0.3 });
+
+        const coreMetal = new THREE.MeshStandardMaterial({ color: 0x10171d, metalness: 0.96, roughness: 0.22 });
+        const coreMetalSoft = new THREE.MeshStandardMaterial({ color: 0x25323a, metalness: 0.86, roughness: 0.32 });
+        const coreCeramic = new THREE.MeshStandardMaterial({ color: 0x2a3438, metalness: 0.12, roughness: 0.62 });
+        const coreGlass = new THREE.MeshPhysicalMaterial({ color: 0x5fcfe8, metalness: 0.0, roughness: 0.11, transmission: 0.78, transparent: true, opacity: 0.34, thickness: 0.42, ior: 1.46, depthWrite: false });
+        const coreGlassDark = new THREE.MeshPhysicalMaterial({ color: 0x123b49, metalness: 0.0, roughness: 0.2, transmission: 0.55, transparent: true, opacity: 0.24, thickness: 0.3, ior: 1.42, depthWrite: false });
+
+        const unitBox = new THREE.BoxGeometry(1, 1, 1);
+        const matrix = new THREE.Matrix4();
+
+        function addBox(x: number, y: number, z: number, sx: number, sy: number, sz: number, material: THREE.Material, cast = false, receive = true) {
+          const mesh = new THREE.Mesh(unitBox, material);
+          mesh.position.set(x, y, z);
+          mesh.scale.set(sx, sy, sz);
+          mesh.castShadow = !mobile && cast;
+          mesh.receiveShadow = receive;
+          world.add(mesh);
+          return mesh;
+        }
+
+        function makeTube(points: THREE.Vector3[], radius: number, material: THREE.Material, segments = 24) {
+          const curve = new THREE.CatmullRomCurve3(points);
+          const mesh = new THREE.Mesh(new THREE.TubeGeometry(curve, segments, radius, 8, false), material);
+          mesh.receiveShadow = true;
+          world.add(mesh);
+          return mesh;
+        }
+
+        // INDUSTRIAL BASE V1 — same zoning and hierarchy.
+        addBox(0, -0.09, 0, 70, 0.06, 52, concrete);
+        if (!mobile) {
+          const grid = new THREE.GridHelper(70, 70, 0x12384a, 0x091921);
+          grid.position.y = 0.005;
+          grid.material.transparent = true;
+          grid.material.opacity = 0.08;
+          world.add(grid);
+        }
+        addBox(-6, 0.06, -5.4, 14.5, 0.12, 10, concreteLight);
+        addBox(8.8, 0.06, -7, 9.4, 0.12, 6.6, concreteLight);
+        addBox(9.6, 0.06, 1.7, 6.6, 0.12, 5.6, concreteLight);
+        addBox(0, 0.07, 0.2, 7.2, 0.14, 7.2, concreteLight);
+        addBox(-12.7, 2.2, -5.4, 0.2, 4.4, 10, panel, true);
+        addBox(-6, 2.2, -10.3, 13.7, 4.4, 0.18, panel, true);
+        addBox(8.8, 2, -10.2, 8.8, 4, 0.18, panel, true);
+        addBox(13.3, 2, -7, 0.2, 4, 6.4, panel, true);
+        addBox(12.9, 1.55, 1.7, 0.2, 3.1, 5.6, panel, true);
+        addBox(-5.8, 0.08, -1.4, 13.4, 0.018, 0.08, safety);
+        addBox(8.8, 0.08, -3.5, 8.4, 0.018, 0.08, safety);
+        addBox(4, 0.08, 4.6, 17, 0.018, 0.06, safety);
+
+        const tankGeo = new THREE.CylinderGeometry(0.62, 0.62, 3, 20);
+        const tankBaseGeo = new THREE.CylinderGeometry(0.74, 0.8, 0.2, 20);
+        const tanks = new THREE.InstancedMesh(tankGeo, steel, 4);
+        const tankBases = new THREE.InstancedMesh(tankBaseGeo, concreteLight, 4);
+        [-9.7, -7.5, -5.3, -3.1].forEach((x, index) => {
+          matrix.compose(new THREE.Vector3(x, 0.22, -7.7), new THREE.Quaternion(), new THREE.Vector3(1, 1, 1)); tankBases.setMatrixAt(index, matrix);
+          matrix.compose(new THREE.Vector3(x, 1.82, -7.7), new THREE.Quaternion(), new THREE.Vector3(1, index % 2 ? 1.09 : 1, 1)); tanks.setMatrixAt(index, matrix);
+        });
+        tanks.castShadow = !mobile; tanks.receiveShadow = true; world.add(tankBases, tanks);
+
+        const motorGeo = new THREE.CylinderGeometry(0.34, 0.34, 0.9, 14);
+        const pumpGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.48, 14);
+        const motors = new THREE.InstancedMesh(motorGeo, panel, 4);
+        const pumps = new THREE.InstancedMesh(pumpGeo, warmMetal, 4);
+        const rotZ = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI / 2));
+        [-9, -7, -5, -3].forEach((x, index) => {
+          matrix.compose(new THREE.Vector3(x - 0.2, 0.67, -3.2), rotZ, new THREE.Vector3(1, 1, 1)); motors.setMatrixAt(index, matrix);
+          matrix.compose(new THREE.Vector3(x + 0.58, 0.67, -3.2), rotZ, new THREE.Vector3(1, 1, 1)); pumps.setMatrixAt(index, matrix);
+          addBox(x, 0.21, -3.2, 1.55, 0.18, 1.05, steel);
+        });
+        motors.castShadow = !mobile; pumps.castShadow = !mobile; world.add(motors, pumps);
+
+        [-11.5, -8.1, -4.7, -1.3].forEach((x) => {
+          addBox(x, 2.22, -5.9, 0.12, 4.2, 0.12, steel, true);
+          addBox(x, 2.55, -5.9, 0.12, 0.12, 1.35, steel, true);
+          addBox(x, 3.65, -5.9, 0.12, 0.12, 1.35, steel, true);
+        });
+        [-8.8, -4.4, 0, 4.4, 8.8].forEach((x) => {
+          addBox(x, 2.87, 3.25, 0.12, 5.5, 0.12, steel, true);
+          addBox(x, 5.45, 3.25, 0.12, 0.12, 2, steel, true);
+        });
+        addBox(0, 5.45, 3.25, 18, 0.12, 0.12, steel, true);
+        addBox(5, 1.17, 0.6, 2.6, 2.1, 2.05, panel, true);
+        addBox(6.32, 1.17, 0.6, 0.04, 1.45, 1.25, steel);
+        addBox(9.6, 0.22, 1.7, 3.5, 0.2, 2.8, concreteLight);
+        addBox(9.6, 0.39, 1.7, 2.9, 0.14, 2.15, steel);
+        addBox(8.8, 0.24, -8.15, 7.5, 0.24, 1.8, steel);
+        addBox(8.8, 2.82, -7.65, 7.6, 0.12, 0.68, steel, true);
+        addBox(8.8, 2.81, -8.02, 7.1, 0.025, 0.03, electricGlow);
+
+        const pipeNetwork = new THREE.Group();
+        const ductNetwork = new THREE.Group();
+        const airconNetwork = new THREE.Group();
+        const electricalNetwork = new THREE.Group();
+        world.add(pipeNetwork, ductNetwork, airconNetwork, electricalNetwork);
+
+        let settledAssets = 0;
+        const settleAsset = () => {
+          settledAssets += 1;
+          if (settledAssets === 4 && renderer.shadowMap.enabled) {
+            renderer.shadowMap.needsUpdate = true;
+            requestAnimationFrame(() => { renderer.shadowMap.autoUpdate = false; });
+          }
+        };
+
+        const pipeManager = new THREE.LoadingManager();
+        pipeManager.setURLModifier((url) => url.includes('/textures/') ? PIXEL : url);
+        new GLTFLoader(pipeManager).load(PIPE_ASSET_URL, (gltf) => {
+          const source = new Map<string, THREE.Object3D>(); gltf.scene.children.forEach((child) => source.set(child.name, child));
+          const addPipe = (name: string, position: [number, number, number], rotation: [number, number, number], scale: number, material: THREE.Material) => {
+            const original = source.get(name); if (!original) return;
+            const piece = original.clone(true); piece.position.set(...position); piece.rotation.set(...rotation); piece.scale.setScalar(scale);
+            piece.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.material = material; object.castShadow = false; object.receiveShadow = true; } });
+            pipeNetwork.add(piece);
+          };
+          [-10.8, -7.4, -4, -0.6].forEach((x) => {
+            addPipe('modular_industrial_pipes_01_pipe02', [x, 3.55, -6.15], [0, 0, Math.PI / 2], 1.35, pipeSupply);
+            addPipe('modular_industrial_pipes_01_pipe02', [x, 2.45, -5.75], [0, 0, Math.PI / 2], 1.35, pipeReturn);
+          });
+          [-9.7, -7.5, -5.3, -3.1].forEach((x, index) => addPipe('modular_industrial_pipes_01_pipe01', [x, 2, -7.3], [0, 0, 0], 1.1, index % 2 ? pipeReturn : pipeSupply));
+          [-9, -6.8, -4.6, -2.4].forEach((x, index) => addPipe('modular_industrial_pipes_01_pipe01', [x, 1.45, -4.2], [0, Math.PI / 2, Math.PI / 2], 0.95, index % 2 ? pipeReturn : pipeSupply));
+          if (pipeStatus) pipeStatus.textContent = 'READY'; settleAsset();
+        }, undefined, (error) => { console.error('Phase 3.1 mechanical network failed', error); if (pipeStatus) pipeStatus.textContent = 'ERROR'; settleAsset(); });
+
+        new GLTFLoader().load(HVAC_ASSET_URL, (gltf) => {
+          const source = new Map<string, THREE.Object3D>(); gltf.scene.children.forEach((child) => source.set(child.name, child));
+          const addDuct = (name: string, position: [number, number, number], rotation: [number, number, number], scale = 1) => {
+            const original = source.get(name); if (!original) return;
+            const piece = original.clone(true); piece.position.set(...position); piece.rotation.set(...rotation); piece.scale.setScalar(scale);
+            piece.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = false; object.receiveShadow = true; } }); ductNetwork.add(piece);
+          };
+          [-8.8, -5.3, -1.8, 1.7, 5.2, 8.7].forEach((x) => addDuct('modular_airduct_circular_triple', [x, 5.05, 3.25], [0, Math.PI / 2, 0], 1.52));
+          addDuct('modular_airduct_circular_fan', [0, 5.05, 3.25], [0, Math.PI / 2, 0], 1.48);
+          addDuct('modular_airduct_circular_smooth_bend_quater', [4.2, 5.05, 3.15], [0, Math.PI, Math.PI / 2], 1.52);
+          addDuct('modular_airduct_circular_smooth_triple', [4.2, 5.05, 1.2], [0, 0, 0], 1.48);
+          if (hvacStatus) hvacStatus.textContent = 'READY'; settleAsset();
+        }, undefined, (error) => { console.error('Phase 3.1 HVAC failed', error); if (hvacStatus) hvacStatus.textContent = 'ERROR'; settleAsset(); });
+
+        const airconManager = new THREE.LoadingManager(); airconManager.setURLModifier((url) => url.includes('_rusted_') ? PIXEL : url);
+        new GLTFLoader(airconManager).load(AIRCON_ASSET_URL, (gltf) => {
+          const clean = gltf.scene.getObjectByName('exterior_aircon_unit');
+          if (!clean) { if (airconStatus) airconStatus.textContent = 'ERROR'; settleAsset(); return; }
+          const unit = clean.clone(true); unit.position.set(9.6, 0.55, 1.7); unit.rotation.y = -Math.PI / 2; unit.scale.setScalar(2.15);
+          unit.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = !mobile; object.receiveShadow = true; } });
+          airconNetwork.add(unit); if (airconStatus) airconStatus.textContent = 'READY'; settleAsset();
+        }, undefined, (error) => { console.error('Phase 3.1 aircon failed', error); if (airconStatus) airconStatus.textContent = 'ERROR'; settleAsset(); });
+
+        new GLTFLoader().load(ELECTRICAL_ASSET_URL, (gltf) => {
+          const cabinet = gltf.scene;
+          cabinet.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = !mobile; object.receiveShadow = true; } });
+          [-2.8, -1.4, 0, 1.4, 2.8].forEach((x, index) => {
+            const unit = cabinet.clone(true); unit.position.set(8.8 + x, 0.36, -8.15); unit.rotation.y = Math.PI; unit.scale.setScalar(index === 2 ? 1.4 : 1.3); electricalNetwork.add(unit);
+          });
+          if (electricalStatus) electricalStatus.textContent = 'READY'; settleAsset();
+        }, undefined, (error) => { console.error('Phase 3.1 electrical failed', error); if (electricalStatus) electricalStatus.textContent = 'ERROR'; settleAsset(); });
+
+        makeTube([new THREE.Vector3(6.25, 1, 0.4), new THREE.Vector3(7.2, 1.2, 0.4), new THREE.Vector3(8.1, 1, 0.8), new THREE.Vector3(9, 1, 1.35)], 0.045, copper, 24);
+        makeTube([new THREE.Vector3(6.25, 1.18, 0.65), new THREE.Vector3(7.15, 1.38, 0.65), new THREE.Vector3(8, 1.2, 1.05), new THREE.Vector3(9, 1.18, 1.55)], 0.075, insulation, 24);
+
+        // CORE V1 — physical architecture first.
+        const core = new THREE.Group();
+        core.position.set(0, 0.14, 0.2);
+        world.add(core);
+
+        const lowerFoot = new THREE.Mesh(new THREE.CylinderGeometry(2.45, 2.7, 0.22, 8), coreCeramic); lowerFoot.position.y = 0.11; core.add(lowerFoot);
+        const lowerRing = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.38, 0.36, 8), coreMetal); lowerRing.position.y = 0.4; lowerRing.castShadow = !mobile; core.add(lowerRing);
+        const serviceDeck = new THREE.Mesh(new THREE.CylinderGeometry(1.92, 2.08, 0.18, 8), coreMetalSoft); serviceDeck.position.y = 0.67; core.add(serviceDeck);
+
+        const pylonGeo = new THREE.BoxGeometry(0.28, 4.35, 0.42);
+        const pylons = new THREE.InstancedMesh(pylonGeo, coreMetal, 4);
+        const pylonPositions: Array<[number, number, number, number]> = [
+          [-1.27, 2.75, -1.27, Math.PI / 4], [1.27, 2.75, -1.27, -Math.PI / 4],
+          [1.27, 2.75, 1.27, Math.PI / 4], [-1.27, 2.75, 1.27, -Math.PI / 4],
+        ];
+        pylonPositions.forEach(([x, y, z, ry], index) => {
+          const q = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, ry, 0));
+          matrix.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(1, 1, 1)); pylons.setMatrixAt(index, matrix);
+        });
+        pylons.castShadow = !mobile; core.add(pylons);
+
+        const lowerBrace = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.08, 8, 48), coreMetalSoft); lowerBrace.rotation.x = Math.PI / 2; lowerBrace.position.y = 1.0; core.add(lowerBrace);
+        const upperBrace = lowerBrace.clone(); upperBrace.position.y = 4.58; core.add(upperBrace);
+
+        const chamber = new THREE.Mesh(new THREE.CylinderGeometry(0.92, 0.92, 3.35, 28, 1, true), coreGlass); chamber.position.y = 2.78; core.add(chamber);
+        const chamberInner = new THREE.Mesh(new THREE.CylinderGeometry(0.77, 0.77, 3.08, 24, 1, true), coreGlassDark); chamberInner.position.y = 2.78; core.add(chamberInner);
+
+        const bus = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 2.75, 14), cyanGlow); bus.position.y = 2.75; core.add(bus);
+        const lowerEmitter = new THREE.Mesh(new THREE.OctahedronGeometry(0.38, 0), cyanGlow); lowerEmitter.position.y = 1.45; lowerEmitter.scale.set(1, 1.25, 1); core.add(lowerEmitter);
+        const upperEmitter = lowerEmitter.clone(); upperEmitter.position.y = 4.04; upperEmitter.rotation.y = Math.PI / 4; core.add(upperEmitter);
+
+        const fieldRings: THREE.Mesh[] = [];
+        [1.65, 2.36, 3.07, 3.78].forEach((y, index) => {
+          const ring = new THREE.Mesh(new THREE.TorusGeometry(0.66 + index * 0.035, 0.035, 8, 42), index % 2 ? blueGlow : cyanGlow);
+          ring.rotation.x = Math.PI / 2; ring.position.y = y; core.add(ring); fieldRings.push(ring);
+        });
+
+        const crownBase = new THREE.Mesh(new THREE.CylinderGeometry(1.55, 1.72, 0.32, 8), coreMetal); crownBase.position.y = 4.88; core.add(crownBase);
+        const crownCap = new THREE.Mesh(new THREE.CylinderGeometry(1.18, 1.48, 0.42, 8), coreMetalSoft); crownCap.position.y = 5.2; core.add(crownCap);
+        const crownGlass = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.78, 0.32, 16), coreGlass); crownGlass.position.y = 5.2; core.add(crownGlass);
+        const statusRing = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.045, 8, 48), cyanGlow); statusRing.rotation.x = Math.PI / 2; statusRing.position.y = 5.36; core.add(statusRing);
+
+        const portMaterialMechanical = new THREE.MeshStandardMaterial({ color: 0x264a55, emissive: 0x087e9c, emissiveIntensity: 0.45, metalness: 0.7, roughness: 0.34 });
+        const portMaterialHvac = new THREE.MeshStandardMaterial({ color: 0x1e4550, emissive: 0x2ab7d2, emissiveIntensity: 0.38, metalness: 0.66, roughness: 0.36 });
+        const portMaterialClimate = new THREE.MeshStandardMaterial({ color: 0x263d47, emissive: 0x59b9cf, emissiveIntensity: 0.32, metalness: 0.68, roughness: 0.34 });
+        const portMaterialElectrical = new THREE.MeshStandardMaterial({ color: 0x514319, emissive: 0xffbe24, emissiveIntensity: 0.52, metalness: 0.68, roughness: 0.34 });
+        const servicePorts: Array<{ mesh: THREE.Mesh; target: THREE.Vector3; material: THREE.Material }> = [];
+        const portSpecs: Array<[number, number, number, THREE.Material, THREE.Vector3]> = [
+          [-1.62, 0.92, -0.38, portMaterialMechanical, new THREE.Vector3(-6, 1.2, -4.4)],
+          [0.55, 0.92, 1.52, portMaterialHvac, new THREE.Vector3(3.6, 4.7, 3.25)],
+          [1.62, 0.92, 0.38, portMaterialClimate, new THREE.Vector3(9.2, 1.2, 1.7)],
+          [0.38, 0.92, -1.62, portMaterialElectrical, new THREE.Vector3(8.8, 1.4, -7.5)],
+        ];
+        portSpecs.forEach(([x, y, z, material, target]) => {
+          const port = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.3, 0.54), material); port.position.set(x, y, z); port.castShadow = !mobile; core.add(port);
+          const socket = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.12, 12), material); socket.rotation.x = Math.PI / 2; socket.position.set(x, y + 0.02, z); core.add(socket);
+          servicePorts.push({ mesh: port, target, material });
+        });
+
+        const internalLight = new THREE.PointLight(0x00d9ff, mobile ? 6 : 12, 8, 1.8); internalLight.position.set(0, 2.8, 0); core.add(internalLight);
+        const crownLight = new THREE.PointLight(0x4fdfff, mobile ? 2 : 4, 5, 2); crownLight.position.set(0, 5.25, 0); core.add(crownLight);
+
+        function createConnection(start: THREE.Vector3, end: THREE.Vector3, height: number, material: THREE.Material) {
+          const mid = start.clone().lerp(end, 0.5); mid.y += height;
+          const curve = new THREE.CatmullRomCurve3([start, mid, end]);
+          world.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 20, 0.014, 6, false), material));
+          const pulse = new THREE.Mesh(new THREE.SphereGeometry(0.043, 8, 8), material); world.add(pulse);
+          return { curve, pulse, offset: Math.random() };
+        }
+        const connections = servicePorts.map(({ mesh, target, material }, index) => {
+          const start = mesh.position.clone().add(core.position);
+          return createConnection(start, target, index === 1 ? 1.55 : 1.0 + index * 0.12, material);
+        });
+
+        scene.add(new THREE.HemisphereLight(0x6f9eb4, 0x020407, 1.06));
+        const key = new THREE.DirectionalLight(0xc7e3ee, 2.45); key.position.set(-10, 15, 8); key.castShadow = !mobile;
+        key.shadow.mapSize.set(1024, 1024); key.shadow.camera.near = 1; key.shadow.camera.far = 45; key.shadow.camera.left = -18; key.shadow.camera.right = 18; key.shadow.camera.top = 18; key.shadow.camera.bottom = -18; scene.add(key);
+        const mechanicalLight = new THREE.PointLight(0xffa55c, 7.2, 15, 2); mechanicalLight.position.set(-6.5, 5, -5.5); scene.add(mechanicalLight);
+        const hvacLight = new THREE.PointLight(0x8eddf2, 5.7, 15, 2); hvacLight.position.set(1.5, 6.5, 3.2); scene.add(hvacLight);
+        const climateLight = new THREE.PointLight(0xb5eaff, 5.1, 10, 2); climateLight.position.set(9.5, 3.5, 1.7); scene.add(climateLight);
+        const electricalLight = new THREE.PointLight(0xffb95c, 7.8, 12, 2); electricalLight.position.set(8.8, 4, -7.6); scene.add(electricalLight);
+
+        const particleCount = mobile ? 36 : 90;
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i += 1) {
+          positions[i * 3] = (Math.random() - 0.5) * 48; positions[i * 3 + 1] = Math.random() * 8 + 0.5; positions[i * 3 + 2] = (Math.random() - 0.5) * 34;
+        }
+        const particleGeometry = new THREE.BufferGeometry(); particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particles = new THREE.Points(particleGeometry, new THREE.PointsMaterial({ color: 0x7cb6c7, size: 0.016, transparent: true, opacity: 0.09, depthWrite: false })); world.add(particles);
+
+        const cameraPath = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(-16, 8, 19), new THREE.Vector3(-10, 4.5, 8), new THREE.Vector3(-5.8, 2.6, 3.4),
+          new THREE.Vector3(-3.1, 2.2, 2.3), new THREE.Vector3(2.8, 2.35, 2.7), new THREE.Vector3(3.8, 3.5, -0.5),
+          new THREE.Vector3(2.4, 4.9, -3.5), new THREE.Vector3(-1.9, 5.8, -3.2), new THREE.Vector3(-5.5, 4.6, 1.3),
+          new THREE.Vector3(-1.8, 3.6, 5.3), new THREE.Vector3(5.8, 6.2, 10.5),
+        ]);
+        const targetPath = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(0, 2.6, 0.2), new THREE.Vector3(0, 2.6, 0.2), new THREE.Vector3(0, 2.5, 0.2),
+          new THREE.Vector3(0, 2.5, 0.2), new THREE.Vector3(0, 2.8, 0.2), new THREE.Vector3(0, 2.9, 0.2),
+          new THREE.Vector3(0, 3.2, 0.2), new THREE.Vector3(0, 3.3, 0.2), new THREE.Vector3(0, 2.7, 0.2),
+          new THREE.Vector3(0, 2.7, 0.2), new THREE.Vector3(0, 2.8, 0.2),
+        ]);
+
+        const state = { progress: 0 };
+        const chapters = Array.from(document.querySelectorAll('.chapter'));
+        ScrollTrigger.create({ trigger: '#story', start: 'top top', end: 'bottom bottom', scrub: reducedMotion ? false : 1.1, onUpdate: (self) => {
+          state.progress = self.progress;
+          const active = Math.min(chapters.length - 1, Math.floor(self.progress * chapters.length));
+          chapters.forEach((chapter, index) => chapter.classList.toggle('active', index === active));
+        }});
+
+        function applyDpr(next: number) {
+          qualityDpr = THREE.MathUtils.clamp(next, dprFloor, Math.min(window.devicePixelRatio, dprCap));
+          renderer.setPixelRatio(qualityDpr); renderer.setSize(window.innerWidth, window.innerHeight, false); composer.setSize(window.innerWidth, window.innerHeight);
+          if (dprEl) dprEl.textContent = qualityDpr.toFixed(2);
+        }
+        applyDpr(qualityDpr);
+
+        const clock = new THREE.Clock();
+        let frames = 0; let fpsStart = performance.now(); let qualityWindowStart = performance.now(); let qualityFrames = 0; let stableHighWindows = 0; let raf = 0; let visible = true;
+
+        function render(now = performance.now()) {
+          const elapsed = clock.getElapsedTime();
+          const progress = reducedMotion ? 0.88 : THREE.MathUtils.clamp(state.progress, 0.001, 0.999);
+          camera.position.lerp(cameraPath.getPointAt(progress), reducedMotion ? 1 : 0.065); camera.lookAt(targetPath.getPointAt(progress));
+
+          const pulse = 1 + Math.sin(elapsed * 1.45) * 0.035;
+          bus.scale.set(pulse, 1, pulse);
+          lowerEmitter.rotation.y = elapsed * 0.22; upperEmitter.rotation.y = -elapsed * 0.18;
+          statusRing.rotation.z = elapsed * 0.08;
+          fieldRings.forEach((ring, index) => { ring.rotation.z = elapsed * (0.045 + index * 0.012) * (index % 2 ? -1 : 1); });
+          internalLight.intensity = (mobile ? 6 : 12) + Math.sin(elapsed * 1.35) * 1.2;
+          particles.rotation.y = elapsed * 0.0012;
+          connections.forEach(({ curve, pulse: movingPulse, offset }, index) => { movingPulse.position.copy(curve.getPointAt((elapsed * (0.075 + index * 0.009) + offset) % 1)); });
+
+          composer.render(); frames += 1; qualityFrames += 1;
+          if (now - fpsStart >= 1000) {
+            const fps = Math.round((frames * 1000) / (now - fpsStart)); if (fpsEl) fpsEl.textContent = String(fps);
+            if (callsEl) callsEl.textContent = renderer.info.render.calls.toLocaleString(); if (trisEl) trisEl.textContent = renderer.info.render.triangles.toLocaleString();
+            frames = 0; fpsStart = now;
+          }
+          if (!reducedMotion && now - qualityWindowStart >= 2500) {
+            const avgFps = (qualityFrames * 1000) / (now - qualityWindowStart);
+            if (avgFps < 48 && qualityDpr > dprFloor + 0.02) { stableHighWindows = 0; applyDpr(qualityDpr - 0.08); }
+            else if (avgFps > 58 && qualityDpr < Math.min(window.devicePixelRatio, dprCap) - 0.02) { stableHighWindows += 1; if (stableHighWindows >= 2) { applyDpr(qualityDpr + 0.05); stableHighWindows = 0; } }
+            else stableHighWindows = 0;
+            qualityFrames = 0; qualityWindowStart = now;
+          }
+          if (visible) raf = requestAnimationFrame(render);
+        }
+
+        function resize() {
+          camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight, false); composer.setSize(window.innerWidth, window.innerHeight); applyDpr(qualityDpr);
+        }
+        window.addEventListener('resize', resize, { passive: true });
+        document.addEventListener('visibilitychange', () => {
+          visible = !document.hidden;
+          if (visible) { cancelAnimationFrame(raf); clock.getDelta(); frames = 0; qualityFrames = 0; fpsStart = performance.now(); qualityWindowStart = fpsStart; render(); }
+        });
+        render();
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #fff; background: #02050a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #02050a; overflow-x: hidden; }
+  body { min-width: 320px; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  #webgl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+  body::after { content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(2,5,10,.54), transparent 35%, transparent 68%, rgba(2,5,10,.37)), linear-gradient(180deg, rgba(2,5,10,.12), transparent 54%, rgba(2,5,10,.58)), radial-gradient(circle at 50% 43%, transparent 0 30%, rgba(2,5,10,.15) 63%, rgba(2,5,10,.55) 100%); }
+  .topbar { position: fixed; inset: 0 0 auto; z-index: 20; height: 74px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(22px, 4.5vw, 74px); border-bottom: 1px solid rgba(125,187,211,.1); background: linear-gradient(180deg, rgba(2,5,10,.82), rgba(2,5,10,.06)); backdrop-filter: blur(8px); }
+  .brand { justify-self: start; font-size: 17px; font-weight: 700; letter-spacing: .04em; }
+  .brand strong { color: #00dcff; }
+  .phase, .back { color: #8aa0ae; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+  .back { justify-self: end; }
+  .metrics { position: fixed; z-index: 18; right: clamp(22px, 3vw, 48px); top: 96px; width: 194px; padding: 10px 13px; border: 1px solid rgba(126,187,211,.12); background: rgba(3,8,13,.62); backdrop-filter: blur(8px); }
+  .metrics div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid rgba(126,187,211,.07); }
+  .metrics div:last-child { border: 0; }
+  .metrics span, .metrics strong { font-size: 8px; letter-spacing: .12em; }
+  .metrics span { color: #667e8c; }
+  .metrics strong { color: #00d9ff; }
+  #story { position: relative; z-index: 3; }
+  .chapter { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 100px clamp(26px, 6vw, 104px) 60px; pointer-events: none; }
+  .copy { width: min(660px, 48vw); opacity: .14; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+  .chapter.active .copy { opacity: 1; transform: translateY(0); }
+  .right-copy { margin-left: auto; width: min(590px, 44vw); }
+  .end-copy { width: min(760px, 68vw); }
+  .eyebrow, .index { margin: 0 0 14px; color: #00d9ff; font-size: 9px; font-weight: 850; letter-spacing: .22em; }
+  .index { color: #657c89; }
+  h1, h2 { margin: 0; font-weight: 510; letter-spacing: -.06em; line-height: .91; }
+  h1 { font-size: clamp(54px, 7vw, 118px); }
+  h2 { font-size: clamp(48px, 6vw, 98px); }
+  .body-copy { max-width: 520px; margin: 24px 0 0; color: #93a5af; font-size: 13px; line-height: 1.7; }
+  .scroll-hint { display: inline-flex; gap: 13px; margin-top: 34px; color: #6f8591; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+  .scroll-hint i { color: #00d9ff; font-style: normal; }
+  .lab-button { pointer-events: auto; display: inline-flex; gap: 18px; margin-top: 30px; padding: 13px 17px; border: 1px solid rgba(0,217,255,.27); color: #dffaff; font-size: 9px; font-weight: 800; letter-spacing: .13em; }
+  .lab-button span { color: #00d9ff; }
+  #no-webgl { position: fixed; inset: 0; z-index: 50; display: grid; place-content: center; text-align: center; background: #02050a; padding: 30px; }
+  #no-webgl[hidden] { display: none; }
+  #no-webgl strong { font-size: 30px; }
+  #no-webgl p { color: #8aa0ae; }
+  @media (max-width: 760px) {
+    .topbar { grid-template-columns: 1fr auto; padding: 0 18px; height: 66px; }
+    .phase { display: none; }
+    .brand { font-size: 14px; }
+    .back { font-size: 7px; }
+    .metrics { top: 78px; right: 14px; width: 158px; }
+    .chapter { padding: 100px 22px 50px; align-items: flex-end; }
+    .copy, .right-copy, .end-copy { width: min(100%, 560px); margin-left: 0; }
+    h1 { font-size: clamp(48px, 15vw, 72px); }
+    h2 { font-size: clamp(44px, 13vw, 66px); }
+    .body-copy { max-width: 92%; font-size: 12px; }
+  }
+</style>

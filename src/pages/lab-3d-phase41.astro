@@ -1,0 +1,247 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02050a" />
+    <meta name="description" content="ISIVOLTPRO phase 4.1 wide ecosystem journey: facility first, approved Core 3.1 at convergence." />
+    <link rel="prefetch" href={`${base}lab-3d-phase29/`} />
+    <link rel="prefetch" href={`${base}lab-3d-phase31/`} />
+    <title>ISIVOLTPRO · Phase 4.1 Ecosystem Journey</title>
+  </head>
+  <body>
+    <div class="stage" aria-hidden="true">
+      <iframe id="plant-frame" class="scene-frame plant" src={`${base}lab-3d-phase29/`} title="IsiVoltPro industrial facility journey"></iframe>
+      <iframe id="core-frame" class="scene-frame core" src={`${base}lab-3d-phase31/`} title="IsiVoltPro approved Core 3.1"></iframe>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href={base}>ISIVOLT<strong>PRO</strong></a>
+      <span class="phase">FASE 4.1 / ECOSYSTEM JOURNEY</span>
+      <a class="back" href={`${base}lab-3d-phase31/`}>CORE 3.1 · APPROVED</a>
+    </header>
+
+    <aside class="metrics" aria-live="polite">
+      <div><span>VIEW</span><strong id="view">FACILITY</strong></div>
+      <div><span>SYSTEM</span><strong id="system">ALL</strong></div>
+      <div><span>SCALE</span><strong id="scale">WIDE</strong></div>
+      <div><span>CORE</span><strong>3.1</strong></div>
+      <div><span>JOURNEY</span><strong id="journey">00%</strong></div>
+    </aside>
+
+    <main id="story">
+      <section class="chapter active" data-view="FACILITY" data-system="ALL" data-scale="WIDE">
+        <div class="copy">
+          <p class="eyebrow">THE FACILITY COMES FIRST</p>
+          <h1>See the whole<br />installation.</h1>
+          <p class="body-copy">We restore the wider industrial journey. The Core is part of the facility, not the camera target for every scene.</p>
+          <span class="scroll-hint">TRAVEL THROUGH THE SYSTEMS <i>↓</i></span>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="SYSTEM" data-system="MECHANICAL" data-scale="CLOSE">
+        <div class="copy right-copy">
+          <p class="index">02 / MECHANICAL</p><p class="eyebrow">PUMPS · TANKS · PIPEWORK</p>
+          <h2>Start where<br />work happens.</h2>
+          <p class="body-copy">The camera enters the mechanical service zone first: pumps, vessels, headers and access paths before any digital abstraction.</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="SYSTEM" data-system="HVAC" data-scale="HIGH">
+        <div class="copy">
+          <p class="index">03 / AIR</p><p class="eyebrow">DUCTS · SUPPORTS · AIRFLOW</p>
+          <h2>Then look<br />above.</h2>
+          <p class="body-copy">The route climbs into the ventilation network so air distribution reads as a real technical system with its own space and hierarchy.</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="SYSTEM" data-system="CLIMATE" data-scale="SERVICE">
+        <div class="copy right-copy">
+          <p class="index">04 / CLIMATE</p><p class="eyebrow">INDOOR MODULE · REFRIGERANT · OUTDOOR UNIT</p>
+          <h2>Indoor and outdoor.<br />One chain.</h2>
+          <p class="body-copy">The camera leaves the center and reaches the perimeter equipment, preserving the technical distinction between air distribution and refrigeration.</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="SYSTEM" data-system="ELECTRICAL" data-scale="SERVICE">
+        <div class="copy">
+          <p class="index">05 / POWER</p><p class="eyebrow">DISTRIBUTION · SEGREGATION · STATUS</p>
+          <h2>Power has<br />its own zone.</h2>
+          <p class="body-copy">The electrical bay remains physically segregated and legible. IsiVoltPro does not flatten every discipline into the same visual object.</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="CONVERGENCE" data-system="ALL" data-scale="WIDE">
+        <div class="copy right-copy">
+          <p class="index">06 / CONVERGENCE</p><p class="eyebrow">MULTIPLE SYSTEMS · ONE OPERATIONAL VIEW</p>
+          <h2>Now bring the<br />plant together.</h2>
+          <p class="body-copy">Only after visiting the systems do we return to the center. The Core now has context: it represents convergence because we have already seen what converges.</p>
+        </div>
+      </section>
+
+      <section class="chapter" data-view="CORE" data-system="ECOSYSTEM" data-scale="FOCUS">
+        <div class="copy end-copy">
+          <p class="index">07 / ISIVOLTPRO</p><p class="eyebrow">APPROVED CORE 3.1</p>
+          <h2>The Core is<br />the destination.</h2>
+          <p class="body-copy">The approved Core 3.1 closes the journey instead of dominating it. Phase 4 can now extend this language toward Water, Assets, Maintenance, Operations and AI.</p>
+          <a class="lab-button" href={`${base}lab-3d-phase31/`}>OPEN APPROVED CORE 3.1 <span>→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const plantFrame = document.querySelector('#plant-frame');
+      const coreFrame = document.querySelector('#core-frame');
+      const viewEl = document.querySelector('#view');
+      const systemEl = document.querySelector('#system');
+      const scaleEl = document.querySelector('#scale');
+      const journeyEl = document.querySelector('#journey');
+      const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+      let plantReady = false;
+      let coreReady = false;
+      let progress = 0;
+      let raf = 0;
+
+      function prepareFrame(frame: Element | null, kind: 'plant' | 'core') {
+        if (!(frame instanceof HTMLIFrameElement)) return;
+        frame.addEventListener('load', () => {
+          try {
+            const doc = frame.contentDocument;
+            if (!doc) return;
+            const style = doc.createElement('style');
+            style.textContent = `
+              html { scrollbar-width: none !important; }
+              html::-webkit-scrollbar, body::-webkit-scrollbar { display: none !important; }
+              .topbar, .metrics { visibility: hidden !important; }
+              #story { opacity: 0 !important; pointer-events: none !important; }
+              body::after { display: none !important; }
+            `;
+            doc.head.appendChild(style);
+            if (kind === 'plant') plantReady = true;
+            if (kind === 'core') coreReady = true;
+            syncFrames();
+          } catch (error) {
+            console.error(`Phase 4.1 ${kind} frame setup failed`, error);
+          }
+        });
+      }
+
+      prepareFrame(plantFrame, 'plant');
+      prepareFrame(coreFrame, 'core');
+
+      function clamp(value: number, min = 0, max = 1) { return Math.min(max, Math.max(min, value)); }
+      function smoothstep(edge0: number, edge1: number, value: number) {
+        const x = clamp((value - edge0) / (edge1 - edge0));
+        return x * x * (3 - 2 * x);
+      }
+
+      function scrollFrame(frame: Element | null, frameProgress: number) {
+        if (!(frame instanceof HTMLIFrameElement)) return;
+        try {
+          const win = frame.contentWindow;
+          const doc = frame.contentDocument;
+          if (!win || !doc) return;
+          const maxScroll = Math.max(0, doc.documentElement.scrollHeight - frame.clientHeight);
+          win.scrollTo(0, clamp(frameProgress) * maxScroll);
+        } catch (error) {
+          console.error('Phase 4.1 frame sync failed', error);
+        }
+      }
+
+      function syncFrames() {
+        const convergence = smoothstep(0.72, 0.88, progress);
+        if (plantFrame instanceof HTMLIFrameElement) {
+          plantFrame.style.opacity = String(1 - convergence);
+          plantFrame.style.visibility = convergence > 0.995 ? 'hidden' : 'visible';
+        }
+        if (coreFrame instanceof HTMLIFrameElement) {
+          coreFrame.style.opacity = String(convergence);
+          coreFrame.style.visibility = convergence < 0.005 ? 'hidden' : 'visible';
+        }
+
+        if (plantReady) scrollFrame(plantFrame, clamp(progress / 0.80) * 0.94);
+        if (coreReady) scrollFrame(coreFrame, 0.20 + clamp((progress - 0.67) / 0.33) * 0.77);
+      }
+
+      function update() {
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        progress = clamp(window.scrollY / maxScroll);
+        const active = Math.min(chapters.length - 1, Math.floor(progress * chapters.length));
+        chapters.forEach((chapter, index) => chapter.classList.toggle('active', index === active));
+        const chapter = chapters[active];
+        if (chapter instanceof HTMLElement) {
+          if (viewEl) viewEl.textContent = chapter.dataset.view || 'FACILITY';
+          if (systemEl) systemEl.textContent = chapter.dataset.system || 'ALL';
+          if (scaleEl) scaleEl.textContent = chapter.dataset.scale || 'WIDE';
+        }
+        if (journeyEl) journeyEl.textContent = `${Math.round(progress * 100).toString().padStart(2, '0')}%`;
+        syncFrames();
+      }
+
+      function scheduleUpdate() {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(update);
+      }
+
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate, { passive: true });
+      update();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #fff; background: #02050a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #02050a; overflow-x: hidden; }
+  body { min-width: 320px; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .stage { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #02050a; }
+  .scene-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; transition: opacity .18s linear; background: #02050a; }
+  .scene-frame.plant { z-index: 1; opacity: 1; }
+  .scene-frame.core { z-index: 2; opacity: 0; visibility: hidden; }
+  body::after { content: ''; position: fixed; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(90deg, rgba(2,5,10,.55), transparent 35%, transparent 68%, rgba(2,5,10,.38)), linear-gradient(180deg, rgba(2,5,10,.12), transparent 54%, rgba(2,5,10,.58)), radial-gradient(circle at 50% 43%, transparent 0 38%, rgba(2,5,10,.12) 68%, rgba(2,5,10,.54) 100%); }
+  .topbar { position: fixed; inset: 0 0 auto; z-index: 20; height: 74px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(22px, 4.5vw, 74px); border-bottom: 1px solid rgba(125,187,211,.1); background: linear-gradient(180deg, rgba(2,5,10,.82), rgba(2,5,10,.06)); backdrop-filter: blur(8px); }
+  .brand { justify-self: start; font-size: 17px; font-weight: 700; letter-spacing: .04em; }
+  .brand strong { color: #00dcff; }
+  .phase, .back { color: #8aa0ae; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+  .back { justify-self: end; }
+  .metrics { position: fixed; z-index: 18; right: clamp(22px, 3vw, 48px); top: 96px; width: 190px; padding: 10px 13px; border: 1px solid rgba(126,187,211,.12); background: rgba(3,8,13,.62); backdrop-filter: blur(8px); }
+  .metrics div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid rgba(126,187,211,.07); }
+  .metrics div:last-child { border: 0; }
+  .metrics span, .metrics strong { font-size: 8px; letter-spacing: .12em; }
+  .metrics span { color: #667e8c; }
+  .metrics strong { color: #00d9ff; text-align: right; }
+  #story { position: relative; z-index: 3; }
+  .chapter { min-height: 120vh; position: relative; display: flex; align-items: center; padding: 100px clamp(26px, 6vw, 104px) 60px; pointer-events: none; }
+  .copy { width: min(660px, 48vw); opacity: .1; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+  .chapter.active .copy { opacity: 1; transform: translateY(0); }
+  .right-copy { margin-left: auto; width: min(590px, 44vw); }
+  .end-copy { width: min(760px, 68vw); }
+  .eyebrow, .index { margin: 0 0 14px; color: #00d9ff; font-size: 9px; font-weight: 850; letter-spacing: .22em; }
+  .index { color: #657c89; }
+  h1, h2 { margin: 0; font-weight: 510; letter-spacing: -.06em; line-height: .91; }
+  h1 { font-size: clamp(54px, 7vw, 118px); }
+  h2 { font-size: clamp(48px, 6vw, 98px); }
+  .body-copy { max-width: 540px; margin: 24px 0 0; color: #93a5af; font-size: 13px; line-height: 1.7; }
+  .scroll-hint { display: inline-flex; gap: 13px; margin-top: 34px; color: #6f8591; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+  .scroll-hint i { color: #00d9ff; font-style: normal; }
+  .lab-button { pointer-events: auto; display: inline-flex; gap: 18px; margin-top: 30px; padding: 13px 17px; border: 1px solid rgba(0,217,255,.27); color: #dffaff; font-size: 9px; font-weight: 800; letter-spacing: .13em; }
+  .lab-button span { color: #00d9ff; }
+  @media (max-width: 760px) {
+    .topbar { grid-template-columns: 1fr auto; padding: 0 18px; height: 66px; }
+    .phase { display: none; }
+    .brand { font-size: 14px; }
+    .back { font-size: 7px; }
+    .metrics { top: 78px; right: 14px; width: 158px; }
+    .chapter { min-height: 112vh; padding: 100px 22px 50px; align-items: flex-end; }
+    .copy, .right-copy, .end-copy { width: min(100%, 560px); margin-left: 0; }
+    h1 { font-size: clamp(48px, 15vw, 72px); }
+    h2 { font-size: clamp(44px, 13vw, 66px); }
+    .body-copy { max-width: 92%; font-size: 12px; }
+  }
+</style>

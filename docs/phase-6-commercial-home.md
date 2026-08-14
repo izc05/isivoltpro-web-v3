@@ -48,82 +48,83 @@ Resultado:
 - primera narrativa activo → OT → histórico;
 - sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
 
-## 6.2 — Qué es el Ecosistema IsiVoltPro — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 6.2 — Qué es el Ecosistema IsiVoltPro — COMPLETADO / APROBADO PARA CONTINUAR
 
 Ruta de revisión: `/lab-3d-phase62/`
 Blob validado: `a821011afefe189554aaafc5a6c67a6fff83f2cf`
 
+Resultado:
+
+- toda la narrativa visible pasa a español;
+- hero redefinido como `ECOSISTEMA DE OPERACIÓN TÉCNICA`;
+- explicación de qué es, en qué se basa y para qué sirve IsiVoltPro;
+- principio central: `EL ACTIVO COMO CENTRO DEL CONTEXTO`;
+- cadena visual:
+  `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`;
+- bloque `Qué conecta`: Electricidad, Climatización/HVAC, Agua e instalaciones y Activos/equipos;
+- capa común de operación:
+  `ACTIVOS · MANTENIMIENTO · OT · DOCUMENTACIÓN · HISTÓRICO · IA`;
+- sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
+
+## 6.3 — Qué ofrecemos — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta de revisión: `/lab-3d-phase63/`
+Blob validado: `5f6acf793dab80eca1d9f3068e6b9e4f02836769`
+
 ### Objetivo
 
-Conseguir que una persona que no conoce IsiVoltPro entienda claramente:
-
-1. qué es el Ecosistema IsiVoltPro;
-2. en qué se basa;
-3. para qué sirve;
-4. qué sistemas conecta.
+Traducir el concepto de Ecosistema IsiVoltPro a una oferta concreta y comprensible sin entrar todavía en una interfaz completa de producto.
 
 ### Implementado
 
-- toda la narrativa visible pasa a español;
-- `PHYSICAL / DIGITAL / INTELLIGENCE` se sustituye por `CAPA FÍSICA / CAPA DIGITAL / CAPA DE INTELIGENCIA`;
-- hero redefinido como `ECOSISTEMA DE OPERACIÓN TÉCNICA`;
-- explicación principal: IsiVoltPro parte de la instalación real y conecta activos, mantenimiento, OT, documentación e histórico;
-- bloque `Qué es el Ecosistema IsiVoltPro` con tres preguntas:
-  - qué es;
-  - en qué se basa;
-  - para qué sirve;
-- principio central: `EL ACTIVO COMO CENTRO DEL CONTEXTO`;
-- cadena visual completa:
-  `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`;
-- bloque `Qué conecta` con cuatro familias iniciales:
-  - Electricidad;
-  - Climatización y HVAC;
-  - Agua e instalaciones;
-  - Activos y equipos;
-- capa común de operación mostrada como:
-  `ACTIVOS · MANTENIMIENTO · OT · DOCUMENTACIÓN · HISTÓRICO · IA`;
-- CTA hacia la experiencia 3D estable;
-- responsive móvil y `prefers-reduced-motion`;
+- conserva íntegramente la narrativa visual de 6.2;
+- añade el bloque `QUÉ OFRECEMOS` antes del puente hacia la experiencia 3D;
+- presenta seis capacidades conectadas:
+  1. Gestión de activos;
+  2. Mantenimiento;
+  3. Órdenes de trabajo;
+  4. Documentación técnica;
+  5. Histórico técnico;
+  6. IsiVoltPro AI;
+- cada capacidad explica:
+  - qué organiza;
+  - qué información conecta;
+  - qué parte del flujo técnico representa;
+- lógica común final:
+  `ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO → CONTEXTO`;
+- mensaje central: el valor no está en acumular módulos, sino en evitar que cada parte de la operación viva aislada;
+- IsiVoltPro AI se presenta como capa futura de asistencia basada en contexto técnico conectado, sin afirmar que esté ya desplegada en producción;
+- responsive móvil incluido;
 - sin modificar `index.astro`;
 - sin modificar ENTRY V1;
 - sin modificar ECOSYSTEM BASE V1;
-- sin añadir todavía nuevas fotografías ni una interfaz de producto más densa.
+- sin añadir todavía fotografías nuevas ni una interfaz comercial densa.
 
 ### Criterio de revisión
 
-6.2 debe permitir responder rápidamente:
+6.3 debe responder rápidamente:
 
-- ¿Qué es el Ecosistema IsiVoltPro?
-- ¿Por qué empieza en la instalación real?
-- ¿Cuál es la relación entre activo, trabajo, documentación e histórico?
-- ¿Qué disciplinas técnicas puede organizar bajo una estructura común?
+- ¿Qué ofrece IsiVoltPro?
+- ¿Qué relación existe entre activos, mantenimiento, OT, documentación e histórico?
+- ¿Por qué las capacidades tienen más valor conectadas que aisladas?
+- ¿Dónde encaja IsiVoltPro AI sin exagerar su estado actual?
 
 ## Feedback visual reservado para siguientes fases
 
-Se deja fijado para no perderlo:
+Se mantiene fijado:
 
 - la interfaz comercial necesita progresivamente más detalle y sensación de producto real;
 - se incorporarán estados, OTs, activos, histórico, documentación y otros elementos funcionales en FASE 6.5;
 - se incorporarán fotografías/fondos industriales fuera de las interfaces en FASE 6.6;
 - más detalle no debe significar más ruido: la interfaz debe seguir siendo técnica, clara y premium.
 
-## 6.3 — Qué ofrecemos — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.2
-
-Alcance previsto:
-
-- Gestión de activos;
-- Mantenimiento;
-- Órdenes de trabajo;
-- Documentación técnica;
-- Histórico y trazabilidad;
-- IsiVoltPro AI;
-- explicar cada capacidad con beneficios concretos sin entrar todavía en una interfaz completa.
-
-## 6.4 — Cómo funciona
+## 6.4 — Cómo funciona — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.3
 
 Flujo operativo previsto:
 
 `ACTIVO → INCIDENCIA → OT → TÉCNICO → ACTUACIÓN → CIERRE → HISTÓRICO`
+
+Objetivo: explicar un caso operativo completo de forma visual y creíble antes de mostrar una interfaz detallada.
 
 ## 6.5 — Interfaz de producto V1
 

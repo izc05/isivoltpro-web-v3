@@ -12,7 +12,7 @@ Crear una entrada cinematográfica ligera que prepare al usuario antes de abrir 
 
 Secuencia objetivo:
 
-`ECLIPSE / INSTALACIÓN DORMIDA → ENTRAR → PRELOAD REAL → APERTURA → ECOSYSTEM BASE V1`
+`ECLIPSE / INSTALACIÓN DORMIDA → ENTRAR → PRELOAD REAL → APERTURA CONTINUA → ECOSYSTEM BASE V1`
 
 La entrada debe sentirse premium, industrial y técnica. No debe convertirse en una escena sci-fi independiente ni competir visualmente con la instalación 3D.
 
@@ -21,58 +21,73 @@ La entrada debe sentirse premium, industrial y técnica. No debe convertirse en 
 - `src/pages/index.astro` no se modifica durante los checkpoints de FASE 5 hasta aprobación visual explícita.
 - `lab-3d-ecosystem-v1.astro` permanece congelada.
 - La entrada es una capa ligera; no crea un segundo mundo 3D.
-- No se añaden vídeos ni assets pesados en 5.1.
+- No se añaden vídeos ni assets pesados en FASE 5.
 - El eclipse se construye con CSS y la imagen industrial existente.
-- El loader debe representar trabajo real cuando sea posible y nunca fingir una descarga con un temporizador arbitrario.
-- Debe existir salida segura hacia ECOSYSTEM BASE V1 si la precarga de un recurso externo falla.
+- El loader debe representar trabajo real cuando sea posible y nunca fingir una descarga con un contador arbitrario.
+- Debe existir salida segura hacia ECOSYSTEM BASE V1 si la precarga o el handoff fallan.
 - Debe respetarse `prefers-reduced-motion`.
 
-## 5.1 — Eclipse + entrada + preload real — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 5.1 — Eclipse + entrada + preload real — APROBADO COMO DIRECCIÓN
 
-Ruta de revisión: `/lab-3d-phase51/`
-Blob candidato validado: `579f154dbf3c6fc36d5e373aa6e362c865356873`
+Ruta: `/lab-3d-phase51/`
+Blob validado: `579f154dbf3c6fc36d5e373aa6e362c865356873`
+
+Resultado:
+
+- portada fullscreen independiente de la Home actual;
+- instalación existente muy oscurecida al inicio;
+- eclipse técnico CSS con corona cyan/azul contenida;
+- CTA único `ENTRAR`;
+- loader basado en precarga real con `fetch(..., cache: force-cache)`;
+- calentamiento de ECOSYSTEM BASE V1 y de los cuatro GLTF principales;
+- progreso ligado a recursos resueltos;
+- salida segura `ENTRAR SIN PRECARGA`;
+- despertar visual antes de abrir el ecosistema;
+- sin Three.js adicional, sin vídeo y sin modificar Home ni la base congelada.
+
+Lectura aprobada:
+
+`instalación dormida → señal de energía → decisión de entrar → preparación técnica → instalación activa`.
+
+## 5.2 — Handoff continuo hacia ECOSYSTEM V1 — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta de revisión: `/lab-3d-phase52/`
+Blob candidato validado: `9d91a55c5059c2afb8caeb4c5af89614149fda04`
+
+Objetivo:
+
+Eliminar la sensación de recarga/cambio de página entre la portada y la experiencia 3D.
 
 Implementado:
 
-- portada fullscreen independiente de la Home actual;
-- imagen industrial existente como fondo, muy oscurecida al inicio;
-- eclipse técnico construido íntegramente con CSS;
-- corona cyan/azul y arco luminoso contenidos;
-- copy mínimo y CTA único `ENTRAR`;
-- estado `idle → loading → ready`;
-- loader ligado a precarga real mediante `fetch(..., cache: force-cache)`;
-- calentamiento de la ruta `ECOSYSTEM BASE V1`;
-- calentamiento de los cuatro GLTF principales ya usados por la escena: mecánica, HVAC, distribución eléctrica y climatización exterior;
-- progreso calculado por recursos realmente resueltos, no por un contador ficticio;
-- timeout individual de seguridad para evitar bloqueo permanente;
-- errores de precarga degradan con gracia y no impiden entrar;
-- botón `ENTRAR SIN PRECARGA` como escape directo;
-- transición final que reduce el eclipse y despierta la instalación antes de navegar a ECOSYSTEM BASE V1;
-- soporte de `prefers-reduced-motion`;
-- sin Three.js adicional;
-- sin vídeo adicional;
-- sin modificar Home;
-- sin modificar ECOSYSTEM BASE V1.
+- conserva el lenguaje visual de 5.1;
+- ECOSYSTEM BASE V1 se carga en un `iframe` same-origin situado detrás de la portada;
+- el iframe no empieza a cargar hasta que el usuario pulsa `ENTRAR`;
+- la portada sigue siendo la única capa visible durante la preparación;
+- el loader combina dos señales reales: inicialización de la ruta viva de ECOSYSTEM V1 y calentamiento de los cuatro GLTF principales;
+- el progreso se calcula por pasos realmente resueltos, no por un temporizador ficticio;
+- el iframe es la única escena WebGL durante el handoff: la portada es CSS/HTML y no añade renderer 3D;
+- cuando la escena está preparada, el ecosistema pasa de oscuro/ligeramente ampliado a escala y brillo normales;
+- simultáneamente la portada, eclipse, copy y loader desaparecen mediante crossfade;
+- tras el handoff, `pointer-events` y foco pasan al iframe para permitir scroll e interacción normal;
+- se mantiene el scroll inicial del ecosistema en 0;
+- si la escena embebida no queda disponible dentro del timeout de seguridad, se navega directamente a la ruta estable ECOSYSTEM V1;
+- `ENTRAR SIN TRANSICIÓN` mantiene un escape directo;
+- `prefers-reduced-motion` reduce el handoff a cambio prácticamente inmediato;
+- no se modifica el blob congelado de ECOSYSTEM BASE V1;
+- no se modifica Home.
 
-## Criterio visual de 5.1
+Arquitectura de 5.2:
 
-Debe transmitir:
+`LIGHT ENTRY (CSS/HTML) → LOAD ONE LIVE WEBGL SCENE BEHIND → CROSSFADE → TRANSFER CONTROL`
 
-`instalación dormida → señal de energía → decisión de entrar → preparación técnica → instalación activa`
+No es equivalente a los experimentos 4.1/4.2: allí convivían capas de laboratorio para construir la narrativa 3D; aquí existe una sola escena WebGL y una portada CSS ligera que desaparece.
 
-No debe transmitir:
+## 5.3 — SIGUIENTE SOLO SI 5.2 SE APRUEBA
 
-`portal espacial → videojuego → holograma genérico → intro larga sin función`.
+- afinar únicamente continuidad visual entre eclipse y primer fotograma del ecosistema;
+- decidir si ocultamos el chrome de laboratorio durante los primeros instantes del handoff;
+- preparar una ruta estable `ENTRY V1`;
+- cerrar FASE 5 antes de integrar entrada y Home comercial.
 
-## 5.2 — SIGUIENTE SOLO SI 5.1 SE APRUEBA
-
-Posibles ajustes después de revisión:
-
-- afinar posición/tamaño del eclipse;
-- afinar oscuridad inicial y despertar final;
-- decidir si la entrada debe conservar copy o reducirse todavía más;
-- suavizar la continuidad visual entre la imagen estática y el primer fotograma de ECOSYSTEM V1;
-- valorar una transición visual entre páginas para reducir el corte de navegación;
-- preparar una ruta estable de entrada antes de integrarla en la Home real.
-
-No empezar Home comercial definitiva hasta cerrar esta decisión visual.
+No empezar todavía la Home comercial definitiva hasta cerrar la entrada.

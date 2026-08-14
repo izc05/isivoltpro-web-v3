@@ -112,57 +112,78 @@ Resultado:
 - establece el puente `INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO`;
 - prepara visualmente la entrada al Core y al ecosistema 3D.
 
-## 6.7 — Ecosistema visual completo — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 6.7 — Ecosistema visual completo — COMPLETADO / APROBADO PARA CONTINUAR
 
 Ruta: `/lab-3d-phase67/`
-Blob validado: `d3a86af74ba85fac5a13b27e8ef91b015be67489`
+Blob: `d3a86af74ba85fac5a13b27e8ef91b015be67489`
 
-### Objetivo
-
-Unir de forma explícita la Home comercial con la experiencia 3D ya aprobada y cerrar la narrativa `FÍSICO → DIGITAL → INTELIGENCIA` sin crear una segunda escena 3D ni modificar las bases congeladas.
-
-### Implementado
+Resultado:
 
 - conserva íntegramente 6.6;
-- añade el bloque `ECOSISTEMA VISUAL` antes del puente comercial final;
-- presenta tres capas conectadas:
-  1. `CAPA FÍSICA` — Electricidad, Climatización, Agua, Equipos e Infraestructura;
-  2. `CAPA DIGITAL` — Activos, Mantenimiento, OT, Documentación e Histórico;
-  3. `CAPA DE INTELIGENCIA` — Contexto, consulta, análisis, asistencia técnica e IsiVoltPro AI;
-- añade un bloque específico `ISIVOLTPRO CORE` como punto de convergencia, sin rediseñar ni reemplazar el Core 3.1 aprobado;
-- integra `ECOSYSTEM BASE V1` mediante un único `iframe` same-origin;
-- la escena 3D se carga de forma diferida al acercarse el visitante a la sección o al pulsar el CTA de carga;
-- no se inicializa WebGL al abrir la Home;
-- al cargar el iframe se ocultan en runtime `.topbar`, `.metrics` y `.lab-button` para presentar la escena como experiencia comercial y no como laboratorio;
-- se neutraliza únicamente el primer texto introductorio del recorrido para adaptarlo al contexto comercial;
-- no se modifica el archivo congelado `lab-3d-ecosystem-v1.astro`;
-- no se modifica `lab-3d-entry-v1.astro`;
-- no se modifica `src/pages/index.astro`;
-- conserva la escena, cámara, sistemas, Water, rutas digitales y Core aprobados;
-- añade resumen final: Origen físico, Contexto conectado, Memoria operativa e Inteligencia;
-- responsive y `prefers-reduced-motion` incluidos.
+- presenta las capas `FÍSICO → DIGITAL → INTELIGENCIA`;
+- incorpora `ISIVOLTPRO CORE` como punto de convergencia sin sustituir el Core 3.1 aprobado;
+- integra `ECOSYSTEM BASE V1` con carga diferida mediante un único `iframe` same-origin;
+- el WebGL no se inicializa al abrir la Home;
+- limpia en runtime el cromado de laboratorio sin modificar el archivo congelado;
+- conserva escena, cámara, sistemas, Water, rutas digitales y Core aprobados;
+- no modifica ENTRY V1 ni `src/pages/index.astro`.
 
-### Arquitectura de integración
+Arquitectura:
 
 `HOME COMERCIAL → carga diferida → 1 iframe same-origin → ECOSYSTEM BASE V1 → runtime cleanup → escena WebGL existente`
 
-No se crea un segundo renderer dentro de la Home.
+## 6.8 — Aplicaciones IsiVoltPro — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta: `/lab-3d-phase68/`
+Blob validado: `79740d7035818337a1684eb5c8175834c51af7a0`
+
+### Objetivo
+
+Presentar las aplicaciones principales como partes de un único Ecosistema IsiVoltPro, evitando que se perciban como herramientas o productos aislados.
+
+### Implementado
+
+- conserva íntegramente 6.7;
+- añade el bloque `APLICACIONES ISIVOLTPRO` antes del puente comercial final;
+- fija el mensaje `DISTINTAS HERRAMIENTAS. UN MISMO CONTEXTO.`;
+- incorpora un mapa común `INSTALACIÓN → ACTIVOS → TRABAJO → HISTÓRICO → INTELIGENCIA`;
+- presenta siete aplicaciones/capacidades:
+  1. `ACTIVOS` — identidad, ubicación, sistema, estado, criticidad y documentación vinculada;
+  2. `MANTENIMIENTO` — preventivo, correctivo, revisiones y próximas actuaciones;
+  3. `ÓRDENES DE TRABAJO` — prioridad, asignación, intervención, evidencias y cierre;
+  4. `INSPECCIONES` — checklists, observaciones, resultados y evidencias;
+  5. `DOCUMENTACIÓN` — planos, manuales, informes, fotografías y versiones ligadas al contexto;
+  6. `USUARIOS Y ORGANIZACIONES` — organizaciones, miembros, roles y acceso por contexto;
+  7. `ISIVOLTPRO AI` — capa transversal de consulta y asistencia basada en contexto técnico, identificada expresamente como capacidad en desarrollo;
+- cada tarjeta explica qué papel cumple y qué relación mantiene con el contexto común;
+- añade un ejemplo de relación entre aplicaciones:
+  `INSPECCIÓN → OT → ACTIVO → DOCUMENTACIÓN → HISTÓRICO`;
+- deja explícito que las páginas individuales de aplicaciones se construirán en fases posteriores y no forman parte todavía de esta Home;
+- añade navegación `Aplicaciones`;
+- responsive incluido;
+- no modifica `src/pages/index.astro`;
+- no modifica ENTRY V1;
+- no modifica ECOSYSTEM BASE V1.
 
 ### Criterio de revisión
 
-6.7 debe conseguir que el visitante entienda, antes y durante el 3D, esta relación:
+6.8 debe transmitir que:
 
-`INSTALACIÓN FÍSICA → SISTEMAS / ACTIVOS → ISIVOLTPRO CORE → OPERACIÓN → HISTÓRICO → INTELIGENCIA`
+- IsiVoltPro es un ecosistema y no siete herramientas separadas;
+- cada persona puede entrar por una tarea distinta sin perder el contexto común;
+- Activos funciona como referencia técnica y el Histórico como memoria de la operación;
+- Mantenimiento, OT e Inspecciones ejecutan trabajo alrededor del activo;
+- Documentación conserva evidencias y conocimiento;
+- Usuarios/Organizaciones define quién opera en cada contexto;
+- IsiVoltPro AI queda preparada como capa transversal sin prometer funciones aún no desplegadas.
 
-El 3D debe sentirse como demostración visual del mensaje comercial, no como una demo técnica separada.
+### Regla para futuras páginas
 
-## 6.8 — Aplicaciones IsiVoltPro — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.7
+Las tarjetas de esta fase no se convierten todavía en páginas funcionales. Tras cerrar la Home, cada aplicación podrá evolucionar a su propia página comercial y posteriormente conectarse con la plataforma real.
 
-Presentar los módulos principales y preparar sus futuras subpáginas.
+## 6.9 — Sectores / casos de uso — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.8
 
-## 6.9 — Sectores / casos de uso
-
-Presentar sectores y contextos de uso sin inventar clientes ni métricas.
+Presentar sectores y contextos de uso sin inventar clientes, métricas ni casos reales no demostrados.
 
 ## 6.10 — Conversión comercial
 

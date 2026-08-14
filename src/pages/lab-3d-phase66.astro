@@ -1,0 +1,173 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase65Url = `${base}lab-3d-phase65/`;
+const industrialImage = `${base}images/home/isivoltpro-industrial-core.webp`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.6 · Instalación física</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.6</strong>
+      <span>CONTEXTO INDUSTRIAL · INSTALACIÓN FÍSICA</span>
+      <noscript><a href={phase65Url}>Abrir Fase 6.5</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase65Url, industrialImage }}>
+      const physicalMarkup = `
+        <section class="physical-world" id="instalacion-real" aria-labelledby="physical-title">
+          <div class="physical-world__head">
+            <div>
+              <p class="eyebrow"><i></i> INSTALACIÓN FÍSICA</p>
+              <h2 id="physical-title">EL SOFTWARE NO ES EL CENTRO.<br /><em>LA INSTALACIÓN SÍ.</em></h2>
+            </div>
+            <div class="physical-world__copy">
+              <p class="physical-world__lead">IsiVoltPro empieza donde ocurre el trabajo: en un cuadro, una UTA, una bomba, una sala técnica o cualquier equipo que necesite mantenerse operativo.</p>
+              <p>La interfaz organiza el contexto, pero el origen siempre es físico. Por eso la Home debe volver constantemente a la instalación real y no quedarse encerrada en pantallas.</p>
+            </div>
+          </div>
+
+          <div class="facility-shot" style="--industrial-image:url('${industrialImage}')">
+            <div class="facility-shot__shade"></div>
+            <div class="facility-shot__content">
+              <span>01 · CONTEXTO REAL</span>
+              <h3>UNA INSTALACIÓN.<br />MÚLTIPLES DISCIPLINAS.</h3>
+              <p>Electricidad, climatización, agua, equipos e infraestructura comparten un mismo espacio físico, pero tradicionalmente su información queda separada.</p>
+              <b>ISIVOLTPRO CONECTA EL TRABAJO CON EL LUGAR DONDE REALMENTE OCURRE.</b>
+            </div>
+            <div class="facility-shot__index">
+              <span>INSTALACIÓN</span>
+              <strong>FÍSICA</strong>
+              <small>ORIGEN DEL CONTEXTO</small>
+            </div>
+          </div>
+
+          <div class="discipline-grid">
+            <article class="discipline-card discipline-card--electrical" style="--industrial-image:url('${industrialImage}')">
+              <div class="discipline-card__media"></div>
+              <div class="discipline-card__body">
+                <span>DISCIPLINA 01</span>
+                <h3>ELECTRICIDAD</h3>
+                <p>Cuadros, líneas, protecciones, revisiones, incidencias y documentación ligados a cada activo.</p>
+                <b>ACTIVO → REVISIÓN → OT → HISTÓRICO</b>
+              </div>
+            </article>
+
+            <article class="discipline-card discipline-card--hvac" style="--industrial-image:url('${industrialImage}')">
+              <div class="discipline-card__media"></div>
+              <div class="discipline-card__body">
+                <span>DISCIPLINA 02</span>
+                <h3>CLIMATIZACIÓN / HVAC</h3>
+                <p>UTA, bombas, climatizadores, ventilación, preventivos y actuaciones conservando el contexto técnico.</p>
+                <b>EQUIPO → INCIDENCIA → TÉCNICO → CIERRE</b>
+              </div>
+            </article>
+
+            <article class="discipline-card discipline-card--infra" style="--industrial-image:url('${industrialImage}')">
+              <div class="discipline-card__media"></div>
+              <div class="discipline-card__body">
+                <span>DISCIPLINA 03</span>
+                <h3>AGUA E INFRAESTRUCTURA</h3>
+                <p>Instalaciones hidráulicas, salas técnicas, equipos auxiliares, evidencias y mantenimiento operativo.</p>
+                <b>UBICACIÓN → ACTIVO → TRABAJO → DOCUMENTACIÓN</b>
+              </div>
+            </article>
+          </div>
+
+          <div class="physical-bridge">
+            <div>
+              <span>DE LO FÍSICO A LO DIGITAL</span>
+              <strong>LA INSTALACIÓN GENERA EL CONTEXTO.</strong>
+            </div>
+            <p>IsiVoltPro no intenta sustituir la realidad por una interfaz. La ordena, la relaciona y conserva lo que ocurre sobre ella.</p>
+            <b>INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO</b>
+          </div>
+        </section>`;
+
+      const physicalStyles = `
+        .physical-world{padding:130px clamp(20px,5vw,92px) 150px;background:linear-gradient(180deg,#03090e,#020609);border-top:1px solid rgba(105,169,197,.08)}
+        .physical-world__head,.facility-shot,.discipline-grid,.physical-bridge{width:min(1480px,100%);margin-left:auto;margin-right:auto}
+        .physical-world__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:72px}
+        .physical-world__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.8vw,98px);line-height:.87;font-weight:650;letter-spacing:-.04em}
+        .physical-world__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.72);text-shadow:0 0 34px rgba(0,145,255,.12)}
+        .physical-world__copy{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}.physical-world__copy p{margin:0 0 13px;color:#8198a3;font-size:12px;line-height:1.8}.physical-world__copy .physical-world__lead{color:#d4e4eb;font-size:15px}
+        .facility-shot{position:relative;min-height:680px;overflow:hidden;border:1px solid rgba(112,186,219,.16);background-image:var(--industrial-image);background-size:cover;background-position:center 52%;box-shadow:0 42px 90px rgba(0,0,0,.34)}
+        .facility-shot::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,7,11,.93) 0%,rgba(2,7,11,.68) 38%,rgba(2,7,11,.16) 72%,rgba(2,7,11,.48) 100%),linear-gradient(180deg,rgba(1,6,10,.18),rgba(1,6,10,.66));z-index:1}
+        .facility-shot::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 68% 44%,rgba(0,157,255,.12),transparent 28%),linear-gradient(180deg,transparent 70%,#03090e);z-index:1}
+        .facility-shot__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,158,255,.05),transparent 45%);mix-blend-mode:screen;z-index:2}
+        .facility-shot__content{position:absolute;z-index:3;left:clamp(28px,5vw,78px);bottom:clamp(36px,7vw,96px);width:min(560px,70%)}
+        .facility-shot__content>span{display:block;margin-bottom:18px;color:#5c899b;font-size:7px;font-weight:850;letter-spacing:.2em}.facility-shot__content h3{margin:0 0 20px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(52px,5vw,86px);line-height:.88;letter-spacing:-.035em}.facility-shot__content p{margin:0 0 24px;color:#9eb1ba;font-size:12px;line-height:1.8}.facility-shot__content b{color:#8fdfff;font-size:8px;letter-spacing:.12em}
+        .facility-shot__index{position:absolute;z-index:3;right:34px;top:34px;display:grid;justify-items:end;gap:4px;padding:16px 18px;border-right:1px solid rgba(27,207,255,.38);background:rgba(2,10,15,.28);backdrop-filter:blur(8px)}.facility-shot__index span{color:#627f8b;font-size:6px;letter-spacing:.16em}.facility-shot__index strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:30px;line-height:.9}.facility-shot__index small{color:#53b7da;font-size:6px;letter-spacing:.13em}
+        .discipline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+        .discipline-card{border:1px solid rgba(112,186,219,.13);background:#061019;overflow:hidden}.discipline-card__media{height:280px;background-image:linear-gradient(180deg,rgba(2,8,12,.08),rgba(2,8,12,.72)),var(--industrial-image);background-size:cover;filter:saturate(.78) contrast(1.05)}
+        .discipline-card--electrical .discipline-card__media{background-position:left center}.discipline-card--hvac .discipline-card__media{background-position:center center}.discipline-card--infra .discipline-card__media{background-position:right center}
+        .discipline-card__body{padding:24px 24px 27px}.discipline-card__body>span{color:#4d7687;font-size:6px;font-weight:850;letter-spacing:.17em}.discipline-card__body h3{margin:9px 0 13px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:31px;line-height:.95}.discipline-card__body p{min-height:63px;margin:0 0 18px;color:#758e99;font-size:10px;line-height:1.7}.discipline-card__body b{color:#58b7d9;font-size:7px;letter-spacing:.1em}
+        .physical-bridge{margin-top:36px;display:grid;grid-template-columns:.7fr 1fr 1.15fr;gap:34px;align-items:center;padding:28px;border:1px solid rgba(40,191,244,.17);background:linear-gradient(90deg,rgba(0,112,206,.11),rgba(0,203,255,.03))}.physical-bridge div span{display:block;color:#5a7886;font-size:7px;font-weight:850;letter-spacing:.18em;margin-bottom:7px}.physical-bridge div strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:24px;line-height:1}.physical-bridge p{margin:0;color:#78919d;font-size:11px;line-height:1.7}.physical-bridge>b{color:#b4d4df;font-size:8px;letter-spacing:.1em;text-align:right}
+        @media(max-width:980px){.discipline-grid{grid-template-columns:1fr}.discipline-card{display:grid;grid-template-columns:.8fr 1fr}.discipline-card__media{height:auto;min-height:260px}.physical-bridge{grid-template-columns:1fr}.physical-bridge>b{text-align:left}}
+        @media(max-width:760px){.physical-world{padding:90px 20px 96px}.physical-world__head{grid-template-columns:1fr;gap:28px}.physical-world__head h2{font-size:clamp(50px,14vw,72px)}.facility-shot{min-height:620px;background-position:62% center}.facility-shot__content{left:24px;right:24px;bottom:36px;width:auto}.facility-shot__content h3{font-size:50px}.facility-shot__content p{font-size:11px}.facility-shot__index{right:18px;top:18px}.discipline-card{display:block}.discipline-card__media{height:220px}.discipline-card__body p{min-height:0}}
+      `;
+
+      async function buildPhase66() {
+        try {
+          const response = await fetch(phase65Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.5: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+          parsed.title = 'IsiVoltPro · Fase 6.6 · Instalación física';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'IsiVoltPro conecta activos, mantenimiento y contexto digital con la instalación física donde realmente ocurre el trabajo técnico.');
+
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#instalacion-real"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#instalacion-real';
+            link.textContent = 'Instalación real';
+            nav.appendChild(link);
+          }
+
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el punto de inserción de Fase 6.5');
+          const template = parsed.createElement('template');
+          template.innerHTML = physicalMarkup.trim();
+          bridge.parentNode.insertBefore(template.content, bridge);
+
+          const style = parsed.createElement('style');
+          style.textContent = physicalStyles;
+          parsed.head.appendChild(style);
+
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.6', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase65Url;
+          fallback.textContent = 'Abrir Fase 6.5';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+
+      buildPhase66();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

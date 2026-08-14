@@ -3,14 +3,6 @@
 @import './home/intro-eclipse-motion.css';
 @import './home/intro-content.css';
 @import './home/intro-transition.css';
-@import './home/hero.css';
-@import './home/experience-base.css';
-@import './home/experience-hero.css';
-@import './home/experience-ecosystem.css';
-@import './home/experience-ecosystem-extra.css';
-@import './home/experience-flow.css';
-@import './home/experience-access.css';
-@import './home/experience-motion.css';
 
 @media (max-width: 900px) {
   .intro-v3__art { right: -4%; width: min(55vw, 620px); }

@@ -60,7 +60,7 @@ Blob: `77b1167c8ba1dac06ab454fe45fd2c08bb99d493`
 Ruta: `/lab-3d-phase62/`
 Blob: `a821011afefe189554aaafc5a6c67a6fff83f2cf`
 
-Resultado: narrativa completamente en español, definición del ecosistema, activo como centro del contexto y cadena `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`.
+Resultado: narrativa en español, definición del ecosistema, activo como centro del contexto y cadena `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`.
 
 ## 6.3 — Qué ofrecemos — COMPLETADO / APROBADO
 
@@ -78,8 +78,7 @@ Resultado:
 
 - ejemplo conceptual `UTA-02`;
 - flujo `ACTIVO → INCIDENCIA → OT → TÉCNICO → ACTUACIÓN → CIERRE → HISTÓRICO`;
-- el cierre de una OT alimenta el conocimiento del activo;
-- sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
+- el cierre de una OT alimenta el conocimiento del activo.
 
 ## 6.5 — Interfaz de producto V1 — COMPLETADO / APROBADO PARA CONTINUAR
 
@@ -91,10 +90,8 @@ Resultado:
 - conserva íntegramente 6.4;
 - añade un `shell` completo de plataforma IsiVoltPro;
 - navegación conceptual por instalaciones, activos, mantenimiento, OT, documentación, histórico e IsiVoltPro AI;
-- indicadores de instalación, activo seleccionado `UTA-02`, OT activa, prioridad, técnico, documentación e histórico;
-- toda la información se presenta alrededor del mismo contexto técnico;
-- se identifica expresamente como dirección comercial/conceptual de producto y no como aplicación PocketBase terminada;
-- sin fotografía industrial nueva ni cambios sobre las bases 3D congeladas.
+- activo `UTA-02`, OT activa, prioridad, técnico, documentación e histórico;
+- se identifica como dirección comercial/conceptual de producto, no como aplicación PocketBase terminada.
 
 ## 6.6 — Contexto industrial / instalación física — COMPLETADO / APROBADO PARA CONTINUAR
 
@@ -103,14 +100,9 @@ Blob: `c87226bd6a797edd175e08526b592de82d8b1026`
 
 Resultado:
 
-- conserva íntegramente 6.5;
-- añade el bloque `INSTALACIÓN FÍSICA` antes del puente hacia la experiencia 3D;
 - mensaje central: `EL SOFTWARE NO ES EL CENTRO. LA INSTALACIÓN SÍ.`;
-- utiliza la imagen industrial ya aprobada del proyecto como recurso visual autoritativo;
-- presenta un plano industrial amplio y tres encuadres para Electricidad, Climatización / HVAC y Agua e infraestructura;
-- cada disciplina vuelve a conectarse con activo, OT, trabajo, documentación e histórico;
-- establece el puente `INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO`;
-- prepara visualmente la entrada al Core y al ecosistema 3D.
+- plano industrial amplio y tres encuadres para Electricidad, Climatización / HVAC y Agua e infraestructura;
+- puente `INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO`.
 
 ## 6.7 — Ecosistema visual completo — COMPLETADO / APROBADO PARA CONTINUAR
 
@@ -119,47 +111,57 @@ Blob: `d3a86af74ba85fac5a13b27e8ef91b015be67489`
 
 Resultado:
 
-- conserva íntegramente 6.6;
-- presenta las capas `FÍSICO → DIGITAL → INTELIGENCIA`;
-- incorpora `ISIVOLTPRO CORE` como punto de convergencia sin sustituir el Core 3.1 aprobado;
-- integra `ECOSYSTEM BASE V1` con carga diferida mediante un único `iframe` same-origin;
-- el WebGL no se inicializa al abrir la Home;
-- limpia en runtime el cromado de laboratorio sin modificar el archivo congelado;
-- conserva escena, cámara, sistemas, Water, rutas digitales y Core aprobados;
-- no modifica ENTRY V1 ni `src/pages/index.astro`.
+- capas `FÍSICO → DIGITAL → INTELIGENCIA`;
+- `ISIVOLTPRO CORE` como punto de convergencia;
+- `ECOSYSTEM BASE V1` con carga diferida mediante un único `iframe` same-origin;
+- sin modificar la escena 3D congelada, ENTRY V1 ni `src/pages/index.astro`.
 
 Arquitectura:
 
 `HOME COMERCIAL → carga diferida → 1 iframe same-origin → ECOSYSTEM BASE V1 → runtime cleanup → escena WebGL existente`
 
-## 6.8 — Aplicaciones IsiVoltPro — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 6.8 — Aplicaciones IsiVoltPro — COMPLETADO / APROBADO PARA CONTINUAR
 
 Ruta: `/lab-3d-phase68/`
-Blob validado: `79740d7035818337a1684eb5c8175834c51af7a0`
+Blob: `79740d7035818337a1684eb5c8175834c51af7a0`
+
+Resultado:
+
+- presenta siete aplicaciones/capacidades: Activos, Mantenimiento, Órdenes de trabajo, Inspecciones, Documentación, Usuarios/Organizaciones e IsiVoltPro AI;
+- fija el mensaje `DISTINTAS HERRAMIENTAS. UN MISMO CONTEXTO.`;
+- añade la relación `INSPECCIÓN → OT → ACTIVO → DOCUMENTACIÓN → HISTÓRICO`;
+- IsiVoltPro AI queda identificada como capacidad en desarrollo;
+- las páginas individuales de aplicaciones quedan reservadas para fases posteriores.
+
+## 6.9 — Sectores / casos de uso — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta: `/lab-3d-phase69/`
+Blob validado: `63484210f9dc0cfa68d230e76c2168a7eb6c85a1`
 
 ### Objetivo
 
-Presentar las aplicaciones principales como partes de un único Ecosistema IsiVoltPro, evitando que se perciban como herramientas o productos aislados.
+Explicar en qué tipos de entorno encaja la arquitectura de IsiVoltPro sin presentar sectores como clientes existentes, sin inventar implantaciones y sin utilizar métricas comerciales no demostradas.
 
 ### Implementado
 
-- conserva íntegramente 6.7;
-- añade el bloque `APLICACIONES ISIVOLTPRO` antes del puente comercial final;
-- fija el mensaje `DISTINTAS HERRAMIENTAS. UN MISMO CONTEXTO.`;
-- incorpora un mapa común `INSTALACIÓN → ACTIVOS → TRABAJO → HISTÓRICO → INTELIGENCIA`;
-- presenta siete aplicaciones/capacidades:
-  1. `ACTIVOS` — identidad, ubicación, sistema, estado, criticidad y documentación vinculada;
-  2. `MANTENIMIENTO` — preventivo, correctivo, revisiones y próximas actuaciones;
-  3. `ÓRDENES DE TRABAJO` — prioridad, asignación, intervención, evidencias y cierre;
-  4. `INSPECCIONES` — checklists, observaciones, resultados y evidencias;
-  5. `DOCUMENTACIÓN` — planos, manuales, informes, fotografías y versiones ligadas al contexto;
-  6. `USUARIOS Y ORGANIZACIONES` — organizaciones, miembros, roles y acceso por contexto;
-  7. `ISIVOLTPRO AI` — capa transversal de consulta y asistencia basada en contexto técnico, identificada expresamente como capacidad en desarrollo;
-- cada tarjeta explica qué papel cumple y qué relación mantiene con el contexto común;
-- añade un ejemplo de relación entre aplicaciones:
-  `INSPECCIÓN → OT → ACTIVO → DOCUMENTACIÓN → HISTÓRICO`;
-- deja explícito que las páginas individuales de aplicaciones se construirán en fases posteriores y no forman parte todavía de esta Home;
-- añade navegación `Aplicaciones`;
+- conserva íntegramente 6.8;
+- añade el bloque `SECTORES Y CASOS DE USO` antes del puente comercial final;
+- fija el mensaje `UNA MISMA LÓGICA. DISTINTOS ENTORNOS.`;
+- define el patrón de encaje de IsiVoltPro: instalaciones físicas + activos técnicos + personas que intervienen + trabajo/documentación/histórico;
+- destaca `HOSPITALES Y CENTROS SANITARIOS` como ejemplo de entorno de alta complejidad por convivencia de múltiples disciplinas, activos, ubicaciones y necesidad de trazabilidad;
+- presenta seis contextos adicionales:
+  1. Industria / plantas y procesos;
+  2. Edificios técnicos / instalaciones complejas;
+  3. Mantenimiento multisitio;
+  4. Instalaciones eléctricas;
+  5. Climatización / HVAC y ventilación;
+  6. Infraestructuras / servicios técnicos;
+- cada contexto se explica mediante su lógica técnica, no mediante clientes o casos inventados;
+- añade el contraste:
+  `LO QUE CAMBIA → entorno, equipos y reglas de operación`
+  `LO QUE PERMANECE → activo, trabajo, documentación, histórico y contexto`;
+- incluye una nota explícita: `CASOS DE USO, NO REFERENCIAS COMERCIALES`;
+- añade navegación `Sectores`;
 - responsive incluido;
 - no modifica `src/pages/index.astro`;
 - no modifica ENTRY V1;
@@ -167,27 +169,11 @@ Presentar las aplicaciones principales como partes de un único Ecosistema IsiVo
 
 ### Criterio de revisión
 
-6.8 debe transmitir que:
+6.9 debe transmitir que IsiVoltPro no pretende ser software genérico para cualquier actividad. Encaja especialmente cuando existe una instalación técnica real y es necesario relacionar activos, personas, trabajo, documentación e histórico dentro de un contexto común.
 
-- IsiVoltPro es un ecosistema y no siete herramientas separadas;
-- cada persona puede entrar por una tarea distinta sin perder el contexto común;
-- Activos funciona como referencia técnica y el Histórico como memoria de la operación;
-- Mantenimiento, OT e Inspecciones ejecutan trabajo alrededor del activo;
-- Documentación conserva evidencias y conocimiento;
-- Usuarios/Organizaciones define quién opera en cada contexto;
-- IsiVoltPro AI queda preparada como capa transversal sin prometer funciones aún no desplegadas.
+## 6.10 — Conversión comercial — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.9
 
-### Regla para futuras páginas
-
-Las tarjetas de esta fase no se convierten todavía en páginas funcionales. Tras cerrar la Home, cada aplicación podrá evolucionar a su propia página comercial y posteriormente conectarse con la plataforma real.
-
-## 6.9 — Sectores / casos de uso — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.8
-
-Presentar sectores y contextos de uso sin inventar clientes, métricas ni casos reales no demostrados.
-
-## 6.10 — Conversión comercial
-
-Solicitar demo, contacto y acceso.
+Preparar el cierre comercial de la Home con `Solicitar demo`, contacto y acceso, manteniendo coherencia con la futura plataforma real y evitando formularios o flujos falsos.
 
 ## 6.11 — HOME V1 COMPLETA
 

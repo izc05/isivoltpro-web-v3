@@ -1,0 +1,233 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase66Url = `${base}lab-3d-phase66/`;
+const ecosystemUrl = `${base}lab-3d-ecosystem-v1/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.7 · Ecosistema visual</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.7</strong>
+      <span>ECOSISTEMA VISUAL · FÍSICO → DIGITAL → INTELIGENCIA</span>
+      <noscript><a href={phase66Url}>Abrir Fase 6.6</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase66Url, ecosystemUrl }}>
+      const ecosystemMarkup = `
+        <section class="ecosystem-live" id="ecosistema-3d" aria-labelledby="ecosystem-live-title">
+          <div class="ecosystem-live__head">
+            <div>
+              <p class="eyebrow"><i></i> ECOSISTEMA VISUAL</p>
+              <h2 id="ecosystem-live-title">DE LA INSTALACIÓN<br /><em>AL CONTEXTO OPERATIVO.</em></h2>
+            </div>
+            <div class="ecosystem-live__copy">
+              <p class="ecosystem-live__lead">La instalación física no desaparece cuando entramos en IsiVoltPro. Sigue siendo la referencia sobre la que se organizan activos, trabajo, documentación e histórico.</p>
+              <p>El Core representa el punto de convergencia: distintos sistemas técnicos llegan a una misma capa operativa sin perder su origen ni su contexto.</p>
+            </div>
+          </div>
+
+          <div class="layer-flow" aria-label="Capas del Ecosistema IsiVoltPro">
+            <article class="layer-flow__item layer-flow__item--physical">
+              <span>01 · CAPA FÍSICA</span>
+              <strong>INSTALACIÓN</strong>
+              <p>Electricidad · Climatización · Agua · Equipos · Infraestructura</p>
+              <b>DONDE OCURRE EL TRABAJO</b>
+            </article>
+            <i class="layer-flow__arrow" aria-hidden="true">→</i>
+            <article class="layer-flow__item layer-flow__item--digital">
+              <span>02 · CAPA DIGITAL</span>
+              <strong>OPERACIÓN</strong>
+              <p>Activos · Mantenimiento · OT · Documentación · Histórico</p>
+              <b>DONDE SE CONSERVA EL CONTEXTO</b>
+            </article>
+            <i class="layer-flow__arrow" aria-hidden="true">→</i>
+            <article class="layer-flow__item layer-flow__item--intelligence">
+              <span>03 · CAPA DE INTELIGENCIA</span>
+              <strong>ISIVOLTPRO</strong>
+              <p>Contexto · Consulta · Análisis · Asistencia técnica · IsiVoltPro AI</p>
+              <b>DONDE EL CONOCIMIENTO SE REUTILIZA</b>
+            </article>
+          </div>
+
+          <div class="core-statement">
+            <div class="core-statement__mark" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+            <div>
+              <span>ISIVOLTPRO CORE</span>
+              <strong>UN PUNTO DE CONVERGENCIA.<br />NO OTRO SISTEMA AISLADO.</strong>
+            </div>
+            <p>El Core no sustituye la instalación ni sus disciplinas. Las relaciona para que cada activo, OT, documento e intervención forme parte de la misma operación técnica.</p>
+            <b>FÍSICO → DIGITAL → INTELIGENCIA</b>
+          </div>
+
+          <div class="live-scene" data-ecosystem-url="${ecosystemUrl}">
+            <div class="live-scene__topbar">
+              <div><span></span><b>ISIVOLTPRO</b><small>ECOSISTEMA 3D</small></div>
+              <p><i></i> ESCENA VIVA · ECOSYSTEM BASE V1</p>
+            </div>
+            <div class="live-scene__placeholder">
+              <div class="live-scene__ring" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>RECORRIDO 3D</span>
+              <strong>INSTALACIÓN → SISTEMAS → CORE → OPERACIÓN → IA</strong>
+              <p>La escena se carga únicamente al acercarte a esta sección para mantener la Home ligera.</p>
+              <button type="button" class="live-scene__start">CARGAR ECOSISTEMA 3D →</button>
+            </div>
+            <iframe class="live-scene__frame" title="Ecosistema 3D IsiVoltPro" loading="lazy" allow="fullscreen" tabindex="-1"></iframe>
+            <div class="live-scene__status"><span>ESTADO</span><b>PREPARADO</b></div>
+          </div>
+
+          <div class="ecosystem-summary">
+            <article><span>01</span><b>ORIGEN FÍSICO</b><p>Todo empieza en una instalación, ubicación o equipo real.</p></article>
+            <article><span>02</span><b>CONTEXTO CONECTADO</b><p>Activos, trabajo y documentación permanecen relacionados.</p></article>
+            <article><span>03</span><b>MEMORIA OPERATIVA</b><p>El cierre no borra el trabajo: alimenta el histórico técnico.</p></article>
+            <article><span>04</span><b>INTELIGENCIA</b><p>El conocimiento organizado prepara una capa de consulta y asistencia.</p></article>
+          </div>
+        </section>`;
+
+      const ecosystemStyles = `
+        .ecosystem-live{padding:130px clamp(20px,5vw,92px) 155px;background:radial-gradient(circle at 50% 42%,rgba(0,123,211,.08),transparent 34%),linear-gradient(180deg,#020609,#031018 45%,#02070b);border-top:1px solid rgba(105,169,197,.08)}
+        .ecosystem-live__head,.layer-flow,.core-statement,.live-scene,.ecosystem-summary{width:min(1480px,100%);margin-left:auto;margin-right:auto}
+        .ecosystem-live__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:70px}
+        .ecosystem-live__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.8vw,98px);line-height:.87;font-weight:650;letter-spacing:-.04em}
+        .ecosystem-live__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.72);text-shadow:0 0 34px rgba(0,145,255,.12)}
+        .ecosystem-live__copy{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}.ecosystem-live__copy p{margin:0 0 13px;color:#8198a3;font-size:12px;line-height:1.8}.ecosystem-live__copy .ecosystem-live__lead{color:#d4e4eb;font-size:15px}
+        .layer-flow{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr;align-items:stretch;margin-bottom:22px}
+        .layer-flow__item{position:relative;min-height:185px;padding:28px;border:1px solid rgba(112,186,219,.13);background:linear-gradient(145deg,rgba(8,21,31,.92),rgba(4,11,17,.82));overflow:hidden}
+        .layer-flow__item::after{content:'';position:absolute;right:-60px;bottom:-90px;width:190px;height:190px;border-radius:50%;filter:blur(18px);opacity:.16}.layer-flow__item--physical::after{background:#e1a248}.layer-flow__item--digital::after{background:#08a9ff}.layer-flow__item--intelligence::after{background:#1bcfff}
+        .layer-flow__item span{display:block;color:#557381;font-size:7px;font-weight:850;letter-spacing:.16em}.layer-flow__item strong{display:block;margin:14px 0 13px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:38px;line-height:.9}.layer-flow__item p{min-height:38px;margin:0 0 20px;color:#8198a3;font-size:10px;line-height:1.65}.layer-flow__item b{color:#65b9d9;font-size:7px;letter-spacing:.12em}.layer-flow__item--physical b{color:#d4a969}
+        .layer-flow__arrow{display:grid;place-items:center;color:#397489;font-size:20px;font-style:normal}
+        .core-statement{display:grid;grid-template-columns:90px .9fr 1.3fr auto;gap:28px;align-items:center;padding:26px 30px;border:1px solid rgba(27,207,255,.22);background:linear-gradient(90deg,rgba(0,111,198,.14),rgba(3,17,26,.78) 42%,rgba(0,178,255,.04));box-shadow:0 0 45px rgba(0,145,255,.05) inset;margin-bottom:22px}
+        .core-statement__mark{position:relative;width:70px;height:70px;display:grid;place-items:center}.core-statement__mark>span{position:absolute;inset:10px;border:1px solid rgba(27,207,255,.55);border-radius:50%;box-shadow:0 0 24px rgba(27,207,255,.15),inset 0 0 18px rgba(27,207,255,.08)}.core-statement__mark i{position:absolute;width:5px;height:52px;background:linear-gradient(180deg,transparent,#1bcfff,transparent);box-shadow:0 0 10px rgba(27,207,255,.55)}.core-statement__mark i:nth-child(2){transform:rotate(60deg)}.core-statement__mark i:nth-child(3){transform:rotate(-60deg)}
+        .core-statement div:nth-child(2)>span{display:block;margin-bottom:8px;color:#51bfe8;font-size:7px;font-weight:850;letter-spacing:.17em}.core-statement div:nth-child(2)>strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:27px;line-height:.95}.core-statement p{margin:0;color:#8198a3;font-size:10px;line-height:1.7}.core-statement>b{color:#bfeaf8;font-size:8px;letter-spacing:.11em;white-space:nowrap}
+        .live-scene{position:relative;height:min(78vh,850px);min-height:650px;border:1px solid rgba(89,185,225,.18);background:#02070b;overflow:hidden;box-shadow:0 48px 110px rgba(0,0,0,.42)}
+        .live-scene::after{content:'';pointer-events:none;position:absolute;inset:0;z-index:4;box-shadow:inset 0 0 110px rgba(0,0,0,.55),inset 0 -80px 80px rgba(2,7,11,.55)}
+        .live-scene__topbar{position:absolute;z-index:6;left:0;right:0;top:0;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid rgba(111,188,218,.13);background:linear-gradient(180deg,rgba(2,8,13,.92),rgba(2,8,13,.55));backdrop-filter:blur(10px)}.live-scene__topbar>div{display:flex;align-items:center;gap:9px}.live-scene__topbar>div>span{width:17px;height:17px;clip-path:polygon(50% 0,100% 27%,100% 73%,50% 100%,0 73%,0 27%);background:linear-gradient(135deg,#087dff,#1bcfff)}.live-scene__topbar b{font-size:9px;letter-spacing:.15em}.live-scene__topbar small{color:#52717e;font-size:6px;letter-spacing:.14em}.live-scene__topbar p{margin:0;color:#63818d;font-size:6px;letter-spacing:.14em}.live-scene__topbar p i{display:inline-block;width:5px;height:5px;margin-right:7px;border-radius:50%;background:#48d9a0;box-shadow:0 0 8px rgba(72,217,160,.55)}
+        .live-scene__placeholder{position:absolute;inset:0;z-index:2;display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;padding:70px 24px 30px;background:radial-gradient(circle at 50% 48%,rgba(0,135,255,.15),transparent 25%),linear-gradient(180deg,#031019,#020609);transition:opacity .65s ease,visibility .65s ease}.live-scene.is-ready .live-scene__placeholder{opacity:0;visibility:hidden;pointer-events:none}
+        .live-scene__ring{position:relative;width:112px;height:112px;margin-bottom:10px;border:1px solid rgba(27,207,255,.22);border-radius:50%}.live-scene__ring::before,.live-scene__ring::after{content:'';position:absolute;border:1px solid rgba(27,207,255,.13);border-radius:50%}.live-scene__ring::before{inset:15px}.live-scene__ring::after{inset:31px}.live-scene__ring i{position:absolute;left:50%;top:50%;width:4px;height:84px;background:linear-gradient(180deg,transparent,#1bcfff,transparent);transform:translate(-50%,-50%);box-shadow:0 0 9px rgba(27,207,255,.45)}.live-scene__ring i:nth-child(2){transform:translate(-50%,-50%) rotate(60deg)}.live-scene__ring i:nth-child(3){transform:translate(-50%,-50%) rotate(-60deg)}
+        .live-scene__placeholder>span{color:#5c7e8b;font-size:7px;font-weight:850;letter-spacing:.18em}.live-scene__placeholder>strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(28px,3vw,48px);line-height:.95}.live-scene__placeholder>p{max-width:520px;margin:0;color:#6f8994;font-size:10px;line-height:1.7}.live-scene__start{margin-top:10px;padding:13px 18px;border:1px solid rgba(27,207,255,.28);background:rgba(0,126,216,.14);color:#cceffc;font-size:8px;font-weight:850;letter-spacing:.12em;cursor:pointer}.live-scene__start:hover{background:rgba(0,147,255,.22)}
+        .live-scene__frame{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;z-index:1;background:#02070b;transition:opacity .8s ease}.live-scene.is-ready .live-scene__frame{opacity:1}.live-scene__status{position:absolute;z-index:6;right:18px;bottom:18px;display:grid;justify-items:end;gap:3px;padding:10px 12px;border-right:1px solid rgba(27,207,255,.32);background:rgba(2,8,13,.5);backdrop-filter:blur(8px)}.live-scene__status span{color:#597784;font-size:5px;letter-spacing:.14em}.live-scene__status b{color:#7fdcfa;font-size:7px;letter-spacing:.12em}
+        .ecosystem-summary{display:grid;grid-template-columns:repeat(4,1fr);margin-top:22px;border-top:1px solid rgba(112,186,219,.12);border-left:1px solid rgba(112,186,219,.12)}.ecosystem-summary article{min-height:150px;padding:25px;border-right:1px solid rgba(112,186,219,.12);border-bottom:1px solid rgba(112,186,219,.12);background:rgba(5,15,23,.55)}.ecosystem-summary span{display:block;color:#396a7c;font-size:7px;font-weight:850}.ecosystem-summary b{display:block;margin:14px 0 10px;font-size:10px;letter-spacing:.1em}.ecosystem-summary p{margin:0;color:#708995;font-size:9px;line-height:1.65}
+        @media(max-width:1050px){.layer-flow{grid-template-columns:1fr}.layer-flow__arrow{height:34px;transform:rotate(90deg)}.core-statement{grid-template-columns:70px 1fr}.core-statement p,.core-statement>b{grid-column:2}.ecosystem-summary{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:760px){.ecosystem-live{padding:90px 20px 96px}.ecosystem-live__head{grid-template-columns:1fr;gap:28px}.ecosystem-live__head h2{font-size:clamp(50px,14vw,72px)}.core-statement{grid-template-columns:1fr;text-align:left}.core-statement__mark{width:58px;height:58px}.core-statement p,.core-statement>b{grid-column:auto}.live-scene{height:72svh;min-height:560px}.live-scene__topbar p{display:none}.ecosystem-summary{grid-template-columns:1fr}.ecosystem-summary article{min-height:0}}
+        @media(prefers-reduced-motion:reduce){.live-scene__placeholder,.live-scene__frame{transition:none}}
+      `;
+
+      function polishEcosystemFrame(frame) {
+        try {
+          const doc = frame.contentDocument;
+          if (!doc) return;
+          if (!doc.getElementById('isivoltpro-commercial-embed')) {
+            const style = doc.createElement('style');
+            style.id = 'isivoltpro-commercial-embed';
+            style.textContent = '.topbar,.metrics,.lab-button{display:none!important}';
+            doc.head.appendChild(style);
+          }
+          const firstEyebrow = doc.querySelector('.story .chapter:first-child .eyebrow');
+          const firstBody = doc.querySelector('.story .chapter:first-child p');
+          if (firstEyebrow) firstEyebrow.textContent = 'UNA INSTALACIÓN · SISTEMAS CONECTADOS';
+          if (firstBody) firstBody.textContent = 'Recorre la instalación y observa cómo activos, disciplinas y trabajo técnico convergen en un mismo contexto operativo.';
+        } catch (error) {
+          console.warn('[ISIVOLTPRO] No se pudo aplicar el pulido comercial al iframe', error);
+        }
+      }
+
+      function activateLiveScene(root) {
+        if (!root || root.dataset.started === 'true') return;
+        root.dataset.started = 'true';
+        const frame = root.querySelector('.live-scene__frame');
+        const status = root.querySelector('.live-scene__status b');
+        const url = root.dataset.ecosystemUrl;
+        if (!frame || !url) return;
+        if (status) status.textContent = 'CARGANDO ESCENA';
+        frame.src = url;
+        frame.addEventListener('load', () => {
+          polishEcosystemFrame(frame);
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            root.classList.add('is-ready');
+            frame.tabIndex = 0;
+            if (status) status.textContent = 'ECOSISTEMA ACTIVO';
+          }));
+        }, { once: true });
+      }
+
+      function wireLiveScene(doc) {
+        const root = doc.querySelector('.live-scene');
+        if (!root) return;
+        root.querySelector('.live-scene__start')?.addEventListener('click', () => activateLiveScene(root));
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              activateLiveScene(root);
+              observer.disconnect();
+            }
+          }, { rootMargin: '650px 0px' });
+          observer.observe(root);
+        }
+      }
+
+      async function buildPhase67() {
+        try {
+          const response = await fetch(phase66Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.6: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+          parsed.title = 'IsiVoltPro · Fase 6.7 · Ecosistema visual';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'El Ecosistema IsiVoltPro conecta instalación física, activos, operación, documentación, histórico e inteligencia dentro de un mismo contexto técnico.');
+
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#ecosistema-3d"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#ecosistema-3d';
+            link.textContent = 'Ecosistema 3D';
+            nav.appendChild(link);
+          }
+
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el punto de inserción de Fase 6.6');
+          const template = parsed.createElement('template');
+          template.innerHTML = ecosystemMarkup.trim();
+          bridge.parentNode.insertBefore(template.content, bridge);
+
+          const style = parsed.createElement('style');
+          style.textContent = ecosystemStyles;
+          parsed.head.appendChild(style);
+
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+
+          requestAnimationFrame(() => wireLiveScene(document));
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.7', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase66Url;
+          fallback.textContent = 'Abrir Fase 6.6';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+
+      buildPhase67();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

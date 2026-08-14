@@ -45,25 +45,48 @@ Arquitectura implementada:
 - conexiones digitales que nacen en esos puertos;
 - animación contenida del bus, emisores, anillos y pulsos.
 
-No se ha añadido ningún asset externo nuevo en 3.1.
+No se añadió ningún asset externo nuevo en 3.1.
 
-## 3.2 — SIGUIENTE
-Refinar materiales, ensamblajes y detalle físico del CORE V1 sin cambiar su arquitectura general.
+## 3.2 — Acabado físico CORE V2 — COMPLETADO
+Ruta de revisión: `/lab-3d-phase32/`
+Blob candidato validado: `bc1b5573dfae4919ab928ffaf4a5ad88123604f2`
 
-Objetivos previstos:
-- uniones, tornillería y paneles de acceso;
-- mejores transiciones metal/vidrio;
-- rejillas o respiración técnica donde tenga sentido;
-- mejor lectura de base/corona;
-- pequeños indicadores de estado;
-- mejorar reflejos y profundidad sin aumentar bloom de forma artificial;
-- revisar escala y silueta desde todos los ángulos de cámara.
+3.2 conserva literalmente la arquitectura y cámara de Core 3.1 y añade una capa de ensamblaje/acabado sincronizada sobre esa referencia.
 
-## 3.3 — Integración final del Core
-Después de aprobar 3.2:
-- cerrar conexiones físicas/digitales con los sistemas;
-- definir lenguaje de estados;
-- preparar el Core para storytelling del ecosistema.
+Detalle implementado:
+- juntas de elastómero en las transiciones vidrio/estructura;
+- anillos metálicos de retención del vidrio;
+- ocho apoyos de aislamiento/antivibración bajo el zócalo;
+- tornillería de base instanciada;
+- cuatro registros de inspección en el cuerpo inferior;
+- paneles de acceso en los cuatro montantes;
+- cierres/latches de servicio;
+- tornillería de panel instanciada;
+- retenedores del vidrio instanciados;
+- banda de ventilación técnica en la corona;
+- pequeños indicadores de estado cian y servicio ámbar;
+- collares físicos en los cuatro puertos de conexión;
+- placa neutra de servicio preparada para branding/texto posterior;
+- materiales con clearcoat controlado para mejorar lectura de metal sin incrementar bloom.
+
+Decisiones de rendimiento:
+- tornillería, retenedores, apoyos, ventilación e indicadores repetidos usan InstancedMesh;
+- la capa 3.2 no usa postprocesado ni bloom propio;
+- no proyecta sombras adicionales;
+- reutiliza exactamente la curva de cámara y target de 3.1;
+- se mantiene el control de FPS del render base y se muestran draw calls/triángulos específicos del detalle;
+- no se añadió ningún asset externo nuevo en 3.2.
+
+## 3.3 — SIGUIENTE: Integración final del Core
+Objetivo: convertir Core V2 en el nodo funcional y visual que explicará el ecosistema IsiVoltPro sin cambiar de nuevo su arquitectura básica.
+
+Siguiente alcance previsto:
+- cerrar el lenguaje físico/digital de cada puerto;
+- definir estados normal, atención, mantenimiento y alarma sin abuso de color;
+- mejorar cómo las conexiones llegan a mecánica, HVAC, climatización y electricidad;
+- preparar extensiones posteriores hacia agua, activos, mantenimiento, operaciones y AI;
+- hacer que la convergencia de sistemas sea comprensible antes de añadir textos comerciales definitivos;
+- mantener BASE INDUSTRIAL V1 y Core 3.1 disponibles como referencias A/B.
 
 ## Criterio de salida FASE 3
-El Core debe ser reconocible como una pieza propia de IsiVoltPro, estar físicamente integrado en la planta, aportar identidad de marca y mantener la fluidez de BASE INDUSTRIAL V1.
+El Core debe ser reconocible como una pieza propia de IsiVoltPro, estar físicamente integrado en la planta, aportar identidad de marca, explicar visualmente la convergencia del ecosistema y mantener la fluidez de BASE INDUSTRIAL V1.

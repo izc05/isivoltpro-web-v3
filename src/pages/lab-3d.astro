@@ -201,7 +201,7 @@ const base = import.meta.env.BASE_URL;
         grid.material.opacity = 0.25;
         world.add(grid);
 
-        function makeBuilding(x, z, w, d, h) {
+        function makeBuilding(x: number, z: number, w: number, d: number, h: number) {
           const group = new THREE.Group();
           group.position.set(x, 0, z);
 
@@ -285,7 +285,7 @@ const base = import.meta.env.BASE_URL;
         coreCap.position.y = 4.9;
         core.add(coreCap);
 
-        const rings = [];
+        const rings: THREE.Mesh[] = [];
         [1.2, 2.35, 3.5, 4.55].forEach((y, index) => {
           const ring = new THREE.Mesh(new THREE.TorusGeometry(1.08 + index * 0.06, 0.035, 10, 72), index % 2 ? blueGlow : cyanGlow);
           ring.rotation.x = Math.PI / 2;
@@ -329,7 +329,7 @@ const base = import.meta.env.BASE_URL;
         warmLight.position.set(-8, 5, -5);
         scene.add(warmLight);
 
-        function createConnection(start, end, height = 1.0) {
+        function createConnection(start: THREE.Vector3, end: THREE.Vector3, height = 1.0) {
           const mid = start.clone().lerp(end, 0.5);
           mid.y += height;
           const curve = new THREE.CatmullRomCurve3([start, mid, end]);

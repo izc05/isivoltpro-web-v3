@@ -1,6 +1,6 @@
 # FASE 4 — ECOSISTEMA ISIVOLTPRO
 
-Estado: EN CURSO
+Estado: EN REVISIÓN FINAL
 Rama: feat/home-3d-lab
 Base industrial protegida: `/lab-3d-base-v1/`
 Core visual aprobado: `/lab-3d-phase31/`
@@ -76,16 +76,35 @@ Implementado:
 Jerarquía visual validada en 4.2:
 `PHYSICAL → DIGITAL → INTELLIGENCE`.
 
-## 4.3 — SIGUIENTE: consolidación del ecosistema en una escena
-Objetivo:
-- llevar el recorrido amplio y el mapa 4.2 a un montaje técnico único y mantenible;
-- reducir la dependencia de iframes de laboratorio;
-- anclar rutas/estados a posiciones reales de la escena 3D;
-- mantener Core 3.1 como diseño aprobado;
-- integrar Water de forma más física cuando aporte valor;
-- conservar la jerarquía PHYSICAL → DIGITAL → INTELLIGENCE;
-- revisar rendimiento después de consolidar;
-- dejar una base preparada para la futura portada/Home comercial.
+## 4.3 — Consolidación del ecosistema en una escena — COMPLETADO
+Ruta de revisión: `/lab-3d-phase43/`
+Blob candidato validado: `d87ed4d07d43eaee110e9c37bd1d42688d95e27e`
+
+Implementado:
+- elimina la dependencia de iframes usada en 4.1 y 4.2;
+- una sola escena Three.js y un solo canvas WebGL contienen instalación, Core, rutas y Water;
+- recupera el recorrido amplio de cámara de FASE 2.9;
+- conserva la arquitectura visual del Core 3.1 aprobado;
+- Mechanical, HVAC, Climate, Electrical y Water usan rutas 3D reales mediante TubeGeometry/CatmullRom;
+- las rutas aparecen contextualmente según el capítulo y reducen opacidad fuera de foco;
+- Water ya existe como geometría física ligera: tubería, meter/manifold, válvula y base de servicio;
+- Assets utiliza etiquetas HTML proyectadas desde coordenadas reales de equipos 3D;
+- Maintenance, Operations y AI aparecen como capas HTML nítidas sin añadir un segundo renderer;
+- pines de bomba, AHU, climatización, cuadro, agua y Core siguen sus posiciones mientras la cámara se desplaza;
+- se conserva el presupuesto de rendimiento: antialias desactivado, DPR adaptativo, bloom contenido, geometrías compartidas e instancing;
+- no se añade ningún asset 3D externo nuevo;
+- no se modifica Home.
+
+Resultado técnico de 4.3:
+`ONE WEBGL SCENE → PHYSICAL → DIGITAL → INTELLIGENCE`.
+
+## 4.4 — PENDIENTE DE REVISIÓN: performance + freeze del ecosistema
+Solo si 4.3 se aprueba visualmente:
+- revisar FPS / DPR / calls / tris en escritorio y móvil;
+- reducir cualquier coste nuevo de rutas, Water o overlays si fuese necesario;
+- ajustar únicamente cámara/legibilidad, no rediseñar Core 3.1;
+- congelar una BASE ECOSYSTEM V1 estable;
+- dejar FASE 4 cerrada antes de empezar entrada/portada y Home comercial.
 
 ## Criterio de salida FASE 4
 El usuario debe entender visualmente que IsiVoltPro no es un Core aislado: es una plataforma que conecta una instalación completa, sus sistemas, activos, operación, mantenimiento y datos, manteniendo una lectura técnica creíble y una jerarquía visual clara antes de entrar en la narrativa comercial final.

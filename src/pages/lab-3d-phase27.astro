@@ -31,66 +31,45 @@ const base = import.meta.env.BASE_URL;
     </aside>
 
     <main id="story">
-      <section class="chapter active">
-        <div class="copy">
-          <p class="eyebrow">INDUSTRIAL DIGITAL TWIN</p>
-          <h1>Infrastructure<br />becomes equipment.</h1>
-          <p class="body-copy">Phase 2.7 keeps the real pipe, duct and electrical assets and adds one real exterior HVAC machine.</p>
-          <span class="scroll-hint">SCROLL THROUGH THE PLANT <i>↓</i></span>
-        </div>
-      </section>
+      <section class="chapter active"><div class="copy">
+        <p class="eyebrow">INDUSTRIAL DIGITAL TWIN</p>
+        <h1>Infrastructure<br />becomes equipment.</h1>
+        <p class="body-copy">Real pipe, duct and electrical assets remain while one real exterior HVAC machine enters the installation.</p>
+        <span class="scroll-hint">SCROLL THROUGH THE PLANT <i>↓</i></span>
+      </div></section>
 
-      <section class="chapter">
-        <div class="copy right-copy">
-          <p class="index">02 / MECHANICAL</p>
-          <p class="eyebrow">PIPES · PUMPS · TANKS</p>
-          <h2>Water remains<br />at plant level.</h2>
-          <p class="body-copy">The modular mechanical network remains the lower physical service layer.</p>
-        </div>
-      </section>
+      <section class="chapter"><div class="copy right-copy">
+        <p class="index">02 / MECHANICAL</p><p class="eyebrow">PIPES · PUMPS · TANKS</p>
+        <h2>Water remains<br />at plant level.</h2>
+        <p class="body-copy">The modular mechanical network remains the lower physical service layer.</p>
+      </div></section>
 
-      <section class="chapter">
-        <div class="copy">
-          <p class="index">03 / AIR</p>
-          <p class="eyebrow">DUCTS · FAN · INDOOR MODULE</p>
-          <h2>Ventilation stays<br />overhead.</h2>
-          <p class="body-copy">The circular duct network remains separate from the refrigeration circuit.</p>
-        </div>
-      </section>
+      <section class="chapter"><div class="copy">
+        <p class="index">03 / AIR</p><p class="eyebrow">DUCTS · FAN · INDOOR MODULE</p>
+        <h2>Ventilation stays<br />overhead.</h2>
+        <p class="body-copy">The circular duct network remains separate from the refrigeration circuit.</p>
+      </div></section>
 
-      <section class="chapter">
-        <div class="copy right-copy">
-          <p class="index">04 / HVAC EQUIPMENT</p>
-          <p class="eyebrow">OUTDOOR UNIT · REFRIGERANT LINES</p>
-          <h2>A real machine<br />enters the plant.</h2>
-          <p class="body-copy">A clean CC0 exterior air-conditioning unit is installed on a service pad and linked to the indoor module by a two-line refrigeration circuit.</p>
-        </div>
-      </section>
+      <section class="chapter"><div class="copy right-copy">
+        <p class="index">04 / HVAC EQUIPMENT</p><p class="eyebrow">OUTDOOR UNIT · REFRIGERANT LINES</p>
+        <h2>A real machine<br />enters the plant.</h2>
+        <p class="body-copy">A clean CC0 exterior air-conditioning unit is installed on a service pad and linked to the indoor module by a two-line refrigeration circuit.</p>
+      </div></section>
 
-      <section class="chapter">
-        <div class="copy">
-          <p class="index">05 / ELECTRICAL</p>
-          <p class="eyebrow">DISTRIBUTION · PANELS · STATUS</p>
-          <h2>Power keeps<br />its own bay.</h2>
-          <p class="body-copy">The real utility cabinets from Phase 2.6 remain connected digitally to the Core.</p>
-        </div>
-      </section>
+      <section class="chapter"><div class="copy">
+        <p class="index">05 / ELECTRICAL</p><p class="eyebrow">DISTRIBUTION · PANELS · STATUS</p>
+        <h2>Power keeps<br />its own bay.</h2>
+        <p class="body-copy">The real utility cabinets from Phase 2.6 remain connected digitally to the Core.</p>
+      </div></section>
 
-      <section class="chapter">
-        <div class="copy end-copy">
-          <p class="index">06 / CHECKPOINT</p>
-          <p class="eyebrow">PHASE 2.7</p>
-          <h2>Three systems.<br />Real HVAC equipment.</h2>
-          <a class="lab-button" href={`${base}lab-3d-phase26/`}>COMPARE WITH 2.6 <span>→</span></a>
-        </div>
-      </section>
+      <section class="chapter"><div class="copy end-copy">
+        <p class="index">06 / CHECKPOINT</p><p class="eyebrow">PHASE 2.7</p>
+        <h2>Three systems.<br />Real HVAC equipment.</h2>
+        <a class="lab-button" href={`${base}lab-3d-phase26/`}>COMPARE WITH 2.6 <span>→</span></a>
+      </div></section>
     </main>
 
-    <div id="no-webgl" hidden>
-      <strong>3D unavailable</strong>
-      <p>This checkpoint needs WebGL.</p>
-      <a href={base}>Return home</a>
-    </div>
+    <div id="no-webgl" hidden><strong>3D unavailable</strong><p>This checkpoint needs WebGL.</p><a href={base}>Return home</a></div>
 
     <script>
       import * as THREE from 'three';
@@ -124,9 +103,7 @@ const base = import.meta.env.BASE_URL;
         try {
           const test = document.createElement('canvas');
           return Boolean(test.getContext('webgl2') || test.getContext('webgl'));
-        } catch {
-          return false;
-        }
+        } catch { return false; }
       })();
 
       if (!supportsWebGL || !(canvas instanceof HTMLCanvasElement)) {
@@ -135,7 +112,6 @@ const base = import.meta.env.BASE_URL;
       } else {
         const mobile = window.matchMedia('(max-width: 760px)').matches;
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.0 : 1.35));
@@ -148,7 +124,6 @@ const base = import.meta.env.BASE_URL;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x02040a);
         scene.fog = new THREE.FogExp2(0x02040a, 0.025);
-
         const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 145);
         camera.position.set(-14, 8, 19);
 
@@ -159,7 +134,6 @@ const base = import.meta.env.BASE_URL;
 
         const world = new THREE.Group();
         scene.add(world);
-
         const darkMetal = new THREE.MeshStandardMaterial({ color: 0x111925, metalness: 0.74, roughness: 0.36 });
         const darkPanel = new THREE.MeshStandardMaterial({ color: 0x07101a, metalness: 0.5, roughness: 0.54 });
         const concrete = new THREE.MeshStandardMaterial({ color: 0x090e14, metalness: 0.08, roughness: 0.9 });
@@ -176,14 +150,13 @@ const base = import.meta.env.BASE_URL;
         floor.position.y = -0.05;
         floor.receiveShadow = true;
         world.add(floor);
-
         const grid = new THREE.GridHelper(64, 64, 0x17455b, 0x0b1c27);
         grid.position.y = 0.01;
         grid.material.transparent = true;
         grid.material.opacity = 0.15;
         world.add(grid);
 
-        function makeBuilding(x, z, w, d, h) {
+        function makeBuilding(x: number, z: number, w: number, d: number, h: number) {
           const group = new THREE.Group();
           group.position.set(x, 0, z);
           const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), darkPanel);
@@ -199,11 +172,8 @@ const base = import.meta.env.BASE_URL;
         }
 
         const modules = [
-          makeBuilding(-8.4, -2.4, 5.0, 4.2, 3.1),
-          makeBuilding(-7.6, 5.4, 5.8, 4.4, 2.6),
-          makeBuilding(8.1, -4.5, 5.4, 5.0, 3.7),
-          makeBuilding(7.5, 4.7, 6.0, 4.2, 2.8),
-          makeBuilding(0.4, 8.5, 6.6, 3.0, 2.2),
+          makeBuilding(-8.4, -2.4, 5.0, 4.2, 3.1), makeBuilding(-7.6, 5.4, 5.8, 4.4, 2.6),
+          makeBuilding(8.1, -4.5, 5.4, 5.0, 3.7), makeBuilding(7.5, 4.7, 6.0, 4.2, 2.8), makeBuilding(0.4, 8.5, 6.6, 3.0, 2.2),
         ];
 
         const tankGroup = new THREE.Group();
@@ -232,7 +202,6 @@ const base = import.meta.env.BASE_URL;
           pumpGroup.add(led);
         });
 
-        // Indoor air-side module stays procedural because the new real asset is an outdoor condensing unit.
         const indoorModule = new THREE.Group();
         indoorModule.position.set(4.7, 0, -0.7);
         world.add(indoorModule);
@@ -245,7 +214,6 @@ const base = import.meta.env.BASE_URL;
         indoorRing.rotation.y = Math.PI / 2;
         indoorModule.add(indoorRing);
 
-        // Dedicated outdoor HVAC service pad. The real machine lands here.
         const hvacPad = new THREE.Group();
         hvacPad.position.set(8.2, 0, -0.8);
         world.add(hvacPad);
@@ -260,39 +228,26 @@ const base = import.meta.env.BASE_URL;
         unitLed.position.set(-1.0, 1.45, -0.8);
         hvacPad.add(unitLed);
 
-        // Refrigerant circuit: two distinct lines between indoor and outdoor HVAC equipment.
-        function makeServiceLine(points, radius, material) {
+        function makeServiceLine(points: THREE.Vector3[], radius: number, material: THREE.Material) {
           const curve = new THREE.CatmullRomCurve3(points);
           const line = new THREE.Mesh(new THREE.TubeGeometry(curve, 36, radius, 8, false), material);
           line.castShadow = !mobile;
           world.add(line);
-          return line;
         }
-        makeServiceLine([
-          new THREE.Vector3(5.8, 0.85, -0.55),
-          new THREE.Vector3(6.7, 1.15, -0.45),
-          new THREE.Vector3(7.35, 1.05, -0.58),
-          new THREE.Vector3(8.0, 0.9, -0.6),
-        ], 0.035, copper);
-        makeServiceLine([
-          new THREE.Vector3(5.8, 0.68, -0.82),
-          new THREE.Vector3(6.65, 0.95, -0.92),
-          new THREE.Vector3(7.35, 0.88, -0.92),
-          new THREE.Vector3(8.0, 0.72, -0.88),
-        ], 0.055, insulated);
+        makeServiceLine([new THREE.Vector3(5.8, .85, -.55), new THREE.Vector3(6.7, 1.15, -.45), new THREE.Vector3(7.35, 1.05, -.58), new THREE.Vector3(8, .9, -.6)], .035, copper);
+        makeServiceLine([new THREE.Vector3(5.8, .68, -.82), new THREE.Vector3(6.65, .95, -.92), new THREE.Vector3(7.35, .88, -.92), new THREE.Vector3(8, .72, -.88)], .055, insulated);
 
-        // Electrical distribution bay retained from Phase 2.6.
         const electricalBay = new THREE.Group();
         electricalBay.position.set(7.1, 0, -7.3);
         world.add(electricalBay);
-        const electricalPlinth = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.24, 2.0), darkMetal);
-        electricalPlinth.position.y = 0.12;
+        const electricalPlinth = new THREE.Mesh(new THREE.BoxGeometry(5.8, .24, 2), darkMetal);
+        electricalPlinth.position.y = .12;
         electricalBay.add(electricalPlinth);
-        const tray = new THREE.Mesh(new THREE.BoxGeometry(5.6, 0.08, 0.55), darkMetal);
-        tray.position.set(0, 2.45, 0.45);
+        const tray = new THREE.Mesh(new THREE.BoxGeometry(5.6, .08, .55), darkMetal);
+        tray.position.set(0, 2.45, .45);
         electricalBay.add(tray);
-        const trayLine = new THREE.Mesh(new THREE.BoxGeometry(5.1, 0.025, 0.025), electricGlow);
-        trayLine.position.set(0, 2.43, 0.14);
+        const trayLine = new THREE.Mesh(new THREE.BoxGeometry(5.1, .025, .025), electricGlow);
+        trayLine.position.set(0, 2.43, .14);
         electricalBay.add(trayLine);
 
         let pipePieces = 0;
@@ -304,323 +259,164 @@ const base = import.meta.env.BASE_URL;
         const airconNetwork = new THREE.Group();
         const electricalNetwork = new THREE.Group();
         world.add(pipeNetwork, ductNetwork, airconNetwork, electricalNetwork);
-
-        function updatePieceCount() {
-          if (pieceCountEl) pieceCountEl.textContent = String(pipePieces + ductPieces + airconPieces + electricalPieces);
-        }
+        function updatePieceCount() { if (pieceCountEl) pieceCountEl.textContent = String(pipePieces + ductPieces + airconPieces + electricalPieces); }
 
         const pipeManager = new THREE.LoadingManager();
         pipeManager.setURLModifier((url) => url.includes('/textures/') ? PIXEL : url);
-        new GLTFLoader(pipeManager).load(
-          PIPE_ASSET_URL,
-          (gltf) => {
-            const source = new Map();
-            gltf.scene.children.forEach((child) => source.set(child.name, child));
-            const addPipe = (name, position, rotation, scale, material) => {
-              const original = source.get(name);
-              if (!original) return;
-              const piece = original.clone(true);
-              piece.position.set(...position);
-              piece.rotation.set(...rotation);
-              piece.scale.setScalar(scale);
-              piece.traverse((object) => {
-                if (object instanceof THREE.Mesh) {
-                  object.material = material;
-                  object.castShadow = !mobile;
-                  object.receiveShadow = true;
-                }
-              });
-              pipeNetwork.add(piece);
-              pipePieces += 1;
-            };
-            [-7.4, -5.0, -2.6, -0.2].forEach((x) => {
-              addPipe('modular_industrial_pipes_01_pipe02', [x, 3.45, -6.1], [0, 0, Math.PI / 2], 1.2, pipeSupply);
-              addPipe('modular_industrial_pipes_01_pipe02', [x, 2.35, -5.78], [0, 0, Math.PI / 2], 1.2, pipeReturn);
-            });
-            [-3.95, -2.4, -0.85, 0.7, 2.25].forEach((x, index) => {
-              addPipe('modular_industrial_pipes_01_pipe01', [x, 2.0, -7.15], [0, 0, 0], 1.0, index % 2 ? pipeReturn : pipeSupply);
-            });
-            if (pipeStatus) pipeStatus.textContent = 'READY';
-            updatePieceCount();
-          },
-          undefined,
-          (error) => {
-            console.error('Phase 2.7 pipe network failed to load', error);
-            if (pipeStatus) pipeStatus.textContent = 'ERROR';
-          },
-        );
+        new GLTFLoader(pipeManager).load(PIPE_ASSET_URL, (gltf) => {
+          const source = new Map<string, THREE.Object3D>();
+          gltf.scene.children.forEach((child) => source.set(child.name, child));
+          const addPipe = (name: string, position: [number, number, number], rotation: [number, number, number], scale: number, material: THREE.Material) => {
+            const original = source.get(name); if (!original) return;
+            const piece = original.clone(true);
+            piece.position.set(...position); piece.rotation.set(...rotation); piece.scale.setScalar(scale);
+            piece.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.material = material; object.castShadow = !mobile; object.receiveShadow = true; } });
+            pipeNetwork.add(piece); pipePieces += 1;
+          };
+          [-7.4, -5, -2.6, -.2].forEach((x) => {
+            addPipe('modular_industrial_pipes_01_pipe02', [x, 3.45, -6.1], [0, 0, Math.PI / 2], 1.2, pipeSupply);
+            addPipe('modular_industrial_pipes_01_pipe02', [x, 2.35, -5.78], [0, 0, Math.PI / 2], 1.2, pipeReturn);
+          });
+          [-3.95, -2.4, -.85, .7, 2.25].forEach((x, index) => addPipe('modular_industrial_pipes_01_pipe01', [x, 2, -7.15], [0, 0, 0], 1, index % 2 ? pipeReturn : pipeSupply));
+          if (pipeStatus) pipeStatus.textContent = 'READY'; updatePieceCount();
+        }, undefined, (error) => { console.error('Phase 2.7 pipe network failed', error); if (pipeStatus) pipeStatus.textContent = 'ERROR'; });
 
-        new GLTFLoader().load(
-          HVAC_ASSET_URL,
-          (gltf) => {
-            const source = new Map();
-            gltf.scene.children.forEach((child) => source.set(child.name, child));
-            const addDuct = (name, position, rotation, scale = 1) => {
-              const original = source.get(name);
-              if (!original) return;
-              const piece = original.clone(true);
-              piece.position.set(...position);
-              piece.rotation.set(...rotation);
-              piece.scale.setScalar(scale);
-              piece.traverse((object) => {
-                if (object instanceof THREE.Mesh) {
-                  object.castShadow = !mobile;
-                  object.receiveShadow = true;
-                }
-              });
-              ductNetwork.add(piece);
-              ductPieces += 1;
-            };
-            [-5.4, -2.7, 0, 2.7, 5.4].forEach((x) => addDuct('modular_airduct_circular_triple', [x, 4.75, 2.55], [0, Math.PI / 2, 0], 1.48));
-            addDuct('modular_airduct_circular_fan', [0.15, 4.75, 2.55], [0, Math.PI / 2, 0], 1.42);
-            addDuct('modular_airduct_circular_smooth_bend_quater', [-3.1, 4.75, 2.45], [0, 0, Math.PI / 2], 1.5);
-            addDuct('modular_airduct_circular_smooth_bend_quater', [3.15, 4.75, 2.45], [0, Math.PI, Math.PI / 2], 1.5);
-            addDuct('modular_airduct_circular_smooth_triple', [-3.1, 4.75, 0.7], [0, 0, 0], 1.42);
-            addDuct('modular_airduct_circular_smooth_triple', [3.15, 4.75, 0.7], [0, 0, 0], 1.42);
-            if (hvacStatus) hvacStatus.textContent = 'READY';
-            updatePieceCount();
-          },
-          undefined,
-          (error) => {
-            console.error('Phase 2.7 duct network failed to load', error);
-            if (hvacStatus) hvacStatus.textContent = 'ERROR';
-          },
-        );
+        new GLTFLoader().load(HVAC_ASSET_URL, (gltf) => {
+          const source = new Map<string, THREE.Object3D>();
+          gltf.scene.children.forEach((child) => source.set(child.name, child));
+          const addDuct = (name: string, position: [number, number, number], rotation: [number, number, number], scale = 1) => {
+            const original = source.get(name); if (!original) return;
+            const piece = original.clone(true);
+            piece.position.set(...position); piece.rotation.set(...rotation); piece.scale.setScalar(scale);
+            piece.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = !mobile; object.receiveShadow = true; } });
+            ductNetwork.add(piece); ductPieces += 1;
+          };
+          [-5.4, -2.7, 0, 2.7, 5.4].forEach((x) => addDuct('modular_airduct_circular_triple', [x, 4.75, 2.55], [0, Math.PI / 2, 0], 1.48));
+          addDuct('modular_airduct_circular_fan', [.15, 4.75, 2.55], [0, Math.PI / 2, 0], 1.42);
+          addDuct('modular_airduct_circular_smooth_bend_quater', [-3.1, 4.75, 2.45], [0, 0, Math.PI / 2], 1.5);
+          addDuct('modular_airduct_circular_smooth_bend_quater', [3.15, 4.75, 2.45], [0, Math.PI, Math.PI / 2], 1.5);
+          addDuct('modular_airduct_circular_smooth_triple', [-3.1, 4.75, .7], [0, 0, 0], 1.42);
+          addDuct('modular_airduct_circular_smooth_triple', [3.15, 4.75, .7], [0, 0, 0], 1.42);
+          if (hvacStatus) hvacStatus.textContent = 'READY'; updatePieceCount();
+        }, undefined, (error) => { console.error('Phase 2.7 ducts failed', error); if (hvacStatus) hvacStatus.textContent = 'ERROR'; });
 
-        // Keep only the clean exterior unit textures; rusted texture requests are neutralized for this checkpoint.
         const airconManager = new THREE.LoadingManager();
         airconManager.setURLModifier((url) => url.includes('_rusted_') ? PIXEL : url);
-        new GLTFLoader(airconManager).load(
-          AIRCON_ASSET_URL,
-          (gltf) => {
-            const clean = gltf.scene.getObjectByName('exterior_aircon_unit');
-            if (!clean) {
-              if (airconStatus) airconStatus.textContent = 'ERROR';
-              return;
-            }
-            const unit = clean.clone(true);
-            unit.position.set(8.2, 0.95, -0.8);
-            unit.rotation.y = -Math.PI / 2;
-            unit.scale.setScalar(1.85);
-            unit.traverse((object) => {
-              if (object instanceof THREE.Mesh) {
-                object.castShadow = !mobile;
-                object.receiveShadow = true;
-              }
-            });
-            airconNetwork.add(unit);
-            airconPieces = 1;
-            if (airconStatus) airconStatus.textContent = 'READY';
-            updatePieceCount();
-          },
-          undefined,
-          (error) => {
-            console.error('Phase 2.7 exterior HVAC unit failed to load', error);
-            if (airconStatus) airconStatus.textContent = 'ERROR';
-          },
-        );
+        new GLTFLoader(airconManager).load(AIRCON_ASSET_URL, (gltf) => {
+          const clean = gltf.scene.getObjectByName('exterior_aircon_unit');
+          if (!clean) { if (airconStatus) airconStatus.textContent = 'ERROR'; return; }
+          const unit = clean.clone(true);
+          unit.position.set(8.2, .95, -.8); unit.rotation.y = -Math.PI / 2; unit.scale.setScalar(1.85);
+          unit.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = !mobile; object.receiveShadow = true; } });
+          airconNetwork.add(unit); airconPieces = 1;
+          if (airconStatus) airconStatus.textContent = 'READY'; updatePieceCount();
+        }, undefined, (error) => { console.error('Phase 2.7 HVAC unit failed', error); if (airconStatus) airconStatus.textContent = 'ERROR'; });
 
-        new GLTFLoader().load(
-          ELECTRICAL_ASSET_URL,
-          (gltf) => {
-            const cabinet = gltf.scene;
-            cabinet.traverse((object) => {
-              if (object instanceof THREE.Mesh) {
-                object.castShadow = !mobile;
-                object.receiveShadow = true;
-              }
-            });
-            [-2.25, -0.75, 0.75, 2.25].forEach((x, index) => {
-              const unit = cabinet.clone(true);
-              unit.position.set(7.1 + x, 0.24, -7.35 + (index % 2) * 0.06);
-              unit.rotation.y = Math.PI;
-              unit.scale.setScalar(1.28);
-              electricalNetwork.add(unit);
-              electricalPieces += 1;
-            });
-            if (electricalStatus) electricalStatus.textContent = 'READY';
-            updatePieceCount();
-          },
-          undefined,
-          (error) => {
-            console.error('Phase 2.7 electrical asset failed to load', error);
-            if (electricalStatus) electricalStatus.textContent = 'ERROR';
-          },
-        );
+        new GLTFLoader().load(ELECTRICAL_ASSET_URL, (gltf) => {
+          const cabinet = gltf.scene;
+          cabinet.traverse((object: THREE.Object3D) => { if (object instanceof THREE.Mesh) { object.castShadow = !mobile; object.receiveShadow = true; } });
+          [-2.25, -.75, .75, 2.25].forEach((x, index) => {
+            const unit = cabinet.clone(true);
+            unit.position.set(7.1 + x, .24, -7.35 + (index % 2) * .06); unit.rotation.y = Math.PI; unit.scale.setScalar(1.28);
+            electricalNetwork.add(unit); electricalPieces += 1;
+          });
+          if (electricalStatus) electricalStatus.textContent = 'READY'; updatePieceCount();
+        }, undefined, (error) => { console.error('Phase 2.7 electrical asset failed', error); if (electricalStatus) electricalStatus.textContent = 'ERROR'; });
 
-        // CORE remains procedural until Phase 3.
         const core = new THREE.Group();
         world.add(core);
-        const plinth = new THREE.Mesh(new THREE.CylinderGeometry(2.25, 2.55, 0.45, 56), darkMetal);
-        plinth.position.y = 0.22;
-        core.add(plinth);
-        const coreBody = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.96, 4.4, 42), darkMetal);
-        coreBody.position.y = 2.65;
-        core.add(coreBody);
-        const energyColumn = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 3.55, 24), cyanGlow);
-        energyColumn.position.y = 2.7;
-        core.add(energyColumn);
-        const rings = [];
+        const plinth = new THREE.Mesh(new THREE.CylinderGeometry(2.25, 2.55, .45, 56), darkMetal); plinth.position.y = .22; core.add(plinth);
+        const coreBody = new THREE.Mesh(new THREE.CylinderGeometry(.72, .96, 4.4, 42), darkMetal); coreBody.position.y = 2.65; core.add(coreBody);
+        const energyColumn = new THREE.Mesh(new THREE.CylinderGeometry(.22, .22, 3.55, 24), cyanGlow); energyColumn.position.y = 2.7; core.add(energyColumn);
+        const rings: THREE.Mesh[] = [];
         [1.2, 2.35, 3.5, 4.55].forEach((y, index) => {
-          const ring = new THREE.Mesh(new THREE.TorusGeometry(1.08 + index * 0.06, 0.035, 8, 64), index % 2 ? blueGlow : cyanGlow);
-          ring.rotation.x = Math.PI / 2;
-          ring.position.y = y;
-          core.add(ring);
-          rings.push(ring);
+          const ring = new THREE.Mesh(new THREE.TorusGeometry(1.08 + index * .06, .035, 8, 64), index % 2 ? blueGlow : cyanGlow);
+          ring.rotation.x = Math.PI / 2; ring.position.y = y; core.add(ring); rings.push(ring);
         });
-        const halo = new THREE.Mesh(new THREE.TorusGeometry(2, 0.055, 10, 80), cyanGlow);
-        halo.rotation.x = Math.PI / 2;
-        halo.position.y = 0.55;
-        core.add(halo);
-        const beacon = new THREE.PointLight(0x00d9ff, mobile ? 12 : 21, 16, 1.65);
-        beacon.position.set(0, 3, 0);
-        core.add(beacon);
+        const halo = new THREE.Mesh(new THREE.TorusGeometry(2, .055, 10, 80), cyanGlow); halo.rotation.x = Math.PI / 2; halo.position.y = .55; core.add(halo);
+        const beacon = new THREE.PointLight(0x00d9ff, mobile ? 12 : 21, 16, 1.65); beacon.position.set(0, 3, 0); core.add(beacon);
 
         scene.add(new THREE.HemisphereLight(0x6ebfe0, 0x02050b, 1.24));
-        const key = new THREE.DirectionalLight(0xa9dfff, 3.0);
-        key.position.set(-7, 13, 9);
-        key.castShadow = !mobile;
-        scene.add(key);
-        const warm = new THREE.PointLight(0xffa85b, 7.0, 17, 2);
-        warm.position.set(-8, 5, -5);
-        scene.add(warm);
-        const hvacAccent = new THREE.PointLight(0x8bdcff, 9.5, 16, 2);
-        hvacAccent.position.set(0.8, 6.0, 2.4);
-        scene.add(hvacAccent);
-        const equipmentAccent = new THREE.PointLight(0x9de8ff, 10.5, 12, 2);
-        equipmentAccent.position.set(8.0, 3.2, -0.3);
-        scene.add(equipmentAccent);
-        const electricalAccent = new THREE.PointLight(0xffca4a, 8.0, 11, 2);
-        electricalAccent.position.set(7.0, 3.4, -6.6);
-        scene.add(electricalAccent);
+        const key = new THREE.DirectionalLight(0xa9dfff, 3); key.position.set(-7, 13, 9); key.castShadow = !mobile; scene.add(key);
+        const warm = new THREE.PointLight(0xffa85b, 7, 17, 2); warm.position.set(-8, 5, -5); scene.add(warm);
+        const hvacAccent = new THREE.PointLight(0x8bdcff, 9.5, 16, 2); hvacAccent.position.set(.8, 6, 2.4); scene.add(hvacAccent);
+        const equipmentAccent = new THREE.PointLight(0x9de8ff, 10.5, 12, 2); equipmentAccent.position.set(8, 3.2, -.3); scene.add(equipmentAccent);
+        const electricalAccent = new THREE.PointLight(0xffca4a, 8, 11, 2); electricalAccent.position.set(7, 3.4, -6.6); scene.add(electricalAccent);
 
-        function createConnection(start, end, height = 1, material = cyanGlow) {
-          const mid = start.clone().lerp(end, 0.5);
-          mid.y += height;
+        function createConnection(start: THREE.Vector3, end: THREE.Vector3, height = 1, material: THREE.Material = cyanGlow) {
+          const mid = start.clone().lerp(end, .5); mid.y += height;
           const curve = new THREE.CatmullRomCurve3([start, mid, end]);
-          const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 28, 0.023, 7, false), material);
-          world.add(tube);
-          const pulse = new THREE.Mesh(new THREE.SphereGeometry(0.058, 10, 10), material);
-          world.add(pulse);
+          world.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 28, .023, 7, false), material));
+          const pulse = new THREE.Mesh(new THREE.SphereGeometry(.058, 10, 10), material); world.add(pulse);
           return { curve, pulse, offset: Math.random() };
         }
-
         const connections = [
-          createConnection(new THREE.Vector3(0, 0.65, 0), new THREE.Vector3(-4.7, 1.2, -6.1), 1.2),
-          createConnection(new THREE.Vector3(0, 1.0, 0), new THREE.Vector3(0, 4.7, 2.55), 1.8),
-          createConnection(new THREE.Vector3(0, 1.0, 0), new THREE.Vector3(8.2, 1.45, -0.8), 1.5),
-          createConnection(new THREE.Vector3(0, 0.9, 0), new THREE.Vector3(7.1, 1.6, -7.3), 1.45, electricGlow),
+          createConnection(new THREE.Vector3(0, .65, 0), new THREE.Vector3(-4.7, 1.2, -6.1), 1.2),
+          createConnection(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 4.7, 2.55), 1.8),
+          createConnection(new THREE.Vector3(0, 1, 0), new THREE.Vector3(8.2, 1.45, -.8), 1.5),
+          createConnection(new THREE.Vector3(0, .9, 0), new THREE.Vector3(7.1, 1.6, -7.3), 1.45, electricGlow),
         ];
 
         const particleCount = mobile ? 125 : 300;
         const positions = new Float32Array(particleCount * 3);
         for (let i = 0; i < particleCount; i += 1) {
-          positions[i * 3] = (Math.random() - 0.5) * 48;
-          positions[i * 3 + 1] = Math.random() * 10 + 0.3;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 36;
+          positions[i * 3] = (Math.random() - .5) * 48; positions[i * 3 + 1] = Math.random() * 10 + .3; positions[i * 3 + 2] = (Math.random() - .5) * 36;
         }
         const particleGeometry = new THREE.BufferGeometry();
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particles = new THREE.Points(particleGeometry, new THREE.PointsMaterial({ color: 0x5fcde8, size: 0.024, transparent: true, opacity: 0.24, depthWrite: false }));
+        const particles = new THREE.Points(particleGeometry, new THREE.PointsMaterial({ color: 0x5fcde8, size: .024, transparent: true, opacity: .24, depthWrite: false }));
         world.add(particles);
 
-        // Camera now includes a dedicated exterior HVAC equipment pass before the electrical bay.
         const cameraPath = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(-14.5, 8.0, 19.0),
-          new THREE.Vector3(-8.8, 5.8, 10.8),
-          new THREE.Vector3(-6.4, 3.8, -2.0),
-          new THREE.Vector3(-4.5, 4.6, -7.8),
-          new THREE.Vector3(-5.0, 6.2, 4.8),
-          new THREE.Vector3(2.5, 6.5, 7.0),
-          new THREE.Vector3(10.6, 4.4, 3.2),
-          new THREE.Vector3(11.2, 3.3, -1.7),
-          new THREE.Vector3(11.0, 3.3, -8.7),
-          new THREE.Vector3(2.0, 6.6, -11.0),
+          new THREE.Vector3(-14.5, 8, 19), new THREE.Vector3(-8.8, 5.8, 10.8), new THREE.Vector3(-6.4, 3.8, -2),
+          new THREE.Vector3(-4.5, 4.6, -7.8), new THREE.Vector3(-5, 6.2, 4.8), new THREE.Vector3(2.5, 6.5, 7),
+          new THREE.Vector3(10.6, 4.4, 3.2), new THREE.Vector3(11.2, 3.3, -1.7), new THREE.Vector3(11, 3.3, -8.7), new THREE.Vector3(2, 6.6, -11),
         ]);
         const targetPath = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(0, 2.0, 0),
-          new THREE.Vector3(0, 2.7, 0),
-          new THREE.Vector3(-4.6, 2.3, -6.0),
-          new THREE.Vector3(-0.8, 1.4, -5.6),
-          new THREE.Vector3(-2.5, 4.7, 2.5),
-          new THREE.Vector3(1.8, 4.7, 1.8),
-          new THREE.Vector3(6.4, 1.3, -0.7),
-          new THREE.Vector3(8.2, 1.25, -0.8),
-          new THREE.Vector3(7.1, 1.55, -7.3),
-          new THREE.Vector3(0, 3.0, 0),
+          new THREE.Vector3(0, 2, 0), new THREE.Vector3(0, 2.7, 0), new THREE.Vector3(-4.6, 2.3, -6),
+          new THREE.Vector3(-.8, 1.4, -5.6), new THREE.Vector3(-2.5, 4.7, 2.5), new THREE.Vector3(1.8, 4.7, 1.8),
+          new THREE.Vector3(6.4, 1.3, -.7), new THREE.Vector3(8.2, 1.25, -.8), new THREE.Vector3(7.1, 1.55, -7.3), new THREE.Vector3(0, 3, 0),
         ]);
 
         const state = { progress: 0 };
         const chapters = Array.from(document.querySelectorAll('.chapter'));
-        ScrollTrigger.create({
-          trigger: '#story',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: reducedMotion ? false : 1.05,
-          onUpdate: (self) => {
-            state.progress = self.progress;
-            const active = Math.min(chapters.length - 1, Math.floor(self.progress * chapters.length));
-            chapters.forEach((chapter, index) => chapter.classList.toggle('active', index === active));
-          },
-        });
+        ScrollTrigger.create({ trigger: '#story', start: 'top top', end: 'bottom bottom', scrub: reducedMotion ? false : 1.05, onUpdate: (self) => {
+          state.progress = self.progress;
+          const active = Math.min(chapters.length - 1, Math.floor(self.progress * chapters.length));
+          chapters.forEach((chapter, index) => chapter.classList.toggle('active', index === active));
+        }});
 
         const clock = new THREE.Clock();
-        let frames = 0;
-        let fpsStart = performance.now();
-        let raf = 0;
-        let visible = true;
-
+        let frames = 0; let fpsStart = performance.now(); let raf = 0; let visible = true;
         function render(now = performance.now()) {
           const elapsed = clock.getElapsedTime();
-          const progress = reducedMotion ? 0.66 : THREE.MathUtils.clamp(state.progress, 0.001, 0.999);
-          camera.position.lerp(cameraPath.getPointAt(progress), reducedMotion ? 1 : 0.075);
+          const progress = reducedMotion ? .66 : THREE.MathUtils.clamp(state.progress, .001, .999);
+          camera.position.lerp(cameraPath.getPointAt(progress), reducedMotion ? 1 : .075);
           camera.lookAt(targetPath.getPointAt(progress));
-
-          core.rotation.y = elapsed * 0.05;
-          halo.rotation.z = elapsed * 0.16;
-          rings.forEach((ring, index) => {
-            ring.rotation.z = elapsed * (0.11 + index * 0.02) * (index % 2 ? -1 : 1);
-          });
-          particles.rotation.y = elapsed * 0.004;
-          modules.forEach((module, index) => {
-            module.position.y = Math.sin(elapsed * 0.5 + index) * 0.008;
-          });
-          unitLed.scale.setScalar(0.92 + Math.sin(elapsed * 2.2) * 0.08);
-          connections.forEach(({ curve, pulse, offset }, index) => {
-            pulse.position.copy(curve.getPointAt((elapsed * (0.11 + index * 0.014) + offset) % 1));
-          });
-
-          composer.render();
-          frames += 1;
+          core.rotation.y = elapsed * .05; halo.rotation.z = elapsed * .16;
+          rings.forEach((ring, index) => { ring.rotation.z = elapsed * (.11 + index * .02) * (index % 2 ? -1 : 1); });
+          particles.rotation.y = elapsed * .004;
+          modules.forEach((module, index) => { module.position.y = Math.sin(elapsed * .5 + index) * .008; });
+          unitLed.scale.setScalar(.92 + Math.sin(elapsed * 2.2) * .08);
+          connections.forEach(({ curve, pulse, offset }, index) => { pulse.position.copy(curve.getPointAt((elapsed * (.11 + index * .014) + offset) % 1)); });
+          composer.render(); frames += 1;
           if (now - fpsStart >= 1000) {
             if (fpsEl) fpsEl.textContent = String(Math.round((frames * 1000) / (now - fpsStart)));
             if (trisEl) trisEl.textContent = renderer.info.render.triangles.toLocaleString();
-            frames = 0;
-            fpsStart = now;
+            frames = 0; fpsStart = now;
           }
           if (visible) raf = requestAnimationFrame(render);
         }
-
         function resize() {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth <= 760 ? 1.0 : 1.35));
-          renderer.setSize(window.innerWidth, window.innerHeight);
-          composer.setSize(window.innerWidth, window.innerHeight);
+          camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth <= 760 ? 1 : 1.35));
+          renderer.setSize(window.innerWidth, window.innerHeight); composer.setSize(window.innerWidth, window.innerHeight);
         }
-
         window.addEventListener('resize', resize, { passive: true });
         document.addEventListener('visibilitychange', () => {
           visible = !document.hidden;
-          if (visible) {
-            cancelAnimationFrame(raf);
-            clock.getDelta();
-            fpsStart = performance.now();
-            frames = 0;
-            render();
-          }
+          if (visible) { cancelAnimationFrame(raf); clock.getDelta(); fpsStart = performance.now(); frames = 0; render(); }
         });
-
         render();
       }
     </script>

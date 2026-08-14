@@ -8,7 +8,7 @@ export function initLoaderV2() {
   if (!loader || !value || !bar || !light || !status || !detail) return;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const minimumDuration = reduced ? 260 : 1850;
+  const minimumDuration = reduced ? 260 : 2600;
   let started = false;
   let heroReady = document.documentElement.dataset.heroReady === 'true';
   let startedAt = 0;
@@ -51,7 +51,7 @@ export function initLoaderV2() {
       document.body.classList.remove('v2-is-loading');
       window.dispatchEvent(new CustomEvent('isivolt:experience-ready'));
       window.setTimeout(() => loader.remove(), reduced ? 80 : 720);
-    }, reduced ? 20 : 230);
+    }, reduced ? 20 : 260);
   };
 
   const tick = (now: number) => {
@@ -88,7 +88,7 @@ export function initLoaderV2() {
 
     window.setTimeout(() => {
       heroReady = true;
-    }, reduced ? 100 : 3200);
+    }, reduced ? 100 : 3800);
   };
 
   window.addEventListener('isivolt:start-loader', start, { once: true });

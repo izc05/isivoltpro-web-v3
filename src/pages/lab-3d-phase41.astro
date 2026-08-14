@@ -106,7 +106,7 @@ const base = import.meta.env.BASE_URL;
       let progress = 0;
       let raf = 0;
 
-      function prepareFrame(frame, kind) {
+      function prepareFrame(frame: Element | null, kind: 'plant' | 'core') {
         if (!(frame instanceof HTMLIFrameElement)) return;
         frame.addEventListener('load', () => {
           try {
@@ -133,13 +133,13 @@ const base = import.meta.env.BASE_URL;
       prepareFrame(plantFrame, 'plant');
       prepareFrame(coreFrame, 'core');
 
-      function clamp(value, min = 0, max = 1) { return Math.min(max, Math.max(min, value)); }
-      function smoothstep(edge0, edge1, value) {
+      function clamp(value: number, min = 0, max = 1) { return Math.min(max, Math.max(min, value)); }
+      function smoothstep(edge0: number, edge1: number, value: number) {
         const x = clamp((value - edge0) / (edge1 - edge0));
         return x * x * (3 - 2 * x);
       }
 
-      function scrollFrame(frame, frameProgress) {
+      function scrollFrame(frame: Element | null, frameProgress: number) {
         if (!(frame instanceof HTMLIFrameElement)) return;
         try {
           const win = frame.contentWindow;

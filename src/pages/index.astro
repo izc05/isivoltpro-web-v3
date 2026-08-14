@@ -1,28 +1,573 @@
 ---
-import Intro from '../components/home/Intro.astro';
-import LoaderV2 from '../components/home/LoaderV2.astro';
-import DigitalFacilityHero from '../components/home/DigitalFacilityHero.astro';
-import '../styles/global.css';
-import '../styles/home.css';
-import '../styles/home/loader-v2.css';
-import '../styles/home/loader-vanta.css';
-import '../styles/home/hero-v2.css';
+const base = import.meta.env.BASE_URL;
+const heroImage = `${base}images/home/isivoltpro-industrial-core.webp`;
 ---
+
 <!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="IsiVoltPro conecta activos, mantenimiento, órdenes de trabajo, recursos y trazabilidad en un único ecosistema técnico." />
-  <meta name="theme-color" content="#02060a" />
-  <title>IsiVoltPro · Gestión técnica conectada</title>
-</head>
-<body class="has-intro">
-  <LoaderV2 />
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-  <main id="contenido">
-    <DigitalFacilityHero />
-  </main>
-  <Intro />
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ISIVOLTPRO connects industrial operations through edge computing, digital twins and technical intelligence."
+    />
+    <meta name="theme-color" content="#03040c" />
+    <title>ISIVOLTPRO · Industrial Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" href={heroImage} as="image" type="image/webp" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <a class="brand" href={base} aria-label="ISIVOLTPRO home">
+        <span class="brand-mark" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+        <span>ISIVOLT<strong>PRO</strong></span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a href={`${base}ecosistema/`}>Technology</a>
+        <a href={`${base}aplicaciones/`}>Solutions</a>
+        <a href={`${base}mantenimiento/`}>Case Studies</a>
+        <a href={`${base}empresa/`}>About Us</a>
+        <a href={`${base}contacto/`}>Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">INDUSTRIAL DIGITAL TWIN</p>
+          <h1 id="hero-title">
+            The Intelligence<br />
+            that Powers<br />
+            Global Industry
+          </h1>
+          <p class="hero-text">
+            Optimizing efficiency, sustainability, and security with ISIVOLTPRO's edge
+            computing and digital twin solutions.
+          </p>
+          <a class="explore-button" href={`${base}aplicaciones/`}>
+            Explore Solutions <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="hero-visual">
+          <div class="image-frame">
+            <img
+              src={heroImage}
+              alt="ISIVOLTPRO industrial digital twin core in a connected plant"
+              width="600"
+              height="319"
+              decoding="async"
+              fetchpriority="high"
+            />
+
+            <div class="data-card efficiency" aria-hidden="true">
+              <span>Efficiency</span>
+              <strong>98.7%</strong>
+              <i class="gauge"></i>
+            </div>
+
+            <div class="data-card flow" aria-hidden="true">
+              <i class="status-dot"></i>
+              <span>Flow Optimization</span>
+              <strong>Active</strong>
+            </div>
+
+            <div class="data-card thermal" aria-hidden="true">
+              <span>Thermal Status</span>
+              <strong>Ideal</strong>
+              <i class="bars"><b></b><b></b><b></b><b></b></i>
+            </div>
+
+            <div class="data-card network" aria-hidden="true">
+              <span>Network Uptime</span>
+              <strong>99.99%</strong>
+              <i class="network-icon"></i>
+            </div>
+
+            <div class="core-label" aria-hidden="true">
+              <span>ISIVOLTPRO CORE</span>
+              <strong>ONLINE</strong>
+            </div>
+
+            <span class="satellite-label" aria-hidden="true">Satellite Node</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
+
+<style is:global>
+  :root {
+    --bg: #03040c;
+    --surface: rgba(5, 12, 24, 0.82);
+    --text: #ffffff;
+    --muted: #b8bec9;
+    --cyan: #00e0fe;
+    --cyan-soft: rgba(0, 224, 254, 0.28);
+    --frame: #1c2a3e;
+    --header-h: 80px;
+    font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    min-width: 320px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 0 clamp(24px, 5vw, 84px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: linear-gradient(180deg, rgba(3, 4, 12, 0.96), rgba(3, 4, 12, 0.76));
+    backdrop-filter: blur(14px);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .brand strong {
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    align-content: center;
+    gap: 4px;
+  }
+
+  .brand-mark i {
+    display: block;
+    height: 4px;
+    border-radius: 99px;
+    background: #fff;
+    transform: skewX(-24deg);
+  }
+
+  .brand-mark i:nth-child(2) {
+    width: 82%;
+  }
+
+  .brand-mark i:nth-child(3) {
+    width: 68%;
+    background: var(--cyan);
+  }
+
+  .topbar nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.3vw, 36px);
+  }
+
+  .topbar nav a {
+    position: relative;
+    padding: 31px 0 28px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 180ms ease;
+  }
+
+  .topbar nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 20px;
+    height: 1px;
+    background: var(--cyan);
+    transition: right 180ms ease;
+  }
+
+  .topbar nav a:hover,
+  .topbar nav a:focus-visible {
+    color: #fff;
+  }
+
+  .topbar nav a:hover::after,
+  .topbar nav a:focus-visible::after {
+    right: 0;
+  }
+
+  main {
+    min-height: 100svh;
+  }
+
+  .hero {
+    position: relative;
+    width: min(1600px, 100%);
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: calc(var(--header-h) + 38px) clamp(24px, 5vw, 84px) 54px;
+    display: grid;
+    grid-template-columns: minmax(320px, 0.8fr) minmax(560px, 1.25fr);
+    align-items: center;
+    gap: clamp(40px, 5vw, 88px);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 75% 46%, rgba(0, 224, 254, 0.08), transparent 28%),
+      linear-gradient(90deg, rgba(3, 4, 12, 0.2), transparent 34%, rgba(3, 4, 12, 0.18));
+  }
+
+  .hero-copy,
+  .hero-visual {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-copy {
+    max-width: 540px;
+  }
+
+  .eyebrow {
+    margin: 0 0 18px;
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(46px, 4.15vw, 72px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .hero-text {
+    max-width: 500px;
+    margin: 30px 0 38px;
+    color: var(--muted);
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.7;
+  }
+
+  .explore-button {
+    min-width: 196px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 15px 24px;
+    border: 1px solid var(--cyan);
+    border-radius: 3px;
+    background: rgba(9, 22, 39, 0.78);
+    box-shadow: inset 0 0 0 1px rgba(0, 224, 254, 0.06), 0 0 30px rgba(0, 224, 254, 0.05);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  }
+
+  .explore-button span {
+    color: var(--cyan);
+    font-size: 18px;
+  }
+
+  .explore-button:hover,
+  .explore-button:focus-visible {
+    transform: translateY(-2px);
+    background: rgba(10, 34, 53, 0.96);
+    box-shadow: 0 0 34px rgba(0, 224, 254, 0.13);
+  }
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-frame {
+    position: relative;
+    width: min(100%, 820px);
+    isolation: isolate;
+  }
+
+  .image-frame::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 8% 7%;
+    border-radius: 50%;
+    background: rgba(0, 224, 254, 0.11);
+    filter: blur(52px);
+  }
+
+  .image-frame > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    user-select: none;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
+  }
+
+  .data-card,
+  .core-label,
+  .satellite-label {
+    position: absolute;
+    z-index: 3;
+    border: 1px solid rgba(77, 113, 143, 0.55);
+    background: rgba(3, 8, 18, 0.76);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.48);
+  }
+
+  .data-card {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    color: var(--cyan);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .data-card strong {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .efficiency {
+    top: 13%;
+    left: -3%;
+  }
+
+  .flow {
+    top: 43%;
+    left: -7%;
+  }
+
+  .thermal {
+    top: 67%;
+    left: 1%;
+  }
+
+  .network {
+    top: 20%;
+    right: -5%;
+  }
+
+  .gauge {
+    width: 28px;
+    height: 28px;
+    margin-left: 3px;
+    border: 2px solid rgba(40, 79, 106, 0.9);
+    border-top-color: var(--cyan);
+    border-right-color: var(--cyan);
+    border-radius: 50%;
+    transform: rotate(18deg);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+  }
+
+  .bars {
+    height: 24px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    margin-left: 3px;
+  }
+
+  .bars b {
+    width: 4px;
+    background: #314b62;
+  }
+
+  .bars b:nth-child(1) { height: 40%; }
+  .bars b:nth-child(2) { height: 70%; background: var(--cyan); }
+  .bars b:nth-child(3) { height: 55%; }
+  .bars b:nth-child(4) { height: 92%; background: var(--cyan); }
+
+  .network-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border: 1px solid #31536d;
+    box-shadow: inset 0 0 0 5px rgba(0, 224, 254, 0.28);
+  }
+
+  .core-label {
+    right: 29%;
+    bottom: 11%;
+    padding: 8px 11px;
+    border-color: rgba(0, 224, 254, 0.6);
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .core-label strong {
+    margin-left: 8px;
+    color: var(--cyan);
+  }
+
+  .satellite-label {
+    top: 8%;
+    right: 13%;
+    padding: 6px 8px;
+    border-color: transparent;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1120px) {
+    .hero {
+      grid-template-columns: minmax(280px, 0.75fr) minmax(500px, 1.25fr);
+      gap: 36px;
+    }
+
+    .data-card {
+      transform: scale(0.9);
+      transform-origin: center;
+    }
+  }
+
+  @media (max-width: 900px) {
+    :root {
+      --header-h: 70px;
+    }
+
+    .topbar {
+      padding-inline: 22px;
+    }
+
+    .topbar nav {
+      display: none;
+    }
+
+    .hero {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: calc(var(--header-h) + 54px) 22px 56px;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 10vw, 68px);
+    }
+
+    .image-frame {
+      width: min(100%, 760px);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .brand {
+      font-size: 17px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+    }
+
+    .eyebrow {
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 11.5vw, 54px);
+    }
+
+    .hero-text {
+      margin-top: 24px;
+      margin-bottom: 30px;
+    }
+
+    .explore-button {
+      width: 100%;
+    }
+
+    .data-card,
+    .core-label,
+    .satellite-label {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

@@ -1,0 +1,337 @@
+---
+const base = import.meta.env.BASE_URL;
+const heroImage = `${base}images/home/isivoltpro-industrial-core.webp`;
+const entryUrl = `${base}lab-3d-entry-v1/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <meta name="description" content="IsiVoltPro conecta la instalación física con activos, mantenimiento, órdenes de trabajo, documentación e inteligencia técnica." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href={heroImage} as="image" type="image/webp" />
+    <title>IsiVoltPro · Phase 6.1 Commercial Home</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href={base} aria-label="IsiVoltPro inicio">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>ISIVOLT<strong>PRO</strong></span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación de la Home comercial">
+        <a href="#que-es">Qué es</a>
+        <a href="#ecosistema">Ecosistema</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href={`${base}aplicaciones/`}>Aplicaciones</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="link" href={`${base}acceso/`}>Acceder</a>
+        <a class="button button--small" href={`${base}contacto/`}>Solicitar demo <span>→</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="que-es" aria-labelledby="hero-title">
+        <img class="hero__background" src={heroImage} alt="Instalación técnica gestionada con IsiVoltPro" width="1000" height="531" fetchpriority="high" decoding="async" />
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__grid" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__scan" aria-hidden="true"></div>
+
+        <div class="hero__content">
+          <div class="hero__copy">
+            <p class="eyebrow"><i></i> PLATAFORMA DE OPERACIÓN TÉCNICA</p>
+            <h1 id="hero-title">TODA TU<br />INSTALACIÓN.<br /><em>UN SOLO SISTEMA.</em></h1>
+            <p class="lead">
+              IsiVoltPro conecta activos, mantenimiento, órdenes de trabajo, documentación e histórico técnico sobre el contexto real de tu instalación.
+            </p>
+
+            <div class="hero__actions">
+              <a class="button button--primary" href={entryUrl}>Explorar IsiVoltPro <span>→</span></a>
+              <a class="text-link" href="#como-funciona">Ver cómo funciona <span>↓</span></a>
+            </div>
+
+            <div class="trust" aria-label="Capacidades principales">
+              <span>ACTIVOS</span><i></i><span>MANTENIMIENTO</span><i></i><span>OT</span><i></i><span>DOCUMENTACIÓN</span><i></i><span>IA</span>
+            </div>
+          </div>
+
+          <aside class="system-map" id="ecosistema" aria-label="Mapa conceptual del ecosistema IsiVoltPro">
+            <div class="map-head">
+              <span>ECOSISTEMA ISIVOLTPRO</span>
+              <strong>CONNECTED</strong>
+            </div>
+
+            <div class="map-layer map-layer--physical">
+              <span class="map-index">01</span>
+              <div>
+                <small>PHYSICAL</small>
+                <strong>INSTALACIÓN</strong>
+                <p>Electricidad · HVAC · Agua · Equipos</p>
+              </div>
+              <b>LIVE</b>
+            </div>
+
+            <div class="map-link" aria-hidden="true"><i></i><i></i><i></i></div>
+
+            <div class="map-layer map-layer--digital">
+              <span class="map-index">02</span>
+              <div>
+                <small>DIGITAL</small>
+                <strong>OPERACIÓN</strong>
+                <p>Activos · Mantenimiento · OT · Histórico</p>
+              </div>
+              <b>SYNC</b>
+            </div>
+
+            <div class="map-link" aria-hidden="true"><i></i><i></i><i></i></div>
+
+            <div class="map-layer map-layer--intelligence">
+              <span class="map-index">03</span>
+              <div>
+                <small>INTELLIGENCE</small>
+                <strong>CONTEXTO TÉCNICO</strong>
+                <p>Documentación · Datos · IsiVoltPro AI</p>
+              </div>
+              <b>READY</b>
+            </div>
+
+            <a class="map-entry" href={entryUrl}>
+              <span><small>EXPERIENCIA 3D</small><strong>ENTRAR EN LA INSTALACIÓN</strong></span>
+              <b>↗</b>
+            </a>
+          </aside>
+        </div>
+
+        <div class="hero__foot" aria-hidden="true">
+          <span>01 / HOME</span>
+          <i></i>
+          <span>PHYSICAL → DIGITAL → INTELLIGENCE</span>
+        </div>
+      </section>
+
+      <section class="story" id="como-funciona">
+        <div class="story__intro">
+          <p class="eyebrow"><i></i> DE LA INSTALACIÓN AL DATO ÚTIL</p>
+          <h2>EL SOFTWARE EMPIEZA<br />EN EL EQUIPO REAL.</h2>
+          <p>
+            IsiVoltPro no parte de una tabla vacía. Parte de la instalación, identifica sus activos y conecta cada actuación con el equipo, la ubicación y su histórico.
+          </p>
+        </div>
+
+        <div class="pillars">
+          <article>
+            <span>01</span>
+            <small>PHYSICAL</small>
+            <h3>CONOCE QUÉ TIENES</h3>
+            <p>Activos identificados por sistema, ubicación, estado y documentación técnica.</p>
+            <b>INSTALACIÓN → ACTIVO</b>
+          </article>
+          <article>
+            <span>02</span>
+            <small>DIGITAL</small>
+            <h3>CONVIERTE ESTADO EN TRABAJO</h3>
+            <p>Incidencias, mantenimiento y órdenes de trabajo ligadas al activo que realmente las origina.</p>
+            <b>ACTIVO → OT → TÉCNICO</b>
+          </article>
+          <article>
+            <span>03</span>
+            <small>INTELLIGENCE</small>
+            <h3>CONSERVA EL CONTEXTO</h3>
+            <p>Histórico, documentación y datos técnicos disponibles para decidir con más información.</p>
+            <b>TRABAJO → HISTÓRICO → CONTEXTO</b>
+          </article>
+        </div>
+      </section>
+
+      <section class="bridge">
+        <div>
+          <p class="eyebrow"><i></i> ECOSYSTEM BASE V1</p>
+          <h2>NO TE LO CONTAMOS.<br /><em>RECÓRRELO.</em></h2>
+        </div>
+        <a class="button button--primary button--large" href={entryUrl}>Entrar en IsiVoltPro <span>→</span></a>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --blue: #087dff;
+    --cyan: #1bcfff;
+    --ink: #02060b;
+    --panel: rgba(4, 13, 20, .72);
+    --line: rgba(132, 192, 220, .14);
+    --white: #f6fbff;
+    --muted: #8ba0aa;
+    color-scheme: dark;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    background: var(--ink);
+    color: var(--white);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; min-width: 320px; min-height: 100%; background: var(--ink); }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  .topbar {
+    position: fixed;
+    z-index: 50;
+    inset: 0 0 auto;
+    height: 82px;
+    display: grid;
+    grid-template-columns: 240px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 0 clamp(22px, 4vw, 72px);
+    border-bottom: 1px solid rgba(127, 187, 214, .08);
+    background: linear-gradient(180deg, rgba(1, 5, 10, .92), rgba(1, 5, 10, .62));
+    backdrop-filter: blur(14px);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 13px; width: max-content; font-size: 16px; font-weight: 800; letter-spacing: .16em; }
+  .brand strong { color: var(--cyan); }
+  .brand__mark { width: 25px; display: grid; gap: 3px; transform: skewY(-26deg); }
+  .brand__mark i { height: 5px; border-radius: 1px; background: linear-gradient(90deg, var(--blue), var(--cyan)); box-shadow: 0 0 12px rgba(15, 193, 255, .18); }
+  .nav { display: flex; justify-content: center; gap: clamp(18px, 2vw, 34px); }
+  .nav a, .link { color: #8599a4; font-size: 11px; font-weight: 600; letter-spacing: .05em; transition: color .2s ease; }
+  .nav a:hover, .link:hover { color: #fff; }
+  .topbar__actions { display: flex; align-items: center; gap: 22px; }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    min-height: 50px;
+    padding: 0 24px;
+    border: 1px solid rgba(58, 202, 255, .28);
+    background: rgba(4, 18, 28, .62);
+    color: #eafaff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .button:hover { transform: translateY(-2px); border-color: rgba(67, 215, 255, .68); }
+  .button--primary { background: linear-gradient(135deg, rgba(6, 105, 224, .92), rgba(7, 164, 225, .78)); border-color: rgba(78, 209, 255, .54); box-shadow: 0 10px 36px rgba(0, 111, 255, .18); }
+  .button--small { min-height: 40px; padding: 0 18px; font-size: 8px; }
+  .button--large { min-width: 250px; min-height: 58px; }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 118px clamp(26px, 6vw, 108px) 70px;
+  }
+  .hero__background { position: absolute; inset: 0; z-index: -8; width: 100%; height: 100%; object-fit: cover; object-position: 51% 50%; filter: saturate(.82) contrast(1.08) brightness(.52); transform: scale(1.025); }
+  .hero__shade { position: absolute; inset: 0; z-index: -7; background: linear-gradient(90deg, rgba(1,5,10,.95) 0%, rgba(1,5,10,.82) 31%, rgba(1,5,10,.34) 54%, rgba(1,5,10,.68) 100%), linear-gradient(180deg, rgba(1,5,10,.5), transparent 34%, rgba(1,5,10,.62)); }
+  .hero__grid { position: absolute; inset: 0; z-index: -5; opacity: .18; background-image: linear-gradient(rgba(73,163,201,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(73,163,201,.07) 1px, transparent 1px); background-size: 84px 84px; mask-image: linear-gradient(90deg, black, transparent 63%); }
+  .hero__glow { position: absolute; z-index: -4; left: 45%; top: 29%; width: 28vw; height: 44vh; border-radius: 50%; background: radial-gradient(circle, rgba(0,169,255,.17), rgba(0,86,255,.045) 47%, transparent 72%); filter: blur(24px); animation: breathe 4.8s ease-in-out infinite; }
+  .hero__scan { position: absolute; z-index: -3; left: 53%; top: 16%; width: 1px; height: 68%; background: linear-gradient(transparent, rgba(30,208,255,.44), transparent); box-shadow: 0 0 18px rgba(30,208,255,.22); opacity: .5; }
+  .hero__content { width: min(1460px, 100%); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(410px, .72fr); align-items: center; gap: clamp(52px, 8vw, 140px); }
+  .hero__copy { max-width: 760px; }
+  .eyebrow { display: flex; align-items: center; gap: 11px; margin: 0 0 20px; color: #75909d; font-size: 9px; font-weight: 800; letter-spacing: .21em; }
+  .eyebrow i { width: 40px; height: 1px; background: linear-gradient(90deg, var(--cyan), transparent); box-shadow: 0 0 9px rgba(28, 207, 255, .55); }
+  h1, h2, h3 { font-family: 'Barlow Condensed', Inter, sans-serif; }
+  h1 { margin: 0; font-size: clamp(66px, 7.3vw, 126px); line-height: .82; font-weight: 700; letter-spacing: -.045em; }
+  h1 em { color: transparent; font-style: normal; -webkit-text-stroke: 1px rgba(133, 221, 255, .72); text-shadow: 0 0 34px rgba(0, 145, 255, .12); }
+  .lead { max-width: 620px; margin: 28px 0 0; color: #a6b7bf; font-size: clamp(14px, 1.12vw, 17px); line-height: 1.75; }
+  .hero__actions { display: flex; align-items: center; gap: 30px; margin-top: 34px; }
+  .text-link { color: #8fa7b3; font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+  .text-link span { margin-left: 12px; color: var(--cyan); }
+  .trust { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 46px; color: #607985; font-size: 7px; font-weight: 850; letter-spacing: .16em; }
+  .trust i { width: 3px; height: 3px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 7px rgba(27,207,255,.7); }
+
+  .system-map { position: relative; align-self: center; padding: 22px; border: 1px solid rgba(94, 178, 216, .14); background: rgba(2, 10, 16, .60); box-shadow: 0 30px 90px rgba(0,0,0,.30); backdrop-filter: blur(18px); }
+  .system-map::before { content: ''; position: absolute; left: -1px; top: 22%; width: 1px; height: 32%; background: linear-gradient(transparent, var(--cyan), transparent); box-shadow: 0 0 12px rgba(27,207,255,.5); }
+  .map-head { display: flex; justify-content: space-between; gap: 20px; padding: 3px 2px 17px; color: #607987; font-size: 7px; font-weight: 850; letter-spacing: .17em; }
+  .map-head strong { color: #74dfff; }
+  .map-layer { display: grid; grid-template-columns: 38px 1fr auto; align-items: center; gap: 15px; min-height: 98px; padding: 16px; border: 1px solid rgba(121, 184, 210, .10); background: rgba(7, 19, 27, .60); }
+  .map-layer--digital { background: linear-gradient(90deg, rgba(4,38,58,.72), rgba(7,19,27,.62)); border-color: rgba(49,190,241,.22); }
+  .map-layer--intelligence { background: linear-gradient(90deg, rgba(5,27,47,.76), rgba(7,19,27,.62)); border-color: rgba(30,132,255,.22); }
+  .map-index { color: #526c79; font-size: 9px; font-weight: 800; }
+  .map-layer small { color: #66828f; font-size: 7px; font-weight: 850; letter-spacing: .19em; }
+  .map-layer strong { display: block; margin-top: 3px; font-family: 'Barlow Condensed', sans-serif; font-size: 25px; font-weight: 700; letter-spacing: .03em; }
+  .map-layer p { margin: 5px 0 0; color: #78909b; font-size: 9px; }
+  .map-layer > b { color: #49cfff; font-size: 7px; letter-spacing: .15em; }
+  .map-link { height: 32px; display: grid; place-items: center; position: relative; }
+  .map-link::before { content: ''; width: 1px; height: 100%; background: linear-gradient(rgba(27,207,255,.12), rgba(27,207,255,.55), rgba(27,207,255,.12)); }
+  .map-link i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #1bd0ff; box-shadow: 0 0 10px #1bd0ff; animation: dataPulse 2.4s linear infinite; }
+  .map-link i:nth-child(2) { animation-delay: -.8s; }
+  .map-link i:nth-child(3) { animation-delay: -1.6s; }
+  .map-entry { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 17px; padding: 18px 16px; border: 1px solid rgba(39,195,255,.22); background: linear-gradient(90deg, rgba(0,105,220,.16), rgba(0,208,255,.06)); }
+  .map-entry small { display: block; color: #62808f; font-size: 7px; font-weight: 800; letter-spacing: .17em; }
+  .map-entry strong { display: block; margin-top: 4px; font-size: 10px; letter-spacing: .10em; }
+  .map-entry > b { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(51,205,255,.3); color: var(--cyan); }
+  .hero__foot { position: absolute; left: clamp(26px, 6vw, 108px); right: clamp(26px, 6vw, 108px); bottom: 28px; display: flex; align-items: center; gap: 14px; color: #526b77; font-size: 7px; font-weight: 800; letter-spacing: .16em; }
+  .hero__foot i { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(75,137,162,.12), rgba(27,207,255,.35), rgba(75,137,162,.08)); }
+
+  .story { padding: 120px clamp(26px, 6vw, 108px) 135px; background: radial-gradient(circle at 50% 0%, rgba(0,121,190,.08), transparent 34%), #03080d; border-top: 1px solid rgba(105,169,197,.09); }
+  .story__intro { width: min(1180px, 100%); margin: 0 auto 70px; display: grid; grid-template-columns: 1.25fr .75fr; column-gap: 80px; align-items: end; }
+  .story__intro .eyebrow { grid-column: 1 / -1; }
+  .story h2, .bridge h2 { margin: 0; font-size: clamp(56px, 5.6vw, 94px); line-height: .88; font-weight: 650; letter-spacing: -.04em; }
+  .story__intro > p:last-child { margin: 0; color: #8198a3; font-size: 14px; line-height: 1.8; }
+  .pillars { width: min(1380px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .pillars article { min-height: 330px; padding: 30px clamp(24px, 3vw, 48px) 35px; border-right: 1px solid var(--line); background: linear-gradient(180deg, rgba(6,19,27,.36), transparent); }
+  .pillars article:last-child { border-right: 0; }
+  .pillars article > span { color: #4e6875; font-size: 9px; }
+  .pillars small { display: block; margin-top: 54px; color: #4cbfe9; font-size: 7px; font-weight: 850; letter-spacing: .2em; }
+  .pillars h3 { margin: 8px 0 13px; font-size: 31px; line-height: .95; letter-spacing: -.02em; }
+  .pillars p { margin: 0; color: #7f96a0; font-size: 12px; line-height: 1.75; }
+  .pillars b { display: block; margin-top: 36px; color: #5a7481; font-size: 7px; letter-spacing: .14em; }
+
+  .bridge { min-height: 62vh; padding: 100px clamp(26px, 8vw, 144px); display: flex; align-items: center; justify-content: space-between; gap: 60px; background: radial-gradient(circle at 75% 50%, rgba(0,137,255,.12), transparent 28%), linear-gradient(120deg, #02070c, #04111a); border-top: 1px solid rgba(97,170,201,.10); }
+  .bridge h2 em { color: transparent; font-style: normal; -webkit-text-stroke: 1px rgba(94,209,255,.64); }
+
+  @keyframes breathe { 0%,100% { opacity: .62; transform: scale(.98); } 50% { opacity: 1; transform: scale(1.04); } }
+  @keyframes dataPulse { 0% { transform: translateY(-13px); opacity: 0; } 20%,75% { opacity: 1; } 100% { transform: translateY(13px); opacity: 0; } }
+
+  @media (max-width: 1050px) {
+    .topbar { grid-template-columns: 1fr auto; }
+    .nav { display: none; }
+    .hero__content { grid-template-columns: 1fr; gap: 48px; padding-top: 30px; }
+    .system-map { width: min(620px, 100%); }
+    .story__intro { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 720px) {
+    .topbar { height: 68px; padding: 0 18px; }
+    .brand { font-size: 13px; letter-spacing: .12em; }
+    .brand__mark { width: 21px; }
+    .topbar__actions .link { display: none; }
+    .button--small { padding: 0 13px; }
+    .hero { padding: 100px 20px 62px; align-items: start; }
+    .hero__background { object-position: 57% 50%; filter: saturate(.75) contrast(1.06) brightness(.40); }
+    .hero__shade { background: linear-gradient(180deg, rgba(1,5,10,.70), rgba(1,5,10,.82) 43%, rgba(1,5,10,.96) 80%); }
+    h1 { font-size: clamp(58px, 17vw, 82px); }
+    .lead { font-size: 13px; }
+    .hero__actions { align-items: flex-start; flex-direction: column; gap: 20px; }
+    .trust { gap: 8px; }
+    .system-map { padding: 13px; }
+    .map-layer { grid-template-columns: 28px 1fr; }
+    .map-layer > b { display: none; }
+    .hero__foot { display: none; }
+    .story { padding: 88px 20px 90px; }
+    .story h2, .bridge h2 { font-size: clamp(50px, 14vw, 72px); }
+    .pillars { grid-template-columns: 1fr; }
+    .pillars article { min-height: 260px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .pillars article:last-child { border-bottom: 0; }
+    .pillars small { margin-top: 32px; }
+    .bridge { min-height: 70vh; padding: 80px 20px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>

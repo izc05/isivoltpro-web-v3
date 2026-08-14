@@ -52,109 +52,95 @@ Jerarquía visual:
 
 ## 6.1 — Base comercial — COMPLETADO
 
-Ruta de revisión: `/lab-3d-phase61/`
-Blob validado: `77b1167c8ba1dac06ab454fe45fd2c08bb99d493`
+Ruta: `/lab-3d-phase61/`
+Blob: `77b1167c8ba1dac06ab454fe45fd2c08bb99d493`
+
+## 6.2 — Qué es el Ecosistema IsiVoltPro — COMPLETADO / APROBADO
+
+Ruta: `/lab-3d-phase62/`
+Blob: `a821011afefe189554aaafc5a6c67a6fff83f2cf`
+
+Resultado: narrativa completamente en español, definición del ecosistema, activo como centro del contexto y cadena `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`.
+
+## 6.3 — Qué ofrecemos — COMPLETADO / APROBADO
+
+Ruta: `/lab-3d-phase63/`
+Blob: `5f6acf793dab80eca1d9f3068e6b9e4f02836769`
+
+Resultado: Gestión de activos, Mantenimiento, Órdenes de trabajo, Documentación técnica, Histórico técnico e IsiVoltPro AI conectados alrededor del activo.
+
+## 6.4 — Cómo funciona — COMPLETADO / APROBADO PARA CONTINUAR
+
+Ruta: `/lab-3d-phase64/`
+Blob: `f041443f095d7646f049b6ddfe3e06c878d97290`
 
 Resultado:
 
-- hero comercial independiente de la Home pública;
-- posicionamiento inicial como plataforma de operación técnica;
-- titular `TODA TU INSTALACIÓN. UN SOLO SISTEMA.`;
-- puente hacia `ENTRY V1`;
-- primer mapa de capas físico/digital/inteligencia;
-- primera narrativa activo → OT → histórico;
+- ejemplo conceptual `UTA-02`;
+- flujo `ACTIVO → INCIDENCIA → OT → TÉCNICO → ACTUACIÓN → CIERRE → HISTÓRICO`;
+- el cierre de una OT alimenta el conocimiento del activo;
 - sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
 
-## 6.2 — Qué es el Ecosistema IsiVoltPro — COMPLETADO / APROBADO PARA CONTINUAR
+## 6.5 — Interfaz de producto V1 — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
 
-Ruta de revisión: `/lab-3d-phase62/`
-Blob validado: `a821011afefe189554aaafc5a6c67a6fff83f2cf`
-
-Resultado:
-
-- toda la narrativa visible pasa a español;
-- hero redefinido como `ECOSISTEMA DE OPERACIÓN TÉCNICA`;
-- explicación de qué es, en qué se basa y para qué sirve IsiVoltPro;
-- principio central: `EL ACTIVO COMO CENTRO DEL CONTEXTO`;
-- cadena visual:
-  `INSTALACIÓN → ACTIVOS → TRABAJO TÉCNICO → DOCUMENTACIÓN → HISTÓRICO → INTELIGENCIA`;
-- bloque `Qué conecta`: Electricidad, Climatización/HVAC, Agua e instalaciones y Activos/equipos;
-- capa común de operación:
-  `ACTIVOS · MANTENIMIENTO · OT · DOCUMENTACIÓN · HISTÓRICO · IA`;
-- sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
-
-## 6.3 — Qué ofrecemos — COMPLETADO / APROBADO PARA CONTINUAR
-
-Ruta de revisión: `/lab-3d-phase63/`
-Blob validado: `5f6acf793dab80eca1d9f3068e6b9e4f02836769`
-
-Resultado:
-
-- conserva íntegramente la narrativa visual de 6.2;
-- añade el bloque `QUÉ OFRECEMOS`;
-- presenta seis capacidades conectadas:
-  1. Gestión de activos;
-  2. Mantenimiento;
-  3. Órdenes de trabajo;
-  4. Documentación técnica;
-  5. Histórico técnico;
-  6. IsiVoltPro AI;
-- cada capacidad explica qué organiza, qué información conecta y qué parte del flujo técnico representa;
-- lógica común final:
-  `ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO → CONTEXTO`;
-- IsiVoltPro AI se presenta como capa futura de asistencia basada en contexto técnico conectado, sin afirmar que esté ya desplegada en producción;
-- sin modificar Home, ENTRY V1 ni ECOSYSTEM BASE V1.
-
-## 6.4 — Cómo funciona — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
-
-Ruta de revisión: `/lab-3d-phase64/`
-Blob validado: `f041443f095d7646f049b6ddfe3e06c878d97290`
+Ruta: `/lab-3d-phase65/`
+Blob validado: `b1207f334681c34bab226a805ace759f16276074`
 
 ### Objetivo
 
-Explicar un caso operativo completo de forma visual y creíble antes de mostrar una interfaz detallada.
+Aumentar de forma visible el detalle y la sensación de producto real sin presentar todavía la aplicación PocketBase como terminada.
 
 ### Implementado
 
-- conserva íntegramente 6.3;
-- añade el bloque `CÓMO FUNCIONA ISIVOLTPRO` antes del puente 3D;
-- utiliza un ejemplo conceptual de climatización sobre `UTA-02` para dar contexto técnico sin inventar un cliente real;
-- flujo mostrado:
-  `ACTIVO → INCIDENCIA → OT → TÉCNICO → ACTUACIÓN → CIERRE → HISTÓRICO`;
-- cada paso explica qué información se conserva y por qué no debe quedar aislada;
-- el mensaje de cierre fija que el trabajo no termina en cerrar una OT: pasa a formar parte del conocimiento del activo;
-- responsive incluido;
+- conserva íntegramente 6.4;
+- añade un `shell` completo de plataforma IsiVoltPro;
+- navegación lateral conceptual:
+  - Resumen;
+  - Instalaciones;
+  - Activos;
+  - Mantenimiento;
+  - Órdenes de trabajo;
+  - Documentación;
+  - Histórico;
+  - IsiVoltPro AI;
+- indicadores de instalación: activos, OTs abiertas, preventivos y documentos;
+- activo seleccionado `UTA-02` con:
+  - código;
+  - ubicación;
+  - sistema;
+  - fabricante;
+  - criticidad;
+  - última y próxima revisión;
+- OT `OT-2026-0148` con prioridad, técnico, origen, apertura, progreso y cronología;
+- documentación vinculada al activo;
+- histórico técnico con últimas actuaciones y estados;
+- franja de contexto que resume OT, documentos, actuaciones y próxima revisión alrededor del mismo activo;
+- mensaje explícito de que es una vista comercial/conceptual de dirección de producto, no la aplicación PocketBase definitiva;
+- responsive móvil;
 - sin modificar `index.astro`;
 - sin modificar ENTRY V1;
 - sin modificar ECOSYSTEM BASE V1;
-- sin añadir todavía la interfaz comercial densa de 6.5 ni fotografía nueva de 6.6.
+- sin añadir todavía fotografía industrial ni cambios 3D.
 
 ### Criterio de revisión
 
-6.4 debe permitir entender rápidamente:
+6.5 debe transmitir:
 
-- dónde nace una actuación;
-- cómo se transforma una incidencia en trabajo trazable;
-- cómo interviene el técnico;
-- qué información queda tras el cierre;
-- por qué el histórico pertenece al activo y no a una OT aislada.
+- que IsiVoltPro ya parece una plataforma de operación técnica y no solo una página explicativa;
+- que activo, OT, técnico, documentos e histórico pertenecen al mismo contexto;
+- que hay suficiente información para resultar creíble sin saturar la interfaz;
+- que la estética sigue siendo técnica, sobria y premium.
 
-## Feedback visual reservado para siguientes fases
+## 6.6 — Contexto industrial / fotografía — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.5
 
-Se mantiene fijado:
+Objetivo: salir visualmente de la interfaz e introducir fotografía industrial realista para reforzar la relación entre software e instalación física.
 
-- la interfaz comercial necesita progresivamente más detalle y sensación de producto real;
-- se incorporarán estados, OTs, activos, histórico, documentación y otros elementos funcionales en FASE 6.5;
-- se incorporarán fotografías/fondos industriales fuera de las interfaces en FASE 6.6;
-- más detalle no debe significar más ruido: la interfaz debe seguir siendo técnica, clara y premium.
+Criterios reservados:
 
-## 6.5 — Interfaz de producto V1 — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.4
-
-Objetivo: aumentar el detalle visual y la sensación de producto real mediante activos, estados, OTs, prioridades, histórico, documentación y paneles operativos.
-
-## 6.6 — Contexto industrial / fotografía
-
-Objetivo: introducir fotografía técnica e industrial fuera de la interfaz para reforzar la relación constante entre software e instalación física.
+- cuadros eléctricos, climatización, bombas, tuberías, salas técnicas y mantenimiento;
+- fotografía integrada como respiración visual, no como stock genérico;
+- mantener paleta oscura, azul técnico y luz industrial cálida;
+- `interfaz → instalación real → interfaz/ecosistema`.
 
 ## 6.7 — Ecosistema visual completo
 

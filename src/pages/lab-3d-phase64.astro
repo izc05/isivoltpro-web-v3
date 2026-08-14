@@ -1,0 +1,208 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase63Url = `${base}lab-3d-phase63/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.4 · Cómo funciona</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.4</strong>
+      <span>ECOSISTEMA · CÓMO FUNCIONA</span>
+      <noscript><a href={phase63Url}>Abrir Fase 6.3</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase63Url }}>
+      const flowMarkup = `
+        <section class="operation-flow" id="flujo-operativo" aria-labelledby="flow-title">
+          <div class="operation-flow__head">
+            <div>
+              <p class="eyebrow"><i></i> CÓMO FUNCIONA ISIVOLTPRO</p>
+              <h2 id="flow-title">DEL PROBLEMA REAL<br /><em>AL HISTÓRICO DEL ACTIVO.</em></h2>
+            </div>
+            <div class="operation-flow__copy">
+              <p class="operation-flow__lead">Una incidencia no debería terminar en un mensaje perdido o en una OT aislada.</p>
+              <p>IsiVoltPro mantiene la relación entre el equipo que origina el problema, el trabajo que se realiza y la información que queda disponible para la siguiente intervención.</p>
+            </div>
+          </div>
+
+          <div class="flow-case" aria-label="Ejemplo de flujo operativo IsiVoltPro">
+            <div class="flow-case__meta">
+              <span>EJEMPLO OPERATIVO</span>
+              <strong>CLIMATIZACIÓN · UTA-02 · PLANTA TÉCNICA</strong>
+              <p>Ejemplo conceptual para mostrar cómo una necesidad técnica recorre el ecosistema sin perder su contexto.</p>
+            </div>
+
+            <div class="flow-timeline">
+              <article>
+                <span class="flow-step">01</span>
+                <i class="flow-node"></i>
+                <small>ORIGEN</small>
+                <h3>ACTIVO</h3>
+                <p>El equipo ya está identificado con su sistema, ubicación y documentación asociada.</p>
+                <b>UTA-02</b>
+              </article>
+
+              <article>
+                <span class="flow-step">02</span>
+                <i class="flow-node"></i>
+                <small>NECESIDAD</small>
+                <h3>INCIDENCIA</h3>
+                <p>Se registra el problema sobre el activo correcto, con descripción, ubicación y prioridad.</p>
+                <b>FALLO DE TEMPERATURA</b>
+              </article>
+
+              <article>
+                <span class="flow-step">03</span>
+                <i class="flow-node"></i>
+                <small>ORGANIZACIÓN</small>
+                <h3>ORDEN DE TRABAJO</h3>
+                <p>La necesidad se convierte en trabajo trazable y queda ligada al mismo equipo.</p>
+                <b>OT-2026-0148</b>
+              </article>
+
+              <article>
+                <span class="flow-step">04</span>
+                <i class="flow-node"></i>
+                <small>EJECUCIÓN</small>
+                <h3>TÉCNICO</h3>
+                <p>La OT se asigna con la información necesaria para localizar, entender y atender el equipo.</p>
+                <b>ASIGNADA</b>
+              </article>
+
+              <article>
+                <span class="flow-step">05</span>
+                <i class="flow-node"></i>
+                <small>INTERVENCIÓN</small>
+                <h3>ACTUACIÓN</h3>
+                <p>Se registran diagnóstico, trabajo realizado, materiales, observaciones y evidencias.</p>
+                <b>TRABAJO TÉCNICO</b>
+              </article>
+
+              <article>
+                <span class="flow-step">06</span>
+                <i class="flow-node"></i>
+                <small>RESULTADO</small>
+                <h3>CIERRE</h3>
+                <p>La actuación queda cerrada con su resultado y deja de ser una tarea suelta.</p>
+                <b>RESUELTA</b>
+              </article>
+
+              <article>
+                <span class="flow-step">07</span>
+                <i class="flow-node"></i>
+                <small>MEMORIA TÉCNICA</small>
+                <h3>HISTÓRICO</h3>
+                <p>La próxima persona que consulte el activo puede saber qué ocurrió y cómo se resolvió.</p>
+                <b>CONTEXTO CONSERVADO</b>
+              </article>
+            </div>
+          </div>
+
+          <div class="flow-result">
+            <div>
+              <span>EL RESULTADO</span>
+              <strong>EL TRABAJO NO TERMINA EN EL CIERRE DE LA OT.</strong>
+            </div>
+            <p>Termina incorporándose al conocimiento del activo: qué pasó, quién intervino, qué se hizo y qué documentación quedó asociada.</p>
+            <b>ACTIVO → INCIDENCIA → OT → TÉCNICO → ACTUACIÓN → CIERRE → HISTÓRICO</b>
+          </div>
+        </section>`;
+
+      const flowStyles = `
+        .operation-flow{padding:125px clamp(26px,6vw,108px) 140px;background:radial-gradient(circle at 18% 18%,rgba(0,121,202,.09),transparent 29%),linear-gradient(180deg,#03080d,#04111a);border-top:1px solid rgba(105,169,197,.09)}
+        .operation-flow__head,.flow-case,.flow-result{width:min(1380px,100%);margin-left:auto;margin-right:auto}
+        .operation-flow__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:72px}
+        .operation-flow__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.8vw,98px);line-height:.87;font-weight:650;letter-spacing:-.04em}
+        .operation-flow__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.72);text-shadow:0 0 34px rgba(0,145,255,.12)}
+        .operation-flow__copy{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}
+        .operation-flow__copy p{margin:0 0 14px;color:#8198a3;font-size:13px;line-height:1.8}
+        .operation-flow__copy .operation-flow__lead{color:#d2e4eb;font-size:16px;line-height:1.65}
+        .flow-case{border:1px solid rgba(105,177,207,.14);background:rgba(3,11,17,.42)}
+        .flow-case__meta{display:grid;grid-template-columns:.42fr 1fr .9fr;gap:28px;align-items:center;padding:22px 26px;border-bottom:1px solid rgba(105,177,207,.12);background:linear-gradient(90deg,rgba(0,118,215,.12),rgba(0,202,255,.03))}
+        .flow-case__meta span{color:#5c7c8b;font-size:7px;font-weight:850;letter-spacing:.18em}
+        .flow-case__meta strong{color:#b8d7e2;font-size:9px;letter-spacing:.11em}
+        .flow-case__meta p{margin:0;color:#708894;font-size:10px;line-height:1.6}
+        .flow-timeline{position:relative;display:grid;grid-template-columns:repeat(7,1fr)}
+        .flow-timeline::before{content:'';position:absolute;left:5%;right:5%;top:67px;height:1px;background:linear-gradient(90deg,rgba(27,207,255,.14),rgba(27,207,255,.78),rgba(8,125,255,.38))}
+        .flow-timeline article{position:relative;min-height:365px;padding:26px 18px 28px;border-right:1px solid rgba(105,177,207,.09)}
+        .flow-timeline article:last-child{border-right:0}
+        .flow-step{color:#506c79;font-size:8px}
+        .flow-node{position:relative;z-index:2;display:block;width:10px;height:10px;margin:24px 0 50px;border:2px solid #07131d;border-radius:50%;background:#1bcfff;box-shadow:0 0 16px rgba(27,207,255,.7)}
+        .flow-timeline small{display:block;color:#55717e;font-size:7px;font-weight:850;letter-spacing:.17em}
+        .flow-timeline h3{margin:8px 0 13px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:27px;line-height:.94;letter-spacing:-.02em}
+        .flow-timeline p{margin:0;color:#748c97;font-size:10px;line-height:1.7}
+        .flow-timeline b{position:absolute;left:18px;right:18px;bottom:28px;color:#5da7c5;font-size:7px;letter-spacing:.12em}
+        .flow-result{margin-top:34px;display:grid;grid-template-columns:.8fr .95fr 1.15fr;gap:34px;align-items:center;padding:28px;border:1px solid rgba(40,191,244,.18);background:linear-gradient(90deg,rgba(0,112,206,.12),rgba(0,203,255,.04))}
+        .flow-result div span{display:block;color:#5a7886;font-size:7px;font-weight:850;letter-spacing:.18em;margin-bottom:7px}
+        .flow-result div strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:24px;line-height:1}
+        .flow-result p{margin:0;color:#78919d;font-size:11px;line-height:1.7}
+        .flow-result>b{color:#b4d4df;font-size:8px;letter-spacing:.1em;text-align:right}
+        @media(max-width:1180px){.flow-timeline{grid-template-columns:repeat(4,1fr)}.flow-timeline::before{display:none}.flow-timeline article:nth-child(4){border-right:0}.flow-timeline article:nth-child(-n+4){border-bottom:1px solid rgba(105,177,207,.09)}.flow-case__meta{grid-template-columns:1fr}.flow-result{grid-template-columns:1fr}.flow-result>b{text-align:left}}
+        @media(max-width:760px){.operation-flow{padding:88px 20px 92px}.operation-flow__head{grid-template-columns:1fr;gap:28px}.operation-flow__head h2{font-size:clamp(50px,14vw,72px)}.flow-timeline{grid-template-columns:1fr}.flow-timeline article{min-height:235px;border-right:0;border-bottom:1px solid rgba(105,177,207,.09);padding:24px 22px}.flow-timeline article:nth-child(4){border-right:0}.flow-node{display:none}.flow-timeline h3{font-size:30px;margin-top:28px}.flow-timeline b{left:22px;right:22px}.flow-case__meta{padding:22px}.flow-result{align-items:flex-start}}
+      `;
+
+      async function buildPhase64() {
+        try {
+          const response = await fetch(phase63Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.3: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+          parsed.title = 'IsiVoltPro · Fase 6.4 · Cómo funciona';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'Descubre cómo funciona IsiVoltPro desde un activo real hasta la incidencia, orden de trabajo, actuación, cierre e histórico técnico.');
+
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#flujo-operativo"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#flujo-operativo';
+            link.textContent = 'Cómo funciona';
+            nav.appendChild(link);
+          }
+
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el punto de inserción de Fase 6.3');
+          const template = parsed.createElement('template');
+          template.innerHTML = flowMarkup.trim();
+          bridge.parentNode.insertBefore(template.content, bridge);
+
+          const style = parsed.createElement('style');
+          style.textContent = flowStyles;
+          parsed.head.appendChild(style);
+
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.4', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase63Url;
+          fallback.textContent = 'Abrir Fase 6.3';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+
+      buildPhase64();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

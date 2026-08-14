@@ -1,4 +1,6 @@
 ---
+import { heroApprovedImage } from '../../data/hero-approved-image';
+
 const base = import.meta.env.BASE_URL;
 const mediaSrc = `${base}video/hero-home-calidad-original.mp4`;
 ---
@@ -7,6 +9,7 @@ const mediaSrc = `${base}video/hero-home-calidad-original.mp4`;
     <video class="v2-hero__media" data-v2-backdrop muted playsinline preload="metadata" aria-hidden="true">
       <source src={mediaSrc} type="video/mp4" />
     </video>
+    <img class="v2-hero__approved" src={heroApprovedImage} alt="" aria-hidden="true" />
 
     <div class="v2-hero__veil" aria-hidden="true"></div>
     <div class="v2-hero__grid" aria-hidden="true"></div>

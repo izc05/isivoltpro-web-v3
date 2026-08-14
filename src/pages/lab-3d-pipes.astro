@@ -1,0 +1,351 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02040a" />
+    <meta name="description" content="ISIVOLTPRO phase 2.2 real industrial pipe asset validation." />
+    <title>ISIVOLTPRO · Phase 2.2 Pipe Asset</title>
+  </head>
+  <body>
+    <canvas id="asset-canvas" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href={base}>ISIVOLT<strong>PRO</strong></a>
+      <span class="phase">FASE 2.2 / REAL ASSET TEST</span>
+      <a class="back" href={`${base}lab-3d/`}>BACK TO 3D LAB</a>
+    </header>
+
+    <section class="panel">
+      <p class="eyebrow">POLY HAVEN · CC0</p>
+      <h1>Modular Industrial<br />Pipes 01</h1>
+      <p class="desc">Geometry-only validation before this asset enters the main ISIVOLTPRO industrial scene.</p>
+
+      <dl>
+        <div><dt>Status</dt><dd id="asset-status"><i></i>Loading</dd></div>
+        <div><dt>Geometry</dt><dd>~12.3K tris</dd></div>
+        <div><dt>Meshes</dt><dd>8 modular pieces</dd></div>
+        <div><dt>Test payload</dt><dd>~530 KB geometry</dd></div>
+        <div><dt>Textures</dt><dd>Disabled for 2.2</dd></div>
+        <div><dt>FPS</dt><dd id="fps">--</dd></div>
+      </dl>
+
+      <p class="note">Drag to orbit · wheel/pinch to zoom. This is not the final material or final placement.</p>
+    </section>
+
+    <div class="asset-tag" id="asset-tag">REAL INDUSTRIAL ASSET</div>
+
+    <script>
+      import * as THREE from 'three';
+      import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+      import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+      const ASSET_URL = 'https://raw.githubusercontent.com/KrazIvan/GodotVR_Test/6dc918140151c3235406a3f616a765e11293285a/Ivan%20VR/models/props/pipe/modular_industrial_pipes_01_4k.gltf';
+      const PIXEL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zf6AAAAAASUVORK5CYII=';
+
+      const canvas = document.querySelector('#asset-canvas');
+      const statusEl = document.querySelector('#asset-status');
+      const fpsEl = document.querySelector('#fps');
+      const tagEl = document.querySelector('#asset-tag');
+
+      if (!(canvas instanceof HTMLCanvasElement)) {
+        throw new Error('3D asset canvas not found');
+      }
+
+      const mobile = window.matchMedia('(max-width: 760px)').matches;
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        powerPreference: 'high-performance',
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.7));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 0.95;
+      renderer.shadowMap.enabled = !mobile;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x02050a);
+      scene.fog = new THREE.Fog(0x02050a, 13, 30);
+
+      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.05, 80);
+      camera.position.set(8.2, 5.4, 9.6);
+
+      const controls = new OrbitControls(camera, canvas);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.045;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.55;
+      controls.target.set(0, 2.3, 0);
+      controls.minDistance = 5.2;
+      controls.maxDistance = 18;
+      controls.maxPolarAngle = Math.PI * 0.49;
+
+      const stage = new THREE.Group();
+      scene.add(stage);
+
+      const floorMat = new THREE.MeshStandardMaterial({ color: 0x080d13, roughness: 0.82, metalness: 0.14 });
+      const floor = new THREE.Mesh(new THREE.CircleGeometry(10.5, 80), floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.receiveShadow = true;
+      scene.add(floor);
+
+      const grid = new THREE.GridHelper(19, 38, 0x1a566b, 0x102431);
+      grid.position.y = 0.012;
+      grid.material.transparent = true;
+      grid.material.opacity = 0.27;
+      scene.add(grid);
+
+      const pedestal = new THREE.Mesh(
+        new THREE.CylinderGeometry(4.1, 4.45, 0.22, 72),
+        new THREE.MeshStandardMaterial({ color: 0x111820, metalness: 0.72, roughness: 0.3 }),
+      );
+      pedestal.position.y = 0.11;
+      pedestal.receiveShadow = true;
+      stage.add(pedestal);
+
+      const pipeMaterial = new THREE.MeshStandardMaterial({
+        color: 0x5e6d76,
+        metalness: 0.86,
+        roughness: 0.31,
+      });
+      const detailMaterial = new THREE.MeshStandardMaterial({
+        color: 0x8b4e27,
+        metalness: 0.68,
+        roughness: 0.38,
+      });
+
+      scene.add(new THREE.HemisphereLight(0x8edaff, 0x02050a, 1.65));
+
+      const key = new THREE.DirectionalLight(0xd7f4ff, 4.7);
+      key.position.set(-6, 10, 8);
+      key.castShadow = !mobile;
+      if (key.shadow) {
+        key.shadow.mapSize.set(1024, 1024);
+        key.shadow.camera.left = -8;
+        key.shadow.camera.right = 8;
+        key.shadow.camera.top = 8;
+        key.shadow.camera.bottom = -8;
+      }
+      scene.add(key);
+
+      const blue = new THREE.PointLight(0x00cfff, 15, 13, 2);
+      blue.position.set(4, 3.5, -4);
+      scene.add(blue);
+
+      const warm = new THREE.PointLight(0xff9a54, 8, 10, 2);
+      warm.position.set(-4.5, 2.7, 2.5);
+      scene.add(warm);
+
+      const manager = new THREE.LoadingManager();
+      manager.setURLModifier((url) => {
+        if (url.includes('/textures/')) return PIXEL;
+        return url;
+      });
+
+      const loader = new GLTFLoader(manager);
+      loader.load(
+        ASSET_URL,
+        (gltf) => {
+          const root = gltf.scene;
+
+          root.traverse((object) => {
+            if (object instanceof THREE.Mesh) {
+              const originalName = Array.isArray(object.material)
+                ? object.material.map((material) => material.name).join(' ')
+                : object.material?.name ?? '';
+              object.material = originalName.includes('group02') ? detailMaterial : pipeMaterial;
+              object.castShadow = !mobile;
+              object.receiveShadow = true;
+            }
+          });
+
+          root.updateMatrixWorld(true);
+          const initialBox = new THREE.Box3().setFromObject(root);
+          const initialSize = initialBox.getSize(new THREE.Vector3());
+          const dominant = Math.max(initialSize.x, initialSize.y, initialSize.z, 0.001);
+          const scale = 5.3 / dominant;
+          root.scale.setScalar(scale);
+          root.updateMatrixWorld(true);
+
+          const fittedBox = new THREE.Box3().setFromObject(root);
+          const center = fittedBox.getCenter(new THREE.Vector3());
+          root.position.x -= center.x;
+          root.position.z -= center.z;
+          root.position.y += 0.24 - fittedBox.min.y;
+          root.updateMatrixWorld(true);
+
+          stage.add(root);
+
+          const finalBox = new THREE.Box3().setFromObject(root);
+          const finalSize = finalBox.getSize(new THREE.Vector3());
+          controls.target.set(0, Math.max(1.8, finalSize.y * 0.45), 0);
+          controls.update();
+
+          if (statusEl instanceof HTMLElement) {
+            statusEl.innerHTML = '<i></i>Ready';
+            statusEl.classList.add('ready');
+          }
+          if (tagEl instanceof HTMLElement) tagEl.classList.add('ready');
+        },
+        (event) => {
+          if (event.total > 0 && statusEl instanceof HTMLElement) {
+            const pct = Math.min(99, Math.round((event.loaded / event.total) * 100));
+            statusEl.innerHTML = `<i></i>Loading ${pct}%`;
+          }
+        },
+        (error) => {
+          console.error('Industrial pipe asset failed to load', error);
+          if (statusEl instanceof HTMLElement) {
+            statusEl.textContent = 'Load error';
+            statusEl.classList.add('error');
+          }
+        },
+      );
+
+      let frames = 0;
+      let fpsStart = performance.now();
+      let raf = 0;
+
+      function render(now: number) {
+        frames += 1;
+        if (now - fpsStart >= 1000) {
+          const fps = Math.round((frames * 1000) / (now - fpsStart));
+          if (fpsEl) fpsEl.textContent = String(fps);
+          frames = 0;
+          fpsStart = now;
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+        raf = requestAnimationFrame(render);
+      }
+
+      function resize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth <= 760 ? 1.25 : 1.7));
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else {
+          fpsStart = performance.now();
+          frames = 0;
+          raf = requestAnimationFrame(render);
+        }
+      });
+
+      raf = requestAnimationFrame(render);
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #fff;
+    background: #02050a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #02050a; }
+  a { color: inherit; text-decoration: none; }
+  #asset-canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 54% 46%, transparent 0 27%, rgba(2,5,10,.16) 62%, rgba(2,5,10,.68) 100%),
+      linear-gradient(90deg, rgba(2,5,10,.58) 0%, rgba(2,5,10,.08) 42%, transparent 72%);
+  }
+
+  .topbar {
+    position: fixed;
+    z-index: 10;
+    inset: 0 0 auto;
+    height: 74px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 clamp(22px, 4vw, 68px);
+    border-bottom: 1px solid rgba(102,176,205,.14);
+    background: linear-gradient(180deg, rgba(2,5,10,.82), rgba(2,5,10,.12));
+    backdrop-filter: blur(10px);
+  }
+
+  .brand { justify-self: start; font-size: 16px; font-weight: 700; letter-spacing: .045em; }
+  .brand strong { color: #00d9ff; }
+  .phase, .back { font-size: 9px; font-weight: 800; letter-spacing: .17em; color: #8399a6; }
+  .back { justify-self: end; transition: color .2s ease; }
+  .back:hover { color: #fff; }
+
+  .panel {
+    position: fixed;
+    z-index: 6;
+    left: clamp(24px, 5vw, 80px);
+    top: 50%;
+    width: min(390px, 35vw);
+    transform: translateY(-45%);
+    pointer-events: none;
+  }
+
+  .eyebrow { margin: 0 0 14px; color: #00d9ff; font-size: 9px; font-weight: 850; letter-spacing: .22em; }
+  h1 { margin: 0; font-size: clamp(42px, 4.7vw, 76px); line-height: .91; letter-spacing: -.055em; font-weight: 560; }
+  .desc { margin: 22px 0 26px; max-width: 360px; color: #9babb4; font-size: 13px; line-height: 1.65; }
+
+  dl { margin: 0; border-top: 1px solid rgba(126,177,198,.14); }
+  dl div { display: flex; justify-content: space-between; gap: 18px; padding: 10px 0; border-bottom: 1px solid rgba(126,177,198,.1); }
+  dt, dd { margin: 0; font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+  dt { color: #657b88; }
+  dd { color: #c1cbd1; text-align: right; }
+  #asset-status { display: flex; align-items: center; gap: 7px; }
+  #asset-status i { width: 6px; height: 6px; border-radius: 50%; background: #ffab58; box-shadow: 0 0 10px rgba(255,171,88,.65); }
+  #asset-status.ready i { background: #00d9ff; box-shadow: 0 0 12px #00d9ff; }
+  #asset-status.error { color: #ff7b75; }
+
+  .note { margin: 20px 0 0; color: #607682; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+  .asset-tag {
+    position: fixed;
+    z-index: 7;
+    right: clamp(24px, 4vw, 70px);
+    bottom: 38px;
+    padding: 10px 13px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(3,9,14,.56);
+    color: #6c818d;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .18em;
+    opacity: .65;
+    transition: border-color .4s ease, color .4s ease, opacity .4s ease;
+  }
+  .asset-tag.ready { color: #00d9ff; border-color: rgba(0,217,255,.38); opacity: 1; }
+
+  @media (max-width: 760px) {
+    body::after { background: linear-gradient(180deg, rgba(2,5,10,.12) 20%, transparent 48%, rgba(2,5,10,.72) 79%); }
+    .topbar { grid-template-columns: 1fr auto; padding-inline: 18px; }
+    .phase { display: none; }
+    .back { font-size: 8px; }
+    .panel { left: 22px; right: 22px; top: auto; bottom: 28px; width: auto; transform: none; }
+    h1 { font-size: clamp(39px, 12vw, 60px); }
+    .desc { margin-block: 14px 16px; max-width: 90%; font-size: 12px; }
+    dl div { padding: 7px 0; }
+    dl div:nth-child(2), dl div:nth-child(3), dl div:nth-child(5) { display: none; }
+    .note { margin-top: 12px; }
+    .asset-tag { display: none; }
+  }
+</style>

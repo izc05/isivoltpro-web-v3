@@ -96,54 +96,67 @@ Resultado:
 - se identifica expresamente como dirección comercial/conceptual de producto y no como aplicación PocketBase terminada;
 - sin fotografía industrial nueva ni cambios sobre las bases 3D congeladas.
 
-## 6.6 — Contexto industrial / instalación física — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 6.6 — Contexto industrial / instalación física — COMPLETADO / APROBADO PARA CONTINUAR
 
 Ruta: `/lab-3d-phase66/`
-Blob validado: `c87226bd6a797edd175e08526b592de82d8b1026`
+Blob: `c87226bd6a797edd175e08526b592de82d8b1026`
 
-### Objetivo
-
-Romper visualmente la sucesión de interfaces y devolver al visitante al origen físico de IsiVoltPro: la instalación donde realmente ocurre el trabajo técnico.
-
-### Implementado
+Resultado:
 
 - conserva íntegramente 6.5;
 - añade el bloque `INSTALACIÓN FÍSICA` antes del puente hacia la experiencia 3D;
 - mensaje central: `EL SOFTWARE NO ES EL CENTRO. LA INSTALACIÓN SÍ.`;
 - utiliza la imagen industrial ya aprobada del proyecto como recurso visual autoritativo;
-- presenta un plano industrial amplio con tratamiento cinematográfico oscuro y azul técnico;
-- reutiliza el mismo entorno mediante tres encuadres/crops diferenciados para mostrar:
-  1. Electricidad;
-  2. Climatización / HVAC;
-  3. Agua e infraestructura;
+- presenta un plano industrial amplio y tres encuadres para Electricidad, Climatización / HVAC y Agua e infraestructura;
 - cada disciplina vuelve a conectarse con activo, OT, trabajo, documentación e histórico;
-- establece explícitamente el puente:
-  `INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO`;
-- añade navegación `Instalación real`;
-- responsive incluido;
-- sin modificar `index.astro`;
-- sin modificar ENTRY V1;
-- sin modificar ECOSYSTEM BASE V1;
-- sin introducir todavía nuevas fuentes de fotografía externa ni alterar el ecosistema 3D.
+- establece el puente `INSTALACIÓN REAL → ACTIVO → TRABAJO → DOCUMENTACIÓN → HISTÓRICO`;
+- prepara visualmente la entrada al Core y al ecosistema 3D.
+
+## 6.7 — Ecosistema visual completo — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta: `/lab-3d-phase67/`
+Blob validado: `d3a86af74ba85fac5a13b27e8ef91b015be67489`
+
+### Objetivo
+
+Unir de forma explícita la Home comercial con la experiencia 3D ya aprobada y cerrar la narrativa `FÍSICO → DIGITAL → INTELIGENCIA` sin crear una segunda escena 3D ni modificar las bases congeladas.
+
+### Implementado
+
+- conserva íntegramente 6.6;
+- añade el bloque `ECOSISTEMA VISUAL` antes del puente comercial final;
+- presenta tres capas conectadas:
+  1. `CAPA FÍSICA` — Electricidad, Climatización, Agua, Equipos e Infraestructura;
+  2. `CAPA DIGITAL` — Activos, Mantenimiento, OT, Documentación e Histórico;
+  3. `CAPA DE INTELIGENCIA` — Contexto, consulta, análisis, asistencia técnica e IsiVoltPro AI;
+- añade un bloque específico `ISIVOLTPRO CORE` como punto de convergencia, sin rediseñar ni reemplazar el Core 3.1 aprobado;
+- integra `ECOSYSTEM BASE V1` mediante un único `iframe` same-origin;
+- la escena 3D se carga de forma diferida al acercarse el visitante a la sección o al pulsar el CTA de carga;
+- no se inicializa WebGL al abrir la Home;
+- al cargar el iframe se ocultan en runtime `.topbar`, `.metrics` y `.lab-button` para presentar la escena como experiencia comercial y no como laboratorio;
+- se neutraliza únicamente el primer texto introductorio del recorrido para adaptarlo al contexto comercial;
+- no se modifica el archivo congelado `lab-3d-ecosystem-v1.astro`;
+- no se modifica `lab-3d-entry-v1.astro`;
+- no se modifica `src/pages/index.astro`;
+- conserva la escena, cámara, sistemas, Water, rutas digitales y Core aprobados;
+- añade resumen final: Origen físico, Contexto conectado, Memoria operativa e Inteligencia;
+- responsive y `prefers-reduced-motion` incluidos.
+
+### Arquitectura de integración
+
+`HOME COMERCIAL → carga diferida → 1 iframe same-origin → ECOSYSTEM BASE V1 → runtime cleanup → escena WebGL existente`
+
+No se crea un segundo renderer dentro de la Home.
 
 ### Criterio de revisión
 
-6.6 debe conseguir que la Home:
+6.7 debe conseguir que el visitante entienda, antes y durante el 3D, esta relación:
 
-- deje de sentirse como una sucesión continua de pantallas digitales;
-- recuerde que IsiVoltPro nace de instalaciones y equipos reales;
-- mantenga coherencia visual con el lenguaje industrial aprobado;
-- prepare de forma natural la entrada al Core y al ecosistema 3D de 6.7.
+`INSTALACIÓN FÍSICA → SISTEMAS / ACTIVOS → ISIVOLTPRO CORE → OPERACIÓN → HISTÓRICO → INTELIGENCIA`
 
-### Criterio futuro sobre fotografía
+El 3D debe sentirse como demostración visual del mensaje comercial, no como una demo técnica separada.
 
-La integración de 6.6 establece la dirección visual usando el recurso industrial ya aprobado. Si se aprueba el ritmo y el tratamiento, futuras iteraciones podrán incorporar fotografías o renders adicionales específicos de cuadros eléctricos, HVAC, bombas, tuberías y técnicos, manteniendo siempre coherencia de estilo y licencia.
-
-## 6.7 — Ecosistema visual completo — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.6
-
-Objetivo: unir visualmente las capas `FÍSICO → DIGITAL → INTELIGENCIA` recuperando el Core y la experiencia 3D ya aprobados, sin modificar directamente `ECOSYSTEM BASE V1`.
-
-## 6.8 — Aplicaciones IsiVoltPro
+## 6.8 — Aplicaciones IsiVoltPro — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.7
 
 Presentar los módulos principales y preparar sus futuras subpáginas.
 

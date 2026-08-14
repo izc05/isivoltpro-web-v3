@@ -65,8 +65,8 @@ Licencia: CC0.
 2.4 Convertir tuberías en infraestructura real — COMPLETADO
 2.5 Añadir HVAC circular real — COMPLETADO
 2.6 Añadir cuadro/utility box — COMPLETADO
-2.7 Añadir unidad HVAC — SIGUIENTE
-2.8 Componer instalación industrial completa
+2.7 Añadir unidad HVAC — COMPLETADO
+2.8 Componer instalación industrial completa — SIGUIENTE
 2.9 Optimización final de FASE 2
 2.10 Publicar revisión visual y detenerse para aprobación
 

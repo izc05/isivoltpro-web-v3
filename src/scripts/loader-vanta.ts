@@ -4,23 +4,23 @@ type VantaEffect = { destroy?: () => void };
 type VantaWindow = Window & typeof globalThis & {
   THREE?: typeof THREE;
   VANTA?: {
-    FOG?: (options: Record<string, unknown>) => VantaEffect;
+    CLOUDS?: (options: Record<string, unknown>) => VantaEffect;
   };
 };
 
-const SCRIPT_ID = 'isivolt-vanta-fog';
-const SCRIPT_SRC = 'https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.fog.min.js';
+const SCRIPT_ID = 'isivolt-vanta-clouds';
+const SCRIPT_SRC = 'https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.clouds.min.js';
 
 function loadVanta(): Promise<void> {
   const win = window as VantaWindow;
   win.THREE = THREE;
 
-  if (win.VANTA?.FOG) return Promise.resolve();
+  if (win.VANTA?.CLOUDS) return Promise.resolve();
 
   const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
   if (existing) {
     return new Promise((resolve) => {
-      if (win.VANTA?.FOG) resolve();
+      if (win.VANTA?.CLOUDS) resolve();
       else existing.addEventListener('load', () => resolve(), { once: true });
     });
   }
@@ -31,7 +31,7 @@ function loadVanta(): Promise<void> {
     script.src = SCRIPT_SRC;
     script.async = true;
     script.onload = () => resolve();
-    script.onerror = () => reject(new Error('Vanta no disponible'));
+    script.onerror = () => reject(new Error('Vanta Clouds no disponible'));
     document.head.appendChild(script);
   });
 }
@@ -53,9 +53,9 @@ export function initLoaderVanta() {
     try {
       await loadVanta();
       const win = window as VantaWindow;
-      if (!win.VANTA?.FOG || !document.body.contains(host)) return;
+      if (!win.VANTA?.CLOUDS || !document.body.contains(host)) return;
 
-      effect = win.VANTA.FOG({
+      effect = win.VANTA.CLOUDS({
         el: host,
         THREE,
         mouseControls: true,
@@ -63,16 +63,19 @@ export function initLoaderVanta() {
         gyroControls: false,
         minHeight: 200,
         minWidth: 200,
-        highlightColor: 0x1769ff,
-        midtoneColor: 0x082a61,
-        lowlightColor: 0x020a15,
-        baseColor: 0x02060a,
-        blurFactor: 0.58,
-        speed: 0.55,
-        zoom: 1.28,
-        scale: 1.35,
+        backgroundColor: 0x02060a,
+        skyColor: 0x06111f,
+        cloudColor: 0x17375a,
+        cloudShadowColor: 0x01050a,
+        sunColor: 0x1769ff,
+        sunGlareColor: 0x0b3472,
+        sunlightColor: 0x6ea0ff,
+        speed: 0.42,
+        scale: 1.15,
         scaleMobile: 1.0,
       });
+
+      host.classList.add('is-clouds-ready');
     } catch {
       host.classList.add('is-fallback');
     }

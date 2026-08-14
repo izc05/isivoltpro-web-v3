@@ -133,35 +133,46 @@ Resultado:
 - IsiVoltPro AI queda identificada como capacidad en desarrollo;
 - las páginas individuales de aplicaciones quedan reservadas para fases posteriores.
 
-## 6.9 — Sectores / casos de uso — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+## 6.9 — Sectores / casos de uso — COMPLETADO / APROBADO PARA CONTINUAR
 
 Ruta: `/lab-3d-phase69/`
-Blob validado: `63484210f9dc0cfa68d230e76c2168a7eb6c85a1`
+Blob: `63484210f9dc0cfa68d230e76c2168a7eb6c85a1`
+
+Resultado:
+
+- mensaje `UNA MISMA LÓGICA. DISTINTOS ENTORNOS.`;
+- Hospitales y centros sanitarios como ejemplo destacado de alta complejidad técnica;
+- Industria, Edificios técnicos, Mantenimiento multisitio, Instalaciones eléctricas, HVAC e Infraestructuras como contextos de aplicación;
+- contraste `LO QUE CAMBIA` / `LO QUE PERMANECE`;
+- nota expresa `CASOS DE USO, NO REFERENCIAS COMERCIALES`;
+- sin clientes, implantaciones ni métricas inventadas.
+
+## 6.10 — Conversión comercial — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
+
+Ruta: `/lab-3d-phase610/`
+Blob validado: `0085105bfa157e3d3935e2eb31785a8ae132fd36`
 
 ### Objetivo
 
-Explicar en qué tipos de entorno encaja la arquitectura de IsiVoltPro sin presentar sectores como clientes existentes, sin inventar implantaciones y sin utilizar métricas comerciales no demostradas.
+Cerrar la narrativa comercial de la Home con rutas claras para `Solicitar demo`, `Contactar` y `Acceder`, sin simular formularios, correos o URLs de login que todavía no estén definidos.
 
 ### Implementado
 
-- conserva íntegramente 6.8;
-- añade el bloque `SECTORES Y CASOS DE USO` antes del puente comercial final;
-- fija el mensaje `UNA MISMA LÓGICA. DISTINTOS ENTORNOS.`;
-- define el patrón de encaje de IsiVoltPro: instalaciones físicas + activos técnicos + personas que intervienen + trabajo/documentación/histórico;
-- destaca `HOSPITALES Y CENTROS SANITARIOS` como ejemplo de entorno de alta complejidad por convivencia de múltiples disciplinas, activos, ubicaciones y necesidad de trazabilidad;
-- presenta seis contextos adicionales:
-  1. Industria / plantas y procesos;
-  2. Edificios técnicos / instalaciones complejas;
-  3. Mantenimiento multisitio;
-  4. Instalaciones eléctricas;
-  5. Climatización / HVAC y ventilación;
-  6. Infraestructuras / servicios técnicos;
-- cada contexto se explica mediante su lógica técnica, no mediante clientes o casos inventados;
-- añade el contraste:
-  `LO QUE CAMBIA → entorno, equipos y reglas de operación`
-  `LO QUE PERMANECE → activo, trabajo, documentación, histórico y contexto`;
-- incluye una nota explícita: `CASOS DE USO, NO REFERENCIAS COMERCIALES`;
-- añade navegación `Sectores`;
+- conserva íntegramente 6.9;
+- sustituye el antiguo puente final hacia el 3D por un cierre comercial completo;
+- fija el mensaje `DE LA INSTALACIÓN A UNA DEMO CON CONTEXTO.`;
+- presenta tres caminos:
+  1. `SOLICITAR DEMO` — una demo orientada por tipo de instalación, disciplinas prioritarias, personas/organización y problema principal;
+  2. `CONTACTAR` — conversación técnica/comercial para alcance, integraciones, caso de uso y próximos pasos;
+  3. `ACCEDER` — acceso reservado para la plataforma real cuando la URL de producción esté definida;
+- el bloque de demo no envía ni simula ningún formulario;
+- el bloque de contacto no inventa un email comercial;
+- el bloque de acceso no inventa una ruta de login;
+- los botones superiores `Acceder` y `Solicitar demo` se redirigen dentro del checkpoint a `#acceso` y `#demo`, evitando rutas falsas;
+- mantiene un CTA funcional a `ENTRY V1` para explorar la experiencia 3D ya validada;
+- añade el recorrido de conversión:
+  `ENTENDER → VER → RECORRER → CONVERSAR → ACCEDER`;
+- añade footer comercial con navegación resumida y la jerarquía `FÍSICO → DIGITAL → INTELIGENCIA`;
 - responsive incluido;
 - no modifica `src/pages/index.astro`;
 - no modifica ENTRY V1;
@@ -169,12 +180,8 @@ Explicar en qué tipos de entorno encaja la arquitectura de IsiVoltPro sin prese
 
 ### Criterio de revisión
 
-6.9 debe transmitir que IsiVoltPro no pretende ser software genérico para cualquier actividad. Encaja especialmente cuando existe una instalación técnica real y es necesario relacionar activos, personas, trabajo, documentación e histórico dentro de un contexto común.
+6.10 debe cerrar la Home con una acción clara sin aparentar que existen canales comerciales o de acceso que todavía no han sido conectados. En la integración final se sustituirán los estados pendientes por destinos reales.
 
-## 6.10 — Conversión comercial — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.9
+## 6.11 — HOME V1 COMPLETA — SIGUIENTE SOLO TRAS APROBACIÓN DE 6.10
 
-Preparar el cierre comercial de la Home con `Solicitar demo`, contacto y acceso, manteniendo coherencia con la futura plataforma real y evitando formularios o flujos falsos.
-
-## 6.11 — HOME V1 COMPLETA
-
-Solo tras aprobar todos los checkpoints se promoverá la Home de laboratorio a `src/pages/index.astro`.
+Unificar y revisar el recorrido completo de FASE 6 como candidato final de Home. La promoción a `src/pages/index.astro` solo ocurrirá después de una revisión visual completa y aprobación explícita.

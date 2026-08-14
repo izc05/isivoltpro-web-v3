@@ -108,7 +108,7 @@ Resultado:
 ## 6.4 — Cómo funciona — COMPLETADO TÉCNICAMENTE / PENDIENTE DE REVISIÓN VISUAL
 
 Ruta de revisión: `/lab-3d-phase64/`
-Blob validado: pendiente de publicación exacta tras CI.
+Blob validado: `f041443f095d7646f049b6ddfe3e06c878d97290`
 
 ### Objetivo
 

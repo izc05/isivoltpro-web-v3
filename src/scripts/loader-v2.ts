@@ -4,53 +4,74 @@ export function initLoaderV2() {
   const bar = document.querySelector<HTMLElement>('[data-v2-loader-bar]');
   const light = document.querySelector<HTMLElement>('[data-v2-loader-light]');
   const status = document.querySelector<HTMLElement>('[data-v2-loader-status]');
-  if (!loader || !value || !bar || !light || !status) return;
+  const detail = document.querySelector<HTMLElement>('[data-v2-loader-detail]');
+  if (!loader || !value || !bar || !light || !status || !detail) return;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const minimumDuration = reduced ? 260 : 1850;
   let started = false;
+  let heroReady = document.documentElement.dataset.heroReady === 'true';
+  let startedAt = 0;
   let progress = 0;
-  let target = 18;
-  let heroReady = false;
-  let pageLoaded = document.readyState === 'complete';
+
+  const setCopy = (shown: number) => {
+    if (shown < 24) {
+      status.textContent = 'INICIALIZANDO ECOSISTEMA';
+      detail.textContent = 'CARGANDO RECURSOS';
+    } else if (shown < 52) {
+      status.textContent = 'CONECTANDO NÚCLEO';
+      detail.textContent = 'ACTIVANDO ISIVOLTPRO CORE';
+    } else if (shown < 78) {
+      status.textContent = 'SINCRONIZANDO SISTEMAS';
+      detail.textContent = 'ACTIVOS · OT · MANTENIMIENTO';
+    } else if (shown < 100) {
+      status.textContent = 'PREPARANDO EXPERIENCIA';
+      detail.textContent = 'GESTIÓN TÉCNICA CONECTADA';
+    } else {
+      status.textContent = 'SISTEMA PREPARADO';
+      detail.textContent = 'ISIVOLTPRO ONLINE';
+    }
+  };
 
   const render = () => {
     const shown = Math.max(0, Math.min(100, Math.round(progress)));
-    value.textContent = String(shown).padStart(2, '0');
+    value.textContent = `${String(shown).padStart(2, '0')}%`;
     bar.style.transform = `scaleX(${shown / 100})`;
     light.style.left = `${shown}%`;
-    status.textContent = shown < 30
-      ? 'INICIALIZANDO ECOSISTEMA'
-      : shown < 60
-        ? 'CONECTANDO NÚCLEO'
-        : shown < 84
-          ? 'SINCRONIZANDO SISTEMAS'
-          : 'PREPARANDO EXPERIENCIA';
+    setCopy(shown);
   };
 
   const finish = () => {
-    target = 100;
+    progress = 100;
+    render();
+    loader.classList.add('is-ready');
+
+    window.setTimeout(() => {
+      loader.classList.add('is-leaving');
+      document.body.classList.remove('v2-is-loading');
+      window.dispatchEvent(new CustomEvent('isivolt:experience-ready'));
+      window.setTimeout(() => loader.remove(), reduced ? 80 : 720);
+    }, reduced ? 20 : 230);
   };
 
-  const tick = () => {
+  const tick = (now: number) => {
     if (!started) return;
 
-    progress += (target - progress) * (target === 100 ? 0.16 : 0.06);
-    if (target < 100 && progress > target - 1) target = Math.min(88, target + 10);
+    const elapsed = now - startedAt;
+    const timeProgress = Math.min(1, elapsed / minimumDuration);
+    const eased = 1 - Math.pow(1 - timeProgress, 2.35);
+    const cap = heroReady ? 100 : 92;
+    progress = Math.max(progress, eased * cap);
     render();
 
-    if (target === 100 && progress > 99.2) {
-      progress = 100;
-      render();
-      status.textContent = 'SISTEMA PREPARADO';
-      loader.classList.add('is-ready');
-
-      window.setTimeout(() => {
-        loader.classList.add('is-leaving');
-        document.body.classList.remove('v2-is-loading');
-        window.dispatchEvent(new CustomEvent('isivolt:experience-ready'));
-        window.setTimeout(() => loader.remove(), reduced ? 80 : 720);
-      }, reduced ? 20 : 160);
+    if (timeProgress >= 1 && heroReady) {
+      finish();
       return;
+    }
+
+    if (timeProgress >= 1 && !heroReady) {
+      progress += (92 - progress) * 0.08;
+      render();
     }
 
     requestAnimationFrame(tick);
@@ -59,26 +80,20 @@ export function initLoaderV2() {
   const start = () => {
     if (started) return;
     started = true;
+    startedAt = performance.now();
     loader.classList.add('is-active');
     document.body.classList.add('v2-is-loading');
     render();
     requestAnimationFrame(tick);
 
-    if (heroReady || pageLoaded) {
-      window.setTimeout(finish, reduced ? 0 : 280);
-    } else {
-      window.setTimeout(finish, 4200);
-    }
+    window.setTimeout(() => {
+      heroReady = true;
+    }, reduced ? 100 : 3200);
   };
 
   window.addEventListener('isivolt:start-loader', start, { once: true });
   window.addEventListener('isivolt:hero-ready', () => {
     heroReady = true;
-    if (started) finish();
-  }, { once: true });
-  window.addEventListener('load', () => {
-    pageLoaded = true;
-    if (started) window.setTimeout(finish, reduced ? 0 : 280);
   }, { once: true });
 
   render();

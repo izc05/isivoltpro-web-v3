@@ -1,0 +1,206 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase64Url = `${base}lab-3d-phase64/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.5 · Interfaz de producto</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.5</strong>
+      <span>INTERFAZ DE PRODUCTO · V1</span>
+      <noscript><a href={phase64Url}>Abrir Fase 6.4</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase64Url }}>
+      const productMarkup = `
+        <section class="product-ui" id="interfaz-producto" aria-labelledby="product-ui-title">
+          <div class="product-ui__head">
+            <div>
+              <p class="eyebrow"><i></i> INTERFAZ DE PRODUCTO</p>
+              <h2 id="product-ui-title">EL CONTEXTO TÉCNICO,<br /><em>EN UNA SOLA VISTA.</em></h2>
+            </div>
+            <div class="product-ui__intro">
+              <p class="product-ui__lead">Una interfaz útil no empieza por gráficos. Empieza por responder qué equipo es, dónde está, qué le ocurre y qué trabajo existe sobre él.</p>
+              <p>Esta vista comercial representa la dirección de producto de IsiVoltPro. No es todavía la aplicación PocketBase definitiva, pero sí el nivel de información y relación que queremos conservar.</p>
+            </div>
+          </div>
+
+          <div class="app-shell" aria-label="Vista conceptual de la plataforma IsiVoltPro">
+            <aside class="app-nav">
+              <div class="app-brand"><span></span><b>ISIVOLTPRO</b><small>OPERACIÓN TÉCNICA</small></div>
+              <nav>
+                <a class="is-active"><i>01</i> Resumen</a>
+                <a><i>02</i> Instalaciones</a>
+                <a><i>03</i> Activos <span>1.248</span></a>
+                <a><i>04</i> Mantenimiento</a>
+                <a><i>05</i> Órdenes de trabajo <span>12</span></a>
+                <a><i>06</i> Documentación</a>
+                <a><i>07</i> Histórico</a>
+                <a><i>08</i> IsiVoltPro AI</a>
+              </nav>
+              <div class="app-nav__footer"><span>ORGANIZACIÓN</span><strong>Instalación Demo</strong><small>Operación activa</small></div>
+            </aside>
+
+            <div class="app-main">
+              <header class="app-topbar">
+                <div><small>INSTALACIÓN / CLIMATIZACIÓN / UTA-02</small><strong>Vista operativa del activo</strong></div>
+                <div class="app-topbar__actions"><span class="live-dot">OPERATIVA</span><button>+ Nueva OT</button><b>IZ</b></div>
+              </header>
+
+              <div class="app-kpis">
+                <article><span>ACTIVOS</span><strong>1.248</strong><small>1.211 operativos</small></article>
+                <article><span>OT ABIERTAS</span><strong>12</strong><small>3 prioridad alta</small></article>
+                <article><span>PREVENTIVOS</span><strong>8</strong><small>Próximos 7 días</small></article>
+                <article><span>DOCUMENTOS</span><strong>326</strong><small>Vinculados a activos</small></article>
+              </div>
+
+              <div class="app-grid">
+                <section class="panel asset-panel">
+                  <div class="panel__title"><div><small>ACTIVO SELECCIONADO</small><h3>UTA-02</h3></div><span class="status status--ok">OPERATIVO</span></div>
+                  <div class="asset-visual"><div class="asset-machine"><span></span><span></span><span></span></div><div class="asset-id">CLIMA-UTA-002</div></div>
+                  <dl class="asset-data">
+                    <div><dt>Ubicación</dt><dd>Planta técnica · Zona B</dd></div>
+                    <div><dt>Sistema</dt><dd>Climatización / HVAC</dd></div>
+                    <div><dt>Fabricante</dt><dd>Carrier</dd></div>
+                    <div><dt>Criticidad</dt><dd><span class="priority priority--medium">MEDIA</span></dd></div>
+                    <div><dt>Última revisión</dt><dd>12/08/2026</dd></div>
+                    <div><dt>Próxima revisión</dt><dd>12/11/2026</dd></div>
+                  </dl>
+                </section>
+
+                <section class="panel work-panel">
+                  <div class="panel__title"><div><small>TRABAJO ACTIVO</small><h3>OT-2026-0148</h3></div><span class="status status--progress">EN CURSO</span></div>
+                  <p class="work-title">Temperatura de impulsión fuera de consigna</p>
+                  <div class="work-meta">
+                    <div><span>PRIORIDAD</span><b class="priority priority--high">ALTA</b></div>
+                    <div><span>TÉCNICO</span><b>David M.</b></div>
+                    <div><span>ORIGEN</span><b>Incidencia</b></div>
+                    <div><span>ABIERTA</span><b>14 ago · 09:42</b></div>
+                  </div>
+                  <div class="work-progress"><i style="--p:68%"></i></div>
+                  <div class="work-log">
+                    <article><time>09:42</time><div><b>Incidencia registrada</b><p>Temperatura de impulsión 4,8 °C por encima de consigna.</p></div></article>
+                    <article><time>10:03</time><div><b>OT asignada</b><p>Asignada a técnico de climatización.</p></div></article>
+                    <article class="is-current"><time>10:31</time><div><b>Intervención en curso</b><p>Comprobación de sonda y válvula de batería fría.</p></div></article>
+                  </div>
+                </section>
+
+                <section class="panel docs-panel">
+                  <div class="panel__title"><div><small>DOCUMENTACIÓN</small><h3>4 archivos vinculados</h3></div><a>Ver todo</a></div>
+                  <ul class="doc-list">
+                    <li><i>PDF</i><div><b>Ficha técnica UTA-02</b><span>1,8 MB · revisado</span></div><small>↗</small></li>
+                    <li><i>PDF</i><div><b>Plano climatización P.T.</b><span>3,2 MB · Rev. 04</span></div><small>↗</small></li>
+                    <li><i>IMG</i><div><b>Foto batería fría</b><span>840 KB · 12/08/2026</span></div><small>↗</small></li>
+                    <li><i>PDF</i><div><b>Manual fabricante</b><span>6,4 MB · Carrier</span></div><small>↗</small></li>
+                  </ul>
+                </section>
+
+                <section class="panel history-panel">
+                  <div class="panel__title"><div><small>HISTÓRICO DEL ACTIVO</small><h3>Últimas actuaciones</h3></div><a>Histórico completo</a></div>
+                  <div class="history-table">
+                    <div class="history-row history-row--head"><span>FECHA</span><span>ACTUACIÓN</span><span>ESTADO</span><span>TÉCNICO</span></div>
+                    <div class="history-row"><span>12/08/26</span><span>Revisión preventiva trimestral</span><b class="status status--ok">CERRADA</b><span>J. Ruiz</span></div>
+                    <div class="history-row"><span>30/06/26</span><span>Limpieza de filtros F7</span><b class="status status--ok">CERRADA</b><span>D. Martín</span></div>
+                    <div class="history-row"><span>04/05/26</span><span>Ajuste actuador compuerta exterior</span><b class="status status--warn">OBSERVADA</b><span>L. Pérez</span></div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="context-strip">
+                <div><span>CONTEXTO DEL ACTIVO</span><strong>UTA-02</strong></div>
+                <p>1 OT activa · 4 documentos · 3 actuaciones recientes · próxima revisión 12/11/2026</p>
+                <b>TODO VINCULADO AL MISMO ACTIVO</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-principles">
+            <article><span>01</span><b>MENOS PANTALLAS AISLADAS</b><p>El activo funciona como punto de unión entre trabajo, documentación e histórico.</p></article>
+            <article><span>02</span><b>ESTADO OPERATIVO VISIBLE</b><p>Prioridad, responsable y evolución de las OTs se leen sin perder el contexto físico.</p></article>
+            <article><span>03</span><b>INFORMACIÓN REUTILIZABLE</b><p>Lo ocurrido hoy permanece disponible para la siguiente intervención.</p></article>
+          </div>
+        </section>`;
+
+      const productStyles = `
+        .product-ui{padding:125px clamp(20px,5vw,92px) 145px;background:radial-gradient(circle at 78% 9%,rgba(0,132,220,.1),transparent 28%),linear-gradient(180deg,#02070c,#031019);border-top:1px solid rgba(105,169,197,.09)}
+        .product-ui__head,.app-shell,.product-principles{width:min(1480px,100%);margin-left:auto;margin-right:auto}
+        .product-ui__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:70px}
+        .product-ui__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.7vw,96px);line-height:.87;font-weight:650;letter-spacing:-.04em}
+        .product-ui__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.72);text-shadow:0 0 34px rgba(0,145,255,.12)}
+        .product-ui__intro{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}.product-ui__intro p{margin:0 0 12px;color:#8198a3;font-size:12px;line-height:1.8}.product-ui__intro .product-ui__lead{color:#d4e4eb;font-size:15px}
+        .app-shell{display:grid;grid-template-columns:220px 1fr;min-height:910px;border:1px solid rgba(112,186,219,.18);background:#061019;box-shadow:0 45px 100px rgba(0,0,0,.34),0 0 0 1px rgba(0,190,255,.02) inset;overflow:hidden}
+        .app-nav{display:flex;flex-direction:column;padding:24px 16px;border-right:1px solid rgba(118,184,210,.12);background:linear-gradient(180deg,#07141e,#040b11)}
+        .app-brand{display:grid;grid-template-columns:24px 1fr;column-gap:10px;align-items:center;padding:3px 6px 25px;border-bottom:1px solid rgba(122,184,209,.09)}.app-brand>span{grid-row:1/3;width:22px;height:22px;clip-path:polygon(50% 0,100% 27%,100% 73%,50% 100%,0 73%,0 27%);background:linear-gradient(135deg,#087dff,#1bcfff);box-shadow:0 0 18px rgba(27,207,255,.24)}.app-brand b{font-size:10px;letter-spacing:.16em}.app-brand small{color:#506d79;font-size:6px;letter-spacing:.13em}
+        .app-nav nav{display:grid;gap:5px;padding-top:22px}.app-nav nav a{display:flex;align-items:center;gap:10px;padding:11px 10px;color:#68818d;font-size:9px;border:1px solid transparent;text-decoration:none}.app-nav nav a i{color:#38515d;font-size:6px;font-style:normal}.app-nav nav a span{margin-left:auto;min-width:21px;padding:3px 5px;text-align:center;border-radius:20px;background:rgba(31,146,207,.12);color:#70c7e9;font-size:6px}.app-nav nav a.is-active{color:#d8e8ee;background:linear-gradient(90deg,rgba(0,135,255,.16),rgba(0,180,255,.03));border-color:rgba(30,173,229,.13)}.app-nav nav a.is-active i{color:#1bcfff}.app-nav__footer{margin-top:auto;padding:16px 9px;border-top:1px solid rgba(122,184,209,.09);display:grid;gap:5px}.app-nav__footer span{color:#435f6b;font-size:6px;letter-spacing:.14em}.app-nav__footer strong{font-size:9px}.app-nav__footer small{color:#4ea9ca;font-size:7px}
+        .app-main{min-width:0;background:radial-gradient(circle at 80% 0,rgba(0,127,200,.06),transparent 30%),#071019}.app-topbar{min-height:76px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(120,185,212,.1);background:rgba(5,14,21,.8)}.app-topbar>div:first-child{display:grid;gap:6px}.app-topbar small{color:#496673;font-size:6px;letter-spacing:.13em}.app-topbar strong{font-size:13px}.app-topbar__actions{display:flex;align-items:center;gap:10px}.app-topbar__actions button{border:1px solid rgba(27,207,255,.25);background:linear-gradient(90deg,#087dff,#0aaee8);color:#fff;padding:9px 14px;font-size:7px;font-weight:800;letter-spacing:.08em}.app-topbar__actions>b{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(112,186,219,.15);border-radius:50%;font-size:8px}.live-dot{position:relative;padding-left:13px;color:#6ed9b2;font-size:6px;font-weight:850;letter-spacing:.12em}.live-dot::before{content:'';position:absolute;left:0;top:50%;width:6px;height:6px;border-radius:50%;background:#56daa6;box-shadow:0 0 10px rgba(86,218,166,.6);transform:translateY(-50%)}
+        .app-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(124,190,216,.08);border-bottom:1px solid rgba(124,190,216,.08)}.app-kpis article{padding:18px 20px;background:#08131c}.app-kpis span{display:block;color:#506b77;font-size:6px;letter-spacing:.13em}.app-kpis strong{display:block;margin:7px 0 3px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:30px;font-weight:500}.app-kpis small{color:#5c7b88;font-size:7px}
+        .app-grid{display:grid;grid-template-columns:1fr 1.18fr;gap:12px;padding:12px}.panel{min-width:0;padding:20px;border:1px solid rgba(117,184,211,.12);background:linear-gradient(145deg,rgba(9,25,36,.86),rgba(6,16,24,.72))}.panel__title{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px}.panel__title small{display:block;color:#506b77;font-size:6px;letter-spacing:.14em;margin-bottom:5px}.panel__title h3{margin:0;font-size:16px}.panel__title>a{color:#55bfe6;font-size:7px;text-decoration:none}.status{display:inline-flex;align-items:center;justify-content:center;padding:5px 7px;border:1px solid currentColor;border-radius:2px;font-size:6px!important;letter-spacing:.1em;font-weight:850;white-space:nowrap}.status--ok{color:#65d6aa;background:rgba(64,192,139,.06)}.status--progress{color:#5fc9f5;background:rgba(40,167,224,.07)}.status--warn{color:#e7bb6b;background:rgba(219,160,59,.06)}
+        .asset-panel{min-height:380px}.asset-visual{height:145px;position:relative;display:grid;place-items:center;margin-bottom:19px;border:1px solid rgba(106,182,211,.1);background:radial-gradient(circle,rgba(0,139,205,.09),transparent 55%),linear-gradient(180deg,rgba(1,8,13,.34),rgba(9,22,31,.24));overflow:hidden}.asset-visual::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(72,142,169,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(72,142,169,.05) 1px,transparent 1px);background-size:22px 22px}.asset-machine{position:relative;width:148px;height:70px;border:1px solid rgba(127,208,235,.34);background:linear-gradient(145deg,rgba(12,48,63,.75),rgba(7,20,28,.85));box-shadow:0 0 35px rgba(0,144,210,.08)}.asset-machine::before,.asset-machine::after{content:'';position:absolute;top:10px;width:44px;height:48px;border:1px solid rgba(112,186,213,.25);border-radius:50%;background:radial-gradient(circle,transparent 34%,rgba(84,160,189,.18) 36%,transparent 40%)}.asset-machine::before{left:12px}.asset-machine::after{right:12px}.asset-machine span{position:absolute;left:64px;width:18px;height:5px;background:#16404f}.asset-machine span:nth-child(1){top:15px}.asset-machine span:nth-child(2){top:31px}.asset-machine span:nth-child(3){top:47px}.asset-id{position:absolute;right:12px;bottom:10px;color:#4b7688;font-size:6px;letter-spacing:.13em}.asset-data{display:grid;grid-template-columns:repeat(2,1fr);margin:0}.asset-data>div{padding:10px 0;border-top:1px solid rgba(113,179,204,.08)}.asset-data>div:nth-child(odd){padding-right:14px}.asset-data>div:nth-child(even){padding-left:14px;border-left:1px solid rgba(113,179,204,.08)}.asset-data dt{color:#496673;font-size:6px;margin-bottom:5px}.asset-data dd{margin:0;color:#b8ccd5;font-size:8px}.priority{font-size:6px!important;letter-spacing:.09em}.priority--medium{color:#e2b56a}.priority--high{color:#ff786e}
+        .work-panel{min-height:380px}.work-title{margin:-5px 0 18px;color:#bad0da;font-size:12px}.work-meta{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(111,178,204,.1)}.work-meta>div{padding:10px;border-right:1px solid rgba(111,178,204,.1)}.work-meta>div:last-child{border-right:0}.work-meta span{display:block;color:#48636f;font-size:5px;margin-bottom:6px}.work-meta b{font-size:7px}.work-progress{height:3px;margin:17px 0 20px;background:#0d202b}.work-progress i{display:block;width:var(--p);height:100%;background:linear-gradient(90deg,#087dff,#1bcfff);box-shadow:0 0 12px rgba(27,207,255,.4)}.work-log{display:grid;gap:2px}.work-log article{display:grid;grid-template-columns:44px 1fr;gap:11px;padding:9px 10px;border-left:1px solid rgba(92,154,179,.18);background:rgba(7,20,29,.42)}.work-log article.is-current{border-left-color:#1bcfff;background:rgba(0,139,203,.06)}.work-log time{color:#4e6d7b;font-size:6px}.work-log b{font-size:8px}.work-log p{margin:3px 0 0;color:#66818d;font-size:7px;line-height:1.5}
+        .doc-list{list-style:none;margin:0;padding:0;display:grid}.doc-list li{display:grid;grid-template-columns:34px 1fr auto;gap:11px;align-items:center;padding:10px 0;border-top:1px solid rgba(111,178,204,.08)}.doc-list i{display:grid;place-items:center;width:28px;height:28px;border:1px solid rgba(62,164,203,.17);color:#58bfe5;font-size:6px;font-style:normal}.doc-list div{display:grid;gap:4px}.doc-list b{font-size:8px}.doc-list span{color:#526e7a;font-size:6px}.doc-list small{color:#4f8194;font-size:8px}
+        .history-table{display:grid}.history-row{display:grid;grid-template-columns:.6fr 1.7fr .7fr .7fr;gap:10px;align-items:center;padding:11px 0;border-top:1px solid rgba(111,178,204,.08);color:#78919c;font-size:7px}.history-row--head{color:#45616e;font-size:5px;letter-spacing:.1em}.history-row .status{justify-self:start}
+        .context-strip{margin:0 12px 12px;display:grid;grid-template-columns:.5fr 1fr .65fr;gap:22px;align-items:center;padding:16px 18px;border:1px solid rgba(36,179,235,.16);background:linear-gradient(90deg,rgba(0,123,219,.12),rgba(0,202,255,.035))}.context-strip div span{display:block;color:#55727f;font-size:5px;letter-spacing:.12em}.context-strip div strong{font-size:12px}.context-strip p{margin:0;color:#688591;font-size:7px}.context-strip>b{color:#8dcfe6;font-size:6px;text-align:right;letter-spacing:.1em}
+        .product-principles{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border-top:1px solid rgba(112,186,219,.12);border-left:1px solid rgba(112,186,219,.12)}.product-principles article{min-height:145px;padding:24px;border-right:1px solid rgba(112,186,219,.12);border-bottom:1px solid rgba(112,186,219,.12);background:rgba(5,16,24,.35)}.product-principles span{color:#42606c;font-size:6px}.product-principles b{display:block;margin:27px 0 8px;font-size:8px;letter-spacing:.11em}.product-principles p{margin:0;color:#657e89;font-size:8px;line-height:1.65}
+        @media(max-width:1180px){.app-shell{grid-template-columns:180px 1fr}.app-grid{grid-template-columns:1fr}.asset-panel,.work-panel{min-height:auto}.context-strip{grid-template-columns:1fr}.context-strip>b{text-align:left}.work-meta{grid-template-columns:repeat(2,1fr)}.app-kpis{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:780px){.product-ui{padding:88px 16px 95px}.product-ui__head{grid-template-columns:1fr;gap:28px}.product-ui__head h2{font-size:clamp(50px,14vw,72px)}.app-shell{display:block;min-height:0}.app-nav{display:none}.app-topbar{padding:16px;align-items:flex-start}.app-topbar__actions .live-dot{display:none}.app-kpis{grid-template-columns:repeat(2,1fr)}.app-grid{padding:8px;gap:8px}.panel{padding:16px}.work-meta{grid-template-columns:repeat(2,1fr)}.history-row{grid-template-columns:.7fr 1.5fr .8fr}.history-row span:last-child{display:none}.context-strip{margin:0 8px 8px}.product-principles{grid-template-columns:1fr}}
+      `;
+
+      async function buildPhase65() {
+        try {
+          const response = await fetch(phase64Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.4: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+          parsed.title = 'IsiVoltPro · Fase 6.5 · Interfaz de producto';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'Vista conceptual de IsiVoltPro con activos, órdenes de trabajo, técnicos, prioridades, documentación e histórico técnico conectados.');
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#interfaz-producto"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#interfaz-producto';
+            link.textContent = 'Interfaz';
+            nav.appendChild(link);
+          }
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el punto de inserción de Fase 6.4');
+          const template = parsed.createElement('template');
+          template.innerHTML = productMarkup.trim();
+          bridge.parentNode.insertBefore(template.content, bridge);
+          const style = parsed.createElement('style');
+          style.textContent = productStyles;
+          parsed.head.appendChild(style);
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.5', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase64Url;
+          fallback.textContent = 'Abrir Fase 6.4';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+      buildPhase65();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

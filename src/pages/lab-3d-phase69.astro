@@ -1,0 +1,181 @@
+---
+const base = import.meta.env.BASE_URL;
+const phase68Url = `${base}lab-3d-phase68/`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#02060b" />
+    <title>IsiVoltPro · Fase 6.9 · Sectores</title>
+  </head>
+  <body>
+    <main class="phase-loader">
+      <div class="phase-loader__mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p>ISIVOLTPRO</p>
+      <strong>Preparando Fase 6.9</strong>
+      <span>SECTORES · CASOS DE USO</span>
+      <noscript><a href={phase68Url}>Abrir Fase 6.8</a></noscript>
+    </main>
+
+    <script is:inline define:vars={{ phase68Url }}>
+      const sectorsMarkup = `
+        <section class="sectors" id="sectores" aria-labelledby="sectors-title">
+          <div class="sectors__head">
+            <div>
+              <p class="eyebrow"><i></i> SECTORES Y CASOS DE USO</p>
+              <h2 id="sectors-title">UNA MISMA LÓGICA.<br /><em>DISTINTOS ENTORNOS.</em></h2>
+            </div>
+            <div class="sectors__copy">
+              <p class="sectors__lead">IsiVoltPro encaja donde existen instalaciones físicas, activos técnicos, personas que intervienen sobre ellos y conocimiento que merece conservarse.</p>
+              <p>El sector cambia. La estructura operativa permanece: identificar el activo, organizar el trabajo, documentar la actuación y mantener el histórico disponible.</p>
+            </div>
+          </div>
+
+          <article class="sector-featured">
+            <div class="sector-featured__index"><span>01</span><small>ENTORNO DE ALTA COMPLEJIDAD</small></div>
+            <div class="sector-featured__body">
+              <span>HOSPITALES Y CENTROS SANITARIOS</span>
+              <h3>MÚLTIPLES DISCIPLINAS.<br />UNA SOLA OPERACIÓN TÉCNICA.</h3>
+              <p>Electricidad, climatización, agua, infraestructura, equipos críticos, mantenimiento preventivo y correctivo conviven en una instalación donde el contexto y la trazabilidad son especialmente importantes.</p>
+              <div class="sector-featured__tags"><b>Electricidad</b><b>HVAC</b><b>Agua</b><b>Infraestructura</b><b>Activos</b><b>OT</b><b>Documentación</b></div>
+            </div>
+            <div class="sector-featured__logic">
+              <span>ENCaja CUANDO...</span>
+              <strong>EL TRABAJO TÉCNICO NO PUEDE QUEDAR AISLADO.</strong>
+              <ul>
+                <li><i></i><span>Muchos equipos y ubicaciones</span></li>
+                <li><i></i><span>Distintas especialidades técnicas</span></li>
+                <li><i></i><span>Actuaciones con necesidad de trazabilidad</span></li>
+                <li><i></i><span>Documentación asociada al contexto real</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <div class="sectors-grid">
+            <article class="sector-card">
+              <span>02 · INDUSTRIA</span><h3>PLANTAS Y PROCESOS</h3>
+              <p>Equipos, líneas, servicios auxiliares e infraestructura técnica con mantenimiento ligado a activos y ubicaciones concretas.</p>
+              <b>ACTIVO → TRABAJO → HISTÓRICO</b>
+            </article>
+            <article class="sector-card">
+              <span>03 · EDIFICIOS TÉCNICOS</span><h3>INSTALACIONES COMPLEJAS</h3>
+              <p>Edificios con cuadros, climatización, bombeo, PCI, infraestructura y documentación repartida entre distintas disciplinas.</p>
+              <b>SISTEMA → EQUIPO → CONTEXTO</b>
+            </article>
+            <article class="sector-card">
+              <span>04 · MULTISITIO</span><h3>MANTENIMIENTO DISTRIBUIDO</h3>
+              <p>Varias sedes u organizaciones con necesidad de conservar una estructura común sin perder el contexto de cada instalación.</p>
+              <b>ORGANIZACIÓN → SEDE → ACTIVO</b>
+            </article>
+            <article class="sector-card">
+              <span>05 · ELECTRICIDAD</span><h3>INSTALACIONES ELÉCTRICAS</h3>
+              <p>Cuadros, líneas, protecciones, revisiones, defectos, intervenciones y documentación vinculados al elemento inspeccionado.</p>
+              <b>CUADRO → REVISIÓN → ACTUACIÓN</b>
+            </article>
+            <article class="sector-card">
+              <span>06 · CLIMATIZACIÓN</span><h3>HVAC Y VENTILACIÓN</h3>
+              <p>UTA, climatizadores, bombas, ventiladores y equipos asociados a preventivos, incidencias, técnicos y evidencias.</p>
+              <b>EQUIPO → OT → TÉCNICO → CIERRE</b>
+            </article>
+            <article class="sector-card">
+              <span>07 · INFRAESTRUCTURAS</span><h3>SERVICIOS TÉCNICOS</h3>
+              <p>Agua, bombeo, redes, salas técnicas y activos auxiliares que necesitan seguimiento, documentación e histórico común.</p>
+              <b>UBICACIÓN → ACTIVO → MEMORIA</b>
+            </article>
+          </div>
+
+          <div class="sector-principle">
+            <div>
+              <span>LO QUE CAMBIA</span>
+              <strong>EL ENTORNO, LOS EQUIPOS Y LAS REGLAS DE OPERACIÓN.</strong>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div>
+              <span>LO QUE PERMANECE</span>
+              <strong>ACTIVO · TRABAJO · DOCUMENTACIÓN · HISTÓRICO · CONTEXTO</strong>
+            </div>
+          </div>
+
+          <div class="sectors-note">
+            <span>CASOS DE USO, NO REFERENCIAS COMERCIALES</span>
+            <p>Estos sectores representan contextos donde la arquitectura de IsiVoltPro puede aportar valor. No se presentan como clientes, implantaciones ni resultados comerciales ya obtenidos.</p>
+            <b>UN NÚCLEO OPERATIVO · DISTINTAS INSTALACIONES</b>
+          </div>
+        </section>`;
+
+      const sectorsStyles = `
+        .sectors{padding:130px clamp(20px,5vw,92px) 155px;background:radial-gradient(circle at 20% 32%,rgba(218,154,63,.055),transparent 24%),radial-gradient(circle at 80% 24%,rgba(0,142,234,.07),transparent 28%),linear-gradient(180deg,#02070b,#061019 48%,#02070b);border-top:1px solid rgba(105,169,197,.08)}
+        .sectors__head,.sector-featured,.sectors-grid,.sector-principle,.sectors-note{width:min(1480px,100%);margin-left:auto;margin-right:auto}
+        .sectors__head{display:grid;grid-template-columns:1fr .58fr;gap:clamp(50px,8vw,130px);align-items:end;margin-bottom:66px}
+        .sectors__head h2{margin:0;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(58px,5.8vw,98px);line-height:.87;font-weight:650;letter-spacing:-.04em}.sectors__head h2 em{color:transparent;font-style:normal;-webkit-text-stroke:1px rgba(133,221,255,.72);text-shadow:0 0 34px rgba(0,145,255,.12)}
+        .sectors__copy{border-left:1px solid rgba(27,207,255,.22);padding-left:28px}.sectors__copy p{margin:0 0 13px;color:#8198a3;font-size:12px;line-height:1.8}.sectors__copy .sectors__lead{color:#d4e4eb;font-size:15px}
+        .sector-featured{display:grid;grid-template-columns:110px 1.2fr .7fr;min-height:430px;border:1px solid rgba(108,188,220,.18);background:linear-gradient(120deg,rgba(10,28,39,.98),rgba(4,13,20,.94));overflow:hidden;position:relative}.sector-featured::after{content:'';position:absolute;width:480px;height:480px;border-radius:50%;right:-180px;top:-220px;background:#078dff;filter:blur(95px);opacity:.08;pointer-events:none}
+        .sector-featured__index{padding:28px 20px;border-right:1px solid rgba(100,177,208,.12);display:flex;flex-direction:column;justify-content:space-between}.sector-featured__index span{font-family:'Barlow Condensed',Inter,sans-serif;font-size:62px;color:#244557;line-height:.8}.sector-featured__index small{writing-mode:vertical-rl;transform:rotate(180deg);color:#587581;font-size:6px;font-weight:850;letter-spacing:.17em}
+        .sector-featured__body{padding:50px clamp(30px,4vw,68px);display:flex;flex-direction:column;justify-content:center}.sector-featured__body>span{color:#d5aa6d;font-size:7px;font-weight:850;letter-spacing:.17em}.sector-featured__body h3{margin:16px 0 22px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:clamp(44px,4.5vw,74px);line-height:.88;letter-spacing:-.035em}.sector-featured__body p{max-width:690px;margin:0;color:#879da8;font-size:12px;line-height:1.85}.sector-featured__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px}.sector-featured__tags b{padding:7px 9px;border:1px solid rgba(215,171,107,.18);background:rgba(215,171,107,.05);color:#c7a777;font-size:6px;letter-spacing:.11em}
+        .sector-featured__logic{position:relative;z-index:1;padding:42px 34px;border-left:1px solid rgba(102,180,211,.12);background:linear-gradient(180deg,rgba(0,111,194,.08),rgba(2,9,14,.38));display:flex;flex-direction:column;justify-content:center}.sector-featured__logic>span{color:#5c8494;font-size:6px;font-weight:850;letter-spacing:.16em}.sector-featured__logic>strong{margin:12px 0 24px;color:#d5e8ef;font-family:'Barlow Condensed',Inter,sans-serif;font-size:28px;line-height:1}.sector-featured__logic ul{list-style:none;padding:0;margin:0;display:grid;gap:13px}.sector-featured__logic li{display:flex;align-items:center;gap:10px;color:#8097a2;font-size:9px;line-height:1.4}.sector-featured__logic li i{width:5px;height:5px;border-radius:50%;background:#1bcfff;box-shadow:0 0 8px rgba(27,207,255,.45)}
+        .sectors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}.sector-card{min-height:245px;padding:30px;border:1px solid rgba(105,180,210,.12);background:linear-gradient(155deg,rgba(8,22,32,.94),rgba(3,10,16,.94));transition:transform .25s ease,border-color .25s ease}.sector-card:hover{transform:translateY(-3px);border-color:rgba(75,199,246,.24)}.sector-card>span{color:#537786;font-size:6px;font-weight:850;letter-spacing:.15em}.sector-card h3{margin:15px 0 16px;font-family:'Barlow Condensed',Inter,sans-serif;font-size:32px;line-height:.94}.sector-card p{min-height:72px;margin:0 0 22px;color:#768f9a;font-size:10px;line-height:1.75}.sector-card b{color:#5bb8da;font-size:7px;letter-spacing:.1em}
+        .sector-principle{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:24px;margin-top:28px;padding:30px;border:1px solid rgba(27,207,255,.16);background:linear-gradient(90deg,rgba(209,151,67,.05),rgba(0,125,210,.1))}.sector-principle div span{display:block;margin-bottom:8px;color:#5d7b88;font-size:6px;font-weight:850;letter-spacing:.16em}.sector-principle div strong{font-family:'Barlow Condensed',Inter,sans-serif;font-size:26px;line-height:1;color:#c7dce5}.sector-principle>i{text-align:center;color:#39869f;font-style:normal;font-size:24px}
+        .sectors-note{display:grid;grid-template-columns:.6fr 1.25fr .8fr;gap:30px;align-items:center;margin-top:14px;padding:22px 28px;border:1px solid rgba(107,176,202,.1);background:#040d13}.sectors-note span{color:#6c8792;font-size:6px;font-weight:850;letter-spacing:.14em}.sectors-note p{margin:0;color:#69818b;font-size:9px;line-height:1.65}.sectors-note b{text-align:right;color:#92b8c6;font-size:7px;letter-spacing:.1em}
+        @media(max-width:1050px){.sector-featured{grid-template-columns:80px 1fr}.sector-featured__logic{grid-column:1/-1;border-left:0;border-top:1px solid rgba(102,180,211,.12)}.sectors-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:800px){.sectors{padding:90px 20px 105px}.sectors__head{grid-template-columns:1fr;gap:28px}.sectors__head h2{font-size:clamp(50px,14vw,72px)}.sector-featured{display:block}.sector-featured__index{display:none}.sector-featured__body{padding:38px 26px}.sector-featured__logic{padding:30px 26px}.sectors-grid{grid-template-columns:1fr}.sector-card{min-height:0}.sector-card p{min-height:0}.sector-principle{grid-template-columns:1fr}.sector-principle>i{text-align:left;transform:rotate(90deg);width:max-content}.sectors-note{grid-template-columns:1fr}.sectors-note b{text-align:left}}
+      `;
+
+      async function buildPhase69() {
+        try {
+          const response = await fetch(phase68Url, { cache: 'no-cache' });
+          if (!response.ok) throw new Error(`Fase 6.8: ${response.status}`);
+          const html = await response.text();
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+
+          parsed.title = 'IsiVoltPro · Fase 6.9 · Sectores';
+          const description = parsed.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', 'Sectores y casos de uso de IsiVoltPro: hospitales, industria, edificios técnicos, mantenimiento multisitio, electricidad, climatización e infraestructuras.');
+
+          const nav = parsed.querySelector('.nav');
+          if (nav && !nav.querySelector('a[href="#sectores"]')) {
+            const link = parsed.createElement('a');
+            link.href = '#sectores';
+            link.textContent = 'Sectores';
+            nav.appendChild(link);
+          }
+
+          const bridge = parsed.querySelector('.bridge');
+          if (!bridge) throw new Error('No se encontró el punto de inserción de Fase 6.8');
+          const template = parsed.createElement('template');
+          template.innerHTML = sectorsMarkup.trim();
+          bridge.parentNode.insertBefore(template.content, bridge);
+
+          const style = parsed.createElement('style');
+          style.textContent = sectorsStyles;
+          parsed.head.appendChild(style);
+
+          document.open();
+          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
+          document.close();
+        } catch (error) {
+          console.error('[ISIVOLTPRO] No se pudo componer Fase 6.9', error);
+          document.querySelector('.phase-loader')?.classList.add('phase-loader--error');
+          const fallback = document.createElement('a');
+          fallback.href = phase68Url;
+          fallback.textContent = 'Abrir Fase 6.8';
+          document.querySelector('.phase-loader')?.appendChild(fallback);
+        }
+      }
+
+      buildPhase69();
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html), :global(body) { margin: 0; min-width: 320px; min-height: 100%; background: #02060b; color: #f6fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+  .phase-loader { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 9px; background: radial-gradient(circle at 50% 42%, rgba(0, 122, 255, .13), transparent 26%), #02060b; }
+  .phase-loader__mark { width: 32px; display: grid; gap: 4px; margin-bottom: 16px; transform: skewY(-26deg); }
+  .phase-loader__mark i { height: 6px; background: linear-gradient(90deg, #087dff, #1bcfff); box-shadow: 0 0 16px rgba(27, 207, 255, .24); }
+  .phase-loader p { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .18em; }
+  .phase-loader strong { font-size: 20px; }
+  .phase-loader span { color: #607985; font-size: 8px; font-weight: 800; letter-spacing: .17em; }
+  .phase-loader a { margin-top: 18px; color: #1bcfff; font-size: 11px; }
+</style>

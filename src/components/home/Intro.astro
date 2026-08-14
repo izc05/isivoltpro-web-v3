@@ -53,7 +53,6 @@
   (() => {
     const gate = document.querySelector('[data-intro-gate]');
     const enter = document.querySelector('[data-intro-enter]');
-    const video = document.querySelector('[data-hero-video]');
     if (!(gate instanceof HTMLElement) || !(enter instanceof HTMLButtonElement)) return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,13 +61,10 @@
     const openSite = () => {
       if (leaving) return;
       leaving = true;
+
+      window.dispatchEvent(new CustomEvent('isivolt:start-loader'));
       gate.classList.add('is-leaving');
       document.body.classList.remove('has-intro');
-
-      if (video instanceof HTMLVideoElement) {
-        try { video.currentTime = 0; } catch (_) {}
-        video.play().catch(() => {});
-      }
 
       window.setTimeout(() => gate.remove(), reduced ? 40 : 860);
     };

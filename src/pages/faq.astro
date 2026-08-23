@@ -1,0 +1,37 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
+const base = import.meta.env.BASE_URL;
+const contact = `${base}contacto/`;
+const modules = `${base}aplicaciones/`;
+const questions = [
+  ['¿IsiVoltPro está pensado para autónomos?', 'Sí. La dirección del producto prioriza profesionales que gestionan clientes, equipos, avisos, revisiones y trabajos sin querer implantar un ERP complejo. La configuración concreta depende de la fase actual del producto.'],
+  ['¿También sirve para una pequeña empresa con varios técnicos?', 'Ese es el segundo perfil principal. La plataforma se plantea para repartir trabajo, compartir contexto y mantener separados los históricos de clientes e instalaciones.'],
+  ['¿Tengo que usar todos los módulos?', 'No. La idea comercial es empezar por el problema que más tiempo hace perder —por ejemplo OT, activos o preventivo— y ampliar después.'],
+  ['¿Sustituye a WhatsApp?', 'No pretende sustituir la comunicación. Pretende evitar que el registro del trabajo dependa de mensajes: un aviso puede terminar convertido en una OT con responsable, estado, evidencias e histórico.'],
+  ['¿Puedo identificar equipos con QR o NFC?', 'IsiVoltPro contempla QR y NFC como puente entre el activo físico y su ficha digital. La disponibilidad exacta y el flujo de acceso se confirman en la demo según la fase del producto.'],
+  ['¿Funciona desde el móvil?', 'La experiencia está diseñada con el trabajo de campo como prioridad: identificar un activo, consultar contexto, trabajar sobre una OT y adjuntar evidencias son casos centrales del diseño.'],
+  ['¿Puedo gestionar varios clientes o ubicaciones?', 'La arquitectura de IsiVoltPro está planteada para organizaciones, clientes, instalaciones y activos separados. Los permisos y el acceso central se desarrollan en la plataforma, fuera de esta web comercial.'],
+  ['¿Cuánto cuesta?', 'Los precios definitivos no se publicarán hasta validar alcance y uso con pilotos. La estructura prevista diferencia profesional individual, pequeño equipo y empresa, evitando fijar importes ficticios.'],
+  ['¿Puedo probarlo antes de contratar?', 'La web está orientada a solicitar una demo y validar el encaje sobre problemas reales. El formato de piloto y las condiciones se concretarán antes de producción comercial.'],
+  ['¿Qué diferencia a IsiVoltPro de un software de mantenimiento grande?', 'El enfoque: empezar pequeño, usar lenguaje de trabajo cotidiano y reducir administración. La prioridad son autónomos y pequeñas empresas que necesitan control sin desplegar un sistema sobredimensionado.']
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: questions.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }))
+};
+---
+<!doctype html><html lang="es"><head><V3Seo title="Preguntas frecuentes · IsiVoltPro" description="Preguntas frecuentes sobre IsiVoltPro para autónomos y pequeñas empresas: módulos, móvil, QR/NFC, precios, pilotos y forma de trabajo." path={`${base}faq/`} /><script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script></head><body>
+<V3CommercialHeader />
+<main class="page-main">
+<section class="page-hero"><div class="page-shell page-hero__grid"><div><span class="eyebrow">Sin letra pequeña comercial</span><h1>Preguntas antes de<br/><span class="gradient-text">dar el siguiente paso.</span></h1><p>Respondemos lo que normalmente importa a un autónomo o pequeña empresa antes de probar un nuevo sistema: encaje, complejidad, módulos, móvil y costes.</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Preguntar por mi caso →</a><a class="btn" href={modules}>Ver módulos</a></div></div><div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">FAQ<small>RESPUESTAS CLARAS</small></div><div class="page-pill page-pill--a">Autónomos<small>¿Encaja conmigo?</small></div><div class="page-pill page-pill--b">Módulos<small>¿Qué necesito?</small></div><div class="page-pill page-pill--c">Móvil<small>¿Cómo se usa?</small></div><div class="page-pill page-pill--d">Planes<small>¿Cómo empiezo?</small></div></div></div></section>
+<section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Lo esencial</span><h2>Respuestas directas,<br/><span class="gradient-text">sin prometer de más.</span></h2></div><p>Mientras IsiVoltPro avanza hacia pilotos, diferenciamos claramente la dirección del producto de las capacidades cuya disponibilidad debe confirmarse.</p></div><div class="faq-list">{questions.map(([question, answer], index) => <details class="faq-item" open={index === 0}><summary><span>{String(index + 1).padStart(2,'0')}</span>{question}<i>+</i></summary><p>{answer}</p></details>)}</div></div></section>
+<section class="page-section"><div class="page-shell"><div class="callout"><div><h2>¿Tu duda no aparece aquí?</h2><p>Cuéntanos cómo trabajas hoy y qué quieres mejorar. Es mejor decirte que algo todavía no encaja que venderte una solución equivocada.</p></div><a class="btn btn--primary" href={contact}>Hablar de mi caso →</a></div></div></section>
+</main><V3CommercialFooter />
+<style is:inline>
+.faq-list{display:grid;gap:12px;max-width:900px;margin:0 auto}.faq-item{border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 10px 28px rgba(41,62,104,.05);overflow:hidden}.faq-item summary{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;padding:20px 22px;cursor:pointer;list-style:none;font:700 16px/1.4 Manrope,sans-serif}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary span{color:var(--violet);font-size:12px}.faq-item summary i{font-style:normal;font-size:21px;color:#7a86a3;transition:transform .2s ease}.faq-item[open] summary i{transform:rotate(45deg)}.faq-item p{margin:0;padding:0 22px 22px 76px;color:var(--muted);line-height:1.75}@media(max-width:600px){.faq-item summary{grid-template-columns:30px 1fr auto;padding:17px}.faq-item p{padding:0 17px 18px 47px}}
+</style>
+</body></html>

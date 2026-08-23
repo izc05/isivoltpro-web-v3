@@ -41,18 +41,24 @@ failures: list[str] = []
 
 
 def render_full_page(page, label: str, width: int) -> None:
+    """Visita cada bloque animado para no saltar IntersectionObservers en páginas largas."""
     page.evaluate(
         """async () => {
           const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-          const step = Math.max(360, Math.floor(window.innerHeight * .7));
+          const reveals = [...document.querySelectorAll('.reveal')];
+          for (const el of reveals) {
+            el.scrollIntoView({block: 'center', behavior: 'instant'});
+            await sleep(90);
+          }
+          const step = Math.max(300, Math.floor(window.innerHeight * .55));
           let max = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
           for (let y = 0; y <= max; y += step) {
             window.scrollTo(0, y);
-            await sleep(70);
+            await sleep(65);
             max = Math.max(max, document.body.scrollHeight, document.documentElement.scrollHeight);
           }
           window.scrollTo(0, max);
-          await sleep(500);
+          await sleep(420);
         }"""
     )
     hidden_reveals = page.evaluate(

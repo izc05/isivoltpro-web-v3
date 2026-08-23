@@ -1,5 +1,13 @@
 /* V3 commercial polish: progressive enhancement, motion and depth. */
 
+:root {
+  --v3-font-sans: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --v3-font-display: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+body { font-family: var(--v3-font-sans); }
+:where(h1, h2, h3, h4, .brand, .mini-brand, .page-core, .intro__mark span) { font-family: var(--v3-font-display); }
+
 :where(a, button, summary, input, select, textarea):focus-visible {
   outline: 3px solid rgba(23, 92, 255, .28);
   outline-offset: 4px;
@@ -81,7 +89,7 @@
   box-shadow: 0 1px 0 rgba(20,34,68,.03);
 }
 
-.mobile-nav__panel a,
+.v3-mobile-nav__panel a,
 .nav a {
   position: relative;
 }
@@ -98,7 +106,8 @@
   transition: right .22s ease;
 }
 
-.nav a:hover::after { right: 0; }
+.nav a:hover::after,
+.nav a[aria-current="page"]::after { right: 0; }
 
 @keyframes v3-core-float {
   0%,100% { transform: translate(-50%,-50%) translateY(0) rotate(-1deg); }

@@ -6,6 +6,7 @@ const routes = [
   'soluciones/',
   'app-mantenimiento/',
   'aplicaciones/',
+  'demo/',
   'piloto/',
   'implantacion/',
   'seguridad/',

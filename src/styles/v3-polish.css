@@ -1,0 +1,130 @@
+/* V3 commercial polish: progressive enhancement, motion and depth. */
+
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(23, 92, 255, .28);
+  outline-offset: 4px;
+}
+
+:where(.feature-card, .value-card, .sector-card, .resource-card, .plan-card, .story-card) {
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
+}
+
+:where(a.feature-card, a.value-card, a.sector-card, a.resource-card):hover {
+  transform: translateY(-6px);
+  border-color: rgba(95, 87, 220, .23);
+  box-shadow: 0 24px 62px rgba(49, 62, 102, .12);
+}
+
+:where(a.feature-card, a.value-card, a.sector-card, a.resource-card):hover i {
+  transform: rotate(-4deg) scale(1.06);
+}
+
+:where(.feature-card, .value-card, .sector-card, .resource-card) i {
+  transition: transform .28s cubic-bezier(.2,.8,.2,1);
+}
+
+.page-hero__visual {
+  transform-style: preserve-3d;
+}
+
+.page-core {
+  animation: v3-core-float 6s ease-in-out infinite;
+}
+
+.page-orbit {
+  animation: v3-orbit-drift 18s linear infinite;
+}
+
+.page-pill {
+  animation: v3-pill-float 7s ease-in-out infinite;
+}
+
+.page-pill--b { animation-delay: -1.6s; }
+.page-pill--c { animation-delay: -3.1s; }
+.page-pill--d { animation-delay: -4.7s; }
+
+.callout {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 340px;
+  height: 340px;
+  right: -160px;
+  top: -210px;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, rgba(23,92,255,.18), rgba(109,74,255,.13), rgba(242,56,169,.14), rgba(255,139,61,.10));
+  filter: blur(18px);
+}
+
+.flow-step {
+  transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
+
+.flow-step:hover {
+  transform: translateY(-4px);
+  border-color: rgba(109,74,255,.20);
+  box-shadow: 0 18px 38px rgba(49,62,102,.08);
+}
+
+.page-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 780px;
+}
+
+.site-header {
+  box-shadow: 0 1px 0 rgba(20,34,68,.03);
+}
+
+.mobile-nav__panel a,
+.nav a {
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -7px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #175cff, #6d4aff, #f238a9);
+  transition: right .22s ease;
+}
+
+.nav a:hover::after { right: 0; }
+
+@keyframes v3-core-float {
+  0%,100% { transform: translate(-50%,-50%) translateY(0) rotate(-1deg); }
+  50% { transform: translate(-50%,-50%) translateY(-9px) rotate(1deg); }
+}
+
+@keyframes v3-orbit-drift {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(352deg); }
+}
+
+@keyframes v3-pill-float {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .page-section { contain-intrinsic-size: 1100px; }
+  :where(a.feature-card, a.value-card, a.sector-card, a.resource-card):hover { transform: none; }
+}

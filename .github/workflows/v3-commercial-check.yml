@@ -111,22 +111,22 @@ jobs:
             'faq/'
           )
           for route in "${sitemap_required[@]}"; do
-            if ! grep -q "$route" dist/sitemap.xml; then
+            if ! grep -Fq "$route" dist/sitemap.xml; then
               echo "::error::Falta $route en sitemap.xml"
               exit 1
             fi
           done
 
           sitemap_forbidden=(
-            'lab-3d'
-            'acceso/'
-            'mantenimiento/'
-            'privacidad/'
-            'cookies/'
-            'aviso-legal/'
+            '/lab-3d'
+            '/acceso/</loc>'
+            '/mantenimiento/</loc>'
+            '/privacidad/</loc>'
+            '/cookies/</loc>'
+            '/aviso-legal/</loc>'
           )
           for route in "${sitemap_forbidden[@]}"; do
-            if grep -q "$route" dist/sitemap.xml; then
+            if grep -Fq "$route" dist/sitemap.xml; then
               echo "::error::Ruta no indexable presente en sitemap.xml: $route"
               exit 1
             fi

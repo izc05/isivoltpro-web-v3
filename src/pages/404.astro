@@ -1,0 +1,7 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html><html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#ffffff"/><meta name="robots" content="noindex"/><title>Página no encontrada · IsiVoltPro</title></head><body><V3CommercialHeader/><main class="page-main"><section class="page-hero" style="min-height:70svh;display:grid;align-items:center"><div class="page-shell" style="text-align:center"><span class="eyebrow">Error 404</span><h1 style="margin:20px auto;font:800 clamp(64px,11vw,140px)/.9 Manrope,sans-serif;letter-spacing:-.07em">Esta OT no existe.<br/><span class="gradient-text">La página tampoco.</span></h1><p style="margin:0 auto;max-width:650px;color:var(--muted);font-size:18px;line-height:1.7">Puede que el enlace haya cambiado o que hayas llegado a una ruta que todavía no está publicada.</p><div class="page-hero__actions" style="justify-content:center"><a class="btn btn--primary" href={base}>Volver a IsiVoltPro →</a></div></div></section></main><V3CommercialFooter/></body></html>

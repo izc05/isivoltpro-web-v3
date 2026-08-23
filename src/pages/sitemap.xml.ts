@@ -7,6 +7,7 @@ const routes = [
   'app-mantenimiento/',
   'aplicaciones/',
   'implantacion/',
+  'seguridad/',
   'modulos/ordenes-de-trabajo/',
   'modulos/activos/',
   'modulos/mantenimiento-preventivo/',

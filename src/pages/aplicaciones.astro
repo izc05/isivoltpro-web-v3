@@ -5,26 +5,33 @@ import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
+const solutions = `${base}soluciones/`;
+const appMaintenance = `${base}app-mantenimiento/`;
 const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
-  <V3Seo title="Módulos · IsiVoltPro" description="Módulos IsiVoltPro para autónomos y pequeñas empresas: activos, avisos, órdenes de trabajo, mantenimiento, QR/NFC, documentación, inventario e inspecciones." path={`${base}aplicaciones/`} />
+  <V3Seo title="Apps y módulos · IsiVoltPro" description="Apps y módulos IsiVoltPro para autónomos y pequeñas empresas: App Mantenimiento, activos, avisos, órdenes de trabajo, mantenimiento preventivo, QR/NFC, documentación, inventario e inspecciones." path={`${base}aplicaciones/`} />
+  <style is:inline>
+    .app-feature{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;padding:40px;border:1px solid #e5e9f3;border-radius:34px;background:linear-gradient(125deg,#f7faff,#f5f1ff 52%,#fff3f8);box-shadow:var(--shadow-soft)}.app-feature h2{margin:15px 0 12px;font-size:clamp(38px,5vw,60px);line-height:1.02;letter-spacing:-.055em}.app-feature p{margin:0;color:var(--muted);line-height:1.7}.app-feature__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.app-feature__visual{position:relative;min-height:310px}.app-feature__window{position:absolute;inset:15px 20px 30px 0;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 24px 60px rgba(54,70,113,.13);overflow:hidden}.app-feature__bar{display:flex;justify-content:space-between;align-items:center;padding:15px 17px;border-bottom:1px solid var(--line);font-size:10px;color:#75819a}.app-feature__body{padding:18px}.app-feature__body h3{margin:0;font-size:23px}.app-feature__kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}.app-feature__kpis div{padding:12px;border:1px solid var(--line);border-radius:13px}.app-feature__kpis small{display:block;color:var(--muted);font-size:9px}.app-feature__kpis strong{display:block;margin-top:5px;font-size:20px}.app-feature__phone{position:absolute;right:0;bottom:0;width:116px;padding:8px;border:4px solid #101a35;border-radius:24px;background:#fff;box-shadow:0 20px 45px rgba(31,47,90,.22);transform:rotate(4deg)}.app-feature__phone div{min-height:190px;padding:10px;border-radius:15px;background:linear-gradient(180deg,#f7faff,#fff)}.app-feature__phone strong{display:block;margin-top:4px;font-size:12px}.app-feature__phone small{font-size:8px;color:var(--muted)}.app-feature__phone b{display:block;margin-top:12px;padding:9px;border-radius:9px;text-align:center;color:#fff;background:linear-gradient(100deg,var(--blue),var(--violet));font-size:8px}@media(max-width:850px){.app-feature{grid-template-columns:1fr}}@media(max-width:560px){.app-feature{padding:26px 20px;border-radius:26px}.app-feature__visual{min-height:280px}.app-feature__actions .btn{width:100%}.app-feature__kpis{grid-template-columns:1fr 1fr}.app-feature__kpis div:last-child{display:none}}
+  </style>
 </head>
 <body>
   <V3CommercialHeader />
   <main class="page-main">
     <section class="page-hero">
       <div class="page-shell page-hero__grid">
-        <div><span class="eyebrow">Una base común, módulos conectados</span><h1>Activa lo que necesitas.<br /><span class="gradient-text">Crece cuando haga falta.</span></h1><p>IsiVoltPro no obliga a implantar una suite enorme desde el primer día. Cada módulo resuelve una parte concreta del trabajo y comparte clientes, activos, usuarios e histórico con el resto.</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Solicitar demo →</a><a class="btn" href="#modulos">Explorar módulos</a></div></div>
-        <div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">MÓDULOS<small>UN SOLO SISTEMA</small></div><div class="page-pill page-pill--a">OT<small>Trabajo y asignación</small></div><div class="page-pill page-pill--b">Activos<small>Equipos e histórico</small></div><div class="page-pill page-pill--c">QR / NFC<small>Acceso en campo</small></div><div class="page-pill page-pill--d">Preventivo<small>Planificación</small></div></div>
+        <div><span class="eyebrow">Aplicaciones conectadas sobre una base común</span><h1>Empieza con una app.<br /><span class="gradient-text">Construye tu sistema después.</span></h1><p>IsiVoltPro no obliga a implantar una suite enorme desde el primer día. Puedes empezar por mantenimiento y añadir activos, QR/NFC, inspecciones, inventario o documentación cuando solucionen un problema concreto.</p><div class="page-hero__actions"><a class="btn btn--primary" href={appMaintenance}>Ver App Mantenimiento →</a><a class="btn" href={solutions}>Ver soluciones</a></div></div>
+        <div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">APPS<small>UN SOLO ECOSISTEMA</small></div><div class="page-pill page-pill--a">Mantenimiento<small>Avisos y OT</small></div><div class="page-pill page-pill--b">Activos<small>Equipos e histórico</small></div><div class="page-pill page-pill--c">QR / NFC<small>Acceso en campo</small></div><div class="page-pill page-pill--d">Inspecciones<small>Trabajo trazable</small></div></div>
       </div>
     </section>
 
+    <section class="page-section"><div class="page-shell"><div class="app-feature"><div><span class="eyebrow">Producto de entrada</span><h2>App Mantenimiento</h2><p>Avisos, órdenes de trabajo, activos, preventivos, fotos, documentación e histórico pensados alrededor de un técnico que trabaja desde el móvil y de quien necesita coordinar sin perseguir información.</p><div class="app-feature__actions"><a class="btn btn--primary" href={appMaintenance}>Conocer la app →</a><a class="btn" href={contact}>Solicitar demo</a></div></div><div class="app-feature__visual" aria-label="Vista conceptual de App Mantenimiento"><div class="app-feature__window"><div class="app-feature__bar"><strong>IsiVoltPro · Mantenimiento</strong><span>Vista conceptual</span></div><div class="app-feature__body"><small style="color:var(--muted)">Hoy</small><h3>Trabajo pendiente</h3><div class="app-feature__kpis"><div><small>OT abiertas</small><strong>12</strong></div><div><small>Preventivos</small><strong>8</strong></div><div><small>Avisos</small><strong>3</strong></div></div></div></div><div class="app-feature__phone"><div><small>ACTIVO</small><strong>UTA-02</strong><small>Planta 1 · Zona técnica</small><b>ABRIR OT</b></div></div></div></div></div></section>
+
     <section class="page-section page-section--soft" id="modulos">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">Núcleo operativo</span><h2>Lo que más se usa,<br /><span class="gradient-text">primero.</span></h2></div><p>Estos módulos forman el recorrido comercial principal: desde el cliente y el equipo hasta el cierre del trabajo y su histórico. Entra en cada uno para ver el problema concreto que resuelve.</p></div>
+        <div class="page-section__head"><div><span class="eyebrow">Núcleo operativo conectado</span><h2>Lo que más se usa,<br /><span class="gradient-text">trabajando junto.</span></h2></div><p>Estas capacidades forman el recorrido principal: desde el cliente y el equipo hasta el cierre del trabajo y su histórico. Cada una puede resolver una fricción concreta sin perder la conexión con las demás.</p></div>
         <div class="feature-grid">
           <a class="feature-card" href={moduleUrl('activos')} style="--accent:rgba(23,92,255,.10)"><i>▣</i><h3>Activos y equipos</h3><p>Identidad, ubicación, estado, fotografías, documentos, revisiones y actuaciones alrededor de cada equipo.</p><small>Ver gestión de activos →</small></a>
           <a class="feature-card" href={moduleUrl('avisos-incidencias')} style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>!</i><h3>Avisos e incidencias</h3><p>Convierte una llamada o mensaje en un registro claro con cliente, activo, prioridad, descripción y evidencias.</p><small>Ver avisos e incidencias →</small></a>
@@ -49,20 +56,20 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
 
     <section class="page-section page-section--soft">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">Módulos especializados</span><h2>Más profundidad cuando<br /><span class="gradient-text">tu actividad la necesita.</span></h2></div><p>Estas capacidades se integran progresivamente sobre la misma base. La disponibilidad concreta se confirma en demo para no presentar desarrollo futuro como producto terminado.</p></div>
+        <div class="page-section__head"><div><span class="eyebrow">Soluciones especializadas</span><h2>Más profundidad cuando<br /><span class="gradient-text">tu actividad la necesita.</span></h2></div><p>Estas capacidades se integran progresivamente sobre la misma base. La disponibilidad concreta se confirma en demo para no presentar desarrollo futuro como producto terminado.</p></div>
         <div class="feature-grid">
           <a class="feature-card" href={moduleUrl('inventario')}><i>▥</i><h3>Inventario y almacén</h3><p>Materiales, existencias, movimientos y consumos vinculados a la operación.</p><small>Ver enfoque de inventario →</small></a>
           <a class="feature-card" href={moduleUrl('inspecciones')} style="--icon:#e37427;--icon-bg:#fff4ea"><i>◎</i><h3>Inspecciones</h3><p>Checklists, defectos, fotografías y resultados vinculados a la instalación inspeccionada.</p><small>Ver enfoque de inspecciones →</small></a>
-          <article class="feature-card" style="--icon:#159f71;--icon-bg:#eaf9f3"><i>≈</i><h3>Legionella / ACS</h3><p>Controles, purgas, puntos y registros específicos alrededor del activo correspondiente.</p><small>Módulo especializado · integración progresiva</small></article>
-          <article class="feature-card" style="--icon:#139db9;--icon-bg:#eafafd"><i>❄</i><h3>Climatización</h3><p>Equipos HVAC, mantenimientos, averías, documentación y trazabilidad por instalación.</p><small>Módulo especializado · integración progresiva</small></article>
-          <article class="feature-card" style="--icon:#6544e8;--icon-bg:#f2efff"><i>⚡</i><h3>Instalaciones eléctricas</h3><p>Cuadros, circuitos, revisiones, documentación técnica y actuaciones sobre cada elemento.</p><small>Módulo especializado · integración progresiva</small></article>
+          <article class="feature-card" style="--icon:#159f71;--icon-bg:#eaf9f3"><i>≈</i><h3>Legionella / ACS</h3><p>Controles, purgas, puntos y registros específicos alrededor del activo correspondiente.</p><small>Solución especializada · integración progresiva</small></article>
+          <article class="feature-card" style="--icon:#139db9;--icon-bg:#eafafd"><i>❄</i><h3>Climatización y frío</h3><p>Equipos HVAC, mantenimientos, averías, documentación y trazabilidad por instalación.</p><small>Solución especializada · integración progresiva</small></article>
+          <article class="feature-card" style="--icon:#6544e8;--icon-bg:#f2efff"><i>⚡</i><h3>Instalaciones eléctricas</h3><p>Cuadros, circuitos, revisiones, documentación técnica y actuaciones sobre cada elemento.</p><small>Solución especializada · integración progresiva</small></article>
           <article class="feature-card" style="--icon:#d52f99;--icon-bg:#fff0f8"><i>✦</i><h3>IsiVoltPro AI</h3><p>Capa de asistencia prevista para consultar documentación e histórico técnico con contexto.</p><small>Capacidad en desarrollo</small></article>
         </div>
       </div>
     </section>
 
     <section class="page-section">
-      <div class="page-shell"><div class="callout"><div><h2>No necesitas activar todo.</h2><p>Empieza por el problema más urgente y amplía cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={contact}>Diseñar mi configuración →</a></div></div>
+      <div class="page-shell"><div class="callout"><div><h2>No necesitas activar todo.</h2><p>Empieza por App Mantenimiento o por el problema más urgente y amplía cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={contact}>Diseñar mi configuración →</a></div></div>
     </section>
   </main>
   <V3CommercialFooter />

@@ -25,7 +25,7 @@ const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
 <style is:inline>
   .v3-skip-link{position:fixed;left:14px;top:10px;z-index:10000;padding:10px 14px;border-radius:12px;background:#0c1530;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(12,21,48,.22);transform:translateY(-160%);transition:transform .18s ease}
   .v3-skip-link:focus{transform:translateY(0)}
-  .v3-skip-target{display:block;position:relative;top:-88px;visibility:hidden}
+  .v3-skip-target{display:block;position:relative;top:-88px;width:1px;height:1px;overflow:hidden}
   .v3-mobile-nav{display:none;position:relative}
   .v3-mobile-nav summary{list-style:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:19px;cursor:pointer}
   .v3-mobile-nav summary::-webkit-details-marker{display:none}
@@ -64,4 +64,4 @@ const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
     </div>
   </div>
 </header>
-<span id="v3-main-content" class="v3-skip-target" tabindex="-1" aria-hidden="true"></span>
+<span id="v3-main-content" class="v3-skip-target" tabindex="-1"></span>

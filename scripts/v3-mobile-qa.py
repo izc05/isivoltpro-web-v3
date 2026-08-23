@@ -17,8 +17,8 @@ VIEWPORTS = [
     ("430", 430, 932),
 ]
 
-# Mantener aquí las rutas públicas que un visitante real recorre antes de una demo.
-# Las rutas de /acceso/ quedan expresamente fuera: pertenecen al trabajo de plataforma.
+# Rutas representativas de todas las plantillas comerciales públicas.
+# /acceso/ queda expresamente fuera: pertenece a IsiVoltPro Platform.
 ROUTES = [
     ("", "home"),
     ("producto/", "producto"),
@@ -29,27 +29,42 @@ ROUTES = [
     ("empresa/", "empresa"),
     ("faq/", "faq"),
     ("contacto/", "contacto"),
+    ("modulos/ordenes-de-trabajo/", "modulo-ot"),
+    ("sectores/autonomos-tecnicos/", "sector-autonomos"),
+    ("recursos/orden-trabajo-util/", "guia-ot"),
 ]
 
 failures: list[str] = []
 
 
-def render_full_page(page) -> None:
-    """Recorre la página para materializar secciones con content-visibility:auto."""
+def render_full_page(page, label: str, width: int) -> None:
+    """Recorre la página como una persona para activar lazy/reveal antes del QA."""
     page.evaluate(
         """async () => {
-          const step = Math.max(360, Math.floor(window.innerHeight * 0.72));
-          const max = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-          for (let y = 0; y < max; y += step) {
+          const step = Math.max(300, Math.floor(window.innerHeight * 0.62));
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          let max = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+          for (let y = 0; y <= max; y += step) {
             window.scrollTo(0, y);
-            await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await sleep(90);
+            max = Math.max(max, document.body.scrollHeight, document.documentElement.scrollHeight);
           }
           window.scrollTo(0, max);
-          await new Promise((resolve) => setTimeout(resolve, 80));
-          window.scrollTo(0, 0);
-          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          await sleep(720);
         }"""
     )
+
+    hidden_reveals = page.evaluate(
+        """() => [...document.querySelectorAll('.reveal')]
+          .filter((el) => !el.classList.contains('is-visible'))
+          .map((el) => ({tag: el.tagName, cls: String(el.className || '').slice(0, 90)}))
+          .slice(0, 12)"""
+    )
+    if hidden_reveals:
+        failures.append(f"{label} ({width}px): secciones reveal no activadas tras recorrido · {hidden_reveals}")
+
+    page.evaluate("window.scrollTo(0, 0)")
+    page.wait_for_timeout(180)
 
 
 def audit_layout(page, label: str, width: int) -> None:
@@ -57,7 +72,6 @@ def audit_layout(page, label: str, width: int) -> None:
         """() => ({
           scrollWidth: document.documentElement.scrollWidth,
           clientWidth: document.documentElement.clientWidth,
-          bodyWidth: document.body.getBoundingClientRect().width,
           offenders: [...document.querySelectorAll('body *')]
             .map((el) => {
               const r = el.getBoundingClientRect();
@@ -83,6 +97,19 @@ def audit_layout(page, label: str, width: int) -> None:
         failures.append(f"{label} ({width}px): controles táctiles <43px · {metrics['smallControls']}")
 
 
+def full_screenshot(page, path: Path) -> None:
+    # Chrome puede omitir visualmente contenido fuera del viewport en screenshots
+    # muy largos. Para la evidencia visual forzamos solo el estado final ya auditado.
+    style = page.add_style_tag(
+        content="""
+          .reveal { opacity: 1 !important; transform: none !important; }
+          .section, .page-section { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+        """
+    )
+    page.screenshot(path=str(path), full_page=True)
+    style.evaluate("el => el.remove()")
+
+
 def capture_route(browser, route: str, name: str, viewport_name: str, width: int, height: int) -> None:
     page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
     page.add_init_script(
@@ -95,15 +122,13 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
         page.close()
         return
 
-    page.wait_for_timeout(200)
-    render_full_page(page)
+    page.wait_for_timeout(180)
+    render_full_page(page, name, width)
     audit_layout(page, name, width)
 
-    # Captura superior de todas las rutas. En 390 px guardamos además el recorrido
-    # completo de Home y Contacto para revisar jerarquía, CTA y cierre de página.
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
     if width == 390 and name in {"home", "contacto"}:
-        page.screenshot(path=str(OUT / f"{name}-390-full.png"), full_page=True)
+        full_screenshot(page, OUT / f"{name}-390-full.png")
 
     if name == "home" and width == 390:
         menu = page.locator(".v3-mobile-nav summary")
@@ -137,4 +162,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · rutas comerciales críticas validadas a 360 / 390 / 430 px tras recorrer la página completa")
+print("QA móvil V3: OK · 12 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")

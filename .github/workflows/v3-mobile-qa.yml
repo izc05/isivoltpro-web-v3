@@ -24,9 +24,6 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Construir V3 para QA local
-        env:
-          PUBLIC_SITE_URL: http://127.0.0.1:4321
-          PUBLIC_BASE_PATH: /
         run: npm run build
 
       - name: Instalar Playwright Chromium
@@ -38,7 +35,7 @@ jobs:
         run: |
           nohup npm run preview -- --port 4321 > /tmp/isivoltpro-v3-preview.log 2>&1 &
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then
+            if curl -fsS http://127.0.0.1:4321/isivoltpro-web-v3/ >/dev/null; then
               exit 0
             fi
             sleep 1
@@ -48,7 +45,7 @@ jobs:
 
       - name: Auditar 360 / 390 / 430 px y capturar pantallas
         env:
-          V3_PREVIEW_URL: http://127.0.0.1:4321/
+          V3_PREVIEW_URL: http://127.0.0.1:4321/isivoltpro-web-v3/
           V3_MOBILE_QA_DIR: mobile-qa
         run: python scripts/v3-mobile-qa.py
 

@@ -71,6 +71,14 @@ jobs:
               echo "::error::La página comercial $page está cargando Three.js de forma inesperada."
               exit 1
             fi
+            if ! grep -q 'Content-Security-Policy' "$page"; then
+              echo "::error::Falta CSP comercial en $page"
+              exit 1
+            fi
+            if ! grep -q "font-src 'self' data:" "$page"; then
+              echo "::error::La CSP de $page no restringe las fuentes a recursos locales."
+              exit 1
+            fi
           done
 
           for page in dist/index.html dist/producto/index.html; do
@@ -93,6 +101,7 @@ jobs:
 
           echo "Rutas comerciales: OK"
           echo "Preview social: OK"
+          echo "CSP y fuentes locales: OK"
           echo "Sin MP4 heredados: OK"
           echo "Three.js fuera de páginas comerciales: OK"
           echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"

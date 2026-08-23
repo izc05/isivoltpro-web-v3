@@ -44,11 +44,16 @@ jobs:
             dist/aplicaciones/index.html
             dist/implantacion/index.html
             dist/seguridad/index.html
+            dist/de-whatsapp-excel-a-isivoltpro/index.html
             dist/mantenimiento/index.html
             dist/modulos/ordenes-de-trabajo/index.html
             dist/modulos/activos/index.html
             dist/sectores/autonomos-tecnicos/index.html
             dist/sectores/empresas-mantenedoras/index.html
+            dist/recursos/dejar-whatsapp-excel-mantenimiento/index.html
+            dist/recursos/organizar-avisos-mantenimiento/index.html
+            dist/recursos/cerrar-ot-historico-util/index.html
+            dist/recursos/piloto-mantenimiento-digital/index.html
             dist/recursos/orden-trabajo-util/index.html
             dist/faq/index.html
             dist/contacto/index.html
@@ -77,6 +82,7 @@ jobs:
             dist/aplicaciones/index.html
             dist/implantacion/index.html
             dist/seguridad/index.html
+            dist/de-whatsapp-excel-a-isivoltpro/index.html
             dist/precios/index.html
             dist/recursos/index.html
             dist/faq/index.html
@@ -123,8 +129,13 @@ jobs:
             'aplicaciones/'
             'implantacion/'
             'seguridad/'
+            'de-whatsapp-excel-a-isivoltpro/'
             'modulos/ordenes-de-trabajo/'
             'sectores/autonomos-tecnicos/'
+            'recursos/dejar-whatsapp-excel-mantenimiento/'
+            'recursos/organizar-avisos-mantenimiento/'
+            'recursos/cerrar-ot-historico-util/'
+            'recursos/piloto-mantenimiento-digital/'
             'recursos/orden-trabajo-util/'
             'faq/'
           )
@@ -150,7 +161,7 @@ jobs:
             fi
           done
 
-          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/implantacion/index.html dist/seguridad/index.html; do
+          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
               echo "::error::Falta og:image en $page"
               exit 1

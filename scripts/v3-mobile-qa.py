@@ -25,6 +25,8 @@ ROUTES = [
     ("soluciones/", "soluciones"),
     ("app-mantenimiento/", "app-mantenimiento"),
     ("aplicaciones/", "modulos"),
+    ("implantacion/", "implantacion"),
+    ("seguridad/", "seguridad"),
     ("sectores/", "sectores"),
     ("precios/", "planes"),
     ("recursos/", "recursos"),
@@ -129,7 +131,7 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     audit_layout(page, name, width)
 
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
-    if width == 390 and name in {"home", "contacto", "app-mantenimiento"}:
+    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "implantacion", "seguridad"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")
 
     if name == "home" and width == 390:
@@ -164,4 +166,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · 14 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")
+print("QA móvil V3: OK · 16 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")

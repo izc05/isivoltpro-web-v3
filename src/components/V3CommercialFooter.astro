@@ -1,0 +1,17 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<footer class="page-footer">
+  <div class="page-shell">
+    <div class="page-footer__grid">
+      <div>
+        <div class="brand"><i class="brand__icon" aria-hidden="true"></i><span>IsiVoltPro</span></div>
+        <p>Control práctico para autónomos, pequeños equipos y empresas de mantenimiento: clientes, activos, avisos, OT, preventivos y documentación en un solo lugar.</p>
+      </div>
+      <div><h4>Producto</h4><a href={`${base}producto/`}>Visión general</a><a href={`${base}aplicaciones/`}>Módulos</a><a href={`${base}precios/`}>Planes</a></div>
+      <div><h4>Soluciones</h4><a href={`${base}sectores/`}>Sectores</a><a href={`${base}recursos/`}>Recursos</a><a href={`${base}empresa/`}>Empresa</a></div>
+      <div><h4>Empezar</h4><a href={`${base}contacto/`}>Solicitar demo</a><a href={`${base}acceso/`}>Acceder</a><a href={base}>Volver a inicio</a></div>
+    </div>
+    <div class="page-footer__bottom">IsiVoltPro · Web V3 en desarrollo comercial. Sin métricas, clientes ni funcionalidades ficticias.</div>
+  </div>
+</footer>

@@ -9,37 +9,46 @@ const pricing = `${base}precios/`;
 const resources = `${base}recursos/`;
 const access = `${base}acceso/`;
 const contact = `${base}contacto/`;
+const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+const ariaCurrent = (href: string) => {
+  const targetPath = normalizePath(new URL(href, Astro.url.origin).pathname);
+  return currentPath === targetPath ? 'page' : undefined;
+};
 ---
 <style is:inline>
   .v3-mobile-nav{display:none;position:relative}
   .v3-mobile-nav summary{list-style:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:19px;cursor:pointer}
   .v3-mobile-nav summary::-webkit-details-marker{display:none}
+  .v3-mobile-nav summary:focus-visible{outline:3px solid rgba(23,92,255,.22);outline-offset:3px}
   .v3-mobile-nav__panel{position:absolute;right:0;top:54px;width:min(300px,calc(100vw - 28px));padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.98);box-shadow:var(--shadow);display:grid;gap:4px}
   .v3-mobile-nav__panel a{padding:11px 12px;border-radius:10px;color:#34405d;font-size:14px;font-weight:700}
   .v3-mobile-nav__panel a:hover{background:#f5f7fc;color:var(--blue)}
+  .v3-mobile-nav__panel a[aria-current="page"]{background:#eef3ff;color:var(--blue)}
   .v3-mobile-nav__panel .mobile-cta{margin-top:6px;color:#fff;background:linear-gradient(100deg,var(--blue),var(--violet),var(--pink))}
+  .nav a[aria-current="page"]{color:var(--blue)}
   @media(max-width:860px){.v3-mobile-nav{display:block}.site-header .nav{display:none}.site-header .header-actions>.btn{display:none}.site-header__inner{min-height:68px}}
 </style>
 <header class="site-header">
   <div class="site-header__inner shell">
-    <a class="brand" href={home} aria-label="IsiVoltPro, inicio">
+    <a class="brand" href={home} aria-label="IsiVoltPro, inicio" aria-current={ariaCurrent(home)}>
       <i class="brand__icon" aria-hidden="true"></i>
       <span>IsiVoltPro</span>
     </a>
     <nav class="nav" aria-label="Navegación principal">
-      <a href={product}>Producto</a>
-      <a href={modules}>Módulos</a>
-      <a href={sectors}>Sectores</a>
-      <a href={pricing}>Planes</a>
-      <a href={resources}>Recursos</a>
+      <a href={product} aria-current={ariaCurrent(product)}>Producto</a>
+      <a href={modules} aria-current={ariaCurrent(modules)}>Módulos</a>
+      <a href={sectors} aria-current={ariaCurrent(sectors)}>Sectores</a>
+      <a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a>
+      <a href={resources} aria-current={ariaCurrent(resources)}>Recursos</a>
     </nav>
     <div class="header-actions">
-      <a class="btn" href={access}>Acceder</a>
-      <a class="btn btn--primary" href={contact}>Solicitar demo <span>→</span></a>
+      <a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a>
+      <a class="btn btn--primary" href={contact} aria-current={ariaCurrent(contact)}>Solicitar demo <span aria-hidden="true">→</span></a>
       <details class="v3-mobile-nav">
-        <summary aria-label="Abrir navegación">☰</summary>
+        <summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary>
         <nav class="v3-mobile-nav__panel" aria-label="Navegación móvil">
-          <a href={product}>Producto</a><a href={modules}>Módulos</a><a href={sectors}>Sectores</a><a href={pricing}>Planes</a><a href={resources}>Recursos</a><a href={access}>Acceder</a><a class="mobile-cta" href={contact}>Solicitar demo →</a>
+          <a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={modules} aria-current={ariaCurrent(modules)}>Módulos</a><a href={sectors} aria-current={ariaCurrent(sectors)}>Sectores</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={resources} aria-current={ariaCurrent(resources)}>Recursos</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={contact} aria-current={ariaCurrent(contact)}>Solicitar demo <span aria-hidden="true">→</span></a>
         </nav>
       </details>
     </div>

@@ -23,6 +23,59 @@ jobs:
           node-version: '22'
       - run: npm install --no-audit --no-fund
       - run: npm run check
+      - name: Validar rutas y presupuesto comercial
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required=(
+            dist/index.html
+            dist/producto/index.html
+            dist/aplicaciones/index.html
+            dist/modulos/ordenes-de-trabajo/index.html
+            dist/modulos/activos/index.html
+            dist/sectores/autonomos-tecnicos/index.html
+            dist/sectores/empresas-mantenedoras/index.html
+            dist/recursos/orden-trabajo-util/index.html
+            dist/faq/index.html
+            dist/contacto/index.html
+            dist/sitemap.xml
+          )
+
+          for file in "${required[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "::error::Falta ruta comercial construida: $file"
+              exit 1
+            fi
+          done
+
+          if find dist -type f -name '*.mp4' -print -quit | grep -q .; then
+            echo "::error::El build comercial vuelve a incluir MP4. Revisar antes de aceptar el incremento de peso."
+            find dist -type f -name '*.mp4' -print
+            exit 1
+          fi
+
+          commercial_pages=(
+            dist/index.html
+            dist/producto/index.html
+            dist/aplicaciones/index.html
+            dist/precios/index.html
+            dist/recursos/index.html
+            dist/faq/index.html
+            dist/contacto/index.html
+          )
+
+          for page in "${commercial_pages[@]}"; do
+            if grep -q 'three\.module' "$page"; then
+              echo "::error::La página comercial $page está cargando Three.js de forma inesperada."
+              exit 1
+            fi
+          done
+
+          echo "Rutas comerciales: OK"
+          echo "Sin MP4 heredados: OK"
+          echo "Three.js fuera de páginas comerciales: OK"
+          du -sh dist
       - name: Guardar build V3
         uses: actions/upload-artifact@v4
         with:

@@ -1,0 +1,74 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+const base = import.meta.env.BASE_URL;
+const contact = `${base}contacto/`;
+const modules = `${base}aplicaciones/`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Descubre cómo IsiVoltPro organiza clientes, activos, avisos, órdenes de trabajo, preventivos, QR, fotos y documentación para autónomos y pequeñas empresas." />
+  <title>Producto · IsiVoltPro</title>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="page-main">
+    <section class="page-hero">
+      <div class="page-shell page-hero__grid">
+        <div>
+          <span class="eyebrow">Producto pensado para el día a día</span>
+          <h1>Todo el trabajo técnico,<br /><span class="gradient-text">en el mismo contexto.</span></h1>
+          <p>IsiVoltPro une clientes, ubicaciones, equipos, incidencias, órdenes, mantenimientos, fotos y documentación para que cada actuación tenga sentido antes, durante y después del trabajo.</p>
+          <div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Solicitar demo →</a><a class="btn" href={modules}>Ver módulos</a></div>
+        </div>
+        <div class="page-hero__visual" aria-hidden="true">
+          <div class="page-orbit"></div>
+          <div class="page-core">ISIVOLTPRO<small>TRABAJO CONECTADO</small></div>
+          <div class="page-pill page-pill--a">Clientes<small>Personas y ubicaciones</small></div>
+          <div class="page-pill page-pill--b">Activos<small>Equipos e histórico</small></div>
+          <div class="page-pill page-pill--c">OT<small>Trabajo trazable</small></div>
+          <div class="page-pill page-pill--d">Preventivo<small>Lo que toca, a tiempo</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">De la realidad a la pantalla</span><h2>Menos aplicaciones.<br /><span class="gradient-text">Más contexto útil.</span></h2></div><p>Un autónomo o una pequeña empresa no necesita un ERP gigantesco para saber qué tiene pendiente. Necesita abrir el móvil y entender qué cliente, qué equipo, qué problema y qué trabajo hay detrás.</p></div>
+        <div class="product-preview">
+          <aside class="product-nav"><strong>IsiVoltPro</strong><ul><li class="active">Resumen</li><li>Clientes</li><li>Activos</li><li>Avisos</li><li>Órdenes de trabajo</li><li>Mantenimiento</li><li>Documentación</li><li>Histórico</li></ul></aside>
+          <div class="product-canvas">
+            <div class="product-canvas__top"><div><small>EMPRESA DEMO · HOY</small><h3>Tu operación, de un vistazo</h3></div><small>Datos ilustrativos</small></div>
+            <div class="metric-grid"><div class="metric"><small>OT abiertas</small><strong>12</strong></div><div class="metric"><small>Para hoy</small><strong>4</strong></div><div class="metric"><small>Preventivos</small><strong>8</strong></div><div class="metric"><small>Incidencias</small><strong>3</strong></div></div>
+            <div class="work-list"><div class="work-row"><span>UTA-02 · fallo de temperatura</span><small>Clínica Norte</small><b class="status status--orange">En curso</b></div><div class="work-row"><span>Cuadro QG-01 · revisión</span><small>Comercio Centro</small><b class="status status--violet">Mañana</b></div><div class="work-row"><span>Bomba ACS-01 · correctivo</span><small>Residencia Sur</small><b class="status">Cerrada</b></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">Qué cambia</span><h2>Del mensaje perdido<br /><span class="gradient-text">al histórico del activo.</span></h2></div><p>IsiVoltPro convierte una necesidad cotidiana en un flujo comprensible. Cada paso reutiliza la información anterior, evitando escribir lo mismo varias veces.</p></div>
+        <div class="flow-board"><article class="flow-step"><b>01</b><strong>Cliente</strong><small>Quién necesita el trabajo.</small></article><article class="flow-step"><b>02</b><strong>Activo</strong><small>Dónde ocurre y qué equipo es.</small></article><article class="flow-step"><b>03</b><strong>Aviso</strong><small>Qué problema se ha detectado.</small></article><article class="flow-step"><b>04</b><strong>OT</strong><small>Quién lo hará y con qué prioridad.</small></article><article class="flow-step"><b>05</b><strong>Cierre</strong><small>Fotos, trabajo y resultado.</small></article><article class="flow-step"><b>06</b><strong>Histórico</strong><small>Todo listo para la próxima vez.</small></article></div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">Diseñado para campo</span><h2>El móvil primero.<br /><span class="gradient-text">La oficina después.</span></h2></div><p>El técnico debe poder identificar un activo, consultar antecedentes, abrir una OT, añadir fotos y cerrar el trabajo desde el lugar donde ocurre. El ordenador queda para planificación, control y revisión.</p></div>
+        <div class="value-grid"><article class="value-card" style="--accent:rgba(23,92,255,.10)"><i>⌁</i><h3>Escanea y entra</h3><p>QR o NFC abre directamente el activo correcto, evitando búsquedas y errores de identificación.</p></article><article class="value-card" style="--accent:rgba(36,197,140,.12);--icon:#159f71;--icon-bg:#eaf9f3"><i>✓</i><h3>Trabaja y documenta</h3><p>Texto, fotos, materiales y resultado quedan asociados a la misma actuación.</p></article><article class="value-card" style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>↗</i><h3>Consulta después</h3><p>El histórico conserva qué ocurrió, quién actuó y cómo se resolvió para futuras intervenciones.</p></article></div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell"><div class="callout"><div><h2>Empieza por el problema que más tiempo te hace perder.</h2><p>No necesitas activar todo a la vez. Podemos partir de OT, activos o preventivos y crecer desde ahí.</p></div><a class="btn btn--primary" href={contact}>Ver una demo →</a></div></div>
+    </section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

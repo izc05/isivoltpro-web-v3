@@ -29,9 +29,6 @@ const routes = [
   'empresa/',
   'ecosistema/',
   'contacto/',
-  'privacidad/',
-  'cookies/',
-  'aviso-legal/',
 ];
 
 export function GET({ site }: { site?: URL }) {

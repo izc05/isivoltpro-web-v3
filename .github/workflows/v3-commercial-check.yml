@@ -22,6 +22,8 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
+      - name: Validar script de smoke staging
+        run: node --check scripts/v3-staging-smoke.mjs
       - run: npm run check
       - name: Validar rutas y presupuesto comercial
         shell: bash
@@ -32,6 +34,7 @@ jobs:
             dist/index.html
             dist/producto/index.html
             dist/aplicaciones/index.html
+            dist/mantenimiento/index.html
             dist/modulos/ordenes-de-trabajo/index.html
             dist/modulos/activos/index.html
             dist/sectores/autonomos-tecnicos/index.html
@@ -79,7 +82,16 @@ jobs:
               echo "::error::La CSP de $page no restringe las fuentes a recursos locales."
               exit 1
             fi
+            if grep -q 'Web V3 en desarrollo comercial' "$page"; then
+              echo "::error::Copy interno de desarrollo visible en $page"
+              exit 1
+            fi
           done
+
+          if ! grep -q 'noindex,nofollow' dist/mantenimiento/index.html; then
+            echo "::error::La ruta heredada /mantenimiento/ debe permanecer fuera de indexación."
+            exit 1
+          fi
 
           for page in dist/index.html dist/producto/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
@@ -100,8 +112,10 @@ jobs:
           fi
 
           echo "Rutas comerciales: OK"
+          echo "Ruta heredada de mantenimiento: OK"
           echo "Preview social: OK"
           echo "CSP y fuentes locales: OK"
+          echo "Sin copy interno: OK"
           echo "Sin MP4 heredados: OK"
           echo "Three.js fuera de páginas comerciales: OK"
           echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"

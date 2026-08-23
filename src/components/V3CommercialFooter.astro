@@ -4,19 +4,20 @@ const base = import.meta.env.BASE_URL;
 <style is:inline>
   .page-footer__bottom a{display:inline;margin:0;color:#aebbd7}
   .page-footer__bottom a:hover{text-decoration:underline}
+  .page-footer__nav{display:grid;align-content:start}
   :where(a,button,input,select,textarea):focus-visible{outline:3px solid rgba(23,92,255,.28);outline-offset:3px}
 </style>
-<footer class="page-footer">
+<footer class="page-footer" aria-label="Pie de página">
   <div class="page-shell">
     <div class="page-footer__grid">
       <div>
         <div class="brand"><i class="brand__icon" aria-hidden="true"></i><span>IsiVoltPro</span></div>
         <p>Control práctico para autónomos, pequeños equipos y empresas de mantenimiento: clientes, activos, avisos, OT, preventivos y documentación en un solo lugar.</p>
       </div>
-      <div><h4>Producto</h4><a href={`${base}producto/`}>Visión general</a><a href={`${base}aplicaciones/`}>Módulos</a><a href={`${base}precios/`}>Planes</a><a href={`${base}faq/`}>Preguntas frecuentes</a></div>
-      <div><h4>Soluciones</h4><a href={`${base}sectores/`}>Sectores</a><a href={`${base}recursos/`}>Recursos</a><a href={`${base}empresa/`}>Empresa</a></div>
-      <div><h4>Empezar</h4><a href={`${base}contacto/`}>Solicitar demo</a><a href={`${base}acceso/`}>Acceder</a><a href={base}>Volver a inicio</a></div>
+      <nav class="page-footer__nav" aria-label="Producto"><h4>Producto</h4><a href={`${base}producto/`}>Visión general</a><a href={`${base}aplicaciones/`}>Módulos</a><a href={`${base}precios/`}>Planes</a><a href={`${base}faq/`}>Preguntas frecuentes</a></nav>
+      <nav class="page-footer__nav" aria-label="Soluciones"><h4>Soluciones</h4><a href={`${base}sectores/`}>Sectores</a><a href={`${base}recursos/`}>Recursos</a><a href={`${base}empresa/`}>Empresa</a></nav>
+      <nav class="page-footer__nav" aria-label="Empezar"><h4>Empezar</h4><a href={`${base}contacto/`}>Solicitar demo</a><a href={`${base}acceso/`}>Acceder</a><a href={base}>Volver a inicio</a></nav>
     </div>
-    <div class="page-footer__bottom"><span>IsiVoltPro · Web V3 en desarrollo comercial.</span> · <a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}cookies/`}>Cookies</a> · <a href={`${base}aviso-legal/`}>Aviso legal</a></div>
+    <div class="page-footer__bottom"><span>IsiVoltPro · Mantenimiento bajo control.</span> · <a href={`${base}privacidad/`}>Privacidad</a> · <a href={`${base}cookies/`}>Cookies</a> · <a href={`${base}aviso-legal/`}>Aviso legal</a></div>
   </div>
 </footer>

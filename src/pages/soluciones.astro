@@ -6,13 +6,14 @@ import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
 const appMaintenance = `${base}app-mantenimiento/`;
+const transition = `${base}de-whatsapp-excel-a-isivoltpro/`;
 const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
 const sectorUrl = (slug: string) => `${base}sectores/${slug}/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
-  <V3Seo title="Soluciones · IsiVoltPro" description="Soluciones prácticas de IsiVoltPro para avisos, órdenes de trabajo, mantenimiento preventivo, activos, documentación, técnicos y trabajo de campo de autónomos y pequeñas empresas." path={`${base}soluciones/`} />
+  <V3Seo title="Soluciones · IsiVoltPro" description="Soluciones prácticas de IsiVoltPro para avisos, órdenes de trabajo, mantenimiento preventivo, activos, documentación, técnicos y transición desde WhatsApp/Excel en autónomos y pequeñas empresas." path={`${base}soluciones/`} />
   <style is:inline>
     .solution-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.solution-card{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:28px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow-soft);color:inherit}.solution-card>i{width:50px;height:50px;display:grid;place-items:center;border-radius:16px;background:var(--tone,#eef3ff);color:var(--ink,var(--blue));font-style:normal;font-weight:900;font-size:19px}.solution-card h3{margin:2px 0 8px;font-size:22px;letter-spacing:-.035em}.solution-card p{margin:0;color:var(--muted);line-height:1.65}.solution-card small{display:block;margin-top:16px;color:#52617c;font-weight:800}.solution-band{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:center;padding:38px;border-radius:32px;background:linear-gradient(125deg,#0b1430,#162653 60%,#243c81);color:#fff}.solution-band h2{margin:0;font-size:clamp(34px,4.8vw,58px);line-height:1.03;letter-spacing:-.052em}.solution-band p{margin:15px 0 0;color:#c3cdea;line-height:1.7}.solution-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.solution-flow article{padding:20px;border:1px solid var(--line);border-radius:20px;background:#fff}.solution-flow b{display:block;color:var(--blue);font-size:12px}.solution-flow strong{display:block;margin-top:18px;font-size:18px}.solution-flow small{display:block;margin-top:7px;color:var(--muted);line-height:1.5}@media(max-width:850px){.solution-grid,.solution-band{grid-template-columns:1fr}.solution-flow{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.solution-grid,.solution-flow{grid-template-columns:1fr}.solution-card{padding:22px;grid-template-columns:1fr}.solution-band{padding:28px 22px}.solution-band .btn{width:100%}}
   </style>
@@ -22,7 +23,7 @@ const sectorUrl = (slug: string) => `${base}sectores/${slug}/`;
   <main class="page-main">
     <section class="page-hero">
       <div class="page-shell page-hero__grid">
-        <div><span class="eyebrow">Empieza por el problema, no por el software</span><h1>Cuéntanos qué te hace perder tiempo.<br/><span class="gradient-text">IsiVoltPro organiza la solución.</span></h1><p>No necesitas saber qué módulo comprar. Si los avisos se pierden, los preventivos se olvidan, las fotos están repartidas o coordinar técnicos exige demasiadas llamadas, empezamos exactamente ahí.</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Contar mi problema →</a><a class="btn" href={appMaintenance}>Ver App Mantenimiento</a></div></div>
+        <div><span class="eyebrow">Empieza por el problema, no por el software</span><h1>Cuéntanos qué te hace perder tiempo.<br/><span class="gradient-text">IsiVoltPro organiza la solución.</span></h1><p>No necesitas saber qué módulo comprar. Si los avisos se pierden, los preventivos se olvidan, las fotos están repartidas o coordinar técnicos exige demasiadas llamadas, empezamos exactamente ahí.</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Contar mi problema →</a><a class="btn" href={transition}>¿WhatsApp y Excel se quedan cortos?</a></div></div>
         <div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">SOLUCIÓN<small>PROBLEMA → CONTROL</small></div><div class="page-pill page-pill--a">Avisos<small>Que no se pierdan</small></div><div class="page-pill page-pill--b">Trabajo<small>Saber qué ocurre</small></div><div class="page-pill page-pill--c">Equipos<small>Con histórico</small></div><div class="page-pill page-pill--d">Preventivo<small>Que nada se olvide</small></div></div>
       </div>
     </section>
@@ -34,7 +35,7 @@ const sectorUrl = (slug: string) => `${base}sectores/${slug}/`;
       <a class="solution-card" href={moduleUrl('activos')} style="--tone:#eef3ff;--ink:#175cff"><i>▣</i><div><h3>“Cada vez que vuelvo a un equipo empiezo de cero”</h3><p>Ficha, ubicación, fotos, documentos, averías y actuaciones quedan alrededor del mismo activo.</p><small>Solución para activos →</small></div></a>
       <a class="solution-card" href={moduleUrl('documentacion')} style="--tone:#eafafd;--ink:#139db9"><i>▤</i><div><h3>“Tengo fotos y documentos pero nunca donde los necesito”</h3><p>Relaciona evidencias, manuales e informes con el cliente, instalación, activo o trabajo correspondiente.</p><small>Solución documental →</small></div></a>
       <a class="solution-card" href={sectorUrl('empresas-mantenedoras')} style="--tone:#fff3e9;--ink:#d96c20"><i>👥</i><div><h3>“Coordino al equipo a base de llamadas”</h3><p>Comparte prioridades, asignaciones y contexto para que todos trabajen sobre la misma información.</p><small>Solución para equipos →</small></div></a>
-    </div></div></section>
+    </div><div class="home-more"><a class="btn" href={transition}>Ver cuándo WhatsApp + Excel dejan de ser suficientes →</a></div></div></section>
 
     <section class="page-section"><div class="page-shell"><div class="solution-band"><div><span class="eyebrow" style="color:#9eb6ff">Una puerta de entrada sencilla</span><h2>App Mantenimiento:<br/>el trabajo diario en un solo sitio.</h2><p>Una experiencia enfocada en avisos, OT, activos, preventivos, fotos e histórico para trabajar desde móvil y escritorio sin empezar implantando una suite enorme.</p></div><div><div class="page-hero__actions"><a class="btn btn--primary" href={appMaintenance}>Conocer App Mantenimiento →</a><a class="btn" style="background:#fff;color:#17233f" href={contact}>Verlo sobre mi negocio</a></div></div></div></div></section>
 

@@ -39,6 +39,8 @@ jobs:
           required=(
             dist/index.html
             dist/producto/index.html
+            dist/soluciones/index.html
+            dist/app-mantenimiento/index.html
             dist/aplicaciones/index.html
             dist/mantenimiento/index.html
             dist/modulos/ordenes-de-trabajo/index.html
@@ -68,6 +70,8 @@ jobs:
           commercial_pages=(
             dist/index.html
             dist/producto/index.html
+            dist/soluciones/index.html
+            dist/app-mantenimiento/index.html
             dist/aplicaciones/index.html
             dist/precios/index.html
             dist/recursos/index.html
@@ -110,6 +114,8 @@ jobs:
 
           sitemap_required=(
             'producto/'
+            'soluciones/'
+            'app-mantenimiento/'
             'aplicaciones/'
             'modulos/ordenes-de-trabajo/'
             'sectores/autonomos-tecnicos/'
@@ -138,7 +144,7 @@ jobs:
             fi
           done
 
-          for page in dist/index.html dist/producto/index.html; do
+          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
               echo "::error::Falta og:image en $page"
               exit 1

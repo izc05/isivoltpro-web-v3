@@ -12,7 +12,9 @@ export function getStaticPaths() {
 const { data, slug } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
-const modulesUrl = `${base}aplicaciones/`;
+const appsUrl = `${base}aplicaciones/`;
+const appMaintenance = `${base}app-mantenimiento/`;
+const solutions = `${base}soluciones/`;
 const seoDescription = `${data.name} en IsiVoltPro: ${data.description} Enfoque práctico para autónomos y pequeñas empresas.`;
 ---
 <!doctype html>
@@ -29,7 +31,7 @@ const seoDescription = `${data.name} en IsiVoltPro: ${data.description} Enfoque 
           <span class="eyebrow">{data.eyebrow}</span>
           <h1>{data.title}</h1>
           <p>{data.description}</p>
-          <div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Verlo en una demo →</a><a class="btn" href={modulesUrl}>Todos los módulos</a></div>
+          <div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Verlo sobre mi caso →</a><a class="btn" href={appsUrl}>Ver todas las apps</a></div>
         </div>
         <div class="page-hero__visual" aria-hidden="true">
           <div class="page-orbit"></div>
@@ -64,7 +66,7 @@ const seoDescription = `${data.name} en IsiVoltPro: ${data.description} Enfoque 
     </section>
 
     <section class="page-section">
-      <div class="page-shell"><div class="callout"><div><h2>¿Este es uno de los problemas que tienes hoy?</h2><p>En la demo podemos centrarnos solo en este flujo y comprobar si encaja con tu forma de trabajar. La disponibilidad exacta de cada capacidad se confirma según la fase actual del producto.</p></div><a class="btn btn--primary" href={contact}>Solicitar demo →</a></div></div>
+      <div class="page-shell"><div class="callout"><div><h2>Una capacidad útil no debería convertirse en otra isla.</h2><p>{data.name} forma parte del mismo contexto de clientes, activos, trabajo y documentación. App Mantenimiento reúne el núcleo operativo; otras apps pueden añadirse cuando el flujo lo necesite. La disponibilidad exacta se confirma en demo.</p></div><div class="page-hero__actions" style="margin-top:0"><a class="btn btn--primary" href={contact}>Probar este flujo →</a><a class="btn" href={appMaintenance}>Ver App Mantenimiento</a><a class="btn" href={solutions}>Ver soluciones</a></div></div></div>
     </section>
   </main>
   <V3CommercialFooter />

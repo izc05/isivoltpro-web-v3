@@ -1,0 +1,148 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+
+const modules = {
+  'ordenes-de-trabajo': {
+    name: 'Órdenes de trabajo',
+    short: 'OT',
+    eyebrow: 'Del aviso al cierre, sin perder el hilo',
+    title: 'Cada trabajo claro desde que entra hasta que termina.',
+    description: 'Organiza avisos, prioridades, asignaciones, fotos, notas y cierres para que cada orden de trabajo conserve todo su contexto.',
+    color: '#6d4aff', icon: '✓',
+    pains: ['Avisos que llegan por varios canales', 'Trabajos que nadie sabe si están terminados', 'Fotos y notas repartidas entre móviles', 'Históricos que dependen de la memoria'],
+    outcomes: ['Prioridad y estado visibles', 'Responsable y contexto en la misma OT', 'Evidencias asociadas al trabajo', 'Cierre que alimenta el histórico'],
+    flow: ['Registrar aviso', 'Crear OT', 'Asignar', 'Ejecutar', 'Documentar', 'Cerrar']
+  },
+  'activos': {
+    name: 'Gestión de activos', short: 'Activos', eyebrow: 'Cada equipo con su propia historia',
+    title: 'Deja de buscar información cada vez que vuelves a un equipo.',
+    description: 'Centraliza ficha, ubicación, documentación, incidencias, revisiones y actuaciones de cada activo en un único punto.',
+    color: '#175cff', icon: '▣',
+    pains: ['Equipos identificados de forma distinta por cada persona', 'Manuales y fotos difíciles de localizar', 'Sin histórico claro de averías', 'Dudas sobre la última intervención'],
+    outcomes: ['Ficha única por activo', 'Ubicación y cliente asociados', 'Documentos y fotos accesibles', 'Histórico técnico acumulado'],
+    flow: ['Crear cliente', 'Registrar ubicación', 'Dar de alta activo', 'Identificar', 'Trabajar', 'Consultar histórico']
+  },
+  'mantenimiento-preventivo': {
+    name: 'Mantenimiento preventivo', short: 'Preventivo', eyebrow: 'Lo que toca, cuando toca',
+    title: 'Que una revisión no dependa de acordarse a tiempo.',
+    description: 'Planifica tareas periódicas y conserva el resultado de cada revisión para saber qué está pendiente y qué se hizo anteriormente.',
+    color: '#24a879', icon: '⚙',
+    pains: ['Revisiones apuntadas en calendarios separados', 'Preventivos olvidados', 'Sin evidencia clara de lo realizado', 'Difícil saber qué vence próximamente'],
+    outcomes: ['Planificación periódica', 'Pendientes visibles', 'Ejecución documentada', 'Histórico por activo'],
+    flow: ['Definir tarea', 'Programar', 'Avisar', 'Ejecutar', 'Registrar', 'Reprogramar']
+  },
+  'qr-nfc': {
+    name: 'QR y NFC', short: 'QR / NFC', eyebrow: 'El equipo físico abre su información digital',
+    title: 'Escanea el equipo y entra directamente donde necesitas.',
+    description: 'Relaciona el activo físico con su ficha digital para que el técnico pueda identificarlo y consultar contexto desde el móvil.',
+    color: '#ef7c32', icon: '⌁',
+    pains: ['Confusión entre equipos parecidos', 'Tiempo perdido buscando una ficha', 'Etiquetas sin contexto técnico', 'Información alejada del lugar de trabajo'],
+    outcomes: ['Identificación inmediata', 'Acceso desde el móvil', 'Menos búsquedas', 'Histórico junto al activo'],
+    flow: ['Generar código', 'Etiquetar activo', 'Escanear', 'Consultar', 'Actuar', 'Actualizar']
+  },
+  'inspecciones': {
+    name: 'Inspecciones y checklists', short: 'Inspecciones', eyebrow: 'Revisar siempre con el mismo criterio',
+    title: 'Convierte una revisión repetitiva en un proceso trazable.',
+    description: 'Estructura comprobaciones, observaciones y evidencias para que una inspección no termine dispersa entre papel, fotos y notas.',
+    color: '#18a8c4', icon: '☑',
+    pains: ['Listas de comprobación en papel', 'Criterios distintos entre técnicos', 'Fotos sin referencia', 'Informes que requieren rehacer información'],
+    outcomes: ['Checklist estructurado', 'Observaciones vinculadas', 'Evidencia fotográfica', 'Base para informe e histórico'],
+    flow: ['Elegir checklist', 'Inspeccionar', 'Registrar defecto', 'Adjuntar evidencia', 'Revisar', 'Cerrar']
+  },
+  'inventario': {
+    name: 'Inventario y materiales', short: 'Inventario', eyebrow: 'Saber qué tienes sin convertirte en un almacén complejo',
+    title: 'Controla los materiales que realmente afectan a tu trabajo.',
+    description: 'Una capa práctica para conocer existencias y relacionar consumos con actuaciones, pensada para equipos pequeños.',
+    color: '#d9479b', icon: '▤',
+    pains: ['Material que falta cuando hace falta', 'Compras duplicadas', 'Consumos sin relación con el trabajo', 'Stock controlado en hojas separadas'],
+    outcomes: ['Existencias básicas visibles', 'Movimientos comprensibles', 'Consumo asociado al trabajo', 'Menos compras imprevistas'],
+    flow: ['Registrar material', 'Actualizar stock', 'Usar en OT', 'Descontar', 'Revisar mínimos', 'Reponer']
+  },
+  'documentacion': {
+    name: 'Documentación técnica', short: 'Documentos', eyebrow: 'El documento correcto junto al equipo correcto',
+    title: 'Manuales, fotos e informes donde realmente se utilizan.',
+    description: 'Agrupa documentación técnica alrededor del cliente, la instalación, el activo o la actuación correspondiente.',
+    color: '#5969d8', icon: '▤',
+    pains: ['Documentos repartidos en carpetas', 'Versiones difíciles de identificar', 'Fotos sin contexto', 'Informes alejados del activo'],
+    outcomes: ['Documentos contextualizados', 'Acceso desde la ficha', 'Evidencias ordenadas', 'Histórico más útil'],
+    flow: ['Subir', 'Clasificar', 'Vincular', 'Consultar', 'Actualizar', 'Conservar']
+  },
+  'avisos-incidencias': {
+    name: 'Avisos e incidencias', short: 'Avisos', eyebrow: 'Que una llamada o un WhatsApp no se pierda',
+    title: 'Captura el problema y conviértelo en trabajo organizado.',
+    description: 'Registra qué ocurre, dónde, con qué prioridad y qué activo está afectado para que el aviso pueda seguir su recorrido hasta la resolución.',
+    color: '#e14c6f', icon: '!',
+    pains: ['Mensajes que se olvidan', 'Poca información al asignar', 'Prioridades discutidas por teléfono', 'Sin relación entre avería y equipo'],
+    outcomes: ['Entrada estructurada', 'Prioridad visible', 'Cliente y activo relacionados', 'Conversión directa a OT'],
+    flow: ['Recibir', 'Registrar', 'Priorizar', 'Relacionar activo', 'Crear OT', 'Resolver']
+  }
+};
+
+export function getStaticPaths() {
+  return Object.entries(modules).map(([slug, data]) => ({ params: { slug }, props: { data, slug } }));
+}
+
+const { data, slug } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const contact = `${base}contacto/`;
+const modulesUrl = `${base}aplicaciones/`;
+const seoDescription = `${data.name} en IsiVoltPro: ${data.description} Enfoque práctico para autónomos y pequeñas empresas.`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title={`${data.name} · IsiVoltPro`} description={seoDescription} path={`${base}modulos/${slug}/`} />
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="page-main">
+    <section class="page-hero">
+      <div class="page-shell page-hero__grid">
+        <div>
+          <span class="eyebrow">{data.eyebrow}</span>
+          <h1>{data.title}</h1>
+          <p>{data.description}</p>
+          <div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Verlo en una demo →</a><a class="btn" href={modulesUrl}>Todos los módulos</a></div>
+        </div>
+        <div class="page-hero__visual" aria-hidden="true">
+          <div class="page-orbit"></div>
+          <div class="page-core" style={`background:linear-gradient(145deg,${data.color},#6d4aff,#f238a9)`}>{data.short}<small>ISIVOLTPRO</small></div>
+          <div class="page-pill page-pill--a">Problema<small>Detectar y registrar</small></div>
+          <div class="page-pill page-pill--b">Contexto<small>Cliente + activo</small></div>
+          <div class="page-pill page-pill--c">Trabajo<small>Actuar con información</small></div>
+          <div class="page-pill page-pill--d">Histórico<small>Conservar lo útil</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">El problema cotidiano</span><h2>Menos tiempo persiguiendo <span class="gradient-text">información.</span></h2></div><p>Esta capacidad está planteada para reducir tareas administrativas alrededor del trabajo técnico, no para añadir burocracia.</p></div>
+        <div class="feature-grid">{data.pains.map((pain, index) => <article class="feature-card" style={`--accent:${data.color}18;--icon:${data.color};--icon-bg:${data.color}12`}><i>{index + 1}</i><h3>{pain}</h3><p>IsiVoltPro mantiene este punto dentro del mismo contexto operativo para que no dependa de memoria, mensajes o archivos aislados.</p></article>)}</div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">Qué debe conseguir</span><h2>Información útil <span class="gradient-text">en el momento correcto.</span></h2></div><p>El valor no está en tener más pantallas. Está en poder saber qué pasa, actuar y encontrar después lo que ocurrió.</p></div>
+        <div class="value-grid">{data.outcomes.map((outcome, index) => <article class="value-card" style={`--accent:${data.color}18;--icon:${data.color};--icon-bg:${data.color}12`}><i>{data.icon}</i><h3>{outcome}</h3><p>{index === 0 ? 'La información principal queda visible sin tener que reconstruir el contexto.' : index === 1 ? 'Cada persona puede trabajar con la información asociada a la misma operación.' : index === 2 ? 'El resultado queda documentado en el lugar donde será útil después.' : 'La siguiente intervención empieza con más información que la anterior.'}</p></article>)}</div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">Flujo sencillo</span><h2>De principio a fin,<br /><span class="gradient-text">sin saltos.</span></h2></div><p>Un proceso corto y entendible ayuda a que el sistema se adapte al trabajo real de un autónomo o equipo pequeño.</p></div>
+        <div class="flow-board">{data.flow.map((step, index) => <article class="flow-step"><b>{String(index + 1).padStart(2,'0')}</b><strong>{step}</strong><small>{index === data.flow.length - 1 ? 'El resultado queda disponible para la próxima vez.' : 'La información pasa al siguiente paso sin volver a empezar.'}</small></article>)}</div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell"><div class="callout"><div><h2>¿Este es uno de los problemas que tienes hoy?</h2><p>En la demo podemos centrarnos solo en este flujo y comprobar si encaja con tu forma de trabajar. La disponibilidad exacta de cada capacidad se confirma según la fase actual del producto.</p></div><a class="btn btn--primary" href={contact}>Solicitar demo →</a></div></div>
+    </section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

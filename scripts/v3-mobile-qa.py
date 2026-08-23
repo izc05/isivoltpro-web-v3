@@ -25,6 +25,7 @@ ROUTES = [
     ("soluciones/", "soluciones"),
     ("app-mantenimiento/", "app-mantenimiento"),
     ("aplicaciones/", "modulos"),
+    ("piloto/", "piloto"),
     ("implantacion/", "implantacion"),
     ("seguridad/", "seguridad"),
     ("de-whatsapp-excel-a-isivoltpro/", "transicion-whatsapp-excel"),
@@ -130,7 +131,7 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     audit_layout(page, name, width)
 
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
-    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
+    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "piloto", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")
 
     if name == "home" and width == 390:
@@ -165,4 +166,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · 17 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")
+print("QA móvil V3: OK · 18 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")

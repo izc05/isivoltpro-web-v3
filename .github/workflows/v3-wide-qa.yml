@@ -1,0 +1,58 @@
+name: QA tablet y escritorio V3
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wide-browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar proyecto
+        run: npm install --no-audit --no-fund
+
+      - name: Construir V3 para QA local
+        run: npm run build
+
+      - name: Instalar Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Levantar preview local
+        run: |
+          nohup npm run preview -- --port 4321 > /tmp/isivoltpro-v3-wide-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4321/isivoltpro-web-v3/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/isivoltpro-v3-wide-preview.log
+          exit 1
+
+      - name: Auditar tablet, laptop y escritorio
+        env:
+          V3_PREVIEW_URL: http://127.0.0.1:4321/isivoltpro-web-v3/
+          V3_WIDE_QA_DIR: wide-qa
+        run: python scripts/v3-wide-qa.py
+
+      - name: Guardar capturas tablet/escritorio
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v3-wide-qa
+          path: wide-qa
+          if-no-files-found: warn

@@ -13,6 +13,8 @@ const { data, slug } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
 const sectorsUrl = `${base}sectores/`;
+const appMaintenance = `${base}app-mantenimiento/`;
+const implementation = `${base}implantacion/`;
 ---
 <!doctype html>
 <html lang="es">
@@ -24,7 +26,7 @@ const sectorsUrl = `${base}sectores/`;
   <main class="page-main">
     <section class="page-hero">
       <div class="page-shell page-hero__grid">
-        <div><span class="eyebrow">{data.eyebrow}</span><h1>{data.title}</h1><p>{data.description}</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Cuéntanos tu caso →</a><a class="btn" href={sectorsUrl}>Ver otros perfiles</a></div></div>
+        <div><span class="eyebrow">{data.eyebrow}</span><h1>{data.title}</h1><p>{data.description}</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Cuéntanos tu caso →</a><a class="btn" href={appMaintenance}>Ver App Mantenimiento</a></div></div>
         <div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">{data.name}<small>ISIVOLTPRO</small></div>{data.examples.map((item, i) => <div class={`page-pill page-pill--${['a','b','c','d'][i]}`}>{item}<small>Trabajo conectado</small></div>)}</div>
       </div>
     </section>
@@ -33,9 +35,9 @@ const sectorsUrl = `${base}sectores/`;
 
     <section class="page-section"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">El resultado buscado</span><h2>Más control sin<br/><span class="gradient-text">más burocracia.</span></h2></div><p>La tecnología debe quitar fricción. Si para usarla hay que duplicar el trabajo, no sirve al tipo de empresa para el que estamos construyendo IsiVoltPro.</p></div><div class="value-grid">{data.wins.map((win, i) => <article class="value-card" style={`--accent:${['rgba(23,92,255,.10)','rgba(109,74,255,.10)','rgba(36,197,140,.11)','rgba(242,56,169,.10)'][i]}`}><i>✓</i><h3>{win}</h3><p>Información clara, vinculada al contexto correcto y disponible cuando hace falta.</p></article>)}</div></div></section>
 
-    <section class="page-section page-section--soft"><div class="page-shell"><div class="flow-board"><article class="flow-step"><b>01</b><strong>Cliente / sede</strong><small>Empieza por el contexto.</small></article><article class="flow-step"><b>02</b><strong>Activo</strong><small>Identifica el equipo.</small></article><article class="flow-step"><b>03</b><strong>Necesidad</strong><small>Aviso o revisión.</small></article><article class="flow-step"><b>04</b><strong>Trabajo</strong><small>Asignar y ejecutar.</small></article><article class="flow-step"><b>05</b><strong>Evidencia</strong><small>Fotos, notas y resultado.</small></article><article class="flow-step"><b>06</b><strong>Histórico</strong><small>Queda disponible.</small></article></div></div></section>
+    <section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Una forma de empezar</span><h2>Primero un flujo.<br/><span class="gradient-text">Después el resto.</span></h2></div><p>La implantación no tiene que comenzar migrando toda la empresa. Elegimos un problema representativo y usamos trabajo real para comprobar si el sistema aporta valor.</p></div><div class="flow-board"><article class="flow-step"><b>01</b><strong>Cliente / sede</strong><small>Empieza por el contexto.</small></article><article class="flow-step"><b>02</b><strong>Activo</strong><small>Identifica el equipo.</small></article><article class="flow-step"><b>03</b><strong>Necesidad</strong><small>Aviso o revisión.</small></article><article class="flow-step"><b>04</b><strong>Trabajo</strong><small>Asignar y ejecutar.</small></article><article class="flow-step"><b>05</b><strong>Evidencia</strong><small>Fotos, notas y resultado.</small></article><article class="flow-step"><b>06</b><strong>Histórico</strong><small>Queda disponible.</small></article></div><div class="home-more"><a class="btn" href={implementation}>Ver cómo empezar sin migrarlo todo →</a><a class="btn" href={sectorsUrl}>Ver otros perfiles</a></div></div></section>
 
-    <section class="page-section"><div class="page-shell"><div class="callout"><div><h2>La demo debe parecerse a tu trabajo, no al de una gran multinacional.</h2><p>Cuéntanos cómo recibes avisos, cómo organizas clientes y qué información pierdes hoy. A partir de ahí evaluamos el encaje.</p></div><a class="btn btn--primary" href={contact}>Solicitar demo →</a></div></div></section>
+    <section class="page-section"><div class="page-shell"><div class="callout"><div><h2>La demo debe parecerse a tu trabajo, no al de una gran multinacional.</h2><p>Cuéntanos cómo recibes avisos, cómo organizas clientes y qué información pierdes hoy. A partir de ahí evaluamos si App Mantenimiento o una configuración distinta encaja.</p></div><div class="page-hero__actions" style="margin-top:0"><a class="btn btn--primary" href={contact}>Solicitar demo →</a><a class="btn" href={appMaintenance}>Conocer la app</a></div></div></div></section>
   </main>
   <V3CommercialFooter />
 </body>

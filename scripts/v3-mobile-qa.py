@@ -17,10 +17,18 @@ VIEWPORTS = [
     ("430", 430, 932),
 ]
 
+# Mantener aquí las rutas públicas que un visitante real recorre antes de una demo.
+# Las rutas de /acceso/ quedan expresamente fuera: pertenecen al trabajo de plataforma.
 ROUTES = [
     ("", "home"),
     ("producto/", "producto"),
     ("aplicaciones/", "modulos"),
+    ("sectores/", "sectores"),
+    ("precios/", "planes"),
+    ("recursos/", "recursos"),
+    ("empresa/", "empresa"),
+    ("faq/", "faq"),
+    ("contacto/", "contacto"),
 ]
 
 failures: list[str] = []
@@ -39,7 +47,7 @@ def audit_layout(page, label: str, width: int) -> None:
             })
             .filter((x) => x.width > 0 && (x.left < -2 || x.right > document.documentElement.clientWidth + 2))
             .slice(0, 12),
-          smallControls: [...document.querySelectorAll('.btn, .v3-mobile-nav summary')]
+          smallControls: [...document.querySelectorAll('.btn, .v3-mobile-nav summary, .contact-back')]
             .map((el) => {
               const r = el.getBoundingClientRect();
               return {tag: el.tagName, cls: String(el.className || ''), text: (el.textContent || '').trim().slice(0, 60), width: r.width, height: r.height};
@@ -72,10 +80,11 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     page.wait_for_timeout(250)
     audit_layout(page, name, width)
 
-    # Captura superior de todas las rutas y captura completa de Home a 390 px.
+    # Captura superior de todas las rutas. En 390 px guardamos además el recorrido
+    # completo de Home y Contacto para revisar jerarquía, CTA y cierre de página.
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
-    if name == "home" and width == 390:
-        page.screenshot(path=str(OUT / "home-390-full.png"), full_page=True)
+    if width == 390 and name in {"home", "contacto"}:
+        page.screenshot(path=str(OUT / f"{name}-390-full.png"), full_page=True)
 
     if name == "home" and width == 390:
         menu = page.locator(".v3-mobile-nav summary")
@@ -109,4 +118,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · 360 / 390 / 430 px sin desbordes y con controles táctiles válidos")
+print("QA móvil V3: OK · rutas comerciales críticas validadas a 360 / 390 / 430 px sin desbordes y con controles táctiles válidos")

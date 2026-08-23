@@ -1,9 +1,9 @@
 name: Publicar preview móvil V3
 
 on:
-  push:
+  pull_request:
     branches:
-      - feat/v3-smb-commercial-redesign
+      - main
   workflow_dispatch:
 
 permissions:

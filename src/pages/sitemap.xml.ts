@@ -8,6 +8,7 @@ const routes = [
   'aplicaciones/',
   'implantacion/',
   'seguridad/',
+  'de-whatsapp-excel-a-isivoltpro/',
   'modulos/ordenes-de-trabajo/',
   'modulos/activos/',
   'modulos/mantenimiento-preventivo/',

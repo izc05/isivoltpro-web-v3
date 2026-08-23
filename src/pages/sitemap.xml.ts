@@ -6,6 +6,7 @@ const routes = [
   'soluciones/',
   'app-mantenimiento/',
   'aplicaciones/',
+  'piloto/',
   'implantacion/',
   'seguridad/',
   'de-whatsapp-excel-a-isivoltpro/',

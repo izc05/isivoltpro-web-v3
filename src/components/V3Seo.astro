@@ -21,9 +21,11 @@ const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(path, siteOrigin);
 const socialImage = new URL(image, siteOrigin);
 const fullTitle = title.includes('IsiVoltPro') ? title : `${title} · IsiVoltPro`;
+const csp = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'";
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content={csp} />
 <meta name="theme-color" content="#ffffff" />
 <meta name="color-scheme" content="light" />
 <meta name="description" content={description} />

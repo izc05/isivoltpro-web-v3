@@ -22,9 +22,15 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
-      - name: Validar script de smoke staging
-        run: node --check scripts/v3-staging-smoke.mjs
+      - name: Validar scripts de QA
+        run: |
+          node --check scripts/v3-staging-smoke.mjs
+          node --check scripts/v3-link-audit.mjs
       - run: npm run check
+      - name: Auditar enlaces internos comerciales
+        env:
+          PUBLIC_BASE_PATH: /isivoltpro-web-v3
+        run: node scripts/v3-link-audit.mjs dist
       - name: Validar rutas y presupuesto comercial
         shell: bash
         run: |
@@ -164,6 +170,7 @@ jobs:
           fi
 
           echo "Rutas comerciales: OK"
+          echo "Enlaces internos comerciales: OK"
           echo "Ruta heredada de mantenimiento: OK"
           echo "Breadcrumbs y skip link: OK"
           echo "Sitemap comercial limpio: OK"

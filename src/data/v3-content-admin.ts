@@ -23,14 +23,28 @@ export type V3ContentEntry = {
   updatedAt: string;
 };
 
+export type V3ContentRevision = {
+  id: string;
+  contentEntryId: string;
+  version: number;
+  actor: string;
+  action: 'created' | 'edited' | 'media_changed' | 'published' | 'restored';
+  summary: string;
+  createdAt: string;
+  restorable: boolean;
+};
+
 export type V3SocialPublication = {
   id: string;
   contentEntryId: string;
   channels: V3SocialChannel[];
   mode: 'manual' | 'scheduled';
-  status: 'draft' | 'ready' | 'published' | 'blocked';
+  status: 'draft' | 'ready' | 'approved' | 'scheduled' | 'published' | 'blocked';
   caption: string;
   mediaIds: string[];
+  scheduledFor?: string;
+  approvedBy?: string;
+  approvedAt?: string;
 };
 
 /**
@@ -46,12 +60,24 @@ export const v3ContentAdminContract = {
   collections: {
     media: 'public_media',
     content: 'public_content',
+    revisions: 'public_content_revisions',
     social: 'social_publications',
+  },
+  permissions: {
+    publishContent: ['owner', 'admin'] as const,
+    approveSocial: ['owner', 'admin'] as const,
+    editContent: ['owner', 'admin', 'content_editor'] as const,
   },
   limits: {
     imageMaxBytes: 8 * 1024 * 1024,
     allowedImageTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
     altRequired: true,
+  },
+  safeguards: {
+    revisionOnPublish: true,
+    revisionOnMediaChange: true,
+    socialApprovalRequired: true,
+    scheduledPublishingRequiresBackendWorker: true,
   },
 };
 
@@ -100,15 +126,48 @@ export const v3AdminPreview = {
       updatedAt: '2026-08-24',
     },
   ] satisfies V3ContentEntry[],
+  revisions: [
+    {
+      id: 'revision-home-hero-v3',
+      contentEntryId: 'content-home-hero',
+      version: 3,
+      actor: 'Admin web',
+      action: 'published',
+      summary: 'Se aprobó el mensaje principal y el visual del dashboard.',
+      createdAt: '2026-08-24T00:12:00+02:00',
+      restorable: true,
+    },
+    {
+      id: 'revision-home-proof-v2',
+      contentEntryId: 'content-home-proof',
+      version: 2,
+      actor: 'Editor de contenido',
+      action: 'media_changed',
+      summary: 'Se propuso una fotografía de trabajo técnico desde móvil.',
+      createdAt: '2026-08-24T00:18:00+02:00',
+      restorable: true,
+    },
+    {
+      id: 'revision-home-proof-v1',
+      contentEntryId: 'content-home-proof',
+      version: 1,
+      actor: 'Editor de contenido',
+      action: 'created',
+      summary: 'Se creó el bloque visual de prueba social para Home.',
+      createdAt: '2026-08-24T00:08:00+02:00',
+      restorable: false,
+    },
+  ] satisfies V3ContentRevision[],
   social: [
     {
       id: 'social-home-launch',
       contentEntryId: 'content-home-proof',
       channels: ['instagram', 'facebook', 'linkedin'],
-      mode: 'manual',
+      mode: 'scheduled',
       status: 'blocked',
       caption: 'Del aviso al cierre, todo el contexto del mantenimiento en el mismo sitio.',
       mediaIds: ['media-field-mobile'],
+      scheduledFor: '2026-08-26T10:00:00+02:00',
     },
   ] satisfies V3SocialPublication[],
 };

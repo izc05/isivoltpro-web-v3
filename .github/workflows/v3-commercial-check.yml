@@ -112,6 +112,11 @@ jobs:
             fi
           done
 
+          if grep -RniE 'posthog|sentry\.io|PUBLIC_POSTHOG_KEY|PUBLIC_SENTRY_DSN' dist --include='*.html' --include='*.js' --include='*.css'; then
+            echo "::error::La V3 preproducción contiene telemetría externa aunque debe permanecer apagada hasta cerrar privacidad/consentimiento."
+            exit 1
+          fi
+
           if ! grep -q 'noindex,nofollow' dist/mantenimiento/index.html; then
             echo "::error::La ruta heredada /mantenimiento/ debe permanecer fuera de indexación."
             exit 1
@@ -199,6 +204,7 @@ jobs:
           echo "Sitemap comercial limpio: OK"
           echo "Preview social: OK"
           echo "CSP y fuentes locales: OK"
+          echo "Telemetría externa desactivada: OK"
           echo "Contacto sin captura de PII: OK"
           echo "Sin copy interno: OK"
           echo "Sin MP4 heredados: OK"

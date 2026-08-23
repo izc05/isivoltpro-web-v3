@@ -27,6 +27,7 @@ ROUTES = [
     ("aplicaciones/", "modulos"),
     ("implantacion/", "implantacion"),
     ("seguridad/", "seguridad"),
+    ("de-whatsapp-excel-a-isivoltpro/", "transicion-whatsapp-excel"),
     ("sectores/", "sectores"),
     ("precios/", "planes"),
     ("recursos/", "recursos"),
@@ -102,8 +103,6 @@ def audit_layout(page, label: str, width: int) -> None:
 
 
 def full_screenshot(page, path: Path) -> None:
-    # Chrome puede omitir visualmente contenido fuera del viewport en screenshots
-    # muy largos. Para la evidencia visual forzamos solo el estado final ya auditado.
     style = page.add_style_tag(
         content="""
           .reveal { opacity: 1 !important; transform: none !important; }
@@ -131,7 +130,7 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     audit_layout(page, name, width)
 
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
-    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "implantacion", "seguridad"}:
+    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")
 
     if name == "home" and width == 390:
@@ -166,4 +165,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · 16 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")
+print("QA móvil V3: OK · 17 rutas representativas validadas a 360 / 390 / 430 px con recorrido completo")

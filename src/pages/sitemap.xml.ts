@@ -1,0 +1,29 @@
+export const prerender = true;
+
+const routes = [
+  '',
+  'producto/',
+  'aplicaciones/',
+  'sectores/',
+  'precios/',
+  'recursos/',
+  'empresa/',
+  'ecosistema/',
+  'contacto/',
+  'privacidad/',
+  'cookies/',
+  'aviso-legal/',
+];
+
+export function GET({ site }: { site?: URL }) {
+  const origin = site ?? new URL('https://isivoltpro.com');
+  const base = import.meta.env.BASE_URL;
+  const urls = routes.map((route) => new URL(`${base}${route}`, origin).toString());
+  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
+    .map((url) => `  <url><loc>${url}</loc></url>`)
+    .join('\n')}\n</urlset>`;
+
+  return new Response(body, {
+    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+  });
+}

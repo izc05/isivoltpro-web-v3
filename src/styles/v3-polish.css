@@ -6,7 +6,8 @@
 }
 
 body { font-family: var(--v3-font-sans); }
-:where(h1, h2, h3, h4, .brand, .mini-brand, .page-core, .intro__mark span) { font-family: var(--v3-font-display); }
+:where(h1, h2, h3, h4, .brand, .mini-brand, .page-core, .intro__mark span, .faq-item summary) { font-family: var(--v3-font-display) !important; }
+:where(.page-core small) { font-family: var(--v3-font-sans) !important; }
 
 html { scroll-padding-top: 88px; }
 html:not(.js) .reveal { opacity: 1; transform: none; }

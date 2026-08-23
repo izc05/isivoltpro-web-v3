@@ -143,6 +143,19 @@ jobs:
             fi
           done
 
+          if ! grep -q '<fieldset[^>]*disabled' dist/contacto/index.html; then
+            echo "::error::Contacto debe mantener los campos de datos personales desactivados hasta disponer de privacidad y backend definitivos."
+            exit 1
+          fi
+          if ! grep -q 'No introduzcas datos personales todavía' dist/contacto/index.html; then
+            echo "::error::Falta el aviso explícito de privacidad en la vista previa de Contacto."
+            exit 1
+          fi
+          if grep -Eq '<form[^>]+(action|method)=' dist/contacto/index.html; then
+            echo "::error::Contacto no debe configurar envío de formulario antes de conectar el canal comercial seguro."
+            exit 1
+          fi
+
           dist_kb=$(du -sk dist | cut -f1)
           max_kb=3072
           if (( dist_kb > max_kb )); then
@@ -156,6 +169,7 @@ jobs:
           echo "Sitemap comercial limpio: OK"
           echo "Preview social: OK"
           echo "CSP y fuentes locales: OK"
+          echo "Contacto sin captura de PII: OK"
           echo "Sin copy interno: OK"
           echo "Sin MP4 heredados: OK"
           echo "Three.js fuera de páginas comerciales: OK"

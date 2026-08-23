@@ -42,6 +42,7 @@ jobs:
             dist/soluciones/index.html
             dist/app-mantenimiento/index.html
             dist/aplicaciones/index.html
+            dist/alcance/index.html
             dist/demo/index.html
             dist/piloto/index.html
             dist/implantacion/index.html
@@ -82,6 +83,7 @@ jobs:
             dist/soluciones/index.html
             dist/app-mantenimiento/index.html
             dist/aplicaciones/index.html
+            dist/alcance/index.html
             dist/demo/index.html
             dist/piloto/index.html
             dist/implantacion/index.html
@@ -136,6 +138,7 @@ jobs:
             'soluciones/'
             'app-mantenimiento/'
             'aplicaciones/'
+            'alcance/'
             'demo/'
             'piloto/'
             'implantacion/'
@@ -172,7 +175,7 @@ jobs:
             fi
           done
 
-          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/demo/index.html dist/piloto/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html; do
+          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/alcance/index.html dist/demo/index.html dist/piloto/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
               echo "::error::Falta og:image en $page"
               exit 1

@@ -9,8 +9,6 @@ PR: borrador; no fusionar hasta aprobación visual, técnica y de staging.
 
 Presentar IsiVoltPro como una herramienta práctica para autónomos, pequeños equipos y empresas mantenedoras que necesitan centralizar clientes, activos, avisos, órdenes de trabajo, preventivos, QR/NFC, documentación e histórico sin implantar un ERP sobredimensionado.
 
-Mensaje principal:
-
 > Menos papeleo. Más trabajo bajo control.
 
 ## Público prioritario
@@ -24,52 +22,35 @@ Mensaje principal:
 ## Dirección visual
 
 - fondo principal ultra blanco;
-- azul acompañado por violeta, rosa, naranja, verde y cian;
-- gradientes como acento, no como fondo continuo;
-- Manrope + DM Sans;
+- azul + violeta + rosa + naranja + verde + cian;
+- gradientes como acento;
 - mucho espacio en blanco;
-- dashboard e interfaces conceptuales claramente etiquetadas;
+- interfaces conceptuales claramente etiquetadas;
 - tarjetas con profundidad y microinteracciones;
 - experiencia móvil prioritaria;
-- entrada inmersiva oscura breve antes de Home;
-- movimiento moderado y respeto de `prefers-reduced-motion`;
-- render progresivo con `content-visibility` en páginas internas.
+- intro inmersiva oscura breve antes de Home;
+- `prefers-reduced-motion`;
+- `content-visibility` en páginas internas.
 
-## Home implementada
-
-- intro aproximada de 3,2 s;
-- botón Saltar intro;
-- una reproducción por sesión con `sessionStorage`;
-- hero orientado a autónomos y pequeñas empresas;
-- dashboard conceptual con datos ilustrativos;
-- problemas cotidianos;
-- módulos principales enlazados a páginas reales;
-- perfiles enlazados a páginas de sector;
-- flujo Cliente/Activo → Aviso → OT → Técnico → Cierre → Histórico;
-- experiencia móvil + QR;
-- estructura Autónomo / Equipo / Empresa sin precios ficticios;
-- CTA final;
-- navegación y footer compartidos con el resto de la web.
-
-## Arquitectura pública actual
+## Arquitectura pública
 
 ### Núcleo comercial
 
 - `/` — Home;
-- `/producto/` — visión del producto;
-- `/aplicaciones/` — índice de módulos;
-- `/sectores/` — índice de perfiles/sectores;
-- `/precios/` — arquitectura comercial sin importes ficticios;
-- `/recursos/` — biblioteca práctica;
-- `/faq/` — preguntas frecuentes + FAQ structured data;
-- `/empresa/` — visión y principios;
-- `/ecosistema/` — relación instalación/activo/trabajo/histórico;
-- `/contacto/` — flujo visual de solicitud de demo, todavía sin envío;
+- `/producto/`;
+- `/aplicaciones/`;
+- `/sectores/`;
+- `/precios/`;
+- `/recursos/`;
+- `/faq/`;
+- `/empresa/`;
+- `/ecosistema/`;
+- `/contacto/`;
 - `/404/`.
 
-### Landings de módulos
+### Módulos
 
-Generadas desde `src/pages/modulos/[slug].astro`:
+Generados desde `src/pages/modulos/[slug].astro` y datos en `src/data/v3-commercial.ts`:
 
 - `/modulos/ordenes-de-trabajo/`;
 - `/modulos/activos/`;
@@ -80,11 +61,7 @@ Generadas desde `src/pages/modulos/[slug].astro`:
 - `/modulos/documentacion/`;
 - `/modulos/avisos-incidencias/`.
 
-Cada landing se centra en problema → resultado → flujo y aclara que la disponibilidad exacta se confirma según fase del producto.
-
-### Landings de perfiles/sectores
-
-Generadas desde `src/pages/sectores/[slug].astro`:
+### Perfiles / sectores
 
 - `/sectores/autonomos-tecnicos/`;
 - `/sectores/empresas-mantenedoras/`;
@@ -95,8 +72,6 @@ Generadas desde `src/pages/sectores/[slug].astro`:
 
 ### Recursos publicados
 
-Generados desde `src/pages/recursos/[slug].astro`:
-
 - `/recursos/orden-trabajo-util/`;
 - `/recursos/organizar-activos-instalaciones/`;
 - `/recursos/qr-activos-mantenimiento/`;
@@ -104,60 +79,68 @@ Generados desde `src/pages/recursos/[slug].astro`:
 
 Los recursos deben aportar utilidad aunque el lector no contrate IsiVoltPro.
 
-### Legal y privacidad de preproducción
+## Legal de preproducción
 
 - `/privacidad/`;
 - `/cookies/`;
 - `/aviso-legal/`.
 
-No se inventan titular, NIF, domicilio ni datos legales no disponibles. Deben completarse antes de producción.
+Las tres rutas están accesibles para revisión, pero están `noindex` y fuera del sitemap hasta completar identidad jurídica, tratamiento de datos y stack definitivo. No se inventan datos legales.
 
 ## SEO y estructura técnica
 
-- componente compartido `V3Seo.astro`;
-- canonical;
-- description;
-- robots por página;
-- Open Graph básico;
-- Twitter card básica;
+- `V3Seo.astro` compartido;
+- canonical, description y robots;
+- Open Graph / Twitter básicos;
 - favicon SVG;
-- sitemap generado con páginas comerciales, módulos, sectores y recursos;
+- sitemap con rutas comerciales, módulos, sectores y recursos;
 - `robots.txt`;
-- laboratorios históricos `lab-3d` fuera de indexación;
+- laboratorios `lab-3d` fuera de indexación;
 - FAQ con JSON-LD `FAQPage`;
-- header y footer reutilizables;
-- navegación móvil real sin JavaScript;
-- microinteracciones y foco accesible;
-- workflow CI exclusivo de la rama;
-- artifact `dist` generado por CI.
+- header/footer reutilizables;
+- menú móvil sin JavaScript;
+- foco accesible y microinteracciones;
+- rutas dinámicas alimentadas desde `src/data/v3-commercial.ts` para compatibilidad con `getStaticPaths()`.
+
+## Rendimiento validado
+
+- CI: `npm run check` + `astro build` en verde;
+- rutas comerciales verificadas automáticamente;
+- páginas comerciales sin carga de Three.js;
+- Home y páginas principales sin JavaScript externo;
+- MP4 de la antigua Fase 2 retirados del build comercial y conservados en historial Git;
+- `dist` reducido aproximadamente de 12 MB a 2,2 MB sin comprimir;
+- artefacto ZIP de CI reducido aproximadamente a 601 KB;
+- CI falla si vuelven a entrar MP4 o desaparecen rutas comerciales clave.
+
+Los chunks de Three.js/GSAP restantes pertenecen a laboratorios históricos y no son referenciados por las páginas comerciales.
 
 ## Separación con IsiVoltPro Platform
 
 Esta rama trabaja exclusivamente la web pública/comercial.
 
-`/acceso/` queda fuera del alcance del rediseño. Autenticación, organizaciones, permisos y plataforma SaaS se desarrollan por separado con Codex. La web pública no debe duplicar autenticación.
+`/acceso/` queda fuera de alcance. Autenticación, organizaciones, permisos y plataforma SaaS se desarrollan por separado con Codex. No duplicar autenticación aquí.
 
 ## Bloqueos reales antes de producción
 
-1. Revisión visual completa del build en escritorio, tablet y móvil.
-2. Conectar formulario de demo a un canal comercial/backend real.
-3. Definir tratamiento, consentimiento y política de privacidad definitiva antes de almacenar datos.
-4. Completar datos jurídicos del aviso legal.
+1. Revisión visual completa en escritorio, tablet y móvil.
+2. Conectar formulario de demo a backend/canal comercial real.
+3. Definir consentimiento y privacidad definitiva antes de almacenar datos.
+4. Completar datos jurídicos.
 5. Definir precios finales tras pilotos reales.
-6. Integrar destino final de `Acceder` cuando la plataforma lo tenga preparado.
-7. Validar la rama en Mini PC como staging.
+6. Integrar destino final de `Acceder` cuando la plataforma esté preparada.
+7. Validar en Mini PC como staging.
 8. Corregir hallazgos de staging y repetir QA.
 9. Solo después, preparar merge a `main` y producción/VPS.
 
 ## Reglas no negociables
 
-- No inventar clientes, testimonios ni métricas.
-- Etiquetar interfaces y cifras conceptuales como ilustrativas.
-- No fijar precios sin validación.
-- No presentar capacidades futuras como terminadas.
-- No activar formularios que almacenen datos sin privacidad y backend.
-- No duplicar autenticación.
-- No hacer merge a `main` hasta aprobación visual y técnica.
-- Mantener rutas compatibles con GitHub Pages, Mini PC y VPS.
-- Validar con `npm run check` en cada bloque significativo.
-- Cuando solo queden bloqueos externos/decisiones de negocio, no inventar más funcionalidades para "seguir avanzando".
+- no inventar clientes, testimonios ni métricas;
+- etiquetar interfaces y cifras conceptuales como ilustrativas;
+- no fijar precios sin validación;
+- no presentar capacidades futuras como terminadas;
+- no activar formularios sin privacidad y backend;
+- no duplicar autenticación;
+- no hacer merge a `main` antes de QA/staging;
+- validar cada bloque significativo;
+- cuando solo queden bloqueos externos, no inventar funcionalidades para seguir avanzando.

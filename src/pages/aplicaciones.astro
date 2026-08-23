@@ -4,9 +4,10 @@ import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
-const contact = `${base}contacto/`;
+const demo = `${base}demo/`;
 const solutions = `${base}soluciones/`;
 const appMaintenance = `${base}app-mantenimiento/`;
+const specialized = `${base}apps-especializadas/`;
 const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
 ---
 <!doctype html>
@@ -27,7 +28,7 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
       </div>
     </section>
 
-    <section class="page-section"><div class="page-shell"><div class="app-feature"><div><span class="eyebrow">Producto de entrada</span><h2>App Mantenimiento</h2><p>Avisos, órdenes de trabajo, activos, preventivos, fotos, documentación e histórico pensados alrededor de un técnico que trabaja desde el móvil y de quien necesita coordinar sin perseguir información.</p><div class="app-feature__actions"><a class="btn btn--primary" href={appMaintenance}>Conocer la app →</a><a class="btn" href={contact}>Solicitar demo</a></div></div><div class="app-feature__visual" aria-label="Vista conceptual de App Mantenimiento"><div class="app-feature__window"><div class="app-feature__bar"><strong>IsiVoltPro · Mantenimiento</strong><span>Vista conceptual</span></div><div class="app-feature__body"><small style="color:var(--muted)">Hoy</small><h3>Trabajo pendiente</h3><div class="app-feature__kpis"><div><small>OT abiertas</small><strong>12</strong></div><div><small>Preventivos</small><strong>8</strong></div><div><small>Avisos</small><strong>3</strong></div></div></div></div><div class="app-feature__phone"><div><small>ACTIVO</small><strong>UTA-02</strong><small>Planta 1 · Zona técnica</small><b>ABRIR OT</b></div></div></div></div></div></section>
+    <section class="page-section"><div class="page-shell"><div class="app-feature"><div><span class="eyebrow">Producto de entrada</span><h2>App Mantenimiento</h2><p>Avisos, órdenes de trabajo, activos, preventivos, fotos, documentación e histórico pensados alrededor de un técnico que trabaja desde el móvil y de quien necesita coordinar sin perseguir información.</p><div class="app-feature__actions"><a class="btn btn--primary" href={appMaintenance}>Conocer la app →</a><a class="btn" href={demo}>Ver cómo sería una demo</a></div></div><div class="app-feature__visual" aria-label="Vista conceptual de App Mantenimiento"><div class="app-feature__window"><div class="app-feature__bar"><strong>IsiVoltPro · Mantenimiento</strong><span>Vista conceptual</span></div><div class="app-feature__body"><small style="color:var(--muted)">Hoy</small><h3>Trabajo pendiente</h3><div class="app-feature__kpis"><div><small>OT abiertas</small><strong>12</strong></div><div><small>Preventivos</small><strong>8</strong></div><div><small>Avisos</small><strong>3</strong></div></div></div></div><div class="app-feature__phone"><div><small>ACTIVO</small><strong>UTA-02</strong><small>Planta 1 · Zona técnica</small><b>ABRIR OT</b></div></div></div></div></div></section>
 
     <section class="page-section page-section--soft" id="modulos">
       <div class="page-shell">
@@ -65,11 +66,12 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
           <article class="feature-card" style="--icon:#6544e8;--icon-bg:#f2efff"><i>⚡</i><h3>Instalaciones eléctricas</h3><p>Cuadros, circuitos, revisiones, documentación técnica y actuaciones sobre cada elemento.</p><small>Solución especializada · integración progresiva</small></article>
           <article class="feature-card" style="--icon:#d52f99;--icon-bg:#fff0f8"><i>✦</i><h3>IsiVoltPro AI</h3><p>Capa de asistencia prevista para consultar documentación e histórico técnico con contexto.</p><small>Capacidad en desarrollo</small></article>
         </div>
+        <div class="page-hero__actions" style="justify-content:center"><a class="btn" href={specialized}>Ver catálogo y estado de apps especializadas →</a></div>
       </div>
     </section>
 
     <section class="page-section">
-      <div class="page-shell"><div class="callout"><div><h2>No necesitas activar todo.</h2><p>Empieza por App Mantenimiento o por el problema más urgente y amplía cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={contact}>Diseñar mi configuración →</a></div></div>
+      <div class="page-shell"><div class="callout"><div><h2>No necesitas activar todo.</h2><p>Empieza por App Mantenimiento o por el problema más urgente y amplía cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={demo}>Ver una demo orientada a mi caso →</a></div></div>
     </section>
   </main>
   <V3CommercialFooter />

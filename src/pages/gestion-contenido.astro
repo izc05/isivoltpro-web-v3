@@ -1,0 +1,67 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
+import { v3AdminPreview, v3ContentAdminContract } from '../data/v3-content-admin';
+
+const base = import.meta.env.BASE_URL;
+const enabled = import.meta.env.PUBLIC_V3_CONTENT_ADMIN_PREVIEW === 'true';
+const { media, entries, social } = v3AdminPreview;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Gestión de contenido · IsiVoltPro" description="Vista de preparación del gestor de contenido y medios de IsiVoltPro." path={`${base}gestion-contenido/`} noindex={true} />
+  <style is:inline>
+    .admin-page{padding:52px 0 90px;background:linear-gradient(180deg,#fff 0%,#f8faff 100%);min-height:80vh}
+    .admin-shell{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    .admin-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:end;margin-bottom:28px}
+    .admin-hero h1{font:800 clamp(42px,6vw,72px)/.98 Manrope,sans-serif;letter-spacing:-.055em;margin:12px 0 18px}
+    .admin-hero p{color:var(--muted);font-size:18px;line-height:1.65;max-width:720px}
+    .admin-status{padding:18px 20px;border-radius:20px;background:#fff;border:1px solid #e7ebf5;box-shadow:0 16px 50px rgba(45,65,110,.08)}
+    .admin-status strong{display:block;margin-bottom:7px}.admin-status small{color:#65708c;line-height:1.5}
+    .admin-grid{display:grid;grid-template-columns:230px 1fr;gap:22px}
+    .admin-nav,.admin-panel{background:#fff;border:1px solid #e6eaf3;border-radius:24px;box-shadow:0 18px 60px rgba(45,65,110,.07)}
+    .admin-nav{padding:16px;align-self:start;position:sticky;top:90px}.admin-nav a{display:flex;gap:10px;align-items:center;padding:12px 13px;color:#27314a;text-decoration:none;border-radius:12px;font-weight:750}.admin-nav a:first-child{background:#eef3ff;color:#175cff}.admin-nav span{width:25px;text-align:center}
+    .admin-panel{padding:26px}.admin-panel__head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:20px}.admin-panel h2{font:800 28px/1.1 Manrope,sans-serif;margin:0 0 5px}.admin-panel p{margin:0;color:#69748f;line-height:1.55}
+    .admin-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 15px;font-weight:800;background:#175cff;color:white}.admin-btn[disabled]{background:#e9edf5;color:#8c95a9;cursor:not-allowed}.admin-btn--ghost{background:#f5f7fb;color:#36415f}
+    .media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.media-card{border:1px solid #e8ebf3;border-radius:18px;overflow:hidden;background:#fff}.media-visual{height:170px;background:linear-gradient(135deg,#edf3ff,#f9efff 45%,#edfafa);display:grid;place-items:center;font-size:48px}.media-copy{padding:15px}.media-copy strong{display:block}.media-copy small{color:#7a849c}.media-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.media-tags i{font-style:normal;font-size:11px;font-weight:800;padding:5px 8px;border-radius:999px;background:#f1f4f9;color:#59647e}
+    .content-table{display:grid;gap:10px}.content-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;border:1px solid #e8ebf3;border-radius:16px;padding:15px}.content-row small{display:block;color:#79839a;margin-top:4px}.status-pill{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;border-radius:999px;background:#eef8f4;color:#14845e}.status-pill.review{background:#fff5e8;color:#b36717}
+    .social-row{border:1px solid #e8ebf3;border-radius:16px;padding:15px;display:grid;grid-template-columns:1fr auto;gap:15px}.social-channels{display:flex;gap:7px;margin-top:10px}.social-channels span{padding:5px 8px;background:#f3f5fa;border-radius:999px;font-size:11px;font-weight:800}.blocked{color:#b1582a;font-weight:800;font-size:12px}
+    .upload-zone{margin-top:14px;border:1.5px dashed #cdd5e5;border-radius:18px;padding:24px;text-align:center;background:#fbfcff}.upload-zone input{display:none}.upload-zone strong{display:block;margin-bottom:5px}.upload-zone small{color:#78839a}
+    .security-note{margin-top:20px;padding:16px 18px;border-radius:16px;background:#fff8ed;border:1px solid #f4dfbd;color:#704d1a;line-height:1.55}
+    .preview-off{margin-top:22px;padding:28px;border-radius:22px;background:#111827;color:#fff}.preview-off p{color:#cbd5e1;line-height:1.6}.preview-off code{background:#243047;padding:3px 7px;border-radius:7px}
+    @media(max-width:840px){.admin-hero,.admin-grid{grid-template-columns:1fr}.admin-nav{display:none}.media-grid{grid-template-columns:1fr}.content-row,.social-row{grid-template-columns:1fr}.admin-panel{padding:19px}.admin-panel__head{display:grid}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="admin-page">
+    <div class="admin-shell">
+      <section class="admin-hero">
+        <div><span class="eyebrow">Administración de la web</span><h1>Contenido, fotos y redes<br/><span class="gradient-text">desde un solo lugar.</span></h1><p>Esta zona prepara el flujo editorial de IsiVoltPro para actualizar textos, sustituir imágenes y reutilizar piezas en redes sociales sin editar archivos a mano.</p></div>
+        <aside class="admin-status"><strong>Modo seguro de preproducción</strong><small>No existe ninguna credencial administrativa en el frontend. La persistencia quedará conectada al backend autenticado con permisos por rol.</small></aside>
+      </section>
+
+      {enabled ? (
+        <div class="admin-grid">
+          <nav class="admin-nav" aria-label="Gestión de contenido"><a href="#media"><span>▧</span> Biblioteca</a><a href="#paginas"><span>▤</span> Páginas</a><a href="#redes"><span>⌁</span> Redes sociales</a><a href="#seguridad"><span>◈</span> Seguridad</a></nav>
+          <div style="display:grid;gap:22px">
+            <section class="admin-panel" id="media"><div class="admin-panel__head"><div><h2>Biblioteca multimedia</h2><p>Fotos, ilustraciones y vídeos reutilizables por toda la web.</p></div><button class="admin-btn" type="button" disabled>Añadir foto</button></div><div class="media-grid">{media.map((item) => <article class="media-card"><div class="media-visual" aria-hidden="true">{item.kind === 'photo' ? '📷' : item.kind === 'video' ? '▶' : '◫'}</div><div class="media-copy"><strong>{item.title}</strong><small>{item.alt}</small><div class="media-tags">{item.tags.map((tag) => <i>{tag}</i>)}</div></div></article>)}</div><label class="upload-zone"><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" disabled/><strong>Arrastra o selecciona una imagen</strong><small>JPEG, PNG, WebP o AVIF · máximo {Math.round(v3ContentAdminContract.limits.imageMaxBytes / 1024 / 1024)} MB · desactivado hasta conectar backend autenticado.</small></label></section>
+
+            <section class="admin-panel" id="paginas"><div class="admin-panel__head"><div><h2>Páginas y secciones</h2><p>Edita mensajes y cambia la imagen asociada sin tocar Astro.</p></div><button class="admin-btn admin-btn--ghost" type="button" disabled>Nueva pieza</button></div><div class="content-table">{entries.map((entry) => <article class="content-row"><div><strong>{entry.section}</strong><small>{entry.route} · {entry.title}</small></div><span class:list={["status-pill", entry.status === 'review' && 'review']}>{entry.status === 'published' ? 'Publicado' : 'Revisión'}</span><button class="admin-btn admin-btn--ghost" type="button" disabled>Editar</button></article>)}</div></section>
+
+            <section class="admin-panel" id="redes"><div class="admin-panel__head"><div><h2>Publicación social</h2><p>Una pieza de la web puede preparar versiones para Instagram, Facebook y LinkedIn.</p></div><button class="admin-btn" type="button" disabled>Crear publicación</button></div>{social.map((item) => <article class="social-row"><div><strong>{item.caption}</strong><div class="social-channels">{item.channels.map((channel) => <span>{channel}</span>)}</div></div><span class="blocked">Bloqueado hasta autorizar cuentas</span></article>)}</section>
+
+            <section class="admin-panel" id="seguridad"><h2>Reglas antes de activar</h2><p>La administración real exigirá sesión autenticada, rol autorizado, validación de tipo/tamaño de archivo, texto alternativo obligatorio, registro de cambios y publicación social explícita. Ninguna red recibirá contenido automáticamente sin autorización.</p><div class="security-note"><strong>Separación importante:</strong> la web comercial no almacenará secretos ni credenciales de PocketBase o redes sociales. Las operaciones sensibles vivirán en el backend autenticado.</div></section>
+          </div>
+        </div>
+      ) : (
+        <section class="preview-off"><strong>Vista administrativa bloqueada por defecto.</strong><p>El diseño y el contrato de datos ya están preparados, pero esta página no muestra controles editoriales en un despliegue normal. Para QA aislado se habilita únicamente con <code>PUBLIC_V3_CONTENT_ADMIN_PREVIEW=true</code>.</p></section>
+      )}
+    </div>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

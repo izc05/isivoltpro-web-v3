@@ -1,0 +1,112 @@
+from __future__ import annotations
+
+import os
+import sys
+from pathlib import Path
+from urllib.parse import urljoin
+
+from playwright.sync_api import sync_playwright
+
+BASE_URL = os.environ.get("V3_PREVIEW_URL", "http://127.0.0.1:4321/")
+OUT = Path(os.environ.get("V3_MOBILE_QA_DIR", "mobile-qa"))
+OUT.mkdir(parents=True, exist_ok=True)
+
+VIEWPORTS = [
+    ("360", 360, 800),
+    ("390", 390, 844),
+    ("430", 430, 932),
+]
+
+ROUTES = [
+    ("", "home"),
+    ("producto/", "producto"),
+    ("aplicaciones/", "modulos"),
+]
+
+failures: list[str] = []
+
+
+def audit_layout(page, label: str, width: int) -> None:
+    metrics = page.evaluate(
+        """() => ({
+          scrollWidth: document.documentElement.scrollWidth,
+          clientWidth: document.documentElement.clientWidth,
+          bodyWidth: document.body.getBoundingClientRect().width,
+          offenders: [...document.querySelectorAll('body *')]
+            .map((el) => {
+              const r = el.getBoundingClientRect();
+              return {tag: el.tagName, cls: String(el.className || '').slice(0, 90), left: r.left, right: r.right, width: r.width};
+            })
+            .filter((x) => x.width > 0 && (x.left < -2 || x.right > document.documentElement.clientWidth + 2))
+            .slice(0, 12),
+          smallControls: [...document.querySelectorAll('.btn, .v3-mobile-nav summary')]
+            .map((el) => {
+              const r = el.getBoundingClientRect();
+              return {tag: el.tagName, cls: String(el.className || ''), text: (el.textContent || '').trim().slice(0, 60), width: r.width, height: r.height};
+            })
+            .filter((x) => x.width > 0 && x.height > 0 && x.height < 43)
+        })"""
+    )
+
+    if metrics["scrollWidth"] > metrics["clientWidth"] + 1:
+        failures.append(
+            f"{label} ({width}px): scroll horizontal {metrics['scrollWidth']} > {metrics['clientWidth']} · {metrics['offenders']}"
+        )
+
+    if metrics["smallControls"]:
+        failures.append(f"{label} ({width}px): controles táctiles <43px · {metrics['smallControls']}")
+
+
+def capture_route(browser, route: str, name: str, viewport_name: str, width: int, height: int) -> None:
+    page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
+    page.add_init_script(
+        """try { sessionStorage.setItem('isivoltpro-intro-seen', '1'); } catch (_) {}"""
+    )
+    url = urljoin(BASE_URL, route)
+    response = page.goto(url, wait_until="networkidle")
+    if response is None or response.status >= 400:
+        failures.append(f"{name} ({width}px): HTTP inválido en {url}")
+        page.close()
+        return
+
+    page.wait_for_timeout(250)
+    audit_layout(page, name, width)
+
+    # Captura superior de todas las rutas y captura completa de Home a 390 px.
+    page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
+    if name == "home" and width == 390:
+        page.screenshot(path=str(OUT / "home-390-full.png"), full_page=True)
+
+    if name == "home" and width == 390:
+        menu = page.locator(".v3-mobile-nav summary")
+        if menu.count() == 1:
+            menu.click()
+            page.wait_for_timeout(100)
+            panel = page.locator(".v3-mobile-nav__panel")
+            if panel.count() == 1:
+                rect = panel.bounding_box()
+                if rect and (rect["x"] < -1 or rect["x"] + rect["width"] > width + 1):
+                    failures.append(f"menú móvil (390px): panel fuera del viewport · {rect}")
+                page.screenshot(path=str(OUT / "home-390-menu.png"), full_page=False)
+            else:
+                failures.append("home (390px): no aparece el panel de navegación móvil")
+        else:
+            failures.append("home (390px): no existe el control de navegación móvil")
+
+    page.close()
+
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    for viewport_name, width, height in VIEWPORTS:
+        for route, name in ROUTES:
+            capture_route(browser, route, name, viewport_name, width, height)
+    browser.close()
+
+if failures:
+    print("\nQA móvil V3: FALLÓ", file=sys.stderr)
+    for item in failures:
+        print(f"- {item}", file=sys.stderr)
+    raise SystemExit(1)
+
+print("QA móvil V3: OK · 360 / 390 / 430 px sin desbordes y con controles táctiles válidos")

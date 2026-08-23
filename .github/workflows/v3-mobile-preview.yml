@@ -1,0 +1,96 @@
+name: Publicar preview móvil V3
+
+on:
+  push:
+    branches:
+      - feat/v3-smb-commercial-redesign
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-v3
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout V3 comercial
+        uses: actions/checkout@v4
+        with:
+          ref: feat/v3-smb-commercial-redesign
+          path: preview-src
+
+      - name: Checkout main estable
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-src
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Construir main estable
+        working-directory: main-src
+        env:
+          PUBLIC_SITE_URL: https://izc05.github.io
+          PUBLIC_BASE_PATH: /isivoltpro-web-v3
+        run: |
+          npm install --no-audit --no-fund
+          npm run check
+
+      - name: Construir preview V3
+        working-directory: preview-src
+        env:
+          PUBLIC_SITE_URL: https://izc05.github.io
+          PUBLIC_BASE_PATH: /isivoltpro-web-v3/v3-preview
+        run: |
+          npm install --no-audit --no-fund
+          npm run check
+
+      - name: Ensamblar Pages sin sustituir la raíz estable
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p site/v3-preview
+          cp -a main-src/dist/. site/
+          cp -a preview-src/dist/. site/v3-preview/
+
+          # El preview es temporal y nunca debe indexarse.
+          find site/v3-preview -type f -name '*.html' -print0 | xargs -0 sed -i 's/content="index,follow,max-image-preview:large"/content="noindex,nofollow"/g'
+
+          cat > site/robots.txt <<'EOF'
+          User-agent: *
+          Allow: /
+          Disallow: /isivoltpro-web-v3/v3-preview/
+          EOF
+
+          test -f site/index.html
+          test -f site/v3-preview/index.html
+          test -f site/v3-preview/producto/index.html
+          grep -q 'noindex,nofollow' site/v3-preview/index.html
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy-preview:
+    needs: build-preview
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}v3-preview/
+    steps:
+      - id: deployment
+        name: Publicar raíz estable + preview V3
+        uses: actions/deploy-pages@v4

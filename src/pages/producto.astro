@@ -2,6 +2,7 @@
 import '../styles/v3-pages.css';
 import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
 const modules = `${base}aplicaciones/`;
@@ -9,11 +10,7 @@ const modules = `${base}aplicaciones/`;
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Descubre cómo IsiVoltPro organiza clientes, activos, avisos, órdenes de trabajo, preventivos, QR, fotos y documentación para autónomos y pequeñas empresas." />
-  <title>Producto · IsiVoltPro</title>
+  <V3Seo title="Producto · IsiVoltPro" description="Descubre cómo IsiVoltPro conecta clientes, activos, avisos, órdenes de trabajo, preventivos, QR y documentación para autónomos y pequeñas empresas." path={`${base}producto/`} />
 </head>
 <body>
   <V3CommercialHeader />
@@ -43,7 +40,7 @@ const modules = `${base}aplicaciones/`;
         <div class="product-preview">
           <aside class="product-nav"><strong>IsiVoltPro</strong><ul><li class="active">Resumen</li><li>Clientes</li><li>Activos</li><li>Avisos</li><li>Órdenes de trabajo</li><li>Mantenimiento</li><li>Documentación</li><li>Histórico</li></ul></aside>
           <div class="product-canvas">
-            <div class="product-canvas__top"><div><small>EMPRESA DEMO · HOY</small><h3>Tu operación, de un vistazo</h3></div><small>Datos ilustrativos</small></div>
+            <div class="product-canvas__top"><div><small>EMPRESA DEMO · DATOS ILUSTRATIVOS</small><h3>Tu operación, de un vistazo</h3></div><small>Interfaz conceptual</small></div>
             <div class="metric-grid"><div class="metric"><small>OT abiertas</small><strong>12</strong></div><div class="metric"><small>Para hoy</small><strong>4</strong></div><div class="metric"><small>Preventivos</small><strong>8</strong></div><div class="metric"><small>Incidencias</small><strong>3</strong></div></div>
             <div class="work-list"><div class="work-row"><span>UTA-02 · fallo de temperatura</span><small>Clínica Norte</small><b class="status status--orange">En curso</b></div><div class="work-row"><span>Cuadro QG-01 · revisión</span><small>Comercio Centro</small><b class="status status--violet">Mañana</b></div><div class="work-row"><span>Bomba ACS-01 · correctivo</span><small>Residencia Sur</small><b class="status">Cerrada</b></div></div>
           </div>

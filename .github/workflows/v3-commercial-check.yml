@@ -86,12 +86,51 @@ jobs:
               echo "::error::Copy interno de desarrollo visible en $page"
               exit 1
             fi
+            if ! grep -q 'Saltar al contenido' "$page"; then
+              echo "::error::Falta skip link accesible en $page"
+              exit 1
+            fi
           done
 
           if ! grep -q 'noindex,nofollow' dist/mantenimiento/index.html; then
             echo "::error::La ruta heredada /mantenimiento/ debe permanecer fuera de indexación."
             exit 1
           fi
+
+          if ! grep -q 'BreadcrumbList' dist/modulos/ordenes-de-trabajo/index.html; then
+            echo "::error::Falta breadcrumb estructurado en una landing profunda de módulos."
+            exit 1
+          fi
+
+          sitemap_required=(
+            'producto/'
+            'aplicaciones/'
+            'modulos/ordenes-de-trabajo/'
+            'sectores/autonomos-tecnicos/'
+            'recursos/orden-trabajo-util/'
+            'faq/'
+          )
+          for route in "${sitemap_required[@]}"; do
+            if ! grep -q "$route" dist/sitemap.xml; then
+              echo "::error::Falta $route en sitemap.xml"
+              exit 1
+            fi
+          done
+
+          sitemap_forbidden=(
+            'lab-3d'
+            'acceso/'
+            'mantenimiento/'
+            'privacidad/'
+            'cookies/'
+            'aviso-legal/'
+          )
+          for route in "${sitemap_forbidden[@]}"; do
+            if grep -q "$route" dist/sitemap.xml; then
+              echo "::error::Ruta no indexable presente en sitemap.xml: $route"
+              exit 1
+            fi
+          done
 
           for page in dist/index.html dist/producto/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
@@ -113,6 +152,8 @@ jobs:
 
           echo "Rutas comerciales: OK"
           echo "Ruta heredada de mantenimiento: OK"
+          echo "Breadcrumbs y skip link: OK"
+          echo "Sitemap comercial limpio: OK"
           echo "Preview social: OK"
           echo "CSP y fuentes locales: OK"
           echo "Sin copy interno: OK"

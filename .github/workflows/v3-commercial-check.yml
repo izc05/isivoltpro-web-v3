@@ -40,11 +40,12 @@ jobs:
             dist/faq/index.html
             dist/contacto/index.html
             dist/sitemap.xml
+            dist/images/home/isivoltpro-industrial-core.webp
           )
 
           for file in "${required[@]}"; do
             if [[ ! -f "$file" ]]; then
-              echo "::error::Falta ruta comercial construida: $file"
+              echo "::error::Falta ruta o recurso comercial construido: $file"
               exit 1
             fi
           done
@@ -72,10 +73,29 @@ jobs:
             fi
           done
 
+          for page in dist/index.html dist/producto/index.html; do
+            if ! grep -q 'property="og:image"' "$page"; then
+              echo "::error::Falta og:image en $page"
+              exit 1
+            fi
+            if ! grep -q 'name="twitter:card" content="summary_large_image"' "$page"; then
+              echo "::error::Falta Twitter Card grande en $page"
+              exit 1
+            fi
+          done
+
+          dist_kb=$(du -sk dist | cut -f1)
+          max_kb=3072
+          if (( dist_kb > max_kb )); then
+            echo "::error::El build V3 ocupa ${dist_kb} KiB y supera el presupuesto de ${max_kb} KiB."
+            exit 1
+          fi
+
           echo "Rutas comerciales: OK"
+          echo "Preview social: OK"
           echo "Sin MP4 heredados: OK"
           echo "Three.js fuera de páginas comerciales: OK"
-          du -sh dist
+          echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"
       - name: Guardar build V3
         uses: actions/upload-artifact@v4
         with:

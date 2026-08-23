@@ -12,7 +12,7 @@ const sectors = `${base}sectores/`;
 const pricing = `${base}precios/`;
 const resources = `${base}recursos/`;
 const access = `${base}acceso/`;
-const contact = `${base}contacto/`;
+const demo = `${base}demo/`;
 const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
 const currentPath = normalizePath(Astro.url.pathname);
 const pathOf = (href: string) => normalizePath(new URL(href, Astro.url.origin).pathname);
@@ -95,11 +95,11 @@ const breadcrumbSchema = breadcrumb ? JSON.stringify({
     </nav>
     <div class="header-actions">
       <a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a>
-      <a class="btn btn--primary" href={contact} aria-current={ariaCurrent(contact)}>Solicitar demo <span aria-hidden="true">→</span></a>
+      <a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Ver demo <span aria-hidden="true">→</span></a>
       <details class="v3-mobile-nav">
         <summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary>
         <nav class="v3-mobile-nav__panel" aria-label="Navegación móvil">
-          <a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules, [`${base}modulos/`, appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors, [sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources, [resources])}>Recursos</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={contact} aria-current={ariaCurrent(contact)}>Solicitar demo <span aria-hidden="true">→</span></a>
+          <a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules, [`${base}modulos/`, appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors, [sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources, [resources])}>Recursos</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={demo} aria-current={ariaCurrent(demo)}>Demo</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Ver demo <span aria-hidden="true">→</span></a>
         </nav>
       </details>
     </div>

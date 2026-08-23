@@ -2,17 +2,15 @@
 import '../styles/v3-pages.css';
 import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
+const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Módulos IsiVoltPro para autónomos y pequeñas empresas: clientes, activos, avisos, órdenes de trabajo, mantenimiento, QR/NFC, documentación, inventario e inspecciones." />
-  <title>Módulos · IsiVoltPro</title>
+  <V3Seo title="Módulos · IsiVoltPro" description="Módulos IsiVoltPro para autónomos y pequeñas empresas: activos, avisos, órdenes de trabajo, mantenimiento, QR/NFC, documentación, inventario e inspecciones." path={`${base}aplicaciones/`} />
 </head>
 <body>
   <V3CommercialHeader />
@@ -26,41 +24,45 @@ const contact = `${base}contacto/`;
 
     <section class="page-section page-section--soft" id="modulos">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">Núcleo operativo</span><h2>Lo que más se usa,<br /><span class="gradient-text">primero.</span></h2></div><p>Estos módulos forman el MVP comercial: cubren el recorrido completo desde el cliente y el equipo hasta el cierre del trabajo y su histórico.</p></div>
+        <div class="page-section__head"><div><span class="eyebrow">Núcleo operativo</span><h2>Lo que más se usa,<br /><span class="gradient-text">primero.</span></h2></div><p>Estos módulos forman el recorrido comercial principal: desde el cliente y el equipo hasta el cierre del trabajo y su histórico. Entra en cada uno para ver el problema concreto que resuelve.</p></div>
         <div class="feature-grid">
-          <article class="feature-card" style="--accent:rgba(23,92,255,.10)"><i>▣</i><h3>Clientes e instalaciones</h3><p>Organiza empresas, particulares, ubicaciones y contactos. Cada trabajo sabe a quién y a qué instalación pertenece.</p><small>Cliente → instalación → activos</small></article>
-          <article class="feature-card" style="--accent:rgba(109,74,255,.10);--icon:#6544e8;--icon-bg:#f2efff"><i>◈</i><h3>Activos y equipos</h3><p>Marca, modelo, número de serie, ubicación, estado, fotografías, manuales, revisiones y actuaciones sobre cada equipo.</p><small>Identidad técnica + histórico</small></article>
-          <article class="feature-card" style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>!</i><h3>Avisos e incidencias</h3><p>Convierte una llamada o mensaje en un registro claro con cliente, activo, prioridad, descripción y evidencias.</p><small>Aviso estructurado, no mensaje perdido</small></article>
-          <article class="feature-card" style="--accent:rgba(255,139,61,.12);--icon:#d96c20;--icon-bg:#fff3e9"><i>✓</i><h3>Órdenes de trabajo</h3><p>Asigna técnicos, registra tiempos, materiales, fotos y resultado, y controla el estado hasta el cierre.</p><small>Asignada → en curso → finalizada</small></article>
-          <article class="feature-card" style="--accent:rgba(36,197,140,.11);--icon:#159f71;--icon-bg:#eaf9f3"><i>⚙</i><h3>Mantenimiento preventivo</h3><p>Define periodicidades y próximas revisiones. La plataforma convierte el calendario técnico en trabajo visible.</p><small>Planificar → avisar → ejecutar</small></article>
-          <article class="feature-card" style="--accent:rgba(24,185,215,.11);--icon:#139db9;--icon-bg:#eafafd"><i>⌁</i><h3>QR / NFC</h3><p>Identifica físicamente equipos y ubicaciones. Escanear abre el contexto correcto desde el móvil.</p><small>Equipo real → ficha digital</small></article>
+          <a class="feature-card" href={moduleUrl('activos')} style="--accent:rgba(23,92,255,.10)"><i>▣</i><h3>Activos y equipos</h3><p>Identidad, ubicación, estado, fotografías, documentos, revisiones y actuaciones alrededor de cada equipo.</p><small>Ver gestión de activos →</small></a>
+          <a class="feature-card" href={moduleUrl('avisos-incidencias')} style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>!</i><h3>Avisos e incidencias</h3><p>Convierte una llamada o mensaje en un registro claro con cliente, activo, prioridad, descripción y evidencias.</p><small>Ver avisos e incidencias →</small></a>
+          <a class="feature-card" href={moduleUrl('ordenes-de-trabajo')} style="--accent:rgba(109,74,255,.10);--icon:#6544e8;--icon-bg:#f2efff"><i>✓</i><h3>Órdenes de trabajo</h3><p>Asigna, ejecuta, documenta y controla el estado de cada trabajo hasta el cierre.</p><small>Ver órdenes de trabajo →</small></a>
+          <a class="feature-card" href={moduleUrl('mantenimiento-preventivo')} style="--accent:rgba(36,197,140,.11);--icon:#159f71;--icon-bg:#eaf9f3"><i>⚙</i><h3>Mantenimiento preventivo</h3><p>Planifica revisiones periódicas y convierte el calendario técnico en trabajo visible y trazable.</p><small>Ver mantenimiento preventivo →</small></a>
+          <a class="feature-card" href={moduleUrl('qr-nfc')} style="--accent:rgba(255,139,61,.12);--icon:#d96c20;--icon-bg:#fff3e9"><i>⌁</i><h3>QR / NFC</h3><p>Identifica físicamente equipos y abre su contexto desde el móvil justo donde ocurre el trabajo.</p><small>Ver QR / NFC →</small></a>
+          <a class="feature-card" href={moduleUrl('documentacion')} style="--accent:rgba(24,185,215,.11);--icon:#139db9;--icon-bg:#eafafd"><i>▤</i><h3>Documentación técnica</h3><p>Fotos, manuales e informes vinculados al cliente, instalación, activo o actuación correspondiente.</p><small>Ver documentación →</small></a>
         </div>
       </div>
     </section>
 
     <section class="page-section">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">Trabajo documentado</span><h2>Cerrar una OT no significa<br /><span class="gradient-text">perder lo aprendido.</span></h2></div><p>La documentación debe quedar exactamente donde será útil la próxima vez: junto al cliente, instalación, activo y actuación que le dan contexto.</p></div>
-        <div class="value-grid"><article class="value-card" style="--accent:rgba(24,185,215,.10);--icon:#139db9;--icon-bg:#eafafd"><i>▤</i><h3>Fotos y documentos</h3><p>Adjunta imágenes, informes, manuales y archivos sin depender de carpetas dispersas.</p></article><article class="value-card" style="--accent:rgba(109,74,255,.10);--icon:#6544e8;--icon-bg:#f2efff"><i>↺</i><h3>Histórico técnico</h3><p>Cada actuación cerrada alimenta la memoria del equipo y ayuda a futuras decisiones.</p></article><article class="value-card" style="--accent:rgba(36,197,140,.11);--icon:#159f71;--icon-bg:#eaf9f3"><i>↗</i><h3>Informes</h3><p>La información registrada durante el trabajo queda preparada para generar documentación profesional.</p></article></div>
+        <div class="page-section__head"><div><span class="eyebrow">Trabajo estructurado</span><h2>Revisar y controlar sin<br /><span class="gradient-text">crear más burocracia.</span></h2></div><p>Cuando un equipo pequeño necesita más profundidad, la misma base puede extenderse a inspecciones e inventario sin crear sistemas aislados.</p></div>
+        <div class="value-grid">
+          <a class="value-card" href={moduleUrl('inspecciones')} style="--accent:rgba(24,185,215,.10);--icon:#139db9;--icon-bg:#eafafd"><i>☑</i><h3>Inspecciones y checklists</h3><p>Comprobaciones, observaciones y evidencias alrededor de una revisión trazable.</p></a>
+          <a class="value-card" href={moduleUrl('inventario')} style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>▥</i><h3>Inventario y materiales</h3><p>Control práctico de existencias y consumos relacionados con el trabajo técnico.</p></a>
+          <a class="value-card" href={moduleUrl('documentacion')} style="--accent:rgba(109,74,255,.10);--icon:#6544e8;--icon-bg:#f2efff"><i>↺</i><h3>Histórico técnico</h3><p>Lo registrado durante el trabajo queda disponible para entender la siguiente intervención.</p></a>
+        </div>
       </div>
     </section>
 
     <section class="page-section page-section--soft">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">Módulos especializados</span><h2>Más profundidad cuando<br /><span class="gradient-text">tu negocio la necesita.</span></h2></div><p>Estas capacidades se integrarán progresivamente sobre la misma base de organizaciones, usuarios, instalaciones y activos.</p></div>
+        <div class="page-section__head"><div><span class="eyebrow">Módulos especializados</span><h2>Más profundidad cuando<br /><span class="gradient-text">tu actividad la necesita.</span></h2></div><p>Estas capacidades se integran progresivamente sobre la misma base. La disponibilidad concreta se confirma en demo para no presentar desarrollo futuro como producto terminado.</p></div>
         <div class="feature-grid">
-          <article class="feature-card"><i>▥</i><h3>Inventario y almacén</h3><p>Materiales, existencias, movimientos y asignaciones conectados con las intervenciones.</p><small>En integración progresiva</small></article>
-          <article class="feature-card" style="--icon:#e37427;--icon-bg:#fff4ea"><i>◎</i><h3>Inspecciones</h3><p>Checklists, defectos, fotografías y resultados vinculados a la instalación inspeccionada.</p><small>En integración progresiva</small></article>
-          <article class="feature-card" style="--icon:#159f71;--icon-bg:#eaf9f3"><i>≈</i><h3>Legionella / ACS</h3><p>Controles, purgas, puntos, registros y documentación específica sobre el activo correspondiente.</p><small>Módulo especializado</small></article>
-          <article class="feature-card" style="--icon:#139db9;--icon-bg:#eafafd"><i>❄</i><h3>Climatización</h3><p>Equipos HVAC, mantenimientos, averías, documentación y trazabilidad por instalación.</p><small>Módulo especializado</small></article>
-          <article class="feature-card" style="--icon:#6544e8;--icon-bg:#f2efff"><i>⚡</i><h3>Instalaciones eléctricas</h3><p>Cuadros, circuitos, revisiones, documentación técnica y actuaciones sobre cada elemento.</p><small>Módulo especializado</small></article>
+          <a class="feature-card" href={moduleUrl('inventario')}><i>▥</i><h3>Inventario y almacén</h3><p>Materiales, existencias, movimientos y consumos vinculados a la operación.</p><small>Ver enfoque de inventario →</small></a>
+          <a class="feature-card" href={moduleUrl('inspecciones')} style="--icon:#e37427;--icon-bg:#fff4ea"><i>◎</i><h3>Inspecciones</h3><p>Checklists, defectos, fotografías y resultados vinculados a la instalación inspeccionada.</p><small>Ver enfoque de inspecciones →</small></a>
+          <article class="feature-card" style="--icon:#159f71;--icon-bg:#eaf9f3"><i>≈</i><h3>Legionella / ACS</h3><p>Controles, purgas, puntos y registros específicos alrededor del activo correspondiente.</p><small>Módulo especializado · integración progresiva</small></article>
+          <article class="feature-card" style="--icon:#139db9;--icon-bg:#eafafd"><i>❄</i><h3>Climatización</h3><p>Equipos HVAC, mantenimientos, averías, documentación y trazabilidad por instalación.</p><small>Módulo especializado · integración progresiva</small></article>
+          <article class="feature-card" style="--icon:#6544e8;--icon-bg:#f2efff"><i>⚡</i><h3>Instalaciones eléctricas</h3><p>Cuadros, circuitos, revisiones, documentación técnica y actuaciones sobre cada elemento.</p><small>Módulo especializado · integración progresiva</small></article>
           <article class="feature-card" style="--icon:#d52f99;--icon-bg:#fff0f8"><i>✦</i><h3>IsiVoltPro AI</h3><p>Capa de asistencia prevista para consultar documentación e histórico técnico con contexto.</p><small>Capacidad en desarrollo</small></article>
         </div>
       </div>
     </section>
 
     <section class="page-section">
-      <div class="page-shell"><div class="callout"><div><h2>No necesitas contratar todos los módulos.</h2><p>La idea es empezar por el problema más urgente y ampliar cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={contact}>Diseñar mi configuración →</a></div></div>
+      <div class="page-shell"><div class="callout"><div><h2>No necesitas activar todo.</h2><p>Empieza por el problema más urgente y amplía cuando IsiVoltPro ya forme parte de tu trabajo diario.</p></div><a class="btn btn--primary" href={contact}>Diseñar mi configuración →</a></div></div>
     </section>
   </main>
   <V3CommercialFooter />

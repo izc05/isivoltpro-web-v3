@@ -8,6 +8,10 @@
 body { font-family: var(--v3-font-sans); }
 :where(h1, h2, h3, h4, .brand, .mini-brand, .page-core, .intro__mark span) { font-family: var(--v3-font-display); }
 
+html:not(.js) .reveal { opacity: 1; transform: none; }
+html:not(.js) .intro { display: none; }
+html:not(.js) body.intro-lock { overflow: auto; }
+
 :where(a, button, summary, input, select, textarea):focus-visible {
   outline: 3px solid rgba(23, 92, 255, .28);
   outline-offset: 4px;

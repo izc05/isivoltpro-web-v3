@@ -1,0 +1,84 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+
+const guides = {
+  'orden-trabajo-util': {
+    title: 'Qué debe tener una orden de trabajo útil',
+    description: 'Una OT útil debe ayudar al técnico a entender, ejecutar y cerrar un trabajo sin obligarle a rellenar información que nadie volverá a consultar.',
+    points: [
+      ['Contexto mínimo', 'Cliente, ubicación, activo afectado y descripción clara del problema.'],
+      ['Prioridad comprensible', 'Una clasificación corta y compartida evita que todo termine siendo urgente.'],
+      ['Responsable visible', 'Debe quedar claro quién está trabajando en la OT y en qué estado se encuentra.'],
+      ['Evidencia útil', 'Fotos, notas y materiales deben quedar vinculados a la intervención, no perdidos en el teléfono.'],
+      ['Cierre con resultado', 'La OT debería explicar qué se encontró, qué se hizo y si queda alguna acción pendiente.'],
+      ['Histórico automático', 'Cerrar la OT debe mejorar la información disponible para la próxima intervención.']
+    ],
+    takeaway: 'Si un campo no ayuda a ejecutar, demostrar o entender el trabajo después, probablemente no debería ser obligatorio.'
+  },
+  'mantenimiento-preventivo-pequena-empresa': {
+    title: 'Mantenimiento preventivo sin hojas paralelas',
+    description: 'Un plan preventivo sencillo debe convertir periodicidades en tareas visibles y verificables, no crear otro calendario que alguien tenga que recordar revisar.',
+    points: [
+      ['Empieza por activos críticos', 'No intentes planificar todo el primer día. Identifica primero los equipos que realmente necesitan seguimiento.'],
+      ['Define periodicidad y acción', 'No basta con poner “cada 3 meses”: describe qué hay que comprobar.'],
+      ['Convierte la fecha en trabajo', 'Cuando se acerca una revisión debe aparecer como una tarea ejecutable, no solo como una celda de calendario.'],
+      ['Registra resultado', 'Una revisión sin resultado documentado no crea histórico.'],
+      ['Anota desviaciones', 'Lo interesante no es solo marcar “hecho”, sino detectar cambios, defectos o necesidades.'],
+      ['Revisa el plan', 'La periodicidad debe poder ajustarse cuando la experiencia real del equipo lo justifica.']
+    ],
+    takeaway: 'El preventivo funciona cuando genera trabajo claro, deja evidencia y prepara la siguiente revisión.'
+  },
+  'qr-activos-mantenimiento': {
+    title: 'Cómo usar QR en mantenimiento sin complicarlo',
+    description: 'El QR aporta valor cuando elimina búsquedas y conecta el equipo físico con la información exacta que necesita el técnico en ese momento.',
+    points: [
+      ['Identifica un activo real', 'El código debe pertenecer a un equipo o ubicación inequívoca.'],
+      ['Abre la ficha correcta', 'Escanear debería evitar navegar por menús o buscar por nombres ambiguos.'],
+      ['Muestra contexto operativo', 'Estado, ubicación, avisos abiertos, últimas actuaciones y documentación son más útiles que una ficha estática.'],
+      ['Permite actuar', 'Desde la ficha debería poder abrirse un aviso u OT cuando sea necesario.'],
+      ['Etiqueta para el entorno', 'El material, tamaño y ubicación de la etiqueta deben resistir el uso real.'],
+      ['Evita información sensible pública', 'El QR identifica; el sistema debe controlar qué información puede ver cada usuario.']
+    ],
+    takeaway: 'Un QR útil no contiene toda la información: abre de forma segura el contexto digital del activo.'
+  },
+  'organizar-activos-instalaciones': {
+    title: 'Cómo organizar clientes, instalaciones y activos',
+    description: 'Una estructura simple evita que la base de datos termine siendo más difícil de mantener que las hojas de cálculo que pretendía sustituir.',
+    points: [
+      ['Cliente', 'Quién recibe el servicio o es responsable de la instalación.'],
+      ['Ubicación', 'Dónde ocurre el trabajo: edificio, local, planta o zona.'],
+      ['Sistema', 'Agrupa cuando aporta valor: climatización, electricidad, ACS, PCI u otros.'],
+      ['Activo', 'El equipo físico que necesita identidad e histórico propios.'],
+      ['Código estable', 'Usa una referencia que no dependa de que alguien recuerde el nombre exacto.'],
+      ['Datos mínimos primero', 'Tipo, ubicación, marca, modelo, serie, estado y documentación básica suelen ser suficientes para arrancar.']
+    ],
+    takeaway: 'La mejor estructura es la más pequeña que permite encontrar el equipo correcto y entender su historia.'
+  }
+};
+
+export function getStaticPaths() {
+  return Object.entries(guides).map(([slug, guide]) => ({ params: { slug }, props: { guide, slug } }));
+}
+
+const { guide, slug } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const contact = `${base}contacto/`;
+const resources = `${base}recursos/`;
+---
+<!doctype html>
+<html lang="es">
+<head><V3Seo title={`${guide.title} · IsiVoltPro`} description={guide.description} path={`${base}recursos/${slug}/`} /></head>
+<body>
+<V3CommercialHeader />
+<main class="page-main">
+  <section class="page-hero"><div class="page-shell page-hero__grid"><div><span class="eyebrow">Guía práctica IsiVoltPro</span><h1>{guide.title}</h1><p>{guide.description}</p><div class="page-hero__actions"><a class="btn" href={resources}>← Todos los recursos</a><a class="btn btn--primary" href={contact}>Verlo aplicado en una demo →</a></div></div><div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">GUÍA<small>TRABAJO REAL</small></div><div class="page-pill page-pill--a">Simple<small>Menos campos</small></div><div class="page-pill page-pill--b">Útil<small>Más contexto</small></div><div class="page-pill page-pill--c">Móvil<small>En el lugar</small></div><div class="page-pill page-pill--d">Histórico<small>Sirve después</small></div></div></div></section>
+
+  <section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Paso a paso</span><h2>Lo esencial,<br/><span class="gradient-text">sin burocracia.</span></h2></div><p>Estas pautas están pensadas para autónomos y equipos pequeños. No requieren implantar IsiVoltPro para ser útiles.</p></div><div class="feature-grid">{guide.points.map(([heading, text], index) => <article class="feature-card"><i>{String(index + 1).padStart(2,'0')}</i><h3>{heading}</h3><p>{text}</p></article>)}</div></div></section>
+
+  <section class="page-section"><div class="page-shell"><div class="callout"><div><h2>{guide.takeaway}</h2><p>IsiVoltPro intenta convertir este principio en un flujo digital sencillo: registrar una vez, reutilizar el contexto y conservar lo que será útil después.</p></div><a class="btn btn--primary" href={contact}>Solicitar demo →</a></div></div></section>
+</main>
+<V3CommercialFooter />
+</body></html>

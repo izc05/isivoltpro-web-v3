@@ -1,5 +1,7 @@
 ---
 import '../styles/v3-polish.css';
+import { moduleLandings, sectorLandings, resourceGuides } from '../data/v3-commercial';
+
 const base = import.meta.env.BASE_URL;
 const home = base;
 const product = `${base}producto/`;
@@ -21,6 +23,37 @@ const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
   });
   return isCurrentSection ? 'location' : undefined;
 };
+
+type Breadcrumb = { parentLabel: string; parentHref: string; currentLabel: string };
+let breadcrumb: Breadcrumb | undefined;
+
+const modulePrefix = pathOf(`${base}modulos/`);
+const sectorPrefix = pathOf(`${base}sectores/`);
+const resourcePrefix = pathOf(`${base}recursos/`);
+
+if (currentPath.startsWith(`${modulePrefix}/`)) {
+  const slug = currentPath.slice(modulePrefix.length + 1).split('/')[0];
+  const item = moduleLandings[slug];
+  if (item) breadcrumb = { parentLabel: 'Módulos', parentHref: modules, currentLabel: item.name };
+} else if (currentPath.startsWith(`${sectorPrefix}/`)) {
+  const slug = currentPath.slice(sectorPrefix.length + 1).split('/')[0];
+  const item = sectorLandings[slug];
+  if (item) breadcrumb = { parentLabel: 'Sectores', parentHref: sectors, currentLabel: item.name };
+} else if (currentPath.startsWith(`${resourcePrefix}/`)) {
+  const slug = currentPath.slice(resourcePrefix.length + 1).split('/')[0];
+  const item = resourceGuides[slug];
+  if (item) breadcrumb = { parentLabel: 'Recursos', parentHref: resources, currentLabel: item.title };
+}
+
+const breadcrumbSchema = breadcrumb ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(home, Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 2, name: breadcrumb.parentLabel, item: new URL(breadcrumb.parentHref, Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 3, name: breadcrumb.currentLabel, item: Astro.url.toString() },
+  ],
+}) : undefined;
 ---
 <style is:inline>
   .v3-skip-link{position:fixed;left:14px;top:10px;z-index:10000;padding:10px 14px;border-radius:12px;background:#0c1530;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(12,21,48,.22);transform:translateY(-160%);transition:transform .18s ease}
@@ -36,6 +69,12 @@ const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
   .v3-mobile-nav__panel a[aria-current]{background:#eef3ff;color:var(--blue)}
   .v3-mobile-nav__panel .mobile-cta{margin-top:6px;color:#fff;background:linear-gradient(100deg,var(--blue),var(--violet),var(--pink))}
   .nav a[aria-current]{color:var(--blue)}
+  .v3-breadcrumb{border-bottom:1px solid rgba(229,234,244,.72);background:rgba(251,252,255,.9)}
+  .v3-breadcrumb__inner{min-height:42px;display:flex;align-items:center;gap:8px;overflow:hidden;color:#76829b;font-size:12px;white-space:nowrap}
+  .v3-breadcrumb__inner a{color:#52607b;font-weight:700}
+  .v3-breadcrumb__inner a:hover{color:var(--blue)}
+  .v3-breadcrumb__current{overflow:hidden;text-overflow:ellipsis;color:#7f8ba3}
+  .v3-breadcrumb__sep{color:#b0b9cb}
   @media(max-width:860px){.v3-mobile-nav{display:block}.site-header .nav{display:none}.site-header .header-actions>.btn{display:none}.site-header__inner{min-height:68px}}
 </style>
 <a class="v3-skip-link" href="#v3-main-content">Saltar al contenido</a>
@@ -64,4 +103,16 @@ const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
     </div>
   </div>
 </header>
+{breadcrumb && (
+  <>
+    <nav class="v3-breadcrumb" aria-label="Migas de pan">
+      <div class="v3-breadcrumb__inner shell">
+        <a href={home}>Inicio</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span>
+        <a href={breadcrumb.parentHref}>{breadcrumb.parentLabel}</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span>
+        <span class="v3-breadcrumb__current" aria-current="page">{breadcrumb.currentLabel}</span>
+      </div>
+    </nav>
+    <script is:inline type="application/ld+json" set:html={breadcrumbSchema}></script>
+  </>
+)}
 <span id="v3-main-content" class="v3-skip-target" tabindex="-1"></span>

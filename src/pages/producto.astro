@@ -5,12 +5,14 @@ import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
+const solutions = `${base}soluciones/`;
 const modules = `${base}aplicaciones/`;
+const appMaintenance = `${base}app-mantenimiento/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
-  <V3Seo title="Producto · IsiVoltPro" description="Descubre cómo IsiVoltPro conecta clientes, activos, avisos, órdenes de trabajo, preventivos, QR y documentación para autónomos y pequeñas empresas." path={`${base}producto/`} />
+  <V3Seo title="Producto · IsiVoltPro" description="Descubre la plataforma IsiVoltPro, su App Mantenimiento y las soluciones conectadas para clientes, activos, avisos, órdenes de trabajo, preventivos, QR y documentación." path={`${base}producto/`} />
 </head>
 <body>
   <V3CommercialHeader />
@@ -20,8 +22,8 @@ const modules = `${base}aplicaciones/`;
         <div>
           <span class="eyebrow">Producto pensado para el día a día</span>
           <h1>Todo el trabajo técnico,<br /><span class="gradient-text">en el mismo contexto.</span></h1>
-          <p>IsiVoltPro une clientes, ubicaciones, equipos, incidencias, órdenes, mantenimientos, fotos y documentación para que cada actuación tenga sentido antes, durante y después del trabajo.</p>
-          <div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Solicitar demo →</a><a class="btn" href={modules}>Ver módulos</a></div>
+          <p>IsiVoltPro une clientes, ubicaciones, equipos, incidencias, órdenes, mantenimientos, fotos y documentación. Puedes entrar por la App Mantenimiento y ampliar solo cuando una nueva solución te aporte valor.</p>
+          <div class="page-hero__actions"><a class="btn btn--primary" href={appMaintenance}>Ver App Mantenimiento →</a><a class="btn" href={solutions}>Ver soluciones</a></div>
         </div>
         <div class="page-hero__visual" aria-hidden="true">
           <div class="page-orbit"></div>
@@ -36,7 +38,7 @@ const modules = `${base}aplicaciones/`;
 
     <section class="page-section page-section--soft">
       <div class="page-shell">
-        <div class="page-section__head"><div><span class="eyebrow">De la realidad a la pantalla</span><h2>Menos aplicaciones.<br /><span class="gradient-text">Más contexto útil.</span></h2></div><p>Un autónomo o una pequeña empresa no necesita un ERP gigantesco para saber qué tiene pendiente. Necesita abrir el móvil y entender qué cliente, qué equipo, qué problema y qué trabajo hay detrás.</p></div>
+        <div class="page-section__head"><div><span class="eyebrow">De la realidad a la pantalla</span><h2>Menos aplicaciones aisladas.<br /><span class="gradient-text">Más contexto útil.</span></h2></div><p>Un autónomo o una pequeña empresa no necesita un ERP gigantesco para saber qué tiene pendiente. Necesita abrir el móvil y entender qué cliente, qué equipo, qué problema y qué trabajo hay detrás.</p></div>
         <div class="product-preview">
           <aside class="product-nav"><strong>IsiVoltPro</strong><ul><li class="active">Resumen</li><li>Clientes</li><li>Activos</li><li>Avisos</li><li>Órdenes de trabajo</li><li>Mantenimiento</li><li>Documentación</li><li>Histórico</li></ul></aside>
           <div class="product-canvas">
@@ -50,20 +52,31 @@ const modules = `${base}aplicaciones/`;
 
     <section class="page-section">
       <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">Una arquitectura que crece contigo</span><h2>No compras una suite enorme.<br/><span class="gradient-text">Construyes tu herramienta.</span></h2></div><p>La misma base puede servir a un autónomo con una necesidad muy concreta y a una mantenedora que más adelante quiera añadir más profundidad.</p></div>
+        <div class="value-grid">
+          <article class="value-card" style="--accent:rgba(23,92,255,.10)"><i>1</i><h3>Plataforma IsiVoltPro</h3><p>Clientes, organizaciones, ubicaciones, activos, usuarios e histórico forman la base común que evita duplicar información.</p></article>
+          <a class="value-card" href={appMaintenance} style="--accent:rgba(109,74,255,.10);--icon:#6544e8;--icon-bg:#f2efff"><i>2</i><h3>App Mantenimiento</h3><p>Avisos, OT, preventivos y trabajo de campo como puerta de entrada práctica al ecosistema.</p><small>Conocer la app →</small></a>
+          <a class="value-card" href={modules} style="--accent:rgba(36,197,140,.11);--icon:#159f71;--icon-bg:#eaf9f3"><i>3</i><h3>Apps y soluciones</h3><p>QR/NFC, inspecciones, inventario, documentación y capacidades especializadas entran cuando resuelven una necesidad real.</p><small>Explorar apps →</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
         <div class="page-section__head"><div><span class="eyebrow">Qué cambia</span><h2>Del mensaje perdido<br /><span class="gradient-text">al histórico del activo.</span></h2></div><p>IsiVoltPro convierte una necesidad cotidiana en un flujo comprensible. Cada paso reutiliza la información anterior, evitando escribir lo mismo varias veces.</p></div>
         <div class="flow-board"><article class="flow-step"><b>01</b><strong>Cliente</strong><small>Quién necesita el trabajo.</small></article><article class="flow-step"><b>02</b><strong>Activo</strong><small>Dónde ocurre y qué equipo es.</small></article><article class="flow-step"><b>03</b><strong>Aviso</strong><small>Qué problema se ha detectado.</small></article><article class="flow-step"><b>04</b><strong>OT</strong><small>Quién lo hará y con qué prioridad.</small></article><article class="flow-step"><b>05</b><strong>Cierre</strong><small>Fotos, trabajo y resultado.</small></article><article class="flow-step"><b>06</b><strong>Histórico</strong><small>Todo listo para la próxima vez.</small></article></div>
       </div>
     </section>
 
-    <section class="page-section page-section--soft">
+    <section class="page-section">
       <div class="page-shell">
         <div class="page-section__head"><div><span class="eyebrow">Diseñado para campo</span><h2>El móvil primero.<br /><span class="gradient-text">La oficina después.</span></h2></div><p>El técnico debe poder identificar un activo, consultar antecedentes, abrir una OT, añadir fotos y cerrar el trabajo desde el lugar donde ocurre. El ordenador queda para planificación, control y revisión.</p></div>
         <div class="value-grid"><article class="value-card" style="--accent:rgba(23,92,255,.10)"><i>⌁</i><h3>Escanea y entra</h3><p>QR o NFC abre directamente el activo correcto, evitando búsquedas y errores de identificación.</p></article><article class="value-card" style="--accent:rgba(36,197,140,.12);--icon:#159f71;--icon-bg:#eaf9f3"><i>✓</i><h3>Trabaja y documenta</h3><p>Texto, fotos, materiales y resultado quedan asociados a la misma actuación.</p></article><article class="value-card" style="--accent:rgba(242,56,169,.10);--icon:#d52f99;--icon-bg:#fff0f8"><i>↗</i><h3>Consulta después</h3><p>El histórico conserva qué ocurrió, quién actuó y cómo se resolvió para futuras intervenciones.</p></article></div>
       </div>
     </section>
 
-    <section class="page-section">
-      <div class="page-shell"><div class="callout"><div><h2>Empieza por el problema que más tiempo te hace perder.</h2><p>No necesitas activar todo a la vez. Podemos partir de OT, activos o preventivos y crecer desde ahí.</p></div><a class="btn btn--primary" href={contact}>Ver una demo →</a></div></div>
+    <section class="page-section page-section--soft">
+      <div class="page-shell"><div class="callout"><div><h2>Empieza por el problema que más tiempo te hace perder.</h2><p>Podemos partir de App Mantenimiento, OT, activos o preventivos y crecer desde ahí. Lo importante es resolver primero una fricción real.</p></div><div class="page-hero__actions" style="margin-top:0"><a class="btn btn--primary" href={contact}>Ver una demo →</a><a class="btn" href={solutions}>Explorar soluciones</a></div></div></div>
     </section>
   </main>
   <V3CommercialFooter />

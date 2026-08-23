@@ -1,6 +1,11 @@
 ---
 const base = import.meta.env.BASE_URL;
 ---
+<style is:inline>
+  .page-footer__bottom a{display:inline;margin:0;color:#aebbd7}
+  .page-footer__bottom a:hover{text-decoration:underline}
+  :where(a,button,input,select,textarea):focus-visible{outline:3px solid rgba(23,92,255,.28);outline-offset:3px}
+</style>
 <footer class="page-footer">
   <div class="page-shell">
     <div class="page-footer__grid">

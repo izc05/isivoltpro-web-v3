@@ -1,18 +1,13 @@
 # IsiVoltPro Web V3 — Rediseño comercial para autónomos y pequeñas empresas
 
-Estado: EN DESARROLLO
+Estado: IMPLEMENTACIÓN PRINCIPAL COMPLETADA EN RAMA / PENDIENTE REVISIÓN VISUAL FINAL
 Rama: `feat/v3-smb-commercial-redesign`
 Base protegida: `main` en `719017c8feba705f17963e3243ce0ba145c6e987`
+PR de validación: borrador, sin intención de merge hasta aprobación.
 
 ## Objetivo
 
-Transformar la Home V3 en una web comercial de nueva generación que comunique con claridad que IsiVoltPro resuelve problemas cotidianos de autónomos, pequeños equipos y empresas mantenedoras.
-
-Mensaje principal:
-
-> Menos papeleo. Más trabajo bajo control.
-
-IsiVoltPro debe presentarse como una herramienta práctica para centralizar:
+Presentar IsiVoltPro como una herramienta práctica para autónomos, pequeños equipos y empresas mantenedoras que necesitan centralizar:
 
 - clientes y ubicaciones;
 - activos y equipos;
@@ -24,68 +19,103 @@ IsiVoltPro debe presentarse como una herramienta práctica para centralizar:
 - histórico técnico;
 - coordinación de pequeños equipos.
 
+Mensaje principal:
+
+> Menos papeleo. Más trabajo bajo control.
+
 ## Público prioritario
 
 1. Autónomos técnicos.
 2. Pequeñas empresas de mantenimiento.
 3. Equipos técnicos pequeños.
-4. Negocios que necesitan controlar sus propias instalaciones sin implantar un ERP complejo.
+4. Negocios que controlan instalaciones propias sin necesitar un ERP complejo.
 
-## Dirección visual
+## Dirección visual aprobada
 
-- Home ultra blanca y luminosa.
-- Tipografía corporativa de alta legibilidad.
-- Azul como color de confianza, acompañado por violeta, rosa, naranja, verde y cian.
-- Gradientes usados como acento, no como fondo permanente.
-- Dashboard conceptual como pieza visual principal.
-- Tarjetas flotantes con profundidad y movimiento moderado.
-- Mucho espacio en blanco y jerarquía clara.
-- Diseño móvil prioritario para el trabajo de campo.
+- fondo principal ultra blanco;
+- azul acompañado por violeta, rosa, naranja, verde y cian;
+- gradientes como acento;
+- Manrope + DM Sans;
+- mucho espacio en blanco;
+- dashboard conceptual y tarjetas con profundidad;
+- experiencia móvil prioritaria;
+- entrada inmersiva oscura breve antes de Home;
+- movimiento moderado y respeto de `prefers-reduced-motion`.
 
-## Entrada previa a la Home
+## Implementado
 
-La nueva Home incorpora una intro cinematográfica breve:
+### Home
 
-`CLIENTES + ACTIVOS + AVISOS + OT + MANTENIMIENTO → ISIVOLTPRO`
+- intro de aproximadamente 3,2 s;
+- botón Saltar intro;
+- reproducción una vez por sesión con `sessionStorage`;
+- hero orientado a autónomos y pequeñas empresas;
+- dashboard conceptual;
+- problemas cotidianos;
+- módulos principales;
+- perfiles de cliente;
+- flujo Cliente/Activo → Aviso → OT → Técnico → Cierre → Histórico;
+- experiencia móvil + QR;
+- estructura Autónomo / Equipo / Empresa sin precios ficticios;
+- CTA final.
 
-Características:
+### Páginas comerciales
 
-- fondo oscuro;
-- núcleo IsiVoltPro animado;
-- nodos orbitando;
-- mensaje "Conectando tu trabajo diario";
-- duración aproximada de 3,2 segundos;
-- botón para saltarla;
-- solo una reproducción por sesión mediante `sessionStorage`;
-- respeto de `prefers-reduced-motion`.
+- `/producto/`;
+- `/aplicaciones/`;
+- `/sectores/`;
+- `/precios/`;
+- `/recursos/`;
+- `/empresa/`;
+- `/ecosistema/`;
+- `/contacto/`;
+- `/404/`.
 
-## Estructura Home V3
+### Legal y privacidad de preproducción
 
-1. Intro inmersiva.
-2. Hero comercial para autónomos y pequeñas empresas.
-3. Vista conceptual del producto.
-4. Problemas cotidianos que simplifica IsiVoltPro.
-5. Módulos principales.
-6. Para quién está diseñado.
-7. Flujo Cliente/Activo → Aviso → OT → Técnico → Cierre → Histórico.
-8. Experiencia móvil + QR.
-9. Arquitectura comercial Autónomo / Equipo / Empresa sin precios ficticios.
-10. CTA final.
-11. Footer.
+- `/privacidad/`;
+- `/cookies/`;
+- `/aviso-legal/`.
 
-## Separación con la plataforma
+No se inventan titular, NIF, domicilio ni datos legales no disponibles. Deben completarse antes de producción.
 
-Esta rama trabaja exclusivamente la web pública V3.
+### Infraestructura web
 
-`/acceso/` queda fuera del alcance de este rediseño porque el acceso real, autenticación, organizaciones y permisos se desarrollan por separado en IsiVoltPro Platform.
+- header y footer comerciales reutilizables;
+- navegación móvil real sin JavaScript;
+- sitemap generado;
+- `robots.txt`;
+- exclusión de rutas históricas `lab-3d` de indexación;
+- favicon SVG;
+- workflow CI exclusivo de la rama;
+- `npm run check` validado correctamente durante el desarrollo;
+- artifact `dist` preparado en CI para revisiones del build.
 
-La web pública enlaza a `/acceso/`, pero no implementa autenticación.
+## Separación con IsiVoltPro Platform
 
-## Reglas
+Esta rama trabaja exclusivamente la web pública/comercial.
 
-- No inventar clientes, testimonios o métricas.
-- No fijar precios hasta validarlos con pilotos.
+`/acceso/` queda fuera del alcance del rediseño. Autenticación, organizaciones, permisos y plataforma SaaS se desarrollan por separado con Codex y no deben duplicarse aquí.
+
+## Pendiente antes de producción
+
+1. Revisión visual completa en escritorio, tablet y móvil.
+2. Revisar la Home V3 frente a las páginas internas y decidir si la navegación principal permanece one-page o enlaza también a las páginas detalladas.
+3. Conectar el formulario de demo a un backend/canal comercial real.
+4. Incorporar consentimiento y política de privacidad definitiva antes de almacenar datos.
+5. Completar datos del aviso legal.
+6. Definir precios finales tras pilotos reales.
+7. Integrar destino real de Acceder cuando el trabajo de plataforma esté preparado.
+8. Validar en Mini PC como staging.
+9. Solo después, preparar VPS/producción.
+
+## Reglas no negociables
+
+- No inventar clientes, testimonios ni métricas.
+- No fijar precios sin validación.
 - No presentar capacidades futuras como terminadas.
-- No hacer merge a `main` hasta revisión visual y validación técnica.
-- Mantener responsive y accesibilidad de movimiento.
-- La web debe vender utilidad práctica antes que complejidad tecnológica.
+- No activar formularios que almacenen datos sin privacidad y backend.
+- No duplicar autenticación.
+- No hacer merge a `main` hasta aprobación visual y técnica.
+- Mantener rutas compatibles con GitHub Pages, Mini PC y VPS.
+- Validar con `npm run check` en cada bloque.

@@ -159,11 +159,26 @@ html:not(.js) body.intro-lock { overflow: auto; }
   .hero__note { align-items: flex-start; line-height: 1.5; }
   .product-stage { min-height: 395px; }
   .dashboard { border-radius: 21px; }
-  .dashboard__top { padding: 15px; }
+  .dashboard__top {
+    padding: 15px;
+    padding-right: 104px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+    min-height: 72px;
+  }
+  .dashboard__top > small {
+    display: block;
+    font-size: 9px;
+    line-height: 1.35;
+    color: #75819a;
+  }
   .dashboard__main { padding: 13px; }
   .kpi { padding: 12px; }
   .kpi strong { font-size: 20px; }
   .floating-card--chart { display: none; }
+  .floating-card--qr { top: -10px; right: 8px; width: 88px; padding: 12px; }
 
   .section-head h2,
   .page-section__head h2 { font-size: clamp(35px, 10.5vw, 44px); line-height: 1.04; }
@@ -207,7 +222,8 @@ html:not(.js) body.intro-lock { overflow: auto; }
   .hero__actions { gap: 9px; }
   .hero__actions .btn { min-height: 50px; }
   .product-stage { min-height: 382px; }
-  .floating-card--qr { right: 4px; }
+  .dashboard__top { padding-right: 96px; }
+  .floating-card--qr { right: 2px; width: 84px; }
 
   .workflow__track { grid-template-columns: 1fr; }
   .workflow-step::after { display: none !important; }

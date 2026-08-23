@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /lab-3d
+Disallow: /isivoltpro-web-v3/lab-3d

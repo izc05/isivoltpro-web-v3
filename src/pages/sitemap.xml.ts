@@ -3,6 +3,8 @@ export const prerender = true;
 const routes = [
   '',
   'producto/',
+  'soluciones/',
+  'app-mantenimiento/',
   'aplicaciones/',
   'modulos/ordenes-de-trabajo/',
   'modulos/activos/',

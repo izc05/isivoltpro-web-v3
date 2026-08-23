@@ -8,13 +8,23 @@
 body { font-family: var(--v3-font-sans); }
 :where(h1, h2, h3, h4, .brand, .mini-brand, .page-core, .intro__mark span) { font-family: var(--v3-font-display); }
 
+html { scroll-padding-top: 88px; }
 html:not(.js) .reveal { opacity: 1; transform: none; }
 html:not(.js) .intro { display: none; }
 html:not(.js) body.intro-lock { overflow: auto; }
 
+:where(a, button, summary) { touch-action: manipulation; }
 :where(a, button, summary, input, select, textarea):focus-visible {
   outline: 3px solid rgba(23, 92, 255, .28);
   outline-offset: 4px;
+}
+
+:where(.hero__grid, .page-hero__grid, .page-section__head, .product-preview, .company-story, .mobile-block, .personas) > * {
+  min-width: 0;
+}
+
+:where(.hero h1, .page-hero h1, .section-head h2, .page-section__head h2, .callout h2, .story-card h3) {
+  overflow-wrap: break-word;
 }
 
 :where(.feature-card, .value-card, .sector-card, .resource-card, .plan-card, .story-card) {
@@ -138,6 +148,78 @@ html:not(.js) body.intro-lock { overflow: auto; }
 }
 
 @media (max-width: 680px) {
+  html { scroll-padding-top: 74px; }
   .page-section { contain-intrinsic-size: 1100px; }
   :where(a.feature-card, a.value-card, a.sector-card, a.resource-card):hover { transform: none; }
+
+  .hero { padding-top: 54px; padding-bottom: 54px; }
+  .hero h1 { font-size: clamp(40px, 12.5vw, 48px); line-height: 1.01; letter-spacing: -.052em; }
+  .hero__lead { font-size: 16px; line-height: 1.62; }
+  .hero__note { align-items: flex-start; line-height: 1.5; }
+  .product-stage { min-height: 395px; }
+  .dashboard { border-radius: 21px; }
+  .dashboard__top { padding: 15px; }
+  .dashboard__main { padding: 13px; }
+  .kpi { padding: 12px; }
+  .kpi strong { font-size: 20px; }
+  .floating-card--chart { display: none; }
+
+  .section-head h2,
+  .page-section__head h2 { font-size: clamp(35px, 10.5vw, 44px); line-height: 1.04; }
+  .section-head p,
+  .page-section__head p { font-size: 15px; line-height: 1.65; }
+
+  :where(.module-card, .persona-card, .value-card, .feature-card, .sector-card, .resource-card, .story-card) { min-height: 0; }
+  :where(.value-card, .feature-card, .sector-card, .resource-card) { padding: 22px; border-radius: 22px; }
+  :where(.value-card h3, .feature-card h3, .sector-card h3, .resource-card h3) { margin-top: 18px; font-size: 20px; }
+
+  .page-hero { padding-top: 56px; padding-bottom: 42px; }
+  .page-hero h1 { font-size: clamp(40px, 12vw, 50px); line-height: 1.01; letter-spacing: -.052em; }
+  .page-hero p { font-size: 16px; line-height: 1.62; }
+  .page-hero__actions .btn,
+  .callout .btn { width: 100%; }
+  .page-hero__visual { min-height: 292px; }
+  .page-core { width: 118px; height: 118px; border-radius: 28px; font-size: 21px; }
+  .page-pill { min-width: 102px; max-width: 122px; padding: 10px 11px; border-radius: 15px; font-size: 10px; }
+
+  .product-canvas { padding: 16px; border-radius: 22px; }
+  .product-canvas__top { flex-direction: column; align-items: flex-start; gap: 7px; }
+  .product-canvas__top h3 { font-size: 23px; }
+  .metric { padding: 14px; }
+  .metric strong { font-size: 22px; }
+  .work-row { padding: 14px; }
+
+  .story-card { padding: 27px; border-radius: 24px; }
+  .story-card h3 { font-size: 27px; }
+  .callout { border-radius: 25px; }
+  .callout h2 { font-size: clamp(31px, 9vw, 40px); }
+
+  .phone-device { transform: none; }
+  .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 420px) {
+  .shell,
+  .page-shell { width: min(100% - 24px, 1180px); }
+
+  .hero h1 { font-size: clamp(38px, 11.5vw, 44px); }
+  .hero__actions { gap: 9px; }
+  .hero__actions .btn { min-height: 50px; }
+  .product-stage { min-height: 382px; }
+  .floating-card--qr { right: 4px; }
+
+  .workflow__track { grid-template-columns: 1fr; }
+  .workflow-step::after { display: none !important; }
+  .metric-grid { grid-template-columns: 1fr; }
+
+  .page-hero__visual { min-height: 250px; }
+  .page-core { width: 108px; height: 108px; font-size: 19px; }
+  .page-pill--b,
+  .page-pill--c { display: none; }
+  .page-pill--a { left: 0; top: 14%; }
+  .page-pill--d { right: 0; bottom: 14%; }
+
+  .callout { padding: 24px 20px; }
+  .final-cta__inner { border-radius: 26px; }
+  .footer { padding-top: 34px; }
 }

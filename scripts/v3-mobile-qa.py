@@ -34,6 +34,24 @@ ROUTES = [
 failures: list[str] = []
 
 
+def render_full_page(page) -> None:
+    """Recorre la página para materializar secciones con content-visibility:auto."""
+    page.evaluate(
+        """async () => {
+          const step = Math.max(360, Math.floor(window.innerHeight * 0.72));
+          const max = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+          for (let y = 0; y < max; y += step) {
+            window.scrollTo(0, y);
+            await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          }
+          window.scrollTo(0, max);
+          await new Promise((resolve) => setTimeout(resolve, 80));
+          window.scrollTo(0, 0);
+          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        }"""
+    )
+
+
 def audit_layout(page, label: str, width: int) -> None:
     metrics = page.evaluate(
         """() => ({
@@ -77,7 +95,8 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
         page.close()
         return
 
-    page.wait_for_timeout(250)
+    page.wait_for_timeout(200)
+    render_full_page(page)
     audit_layout(page, name, width)
 
     # Captura superior de todas las rutas. En 390 px guardamos además el recorrido
@@ -118,4 +137,4 @@ if failures:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · rutas comerciales críticas validadas a 360 / 390 / 430 px sin desbordes y con controles táctiles válidos")
+print("QA móvil V3: OK · rutas comerciales críticas validadas a 360 / 390 / 430 px tras recorrer la página completa")

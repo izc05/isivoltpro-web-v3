@@ -1,0 +1,92 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+
+const sectors = {
+  'autonomos-tecnicos': {
+    name: 'Autónomos técnicos', eyebrow: 'Trabajas solo. El sistema no debería darte más trabajo.',
+    title: 'Menos tiempo organizando. Más tiempo resolviendo.',
+    description: 'IsiVoltPro ayuda a autónomos técnicos a ordenar clientes, equipos, avisos, OT, fotos y revisiones sin convertir su día en una tarea administrativa.',
+    examples: ['Electricidad', 'Climatización', 'Fontanería', 'SAT y reparaciones'],
+    pains: ['Avisos que llegan por WhatsApp o llamada', 'Fotos repartidas por el móvil', 'Clientes y equipos difíciles de recordar', 'Revisiones pendientes sin un sistema único'],
+    wins: ['Una agenda operativa más clara', 'Cada cliente con sus equipos y trabajos', 'Histórico disponible desde el móvil', 'Menos tiempo reconstruyendo información']
+  },
+  'empresas-mantenedoras': {
+    name: 'Pequeñas empresas mantenedoras', eyebrow: 'Coordinar sin perseguir a cada técnico',
+    title: 'Que todo el equipo vea el mismo trabajo, no versiones distintas.',
+    description: 'Centraliza avisos, asignaciones, prioridades, evidencias y cierres para pequeñas empresas que mantienen instalaciones de varios clientes.',
+    examples: ['Mantenimiento integral', 'Climatización', 'Electricidad', 'Servicios técnicos'],
+    pains: ['Reparto de trabajo por llamadas', 'Estados que dependen de preguntar', 'Fotos enviadas fuera de la OT', 'Dificultad para entregar histórico al cliente'],
+    wins: ['Trabajo asignado y visible', 'Estados compartidos', 'Evidencias dentro de la OT', 'Histórico separado por cliente']
+  },
+  'instalaciones-propias': {
+    name: 'Negocios con instalaciones propias', eyebrow: 'Control técnico sin crear un departamento enorme',
+    title: 'Tus instalaciones bajo control aunque el mantenimiento sea externo.',
+    description: 'Organiza activos, incidencias, preventivos, documentación y proveedores para negocios que necesitan saber qué ocurre en sus propias instalaciones.',
+    examples: ['Comercios', 'Clínicas', 'Residencias', 'Pequeños hoteles y centros'],
+    pains: ['Averías sin histórico', 'Documentación en carpetas dispersas', 'Mantenimiento externalizado sin visión global', 'Revisiones próximas difíciles de anticipar'],
+    wins: ['Mapa claro de activos', 'Incidencias por ubicación', 'Preventivos visibles', 'Mejor contexto al hablar con proveedores']
+  },
+  'climatizacion-frio': {
+    name: 'Climatización y frío', eyebrow: 'Equipos, revisiones y averías con contexto',
+    title: 'Cada máquina con su histórico técnico, estés donde estés.',
+    description: 'Relaciona equipos HVAC, mantenimientos, averías, documentación y actuaciones con el cliente y la ubicación correctos.',
+    examples: ['Splits y VRF', 'UTA', 'Bombas de calor', 'Frío comercial'],
+    pains: ['Equipos parecidos en varias ubicaciones', 'Datos técnicos dispersos', 'Preventivos separados de las averías', 'Fotos sin identificar'],
+    wins: ['Activo bien identificado', 'Revisiones junto al equipo', 'Averías acumuladas en histórico', 'Documentación accesible en campo']
+  },
+  'instalaciones-electricas': {
+    name: 'Instalaciones eléctricas', eyebrow: 'Cuadros, revisiones y actuaciones trazables',
+    title: 'Del cuadro real a su historial digital.',
+    description: 'Organiza cuadros, equipos, revisiones, incidencias, fotografías y documentación técnica alrededor de cada instalación eléctrica.',
+    examples: ['Cuadros BT', 'Alumbrado', 'Protecciones', 'Instalaciones de enlace'],
+    pains: ['Fotos de cuadros sin referencia', 'Cambios que no quedan registrados', 'Revisiones difíciles de reconstruir', 'Documentación separada de la instalación'],
+    wins: ['Identificación por activo o ubicación', 'Actuaciones acumuladas', 'Fotos contextualizadas', 'Base para inspección y mantenimiento']
+  },
+  'multisede': {
+    name: 'Operaciones multisede', eyebrow: 'Varias ubicaciones sin mezclar la información',
+    title: 'Una visión común con cada sede perfectamente separada.',
+    description: 'Organiza locales, centros, edificios o clientes bajo una misma operación manteniendo activos, avisos, permisos e históricos por ubicación.',
+    examples: ['Cadenas de locales', 'Varios edificios', 'Delegaciones', 'Carteras de clientes'],
+    pains: ['Información mezclada entre sedes', 'Difícil saber dónde ocurre cada incidencia', 'Documentación duplicada', 'Poca visibilidad global'],
+    wins: ['Jerarquía por sedes', 'Activos contextualizados', 'Permisos por organización', 'Visión global sin perder detalle']
+  }
+};
+
+export function getStaticPaths() {
+  return Object.entries(sectors).map(([slug, data]) => ({ params: { slug }, props: { data, slug } }));
+}
+
+const { data, slug } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const contact = `${base}contacto/`;
+const sectorsUrl = `${base}sectores/`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title={`${data.name} · IsiVoltPro`} description={data.description} path={`${base}sectores/${slug}/`} />
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="page-main">
+    <section class="page-hero">
+      <div class="page-shell page-hero__grid">
+        <div><span class="eyebrow">{data.eyebrow}</span><h1>{data.title}</h1><p>{data.description}</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Cuéntanos tu caso →</a><a class="btn" href={sectorsUrl}>Ver otros perfiles</a></div></div>
+        <div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">{data.name}<small>ISIVOLTPRO</small></div>{data.examples.map((item, i) => <div class={`page-pill page-pill--${['a','b','c','d'][i]}`}>{item}<small>Trabajo conectado</small></div>)}</div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Lo que suele doler</span><h2>Problemas pequeños que<br/><span class="gradient-text">roban mucho tiempo.</span></h2></div><p>IsiVoltPro se plantea desde situaciones cotidianas, no desde procesos corporativos sobredimensionados.</p></div><div class="feature-grid">{data.pains.map((pain, i) => <article class="feature-card"><i>{i+1}</i><h3>{pain}</h3><p>La plataforma busca mantener este punto dentro del mismo flujo para que no dependa de recordar, preguntar o buscar en varias aplicaciones.</p></article>)}</div></div></section>
+
+    <section class="page-section"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">El resultado buscado</span><h2>Más control sin<br/><span class="gradient-text">más burocracia.</span></h2></div><p>La tecnología debe quitar fricción. Si para usarla hay que duplicar el trabajo, no sirve al tipo de empresa para el que estamos construyendo IsiVoltPro.</p></div><div class="value-grid">{data.wins.map((win, i) => <article class="value-card" style={`--accent:${['rgba(23,92,255,.10)','rgba(109,74,255,.10)','rgba(36,197,140,.11)','rgba(242,56,169,.10)'][i]}`}><i>✓</i><h3>{win}</h3><p>Información clara, vinculada al contexto correcto y disponible cuando hace falta.</p></article>)}</div></div></section>
+
+    <section class="page-section page-section--soft"><div class="page-shell"><div class="flow-board"><article class="flow-step"><b>01</b><strong>Cliente / sede</strong><small>Empieza por el contexto.</small></article><article class="flow-step"><b>02</b><strong>Activo</strong><small>Identifica el equipo.</small></article><article class="flow-step"><b>03</b><strong>Necesidad</strong><small>Aviso o revisión.</small></article><article class="flow-step"><b>04</b><strong>Trabajo</strong><small>Asignar y ejecutar.</small></article><article class="flow-step"><b>05</b><strong>Evidencia</strong><small>Fotos, notas y resultado.</small></article><article class="flow-step"><b>06</b><strong>Histórico</strong><small>Queda disponible.</small></article></div></div></section>
+
+    <section class="page-section"><div class="page-shell"><div class="callout"><div><h2>La demo debe parecerse a tu trabajo, no al de una gran multinacional.</h2><p>Cuéntanos cómo recibes avisos, cómo organizas clientes y qué información pierdes hoy. A partir de ahí evaluamos el encaje.</p></div><a class="btn btn--primary" href={contact}>Solicitar demo →</a></div></div></section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

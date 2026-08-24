@@ -80,13 +80,22 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const key = new THREE.PointLight(0x5269ff, 28, 20); key.position.set(-3, 4, 5); scene.add(key);
     const magenta = new THREE.PointLight(0xf04acb, 19, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
     const cyan = new THREE.PointLight(0x36d8ea, 18, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
+    const coreGlow = new THREE.PointLight(0xa8bdff, 8, 7); coreGlow.position.set(0, .1, 2); scene.add(coreGlow);
 
     const group = new THREE.Group(); group.rotation.x = -0.08; scene.add(group);
     const logo = new THREE.Group();
-    const cubeMaterial = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.15,metalness:.06,emissive:0xf4f8ff,emissiveIntensity:.30});
+    const face = (color:number, emissive:number, intensity:number) => new THREE.MeshStandardMaterial({color,roughness:.16,metalness:.05,emissive,emissiveIntensity:intensity});
+    const logoMaterials = [
+      face(0xffffff,0xf5f8ff,.30),
+      face(0xc9f0ff,0x6fceff,.22),
+      face(0xf8fbff,0xffffff,.20),
+      face(0xb8c5ff,0x6f79ff,.20),
+      face(0xffffff,0xf4f8ff,.28),
+      face(0xd9d2ff,0x9b7dff,.20),
+    ];
     const cubeGeo = new THREE.BoxGeometry(.68,.68,.68);
-    [[-.34,.28,0],[.34,.28,0],[0,-.32,0]].forEach(([x,y,z],index)=>{const cube=new THREE.Mesh(cubeGeo,cubeMaterial);cube.position.set(x,y,z);cube.rotation.set(.36,.64+index*.12,.12);logo.add(cube)});
-    logo.position.set(0,.08,.35);logo.scale.setScalar(.86);group.add(logo);
+    [[-.35,.28,.02],[.35,.28,-.02],[0,-.33,.05]].forEach(([x,y,z],index)=>{const cube=new THREE.Mesh(cubeGeo,logoMaterials);cube.position.set(x,y,z);cube.rotation.set(.36,.64+index*.14,.12);logo.add(cube)});
+    logo.position.set(0,.08,.42);logo.scale.setScalar(.74);group.add(logo);
 
     [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:.20}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
 

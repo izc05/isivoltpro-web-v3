@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
+  <title id="title">Equipo HVAC conceptual IsiVoltPro</title>
+  <desc id="desc">Ilustración técnica original de una unidad de climatización industrial con ventiladores, paneles y conexiones.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7f9fd"/><stop offset="1" stop-color="#eef3fb"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".48" stop-color="#e7ebf2"/><stop offset="1" stop-color="#cfd6e2"/></linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dce3ed"/><stop offset="1" stop-color="#b8c2d0"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4d85ee"/><stop offset=".55" stop-color="#7458e7"/><stop offset="1" stop-color="#35c69b"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#34415d" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="720" height="460" rx="44" fill="url(#bg)"/>
+  <ellipse cx="366" cy="382" rx="250" ry="35" fill="#cad3e2" opacity=".32"/>
+  <g filter="url(#shadow)">
+    <path d="M128 129 505 98l84 50-375 36z" fill="#f8faff" stroke="#cfd7e3" stroke-width="3"/>
+    <path d="M214 184 589 148v190l-375 47z" fill="url(#metal)" stroke="#bbc6d5" stroke-width="3"/>
+    <path d="M128 129 214 184v201l-86-55z" fill="url(#side)" stroke="#b7c2d1" stroke-width="3"/>
+    <path d="M214 184 589 148v34l-375 41z" fill="#f9fbfe" opacity=".8"/>
+    <g fill="none" stroke="#8996a9" stroke-width="4">
+      <rect x="249" y="218" width="143" height="118" rx="12"/>
+      <rect x="416" y="202" width="135" height="118" rx="12"/>
+    </g>
+    <g transform="translate(320 277)">
+      <circle r="49" fill="#d8dee8" stroke="#8e9bad" stroke-width="4"/>
+      <circle r="12" fill="#69778b"/>
+      <g fill="#9ca8b8"><path d="M0-10C8-47 29-46 35-29 42-9 18 5 6 10Z"/><path d="M10 0C47 8 46 29 29 35 9 42-5 18-10 6Z"/><path d="M0 10C-8 47-29 46-35 29-42 9-18-5-6-10Z"/><path d="M-10 0C-47-8-46-29-29-35-9-42 5-18 10-6Z"/></g>
+    </g>
+    <g transform="translate(484 261)">
+      <circle r="44" fill="#d8dee8" stroke="#8e9bad" stroke-width="4"/>
+      <circle r="11" fill="#69778b"/>
+      <g fill="#9ca8b8"><path d="M0-9C7-42 26-41 32-26 38-8 16 4 5 9Z"/><path d="M9 0C42 7 41 26 26 32 8 38-4 16-9 5Z"/><path d="M0 9C-7 42-26 41-32 26-38 8-16-4-5-9Z"/><path d="M-9 0C-42-7-41-26-26-32-8-38 4-16 9-5Z"/></g>
+    </g>
+    <rect x="153" y="191" width="32" height="85" rx="8" fill="#aeb9c8"/>
+    <g stroke="#7e8b9e" stroke-width="4"><path d="M160 206h18M160 222h18M160 238h18M160 254h18"/></g>
+    <rect x="236" y="351" width="122" height="11" rx="5.5" fill="url(#accent)"/>
+    <circle cx="537" cy="340" r="8" fill="#35c69b"/><circle cx="563" cy="337" r="8" fill="#6f5be7"/>
+  </g>
+  <g transform="translate(525 74)">
+    <rect width="132" height="52" rx="16" fill="#fff" stroke="#dce3ee" stroke-width="2"/>
+    <circle cx="24" cy="26" r="8" fill="#35c69b"/><text x="42" y="23" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#26334d">UTA-02</text><text x="42" y="38" font-family="Arial,sans-serif" font-size="9" fill="#718099">Operativo</text>
+  </g>
+</svg>

@@ -158,3 +158,19 @@
     margin-top: 17px;
   }
 }
+
+/* Contact preview QA guards. These selectors are intentionally scoped so the
+   shared stylesheet can keep the contact mockup inside every validated viewport. */
+.contact-glow {
+  right: 0 !important;
+}
+.contact-actions .btn {
+  min-height: 46px !important;
+}
+@media (max-width: 980px) {
+  .contact-glow {
+    left: 8% !important;
+    right: 2% !important;
+    filter: blur(26px) !important;
+  }
+}

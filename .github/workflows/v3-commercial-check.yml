@@ -213,10 +213,10 @@ jobs:
             exit 1
           fi
 
-          # El límite sube solo 128 KiB para absorber el chunk diferido de la entrada 3D.
-          # La carga dinámica evita inicializar/descargar WebGL cuando la intro ya se vio en la sesión.
+          # Presupuesto deliberadamente acotado: 3.2 MiB base + 64 KiB para el
+          # workspace visual de soluciones del día a día. Si vuelve a crecer, debe revisarse.
           dist_kb=$(du -sk dist | cut -f1)
-          max_kb=3200
+          max_kb=3264
           if (( dist_kb > max_kb )); then
             echo "::error::El build V3 ocupa ${dist_kb} KiB y supera el presupuesto de ${max_kb} KiB."
             exit 1

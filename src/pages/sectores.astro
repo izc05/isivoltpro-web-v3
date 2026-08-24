@@ -5,12 +5,27 @@ import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
 const contact = `${base}contacto/`;
+const experience = `${base}experiencia/`;
+const sectorVisual = `${base}media/sectores-operacion.svg`;
 const sectorUrl = (slug: string) => `${base}sectores/${slug}/`;
 ---
-<!doctype html><html lang="es"><head><V3Seo title="Sectores · IsiVoltPro" description="IsiVoltPro para autónomos técnicos, pequeñas empresas mantenedoras, negocios con instalaciones propias y operaciones multisede." path={`${base}sectores/`} /></head><body>
+<!doctype html><html lang="es"><head><V3Seo title="Sectores · IsiVoltPro" description="IsiVoltPro para autónomos técnicos, pequeñas empresas mantenedoras, negocios con instalaciones propias y operaciones multisede." path={`${base}sectores/`} /><style is:inline>
+.sector-story{padding:18px 0 86px;background:linear-gradient(180deg,#fff 0%,#fbfcff 100%)}
+.sector-story__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:46px;align-items:center}
+.sector-story__media{position:relative;border:1px solid #e8edf8;border-radius:32px;background:#fff;padding:14px;box-shadow:0 28px 70px rgba(36,54,94,.11)}
+.sector-story__media img{display:block;width:100%;height:auto;border-radius:24px}
+.sector-story__copy h2{margin:10px 0 18px;font-size:clamp(2rem,4vw,3.5rem);line-height:1.02;letter-spacing:-.04em}
+.sector-story__copy>p{font-size:1.05rem;line-height:1.75;color:#5d6a87}
+.sector-story__proof{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
+.sector-story__proof article{border:1px solid #e8edf8;border-radius:18px;padding:16px;background:#fff}
+.sector-story__proof strong{display:block;margin-bottom:5px;color:#1d2742}.sector-story__proof small{color:#66738f;line-height:1.45}
+@media(max-width:880px){.sector-story{padding:8px 0 62px}.sector-story__grid{grid-template-columns:1fr;gap:28px}.sector-story__media{order:2}.sector-story__copy{order:1}}
+@media(max-width:560px){.sector-story__proof{grid-template-columns:1fr}.sector-story__media{padding:8px;border-radius:24px}.sector-story__media img{border-radius:18px}}
+</style></head><body>
 <V3CommercialHeader />
 <main class="page-main">
 <section class="page-hero"><div class="page-shell page-hero__grid"><div><span class="eyebrow">Mismo problema, distintos oficios</span><h1>Tu trabajo cambia.<br/><span class="gradient-text">El control no debería.</span></h1><p>IsiVoltPro se adapta a profesionales y pequeñas empresas que necesitan mantener equipos, atender avisos, organizar revisiones y conservar documentación sin implantar un sistema enorme.</p><div class="page-hero__actions"><a class="btn btn--primary" href={contact}>Cuéntanos tu caso →</a><a class="btn" href="#casos">Ver perfiles</a></div></div><div class="page-hero__visual" aria-hidden="true"><div class="page-orbit"></div><div class="page-core">TU NEGOCIO<small>UN MISMO CONTROL</small></div><div class="page-pill page-pill--a">Autónomos<small>Menos administración</small></div><div class="page-pill page-pill--b">Mantenedoras<small>Más coordinación</small></div><div class="page-pill page-pill--c">Instalaciones<small>Activos e incidencias</small></div><div class="page-pill page-pill--d">Multisitio<small>Todo separado y visible</small></div></div></div></section>
+<section class="sector-story"><div class="page-shell sector-story__grid"><div class="sector-story__media"><img src={sectorVisual} alt="Cuatro escenarios conceptuales de IsiVoltPro: autónomo, pequeño equipo, instalaciones propias y operación multisede." width="1200" height="760" loading="eager" decoding="async" /></div><div class="sector-story__copy"><span class="eyebrow">Una plataforma, cuatro formas de trabajar</span><h2>Que la herramienta se adapte <span class="gradient-text">a tu operación.</span></h2><p>No necesitas aprender una forma artificial de mantener. El mismo contexto —ubicación, activo, aviso, técnico, evidencias e histórico— se presenta de forma distinta según trabajes solo, con un pequeño equipo o repartido entre varias instalaciones.</p><div class="sector-story__proof"><article><strong>Sin demo falsa</strong><small>Los visuales son conceptuales y los datos se identifican como ilustrativos.</small></article><article><strong>Sin ERP gigante</strong><small>Empieza por el problema que ya existe y amplía cuando el equipo lo necesite.</small></article></div><div class="page-hero__actions"><a class="btn btn--primary" href={experience}>Probar IsiVoltPro →</a><a class="btn" href="#casos">Elegir mi perfil</a></div></div></div></section>
 <section class="page-section page-section--soft" id="casos"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Para quién</span><h2>Diseñado alrededor de<br/><span class="gradient-text">problemas reales.</span></h2></div><p>No partimos de una industria idealizada. Partimos de trabajos que llegan por teléfono, equipos sin histórico, revisiones que vencen y documentación repartida entre carpetas, chats y hojas de cálculo.</p></div><div class="sector-grid">
 <a class="sector-card" href={sectorUrl('autonomos-tecnicos')}><i>👤</i><h3>Autónomos técnicos</h3><p>Electricidad, climatización, fontanería, instalaciones y servicios técnicos que gestionan clientes y trabajos desde el móvil.</p><small>Ver solución para autónomos →</small></a>
 <a class="sector-card" href={sectorUrl('empresas-mantenedoras')}><i>🔧</i><h3>Empresas mantenedoras</h3><p>Pequeños equipos que necesitan asignar avisos, coordinar técnicos y entregar trabajos documentados a varios clientes.</p><small>Ver solución para mantenedoras →</small></a>

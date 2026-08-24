@@ -149,7 +149,7 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const edgeY = new THREE.BoxGeometry(.15,.86,.15);
     const edgeZ = new THREE.BoxGeometry(.15,.15,.86);
     const half = .355;
-    const addEdge = (geometry:THREE.BufferGeometry, x:number, y:number, z:number, material:THREE.Material) => { const mesh = new THREE.Mesh(geometry, material); mesh.position.set(x,y,z); logo.add(mesh); };
+    const addEdge = (geometry:any, x:number, y:number, z:number, material:any) => { const mesh = new THREE.Mesh(geometry, material); mesh.position.set(x,y,z); logo.add(mesh); };
     [-half,half].forEach((y)=>[-half,half].forEach((z)=>addEdge(edgeX,0,y,z,y>0?logoCyan:logoWhite)));
     [-half,half].forEach((x)=>[-half,half].forEach((z)=>addEdge(edgeY,x,0,z,x>0?logoViolet:logoWhite)));
     [-half,half].forEach((x)=>[-half,half].forEach((y)=>addEdge(edgeZ,x,y,0,(x>0&&y<0)?logoViolet:logoWhite)));

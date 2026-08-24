@@ -8,6 +8,7 @@ const routes = [
   'aplicaciones/',
   'apps-especializadas/',
   'alcance/',
+  'experiencia/',
   'demo/',
   'selector/',
   'piloto/',

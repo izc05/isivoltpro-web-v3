@@ -1,6 +1,67 @@
 /* Visual corrections discovered from real Chromium screenshots.
-   The desktop rules below only refine proportions and depth on the SaaS Home.
-   The mobile rules keep every element inside 360 / 390 / 430 px viewports. */
+   Desktop rules refine proportions and depth against the approved SaaS board.
+   Mobile rules keep every element inside 360 / 390 / 430 px viewports. */
+
+@media (min-width: 861px) {
+  .site-header__inner {
+    min-height: 60px !important;
+    gap: 24px;
+  }
+
+  .site-header .brand {
+    gap: 8px;
+    font-size: 16px;
+    letter-spacing: -.035em;
+  }
+
+  .site-header .brand__icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(82,89,255,.16);
+  }
+
+  .site-header .brand__icon::after {
+    font-size: 10px;
+  }
+
+  .site-header .nav {
+    gap: 24px;
+    font-size: 12px;
+  }
+
+  .site-header .header-actions {
+    gap: 8px;
+  }
+
+  .site-header .header-actions > .btn {
+    min-height: 44px;
+    padding-inline: 15px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+
+  .page-footer {
+    padding-top: 38px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .page-footer .brand {
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .page-footer .brand__icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+  }
+
+  .page-footer p,
+  .page-footer a {
+    font-size: 12px;
+  }
+}
 
 @media (min-width: 1051px) {
   .saas-home .saas-trust {

@@ -6,6 +6,7 @@ import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 import V3Entry3D from '../components/V3Entry3D.astro';
+import V3HomeDailySolutions from '../components/V3HomeDailySolutions.astro';
 
 const base = import.meta.env.BASE_URL;
 const demo = `${base}demo/`;
@@ -59,6 +60,8 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
     </section>
 
     <section class="saas-benefits" aria-label="Ventajas de uso"><div class="saas-shell saas-benefits__grid reveal"><article class="saas-benefit"><i>◇</i><div><strong>Implantación gradual</strong><span>Empieza por un flujo y amplía después</span></div></article><article class="saas-benefit"><i>✦</i><div><strong>Fácil de entender</strong><span>Diseñado alrededor del trabajo técnico</span></div></article><article class="saas-benefit"><i>▣</i><div><strong>Desde cualquier lugar</strong><span>Web, móvil y tablet</span></div></article><article class="saas-benefit"><i>✓</i><div><strong>Información trazable</strong><span>Activo, OT, fotos e histórico conectados</span></div></article></div></section>
+
+    <V3HomeDailySolutions />
 
     <section class="saas-modules" id="modulos"><div class="saas-shell"><header class="saas-modules__head reveal"><h2>Una plataforma. Todos los módulos.</h2><p>IsiVoltPro reúne las piezas del mantenimiento en una única experiencia. Entra por el problema que hoy te hace perder más tiempo y conecta el resto cuando lo necesites.</p></header><div class="saas-modules__body"><div class="reveal"><div class="saas-module-grid">
       <a class="saas-module" href={moduleUrl('activos')}><i>▣</i><h3>Activos</h3><p>Equipos, ubicaciones, fotos e histórico.</p></a>

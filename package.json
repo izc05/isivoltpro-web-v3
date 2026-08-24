@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "check": "astro check && astro build",
+    "check": "astro check && astro build && node scripts/v3-commercial-safety.mjs dist",
     "preview": "astro preview --host 0.0.0.0",
     "smoke:staging": "node scripts/v3-staging-smoke.mjs"
   },

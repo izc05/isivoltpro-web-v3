@@ -3,6 +3,7 @@ export type ContentStatus = (typeof CONTENT_STATUSES)[number];
 
 export const SOCIAL_CHANNELS = ['instagram', 'facebook', 'linkedin'] as const;
 export type SocialChannel = (typeof SOCIAL_CHANNELS)[number];
+export type ContentRole = 'owner' | 'admin' | 'content_editor';
 
 export type ContentKind = 'page' | 'article' | 'resource' | 'social';
 export type MediaKind = 'image' | 'illustration' | 'document' | 'video';
@@ -48,6 +49,15 @@ export interface MediaAsset {
   createdBy: string;
 }
 
+export interface MediaUploadCandidate {
+  fileName: string;
+  mimeType: string;
+  sizeBytes: number;
+  alt: string;
+  source: MediaAsset['source'];
+  sourceNote?: string;
+}
+
 export interface SocialPublication {
   id: string;
   contentId: string;
@@ -77,6 +87,18 @@ export const V3_CONTENT_CAPABILITIES: ContentManagementCapabilities = {
   scheduling: false,
   socialPublishing: false,
 };
+
+export const V3_CONTENT_POLICY = {
+  imageMaxBytes: 8 * 1024 * 1024,
+  allowedImageTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'] as const,
+  publishingRoles: ['owner', 'admin'] as const,
+  socialApprovalRoles: ['owner', 'admin'] as const,
+  editingRoles: ['owner', 'admin', 'content_editor'] as const,
+  altRequired: true,
+  revisionRequiredOnPublish: true,
+  revisionRequiredOnMediaChange: true,
+  socialApprovalRequired: true,
+} as const;
 
 export type ContentCapabilityKey = keyof ContentManagementCapabilities;
 
@@ -114,6 +136,13 @@ const CONTENT_CAPABILITY_METADATA: Record<ContentCapabilityKey, { label: string;
   },
 };
 
+const CONTENT_TRANSITIONS: Record<ContentStatus, readonly ContentStatus[]> = {
+  draft: ['review', 'archived'],
+  review: ['draft', 'published', 'archived'],
+  published: ['draft', 'archived'],
+  archived: ['draft'],
+};
+
 export function getContentCapabilitySnapshot(
   capabilities: ContentManagementCapabilities = V3_CONTENT_CAPABILITIES,
 ): ContentCapabilitySnapshot[] {
@@ -125,12 +154,43 @@ export function getContentCapabilitySnapshot(
   }));
 }
 
-export function canPublishContent(status: ContentStatus) {
-  return status === 'review';
+export function canEditContent(role: ContentRole) {
+  return (V3_CONTENT_POLICY.editingRoles as readonly ContentRole[]).includes(role);
+}
+
+export function canTransitionContent(from: ContentStatus, to: ContentStatus, role: ContentRole) {
+  if (!canEditContent(role) || !CONTENT_TRANSITIONS[from].includes(to)) return false;
+  if (to === 'published') return (V3_CONTENT_POLICY.publishingRoles as readonly ContentRole[]).includes(role);
+  return true;
+}
+
+export function canPublishContent(status: ContentStatus, role: ContentRole = 'admin') {
+  return status === 'review' && (V3_CONTENT_POLICY.publishingRoles as readonly ContentRole[]).includes(role);
+}
+
+export function canApproveSocial(role: ContentRole) {
+  return (V3_CONTENT_POLICY.socialApprovalRoles as readonly ContentRole[]).includes(role);
 }
 
 export function canScheduleSocial(publication: SocialPublication) {
-  return publication.status === 'approved' && Boolean(publication.scheduledFor);
+  return publication.status === 'approved'
+    && Boolean(publication.scheduledFor)
+    && Boolean(publication.approvedBy)
+    && Boolean(publication.approvedAt);
+}
+
+export function validateMediaUpload(candidate: MediaUploadCandidate) {
+  const errors: string[] = [];
+  const allowedTypes = V3_CONTENT_POLICY.allowedImageTypes as readonly string[];
+
+  if (!candidate.fileName.trim()) errors.push('file_name_required');
+  if (!allowedTypes.includes(candidate.mimeType)) errors.push('unsupported_mime_type');
+  if (candidate.sizeBytes <= 0) errors.push('empty_file');
+  if (candidate.sizeBytes > V3_CONTENT_POLICY.imageMaxBytes) errors.push('file_too_large');
+  if (V3_CONTENT_POLICY.altRequired && !candidate.alt.trim()) errors.push('alt_required');
+  if (candidate.source === 'licensed' && !candidate.sourceNote?.trim()) errors.push('license_source_required');
+
+  return { valid: errors.length === 0, errors } as const;
 }
 
 export function assertNoRuntimePublishing(capabilities = V3_CONTENT_CAPABILITIES) {

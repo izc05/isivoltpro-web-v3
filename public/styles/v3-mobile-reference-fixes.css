@@ -63,6 +63,99 @@
   }
 }
 
+@media (min-width: 981px) {
+  .board-modules .modules-hero {
+    min-height: 470px;
+    padding: 54px 0 32px;
+  }
+
+  .board-modules .modules-hero__grid {
+    grid-template-columns: .78fr 1.22fr;
+    gap: 48px;
+  }
+
+  .board-modules .modules-hero h1 {
+    max-width: 430px;
+    margin: 12px 0 14px;
+    font-size: clamp(39px, 3.3vw, 49px);
+    line-height: 1.01;
+    letter-spacing: -.057em;
+  }
+
+  .board-modules .modules-hero p {
+    max-width: 440px;
+    font-size: 12px;
+    line-height: 1.62;
+  }
+
+  .board-modules .page-hero__actions {
+    margin-top: 21px;
+  }
+
+  .board-modules .module-stack {
+    min-height: 345px;
+  }
+
+  .board-modules .module-window--back {
+    inset: 38px 8px 54px 84px;
+  }
+
+  .board-modules .module-window--mid {
+    inset: 18px 56px 42px 42px;
+  }
+
+  .board-modules .module-window--front {
+    inset: 49px 21px 18px 72px;
+  }
+
+  .board-modules .module-chip {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  .board-modules .modules-cards {
+    padding: 25px 0 52px;
+  }
+
+  .board-modules .modules-cards__head {
+    display: none;
+  }
+
+  .board-modules .board-module-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .board-modules .board-module-card {
+    min-height: 148px;
+    padding: 17px;
+    border-radius: 15px;
+  }
+
+  .board-modules .board-module-card i {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+  }
+
+  .board-modules .board-module-card h3 {
+    margin: 13px 0 6px;
+    font-size: 13px;
+  }
+
+  .board-modules .board-module-card p {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .board-modules .board-module-card small {
+    margin-top: 11px;
+    font-size: 8px;
+  }
+}
+
 @media (min-width: 1051px) {
   .saas-home .saas-trust {
     margin-top: 34px;

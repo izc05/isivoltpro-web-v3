@@ -1,3 +1,5 @@
+@import url('./v3-implementation-reference.css');
+
 /* Product hero refinement: replace the old orbital composition with a compact SaaS workspace.
    Scoped by #demo-dashboard so the rest of the site keeps its own visual treatments. */
 body:has(#demo-dashboard) .page-hero{padding-top:78px;padding-bottom:64px;background:radial-gradient(circle at 88% 18%,rgba(109,74,255,.10),transparent 25%),radial-gradient(circle at 66% 36%,rgba(36,197,140,.07),transparent 22%),#fff}

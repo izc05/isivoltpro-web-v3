@@ -1,0 +1,195 @@
+/* Visual alignment with the approved IsiVoltPro SaaS design board.
+   This file only changes presentation. It deliberately reuses existing page markup
+   and does not introduce tracking, external assets or product claims. */
+
+/* Módulos / Aplicaciones: replace the abstract orbit with layered SaaS windows. */
+body:has(.app-feature) .page-hero__visual{
+  min-height:500px;
+  overflow:visible;
+  isolation:isolate;
+  perspective:1100px;
+}
+body:has(.app-feature) .page-hero__visual::before{
+  content:'';
+  position:absolute;
+  width:410px;
+  height:270px;
+  left:50%;
+  top:50%;
+  transform:translate(-43%,-60%) rotate(-4deg);
+  border:1px solid rgba(217,225,243,.94);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(245,248,255,.88));
+  box-shadow:0 34px 80px rgba(46,62,110,.12);
+  z-index:0;
+}
+body:has(.app-feature) .page-hero__visual::after{
+  content:'';
+  position:absolute;
+  width:390px;
+  height:250px;
+  left:50%;
+  top:50%;
+  transform:translate(-52%,-44%) rotate(5deg);
+  border:1px solid rgba(219,225,241,.88);
+  border-radius:28px;
+  background:linear-gradient(135deg,rgba(247,244,255,.88),rgba(238,252,248,.88));
+  box-shadow:0 28px 70px rgba(72,61,140,.10);
+  z-index:0;
+}
+body:has(.app-feature) .page-orbit{display:none}
+body:has(.app-feature) .page-core{
+  width:350px;
+  height:225px;
+  border:1px solid #e3e8f4;
+  border-radius:26px;
+  background:rgba(255,255,255,.96);
+  color:#111a31;
+  box-shadow:0 34px 86px rgba(45,58,103,.17),0 12px 34px rgba(96,70,190,.08);
+  transform:translate(-50%,-50%) rotate(-1deg);
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  padding:60px 28px 24px;
+  font-size:28px;
+  text-align:left;
+  letter-spacing:-.045em;
+  animation:v3-reference-window 7s ease-in-out infinite;
+  z-index:2;
+}
+body:has(.app-feature) .page-core::before{
+  content:'IsiVoltPro · Módulos';
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:45px;
+  display:flex;
+  align-items:center;
+  padding:0 22px;
+  border-bottom:1px solid #edf0f6;
+  color:#33405c;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:0;
+}
+body:has(.app-feature) .page-core::after{
+  content:'Activos      OT      QR / NFC      Inspecciones';
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:24px;
+  padding:13px 14px;
+  border:1px solid #edf0f6;
+  border-radius:14px;
+  background:linear-gradient(90deg,#f4f7ff,#faf7ff,#f2fbf7);
+  color:#687590;
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.01em;
+  white-space:pre;
+}
+body:has(.app-feature) .page-core small{
+  display:block;
+  position:absolute;
+  left:28px;
+  top:104px;
+  color:#7b879f;
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.12em;
+}
+body:has(.app-feature) .page-pill{
+  z-index:4;
+  min-width:132px;
+  border:1px solid #e7eaf4;
+  border-radius:18px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 16px 42px rgba(43,57,100,.11);
+}
+body:has(.app-feature) .page-pill--a{left:0;top:22%}
+body:has(.app-feature) .page-pill--b{right:0;top:15%}
+body:has(.app-feature) .page-pill--c{left:5%;bottom:16%}
+body:has(.app-feature) .page-pill--d{right:-1%;bottom:14%}
+
+/* Sectores: turn the generic orbit into a small operational workspace. */
+body:has(.sector-story) .page-hero__visual{
+  min-height:470px;
+  overflow:visible;
+}
+body:has(.sector-story) .page-orbit{display:none}
+body:has(.sector-story) .page-core{
+  width:360px;
+  height:220px;
+  border:1px solid #e3e8f4;
+  border-radius:27px;
+  background:#fff;
+  color:#111a31;
+  box-shadow:0 30px 82px rgba(42,57,100,.15);
+  transform:translate(-50%,-50%) rotate(1.5deg);
+  padding:56px 26px 24px;
+  align-items:flex-start;
+  justify-content:flex-start;
+  text-align:left;
+  font-size:23px;
+  letter-spacing:-.04em;
+  animation:v3-reference-window 7.5s ease-in-out infinite reverse;
+}
+body:has(.sector-story) .page-core::before{
+  content:'Operación · vista por perfil';
+  position:absolute;
+  left:0;right:0;top:0;height:43px;
+  display:flex;align-items:center;padding:0 21px;
+  border-bottom:1px solid #edf0f6;
+  color:#65718b;font-size:10px;font-weight:800;letter-spacing:.02em;
+}
+body:has(.sector-story) .page-core::after{
+  content:'Avisos    Activos    Preventivos';
+  position:absolute;left:26px;right:26px;bottom:24px;
+  padding:14px;border-radius:14px;
+  background:linear-gradient(90deg,#f5f7ff,#f7f3ff,#eefbf6);
+  color:#66738d;font-size:10px;font-weight:760;white-space:pre;
+}
+body:has(.sector-story) .page-core small{
+  position:absolute;left:26px;top:100px;
+  color:#24a777;font-size:10px;letter-spacing:.08em;
+}
+body:has(.sector-story) .page-pill{
+  z-index:3;
+  min-width:140px;
+  border:1px solid #e7eaf4;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 15px 38px rgba(42,55,98,.10);
+}
+
+@keyframes v3-reference-window{
+  0%,100%{translate:0 0}
+  50%{translate:0 -8px}
+}
+
+@media(max-width:1180px){
+  body:has(.app-feature) .page-hero__visual,
+  body:has(.sector-story) .page-hero__visual{min-height:420px}
+}
+@media(max-width:680px){
+  body:has(.app-feature) .page-hero__visual,
+  body:has(.sector-story) .page-hero__visual{min-height:335px}
+  body:has(.app-feature) .page-hero__visual::before{width:280px;height:190px}
+  body:has(.app-feature) .page-hero__visual::after{width:265px;height:175px}
+  body:has(.app-feature) .page-core{width:250px;height:165px;padding:50px 18px 18px;font-size:22px}
+  body:has(.app-feature) .page-core::before{height:38px;padding:0 16px;font-size:9px}
+  body:has(.app-feature) .page-core small{left:18px;top:87px;font-size:8px}
+  body:has(.app-feature) .page-core::after{left:18px;right:18px;bottom:16px;padding:9px;font-size:7px}
+  body:has(.app-feature) .page-pill{min-width:112px;max-width:122px;padding:10px;font-size:10px}
+  body:has(.app-feature) .page-pill--b{display:block;right:0;top:10%}
+  body:has(.app-feature) .page-pill--c{display:block;left:0;bottom:8%}
+  body:has(.sector-story) .page-core{width:255px;height:165px;padding:48px 18px 18px;font-size:19px}
+  body:has(.sector-story) .page-core::before{height:37px;padding:0 16px;font-size:8px}
+  body:has(.sector-story) .page-core small{left:18px;top:83px;font-size:8px}
+  body:has(.sector-story) .page-core::after{left:18px;right:18px;bottom:16px;padding:9px;font-size:7px}
+  body:has(.sector-story) .page-pill{min-width:108px;max-width:120px;padding:10px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  body:has(.app-feature) .page-core,
+  body:has(.sector-story) .page-core{animation:none}
+}

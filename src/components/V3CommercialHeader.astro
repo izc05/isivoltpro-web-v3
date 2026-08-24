@@ -11,6 +11,7 @@ const appMaintenance = `${base}app-mantenimiento/`;
 const sectors = `${base}sectores/`;
 const pricing = `${base}precios/`;
 const resources = `${base}recursos/`;
+const experience = `${base}experiencia/`;
 const access = `${base}acceso/`;
 const demo = `${base}demo/`;
 const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
@@ -91,6 +92,7 @@ const breadcrumbSchema = breadcrumb ? JSON.stringify({
       <a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a>
       <a href={modules} aria-current={ariaCurrent(modules, [`${base}modulos/`, appMaintenance])}>Apps</a>
       <a href={sectors} aria-current={ariaCurrent(sectors, [sectors])}>Sectores</a>
+      <a href={experience} aria-current={ariaCurrent(experience)}>Probar</a>
       <a href={resources} aria-current={ariaCurrent(resources, [resources])}>Recursos</a>
     </nav>
     <div class="header-actions">
@@ -99,7 +101,7 @@ const breadcrumbSchema = breadcrumb ? JSON.stringify({
       <details class="v3-mobile-nav">
         <summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary>
         <nav class="v3-mobile-nav__panel" aria-label="Navegación móvil">
-          <a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules, [`${base}modulos/`, appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors, [sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources, [resources])}>Recursos</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={demo} aria-current={ariaCurrent(demo)}>Demo</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Ver demo <span aria-hidden="true">→</span></a>
+          <a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules, [`${base}modulos/`, appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors, [sectors])}>Sectores</a><a href={experience} aria-current={ariaCurrent(experience)}>Probar IsiVoltPro</a><a href={resources} aria-current={ariaCurrent(resources, [resources])}>Recursos</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={demo} aria-current={ariaCurrent(demo)}>Demo</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Ver demo <span aria-hidden="true">→</span></a>
         </nav>
       </details>
     </div>

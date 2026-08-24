@@ -1,0 +1,38 @@
+.home-ref .ref-hero__grid{grid-template-columns:minmax(500px,.95fr) minmax(430px,.85fr) minmax(500px,1fr);min-height:430px}
+.home-ref .ref-hero__copy{padding:42px 34px 38px 0}
+.home-ref .ref-hero h1{font-size:clamp(50px,3.55vw,60px);line-height:1.03;max-width:565px}
+.home-ref .ref-hero__lead{max-width:500px;font-size:14px;line-height:1.6}
+.home-ref .ref-hero__actions{margin-top:20px}
+.home-ref .ref-hero__note{margin-top:13px;font-size:11px}
+.home-ref .ref-hero__photo{min-height:430px}
+.home-ref .ref-video-card{left:-16px;bottom:18px;width:190px}
+.home-ref .ref-video-card__thumb{height:96px}
+.home-ref .ref-dashboard{padding:20px 20px 18px 24px;gap:10px}
+.home-ref .ref-kpi{padding:12px 10px}
+.home-ref .ref-kpi strong{font-size:21px}
+.home-ref .ref-dash-card{padding:14px}
+.home-ref .ref-dash-head{margin-bottom:10px}
+.home-ref .ref-activity{gap:10px}
+.home-ref .ref-workflow{padding:16px 0 12px}
+.home-ref .ref-workflow__grid{grid-template-columns:190px repeat(5,1fr);gap:12px}
+.home-ref .ref-step{min-height:126px}
+.home-ref .ref-step__visual{height:88px}
+.home-ref .ref-sectors{padding:12px 0}
+.home-ref .ref-sector{min-height:108px}
+.home-ref .ref-platform{padding:14px 0 26px}
+@media(max-width:1450px) and (min-width:1181px){
+  .home-ref .shell{width:min(1370px,calc(100% - 44px))}
+  .home-ref .ref-hero__grid{grid-template-columns:minmax(440px,.95fr) minmax(390px,.86fr) minmax(455px,1fr)}
+  .home-ref .ref-hero h1{font-size:54px}
+}
+@media(max-width:1180px){
+  .home-ref .ref-hero__grid{grid-template-columns:.9fr 1.1fr;min-height:0}
+  .home-ref .ref-hero__photo{min-height:460px}
+  .home-ref .ref-dashboard{min-height:350px}
+}
+@media(max-width:820px){
+  .home-ref .ref-hero__grid{grid-template-columns:1fr}
+  .home-ref .ref-hero h1{font-size:clamp(42px,12vw,58px)}
+  .home-ref .ref-hero__photo{min-height:390px}
+  .home-ref .ref-dashboard{min-height:0}
+}

@@ -1,4 +1,5 @@
 @import url('./v3-implementation-reference.css');
+@import url('./v3-mobile-reference-fixes.css');
 
 /* Product hero refinement: replace the old orbital composition with a compact SaaS workspace.
    Scoped by #demo-dashboard so the rest of the site keeps its own visual treatments. */

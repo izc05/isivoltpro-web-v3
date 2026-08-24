@@ -1,0 +1,35 @@
+/* Product hero refinement: replace the old orbital composition with a compact SaaS workspace.
+   Scoped by #demo-dashboard so the rest of the site keeps its own visual treatments. */
+body:has(#demo-dashboard) .page-hero{padding-top:78px;padding-bottom:64px;background:radial-gradient(circle at 88% 18%,rgba(109,74,255,.10),transparent 25%),radial-gradient(circle at 66% 36%,rgba(36,197,140,.07),transparent 22%),#fff}
+body:has(#demo-dashboard) .page-hero::before{display:none}
+body:has(#demo-dashboard) .page-hero__grid{grid-template-columns:minmax(430px,.92fr) minmax(500px,1.08fr);gap:62px}
+body:has(#demo-dashboard) .page-hero h1{font-size:clamp(56px,5.5vw,78px);max-width:650px}
+body:has(#demo-dashboard) .page-hero__visual{min-height:470px;perspective:1200px;isolation:isolate;overflow:visible}
+body:has(#demo-dashboard) .page-orbit{display:none}
+body:has(#demo-dashboard) .page-core{width:410px;height:286px;left:52%;top:48%;display:block;padding:72px 26px 24px;border:1px solid #e3e8f3;border-radius:28px;background:rgba(255,255,255,.96);color:#111a31;box-shadow:0 34px 88px rgba(45,58,103,.16),0 14px 38px rgba(92,65,180,.08);transform:translate(-50%,-50%) rotate(-1.5deg);font:800 24px/1.1 Manrope,sans-serif;text-align:left;letter-spacing:-.04em;animation:v3-product-window 7s ease-in-out infinite;z-index:2}
+body:has(#demo-dashboard) .page-core::before{content:'IsiVoltPro · Resumen';position:absolute;left:0;right:0;top:0;height:48px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid #edf0f6;color:#34425e;font:800 11px/1 'DM Sans',sans-serif;letter-spacing:0}
+body:has(#demo-dashboard) .page-core::after{content:'12\A Órdenes abiertas\A\A 8\A Preventivos\A\A 3\A Incidencias';white-space:pre;position:absolute;left:26px;right:26px;bottom:24px;height:96px;padding:14px 16px;border:1px solid #edf0f6;border-radius:16px;background:linear-gradient(90deg,#f4f7ff 0 33%,#f7f3ff 33% 66%,#eefaf6 66%);color:#66728c;font:700 9px/1.35 'DM Sans',sans-serif;column-count:3;column-gap:22px}
+body:has(#demo-dashboard) .page-core small{display:block;position:absolute;left:26px;top:112px;color:#75819a;font:700 10px/1.2 'DM Sans',sans-serif;letter-spacing:.08em}
+body:has(#demo-dashboard) .page-hero__visual::before{content:'';position:absolute;z-index:0;width:360px;height:240px;left:52%;top:48%;transform:translate(-38%,-59%) rotate(5deg);border:1px solid rgba(221,226,240,.88);border-radius:28px;background:linear-gradient(145deg,#f4f7ff,#f8f4ff 52%,#effbf6);box-shadow:0 24px 64px rgba(59,67,112,.08)}
+body:has(#demo-dashboard) .page-hero__visual::after{content:'';position:absolute;z-index:-1;width:420px;height:310px;left:54%;top:50%;transform:translate(-50%,-50%);border-radius:42px;background:linear-gradient(135deg,rgba(23,92,255,.13),rgba(109,74,255,.14),rgba(242,56,169,.08),rgba(36,197,140,.10));filter:blur(34px)}
+body:has(#demo-dashboard) .page-pill{z-index:4;min-width:134px;padding:13px 15px;border:1px solid #e6eaf3;border-radius:17px;background:rgba(255,255,255,.97);box-shadow:0 16px 42px rgba(44,57,99,.11);font-size:12px}
+body:has(#demo-dashboard) .page-pill--a{left:0;top:18%}
+body:has(#demo-dashboard) .page-pill--b{right:-2%;top:15%}
+body:has(#demo-dashboard) .page-pill--c{left:3%;bottom:14%}
+body:has(#demo-dashboard) .page-pill--d{right:-1%;bottom:13%}
+body:has(#demo-dashboard) .page-pill--a::before,body:has(#demo-dashboard) .page-pill--b::before,body:has(#demo-dashboard) .page-pill--c::before,body:has(#demo-dashboard) .page-pill--d::before{content:'';display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#6d4aff;vertical-align:1px}
+body:has(#demo-dashboard) .page-pill--b::before{background:#24b983}
+body:has(#demo-dashboard) .page-pill--c::before{background:#2882ff}
+body:has(#demo-dashboard) .page-pill--d::before{background:#f05dad}
+
+/* Keep the already-good App Mantenimiento stage but bring its shadows and surfaces closer to the same board. */
+body:has(.app-stage) .page-hero{background:radial-gradient(circle at 86% 18%,rgba(109,74,255,.09),transparent 24%),radial-gradient(circle at 68% 34%,rgba(242,56,169,.06),transparent 20%),#fff}
+body:has(.app-stage) .page-hero::before{display:none}
+body:has(.app-stage) .app-window{border-color:#e4e8f2;background:rgba(255,255,255,.97);box-shadow:0 32px 82px rgba(44,57,99,.15),0 10px 30px rgba(83,67,164,.06)}
+body:has(.app-stage) .app-phone{box-shadow:0 26px 62px rgba(31,47,90,.20)}
+body:has(.app-stage) .app-metric{box-shadow:0 9px 24px rgba(48,62,100,.05)}
+
+@keyframes v3-product-window{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@media(max-width:1100px){body:has(#demo-dashboard) .page-hero__grid{grid-template-columns:1fr;gap:28px}body:has(#demo-dashboard) .page-hero__visual{min-height:430px}}
+@media(max-width:680px){body:has(#demo-dashboard) .page-hero{padding-top:54px;padding-bottom:44px}body:has(#demo-dashboard) .page-hero h1{font-size:clamp(42px,12vw,54px)}body:has(#demo-dashboard) .page-hero__visual{min-height:330px}body:has(#demo-dashboard) .page-core{width:255px;height:190px;padding:54px 18px 18px;font-size:19px;border-radius:22px}body:has(#demo-dashboard) .page-core::before{height:38px;padding:0 15px;font-size:9px}body:has(#demo-dashboard) .page-core small{left:18px;top:82px;font-size:8px}body:has(#demo-dashboard) .page-core::after{left:18px;right:18px;bottom:16px;height:64px;padding:9px;font-size:6px;column-gap:8px}body:has(#demo-dashboard) .page-hero__visual::before{width:220px;height:150px}body:has(#demo-dashboard) .page-hero__visual::after{width:280px;height:220px}body:has(#demo-dashboard) .page-pill{min-width:104px;max-width:118px;padding:9px 10px;font-size:9px}body:has(#demo-dashboard) .page-pill--a{left:0;top:12%}body:has(#demo-dashboard) .page-pill--b{right:0;top:10%}body:has(#demo-dashboard) .page-pill--c{left:0;bottom:8%}body:has(#demo-dashboard) .page-pill--d{right:0;bottom:8%}}
+@media(prefers-reduced-motion:reduce){body:has(#demo-dashboard) .page-core{animation:none}}

@@ -26,7 +26,10 @@ ROUTES = [
     ("aplicaciones/", "apps"),
     ("apps-especializadas/", "apps-especializadas"),
     ("alcance/", "alcance"),
+    ("experiencia/", "experiencia"),
     ("demo/", "demo"),
+    ("selector/", "selector"),
+    ("de-whatsapp-excel-a-isivoltpro/", "transicion-whatsapp-excel"),
     ("piloto/", "piloto"),
     ("implantacion/", "implantacion"),
     ("seguridad/", "seguridad"),
@@ -137,7 +140,7 @@ def capture(browser, route: str, name: str, vp_name: str, width: int, height: in
     if response is None or response.status >= 400: failures.append(f"{name} ({width}px): HTTP inválido en {url}"); page.close(); return
     page.wait_for_timeout(160); render_full_page(page, name, width); audit_page(page, name, width)
     page.screenshot(path=str(OUT / f"{name}-{vp_name}-top.png"), full_page=False)
-    if (width, name) in {(768,"home"),(1440,"home"),(1024,"app-mantenimiento"),(1280,"demo"),(1280,"sectores"),(1280,"planes")}: full_screenshot(page, OUT / f"{name}-{vp_name}-full.png")
+    if (width, name) in {(768,"home"),(1440,"home"),(1024,"app-mantenimiento"),(1280,"experiencia"),(1280,"demo"),(1280,"selector"),(1280,"sectores"),(1280,"planes")}: full_screenshot(page, OUT / f"{name}-{vp_name}-full.png")
     page.close()
 
 
@@ -154,4 +157,4 @@ if failures:
     for item in failures: print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA tablet/escritorio V3: OK · entrada 3D + 15 rutas × 4 viewports")
+print("QA tablet/escritorio V3: OK · entrada 3D + 18 rutas × 4 viewports")

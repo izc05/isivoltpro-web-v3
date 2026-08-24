@@ -67,7 +67,8 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     if (!canvas || !host || reduced || alreadySeen) return;
     const THREE = await import('three');
     const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
-    if (document.querySelector('#intro')?.classList.contains('is-done')) return;
+    const intro = document.querySelector<HTMLElement>('#intro');
+    if (intro?.classList.contains('is-done')) return;
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
@@ -141,32 +142,36 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     group.add(prismEdges);
 
     const logo = new THREE.Group();
-    const face = (color:number, emissive:number, intensity:number) => new THREE.MeshStandardMaterial({color,roughness:.16,metalness:.05,emissive,emissiveIntensity:intensity});
-    const logoMaterials = [
-      face(0xffffff,0xf5f8ff,.30),
-      face(0xc9f0ff,0x6fceff,.22),
-      face(0xf8fbff,0xffffff,.20),
-      face(0xb8c5ff,0x6f79ff,.20),
-      face(0xffffff,0xf4f8ff,.28),
-      face(0xd9d2ff,0x9b7dff,.20),
-    ];
-    const cubeGeo = new THREE.BoxGeometry(.68,.68,.68);
-    [[-.35,.28,.02],[.35,.28,-.02],[0,-.33,.05]].forEach(([x,y,z],index)=>{const cube=new THREE.Mesh(cubeGeo,logoMaterials);cube.position.set(x,y,z);cube.rotation.set(.36,.64+index*.14,.12);logo.add(cube)});
-    logo.position.set(0,.06,.64);logo.scale.setScalar(.69);group.add(logo);
+    const logoWhite = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.15,metalness:.02,emissive:0xf7fbff,emissiveIntensity:.34});
+    const logoCyan = new THREE.MeshStandardMaterial({color:0xc8f6ff,roughness:.15,metalness:.02,emissive:0x72dfff,emissiveIntensity:.28});
+    const logoViolet = new THREE.MeshStandardMaterial({color:0xd7ceff,roughness:.15,metalness:.02,emissive:0x9b7cff,emissiveIntensity:.26});
+    const edgeX = new THREE.BoxGeometry(.86,.15,.15);
+    const edgeY = new THREE.BoxGeometry(.15,.86,.15);
+    const edgeZ = new THREE.BoxGeometry(.15,.15,.86);
+    const half = .355;
+    const addEdge = (geometry:THREE.BufferGeometry, x:number, y:number, z:number, material:THREE.Material) => { const mesh = new THREE.Mesh(geometry, material); mesh.position.set(x,y,z); logo.add(mesh); };
+    [-half,half].forEach((y)=>[-half,half].forEach((z)=>addEdge(edgeX,0,y,z,y>0?logoCyan:logoWhite)));
+    [-half,half].forEach((x)=>[-half,half].forEach((z)=>addEdge(edgeY,x,0,z,x>0?logoViolet:logoWhite)));
+    [-half,half].forEach((x)=>[-half,half].forEach((y)=>addEdge(edgeZ,x,y,0,(x>0&&y<0)?logoViolet:logoWhite)));
+    logo.position.set(0,.035,.68);
+    logo.rotation.set(.35,.66,.035);
+    logo.scale.setScalar(.69);
+    group.add(logo);
 
     [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:.20}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
 
+    intro?.classList.add('has-webgl-prism');
     const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
     resize(); const ro=new ResizeObserver(resize);ro.observe(canvas);
     let pointerX=0,pointerY=0,raf=0;
     const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
     host.addEventListener('pointermove',onPointer,{passive:true});
     const clock=new THREE.Clock();
-    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.10;prism.rotation.y=-.14+Math.sin(t*.48)*.022;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=.66+Math.sin(t*.72)*.07;prism.rotation.y=-.14+Math.sin(t*.48)*.022;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
-    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose()};
-    document.querySelector('#intro')?.addEventListener('transitionend',(event)=>{if((event.target as HTMLElement).classList.contains('is-done'))clean()},{once:true});
+    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};
+    intro?.addEventListener('transitionend',(event)=>{if((event.target as HTMLElement).classList.contains('is-done'))clean()},{once:true});
   };
 
   void mountEntry3D();

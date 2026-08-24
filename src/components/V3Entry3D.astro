@@ -1,6 +1,7 @@
 ---
 import '../styles/v3-entry-3d.css';
 import '../styles/v3-entry-3d-fidelity.css';
+import '../styles/v3-entry-3d-reference-lock.css';
 
 interface Props {
   accessHref: string;
@@ -76,14 +77,14 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(31, 1, 0.1, 100);
-    camera.position.set(0, 0.72, 6.75);
-    camera.lookAt(0, -0.08, 0);
+    camera.position.set(0, 0.78, 6.7);
+    camera.lookAt(0, -0.10, 0);
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd6ff, 3.4));
-    const key = new THREE.PointLight(0x5269ff, 28, 20); key.position.set(-3, 4, 5); scene.add(key);
-    const magenta = new THREE.PointLight(0xf04acb, 19, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
-    const cyan = new THREE.PointLight(0x36d8ea, 18, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
-    const coreGlow = new THREE.PointLight(0xa8bdff, 8, 7); coreGlow.position.set(0, .1, 2); scene.add(coreGlow);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd6ff, 3.6));
+    const key = new THREE.PointLight(0x5269ff, 30, 20); key.position.set(-3, 4, 5); scene.add(key);
+    const magenta = new THREE.PointLight(0xf04acb, 21, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
+    const cyan = new THREE.PointLight(0x36d8ea, 20, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
+    const coreGlow = new THREE.PointLight(0xa8bdff, 10, 7); coreGlow.position.set(0, .1, 2); scene.add(coreGlow);
 
     const group = new THREE.Group(); group.rotation.x = -0.055; scene.add(group);
 
@@ -91,16 +92,16 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const prismMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xa9b6ff,
       transparent: true,
-      opacity: .24,
-      transmission: .42,
+      opacity: .30,
+      transmission: .50,
       thickness: .76,
-      roughness: .11,
+      roughness: .10,
       metalness: 0,
       ior: 1.28,
-      clearcoat: .58,
-      clearcoatRoughness: .07,
+      clearcoat: .62,
+      clearcoatRoughness: .06,
       emissive: 0x4258b8,
-      emissiveIntensity: .07,
+      emissiveIntensity: .09,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
@@ -110,55 +111,75 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     prism.renderOrder = 0;
     group.add(prism);
 
-    const innerGeometry = new RoundedBoxGeometry(1.98, 1.98, 1.52, 6, .12);
+    const middleGeometry = new RoundedBoxGeometry(2.08, 2.08, 1.60, 6, .14);
+    const middleMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xb6b7ff,
+      transparent: true,
+      opacity: .15,
+      transmission: .52,
+      thickness: .54,
+      roughness: .085,
+      ior: 1.24,
+      clearcoat: .48,
+      clearcoatRoughness: .05,
+      emissive: 0x6a55cc,
+      emissiveIntensity: .055,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const middlePrism = new THREE.Mesh(middleGeometry, middleMaterial);
+    middlePrism.position.set(.015, .02, -.19);
+    middlePrism.rotation.set(.082, -.122, .015);
+    middlePrism.renderOrder = 1;
+    group.add(middlePrism);
+
+    const innerGeometry = new RoundedBoxGeometry(1.80, 1.80, 1.40, 6, .12);
     const innerMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xc7d2ff,
       transparent: true,
-      opacity: .095,
-      transmission: .54,
+      opacity: .11,
+      transmission: .58,
       thickness: .42,
-      roughness: .08,
+      roughness: .07,
       ior: 1.22,
-      clearcoat: .4,
-      clearcoatRoughness: .06,
-      emissive: 0x7a4fd4,
-      emissiveIntensity: .035,
+      clearcoat: .44,
+      clearcoatRoughness: .05,
+      emissive: 0x6b62cf,
+      emissiveIntensity: .045,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
     const innerPrism = new THREE.Mesh(innerGeometry, innerMaterial);
-    innerPrism.position.set(.03, .025, -.12);
+    innerPrism.position.set(.03, .025, -.08);
     innerPrism.rotation.set(.075, -.105, .012);
-    innerPrism.renderOrder = 1;
+    innerPrism.renderOrder = 2;
     group.add(innerPrism);
 
     const prismEdges = new THREE.LineSegments(
       new THREE.EdgesGeometry(prismGeometry, 28),
-      new THREE.LineBasicMaterial({ color: 0xdde8ff, transparent: true, opacity: .26 })
+      new THREE.LineBasicMaterial({ color: 0xe7efff, transparent: true, opacity: .29 })
     );
     prismEdges.position.copy(prism.position);
     prismEdges.rotation.copy(prism.rotation);
-    prismEdges.renderOrder = 2;
+    prismEdges.renderOrder = 3;
     group.add(prismEdges);
 
     const logo = new THREE.Group();
-    const logoWhite = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.15,metalness:.02,emissive:0xf7fbff,emissiveIntensity:.34});
-    const logoCyan = new THREE.MeshStandardMaterial({color:0xc8f6ff,roughness:.15,metalness:.02,emissive:0x72dfff,emissiveIntensity:.28});
-    const logoViolet = new THREE.MeshStandardMaterial({color:0xd7ceff,roughness:.15,metalness:.02,emissive:0x9b7cff,emissiveIntensity:.26});
-    const edgeX = new THREE.BoxGeometry(.86,.15,.15);
-    const edgeY = new THREE.BoxGeometry(.15,.86,.15);
-    const edgeZ = new THREE.BoxGeometry(.15,.15,.86);
-    const half = .355;
-    const addEdge = (geometry:any, x:number, y:number, z:number, material:any) => { const mesh = new THREE.Mesh(geometry, material); mesh.position.set(x,y,z); logo.add(mesh); };
-    [-half,half].forEach((y)=>[-half,half].forEach((z)=>addEdge(edgeX,0,y,z,y>0?logoCyan:logoWhite)));
-    [-half,half].forEach((x)=>[-half,half].forEach((z)=>addEdge(edgeY,x,0,z,x>0?logoViolet:logoWhite)));
-    [-half,half].forEach((x)=>[-half,half].forEach((y)=>addEdge(edgeZ,x,y,0,(x>0&&y<0)?logoViolet:logoWhite)));
-    logo.position.set(0,.035,.68);
-    logo.rotation.set(.35,.66,.035);
-    logo.scale.setScalar(.69);
+    const logoWhite = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.13,metalness:.04,emissive:0xf7fbff,emissiveIntensity:.38});
+    const logoCyan = new THREE.MeshStandardMaterial({color:0xbff4ff,roughness:.14,metalness:.03,emissive:0x62dfff,emissiveIntensity:.32});
+    const logoViolet = new THREE.MeshStandardMaterial({color:0xd6c9ff,roughness:.14,metalness:.03,emissive:0x9a78ff,emissiveIntensity:.30});
+    const blockGeometry = new RoundedBoxGeometry(.64,.64,.64,4,.075);
+    const logoBlocks = [
+      { p:[-.31,.25,.02], r:[.38,.66,.12], m:logoCyan },
+      { p:[.31,.25,-.03], r:[.36,.80,.10], m:logoWhite },
+      { p:[0,-.31,.08], r:[.34,.70,.14], m:logoViolet },
+    ];
+    logoBlocks.forEach(({p,r,m})=>{const block=new THREE.Mesh(blockGeometry,m);block.position.set(p[0],p[1],p[2]);block.rotation.set(r[0],r[1],r[2]);logo.add(block)});
+    logo.position.set(0,.045,.66);
+    logo.scale.setScalar(.72);
     group.add(logo);
 
-    [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:.20}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
+    [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:index===1?.24:.21}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
 
     intro?.classList.add('has-webgl-prism');
     const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
@@ -167,7 +188,7 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
     host.addEventListener('pointermove',onPointer,{passive:true});
     const clock=new THREE.Clock();
-    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=.66+Math.sin(t*.72)*.07;prism.rotation.y=-.14+Math.sin(t*.48)*.022;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
     const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};

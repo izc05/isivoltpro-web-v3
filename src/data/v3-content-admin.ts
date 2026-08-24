@@ -130,6 +130,26 @@ export const v3AdminPreview: V3AdminPreview = {
       tags: ['planes', 'autonomos', 'equipos', 'empresa'],
       published: true,
     },
+    {
+      id: 'media-home-cta-mesh',
+      title: 'Malla luminosa de cierre',
+      alt: 'Trama abstracta de líneas luminosas para el bloque final de la Home de IsiVoltPro.',
+      kind: 'illustration',
+      source: 'generated',
+      file: '/media/cta-mesh-isivoltpro.svg',
+      tags: ['home', 'cta', 'marca'],
+      published: true,
+    },
+    {
+      id: 'media-contact-team',
+      title: 'Equipo revisando un proyecto',
+      alt: 'Dos personas revisando en una tablet una interfaz conceptual de IsiVoltPro.',
+      kind: 'illustration',
+      source: 'generated',
+      file: '/media/contact-team-isivoltpro.svg',
+      tags: ['contacto', 'empresa', 'demo'],
+      published: true,
+    },
   ],
   entries: [
     {

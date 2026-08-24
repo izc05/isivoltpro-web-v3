@@ -4,6 +4,7 @@ import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 import { v3AdminPreview, v3ContentAdminContract } from '../data/v3-content-admin';
+import { assertSafeContentPreview, getContentCapabilitySnapshot } from '../lib/v3-content-management';
 
 const base = import.meta.env.BASE_URL;
 const enabled = import.meta.env.PUBLIC_V3_CONTENT_ADMIN_PREVIEW === 'true';
@@ -11,6 +12,8 @@ const { media, entries, revisions, social } = v3AdminPreview;
 const entryById = new Map(entries.map((entry) => [entry.id, entry]));
 const mediaUrl = (file: string) => `${base}${file.replace(/^\/+/, '')}`;
 const mediaUsage = (mediaId: string) => entries.filter((entry) => entry.mediaIds.includes(mediaId));
+assertSafeContentPreview();
+const contentCapabilities = getContentCapabilitySnapshot();
 ---
 <!doctype html>
 <html lang="es">
@@ -36,8 +39,9 @@ const mediaUsage = (mediaId: string) => entries.filter((entry) => entry.mediaIds
     .workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.workflow-step{padding:14px;border-radius:16px;background:#f7f9fd;border:1px solid #e9edf5}.workflow-step b{display:block;font-size:12px;color:#175cff;margin-bottom:4px}.workflow-step span{font-size:12px;color:#6f7990;line-height:1.45}
     .upload-zone{margin-top:14px;border:1.5px dashed #cdd5e5;border-radius:18px;padding:24px;text-align:center;background:#fbfcff}.upload-zone input{display:none}.upload-zone strong{display:block;margin-bottom:5px}.upload-zone small{color:#78839a}
     .security-note{margin-top:20px;padding:16px 18px;border-radius:16px;background:#fff8ed;border:1px solid #f4dfbd;color:#704d1a;line-height:1.55}
+    .capability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.capability-card{padding:14px;border:1px solid #e8ebf3;border-radius:16px;background:#fbfcff}.capability-card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}.capability-card strong{font-size:12px}.capability-card p{margin:7px 0 0;font-size:11px;line-height:1.5}.capability-state{flex:0 0 auto;padding:5px 8px;border-radius:999px;background:#fff1ec;color:#a54d27;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.capability-state.enabled{background:#eaf9f3;color:#16845f}
     .preview-off{margin-top:22px;padding:28px;border-radius:22px;background:#111827;color:#fff}.preview-off p{color:#cbd5e1;line-height:1.6}.preview-off code{background:#243047;padding:3px 7px;border-radius:7px}
-    @media(max-width:840px){.admin-hero,.admin-grid{grid-template-columns:1fr}.admin-nav{display:none}.media-grid,.workflow{grid-template-columns:1fr}.content-row,.social-row,.revision-row{grid-template-columns:1fr}.admin-panel{padding:19px}.admin-panel__head{display:grid}.revision-version{width:42px}.media-visual{height:220px}}
+    @media(max-width:840px){.admin-hero,.admin-grid{grid-template-columns:1fr}.admin-nav{display:none}.media-grid,.workflow,.capability-grid{grid-template-columns:1fr}.content-row,.social-row,.revision-row{grid-template-columns:1fr}.admin-panel{padding:19px}.admin-panel__head{display:grid}.revision-version{width:42px}.media-visual{height:220px}}
   </style>
 </head>
 <body>
@@ -46,7 +50,7 @@ const mediaUsage = (mediaId: string) => entries.filter((entry) => entry.mediaIds
     <div class="admin-shell">
       <section class="admin-hero">
         <div><span class="eyebrow">Administración de la web</span><h1>Contenido, fotos y redes<br/><span class="gradient-text">desde un solo lugar.</span></h1><p>Esta zona prepara el flujo editorial de IsiVoltPro para actualizar textos, sustituir imágenes, revisar cambios y reutilizar piezas en redes sociales sin editar archivos a mano.</p></div>
-        <aside class="admin-status"><strong>Modo seguro de preproducción</strong><small>No existe ninguna credencial administrativa en el frontend. La persistencia, revisiones y programación real quedarán conectadas al backend autenticado con permisos por rol.</small></aside>
+        <aside class="admin-status"><strong>Modo seguro de preproducción</strong><small>El dominio de contenido verifica durante el build que persistencia, autenticación, autorización, subida, programación y publicación social sigan desactivadas en la web pública.</small></aside>
       </section>
 
       {enabled ? (
@@ -61,7 +65,7 @@ const mediaUsage = (mediaId: string) => entries.filter((entry) => entry.mediaIds
 
             <section class="admin-panel" id="redes"><div class="admin-panel__head"><div><h2>Publicación social</h2><p>Una pieza de la web puede preparar versiones para Instagram, Facebook y LinkedIn, siempre con aprobación previa.</p></div><button class="admin-btn" type="button" disabled>Crear publicación</button></div><div class="workflow" aria-label="Flujo de publicación social"><div class="workflow-step"><b>1 · Preparar</b><span>Seleccionar contenido e imagen.</span></div><div class="workflow-step"><b>2 · Revisar</b><span>Ajustar copy para cada red.</span></div><div class="workflow-step"><b>3 · Aprobar</b><span>Owner/Admin valida la publicación.</span></div><div class="workflow-step"><b>4 · Programar</b><span>Backend publica en fecha autorizada.</span></div></div>{social.map((item) => <article class="social-row"><div><strong>{item.caption}</strong><div class="social-channels">{item.channels.map((channel) => <span>{channel}</span>)}</div>{item.mode === 'scheduled' && item.scheduledFor && <div class="social-schedule">Programación prevista: {new Date(item.scheduledFor).toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' })}</div>}</div><span class="blocked">Bloqueado hasta autorizar cuentas y aprobar</span></article>)}</section>
 
-            <section class="admin-panel" id="seguridad"><h2>Reglas antes de activar</h2><p>La administración real exigirá sesión autenticada, rol autorizado, validación de tipo/tamaño de archivo, texto alternativo obligatorio, registro de cambios y publicación social explícita. Ninguna red recibirá contenido automáticamente sin autorización y ninguna tarea programada se ejecutará desde el frontend.</p><div class="security-note"><strong>Separación importante:</strong> la web comercial no almacenará secretos ni credenciales de PocketBase o redes sociales. Las operaciones sensibles, historial persistente y workers de publicación vivirán en el backend autenticado.</div></section>
+            <section class="admin-panel" id="seguridad"><h2>Capacidades bloqueadas hasta backend real</h2><p>Esta vista ya consume el mismo dominio de seguridad que deberá gobernar el futuro gestor. En preproducción, cualquier intento de activar una capacidad sensible dentro de la web pública hace fallar el build.</p><div class="capability-grid">{contentCapabilities.map((item) => <article class="capability-card"><div class="capability-card__top"><strong>{item.label}</strong><span class:list={["capability-state", item.enabled && "enabled"]}>{item.enabled ? 'Activa' : 'Bloqueada'}</span></div><p>{item.boundary}</p></article>)}</div><div class="security-note"><strong>Separación importante:</strong> la web comercial no almacenará secretos ni credenciales de PocketBase o redes sociales. Las operaciones sensibles, historial persistente y workers de publicación vivirán en el backend autenticado y el gestor seguirá separado de <code>/acceso/</code>.</div></section>
           </div>
         </div>
       ) : (

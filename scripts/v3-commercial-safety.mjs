@@ -61,6 +61,10 @@ for (const route of routes) {
   if (route && /entry3d-canvas|V3Entry3D|three\.module/.test(html)) {
     failures.push(`${label(route)} está cargando la experiencia 3D reservada a Home`);
   }
+
+  if (route && /class=(?:"[^"]*\bpage-orbit\b[^"]*"|'[^']*\bpage-orbit\b[^']*')/.test(html)) {
+    failures.push(`${label(route)} ha reintroducido el hero orbital legacy; usar una composición SaaS visual específica`);
+  }
 }
 
 const home = readFileSync(htmlPath(''), 'utf8');
@@ -98,4 +102,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + sitemap + gestor bloqueado`);
+console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + sitemap + gestor bloqueado + sin heroes orbitales legacy`);

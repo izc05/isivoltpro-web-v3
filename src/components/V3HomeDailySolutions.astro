@@ -1,0 +1,67 @@
+---
+import '../styles/v3-home-daily-solutions.css';
+const base = import.meta.env.BASE_URL;
+const solutions = `${base}soluciones/`;
+const maintenanceApp = `${base}app-mantenimiento/`;
+const orders = `${base}modulos/ordenes-de-trabajo/`;
+const qr = `${base}modulos/qr-nfc/`;
+---
+<section class="daily-solutions" aria-labelledby="daily-solutions-title">
+  <div class="saas-shell">
+    <header class="daily-solutions__head reveal">
+      <span class="daily-solutions__eyebrow">SOLUCIONES PARA EL DÍA A DÍA</span>
+      <h2 id="daily-solutions-title">Menos tiempo buscando.<br/><span>Más tiempo resolviendo.</span></h2>
+      <p>IsiVoltPro no empieza por una lista infinita de funciones. Empieza por los problemas que más tiempo roban a un autónomo o a un pequeño equipo de mantenimiento.</p>
+    </header>
+
+    <div class="daily-solutions__grid">
+      <div class="daily-solutions__problems reveal">
+        <a href={maintenanceApp} class="daily-problem daily-problem--active">
+          <i aria-hidden="true">!</i>
+          <div><small>01 · AVISOS</small><strong>“Se me pierden incidencias entre llamadas y WhatsApp.”</strong><span>Registra el aviso, vincúlalo al cliente o activo y conviértelo en trabajo trazable.</span></div>
+          <b aria-hidden="true">→</b>
+        </a>
+        <a href={orders} class="daily-problem">
+          <i aria-hidden="true">✓</i>
+          <div><small>02 · SEGUIMIENTO</small><strong>“No sé qué trabajos siguen abiertos ni quién los lleva.”</strong><span>OT, prioridad, técnico, estado, evidencias y cierre dentro del mismo recorrido.</span></div>
+          <b aria-hidden="true">→</b>
+        </a>
+        <a href={qr} class="daily-problem">
+          <i aria-hidden="true">⌁</i>
+          <div><small>03 · CONTEXTO</small><strong>“Cada vez que vuelvo a un equipo tengo que buscarlo todo otra vez.”</strong><span>Escanea QR/NFC y recupera activo, histórico, documentación y trabajos relacionados.</span></div>
+          <b aria-hidden="true">→</b>
+        </a>
+        <a class="daily-solutions__more" href={solutions}>Ver todas las soluciones →</a>
+      </div>
+
+      <div class="daily-workspace reveal" aria-label="Workspace conceptual de un día de trabajo en IsiVoltPro">
+        <div class="daily-workspace__top">
+          <div><span class="daily-workspace__mark" aria-hidden="true"></span><strong>Mi jornada</strong><small>Interfaz conceptual · datos ilustrativos</small></div>
+          <span class="daily-workspace__live"><i aria-hidden="true"></i> Operativa activa</span>
+        </div>
+
+        <div class="daily-workspace__body">
+          <aside class="daily-workspace__rail" aria-hidden="true"><i>⌂</i><i>!</i><i>✓</i><i>▣</i><i>⌁</i></aside>
+          <div class="daily-workspace__main">
+            <div class="daily-workspace__summary">
+              <div><small>HOY</small><strong>5 trabajos en curso</strong><span>2 requieren atención antes de cerrar la jornada</span></div>
+              <div class="daily-workspace__score"><small>PLAN</small><strong>3 / 5</strong><span>completados</span></div>
+            </div>
+
+            <div class="daily-workspace__timeline">
+              <article class="is-done"><time>08:10</time><i>✓</i><div><strong>Preventivo · UTA-02</strong><span>Checklist y fotos guardadas</span></div><em>Cerrado</em></article>
+              <article class="is-active"><time>10:35</time><i>!</i><div><strong>Incidencia · Cámara frigorífica</strong><span>OT asignada · técnico en desplazamiento</span></div><em>En curso</em></article>
+              <article><time>12:20</time><i>⌁</i><div><strong>Revisión · Cuadro Q-07</strong><span>Acceso mediante QR · histórico disponible</span></div><em>Planificado</em></article>
+            </div>
+
+            <div class="daily-workspace__bottom">
+              <article><small>PRÓXIMO PREVENTIVO</small><strong>Climatizadora · Zona Norte</strong><span>Programado para mañana</span></article>
+              <article class="daily-workspace__qr"><div aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p><small>ACTIVO</small><strong>UTA-02</strong><span>Escanear y continuar</span></p></article>
+            </div>
+          </div>
+        </div>
+        <a class="daily-workspace__cta" href={maintenanceApp}>Explorar App Mantenimiento <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,3 +1,5 @@
+@import './v3-entry-mobile-final.css';
+
 @media (min-width:1051px){
   .saas-home .saas-hero__grid{grid-template-columns:1fr 1fr;gap:48px}
   .saas-home .saas-hero__copy h1{max-width:610px;font-size:clamp(50px,4vw,56px);line-height:1.01}

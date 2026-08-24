@@ -25,7 +25,9 @@ ROUTES = [
     ("aplicaciones/", "modulos"),
     ("apps-especializadas/", "apps-especializadas"),
     ("alcance/", "alcance"),
+    ("experiencia/", "experiencia"),
     ("demo/", "demo"),
+    ("selector/", "selector"),
     ("piloto/", "piloto"),
     ("implantacion/", "implantacion"),
     ("seguridad/", "seguridad"),
@@ -151,7 +153,7 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     render_full_page(page, name, width)
     audit_layout(page, name, width)
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
-    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "apps-especializadas", "alcance", "demo", "piloto", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
+    if width == 390 and name in {"home", "contacto", "app-mantenimiento", "apps-especializadas", "alcance", "experiencia", "demo", "selector", "piloto", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")
     if name == "home" and width == 390:
         menu = page.locator(".v3-mobile-nav summary")
@@ -180,4 +182,4 @@ if failures:
     for item in failures: print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
 
-print("QA móvil V3: OK · entrada 3D + 21 rutas representativas a 360 / 390 / 430 px")
+print("QA móvil V3: OK · entrada 3D + 23 rutas representativas a 360 / 390 / 430 px")

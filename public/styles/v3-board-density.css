@@ -1,0 +1,135 @@
+/* Desktop density alignment for the approved SaaS board.
+   Mobile layouts keep their validated page-specific rules. */
+@media (min-width: 981px) {
+  .board-sectors .sectors-hero {
+    padding: 52px 0 30px;
+  }
+
+  .board-sectors .sectors-hero__grid {
+    grid-template-columns: .8fr 1.2fr;
+    gap: 48px;
+  }
+
+  .board-sectors .sectors-hero h1 {
+    max-width: 430px;
+    margin: 12px 0 14px;
+    font-size: clamp(38px, 3.2vw, 48px);
+    line-height: 1.02;
+  }
+
+  .board-sectors .sectors-hero p {
+    max-width: 430px;
+    font-size: 12px;
+    line-height: 1.62;
+  }
+
+  .board-sectors .sector-ui {
+    min-height: 320px;
+  }
+
+  .board-sectors .sector-ui__main {
+    inset: 24px 28px 27px 36px;
+    padding: 17px;
+    border-radius: 21px;
+  }
+
+  .board-sectors .sector-cards-section {
+    padding-top: 25px;
+  }
+
+  .board-sectors .sector-cards {
+    gap: 10px;
+  }
+
+  .board-sectors .sector-board-card {
+    min-height: 178px;
+    border-radius: 14px;
+  }
+
+  .board-sectors .sector-board-card__copy {
+    padding: 14px;
+  }
+
+  .board-sectors .sector-board-card h3 {
+    font-size: 12px;
+  }
+
+  .board-sectors .sector-board-card p {
+    font-size: 8px;
+  }
+
+  .board-sectors .sector-strip {
+    margin-top: 27px;
+    padding: 25px 0;
+  }
+
+  .board-sectors .sector-stat strong {
+    font-size: 23px;
+  }
+
+  .board-pricing .pricing-hero {
+    padding: 52px 0 62px;
+  }
+
+  .board-pricing .pricing-layout {
+    grid-template-columns: 285px 1fr;
+    gap: 36px;
+  }
+
+  .board-pricing .pricing-copy h1 {
+    margin: 12px 0 14px;
+    font-size: clamp(38px, 3.2vw, 47px);
+    line-height: 1.01;
+  }
+
+  .board-pricing .pricing-copy p {
+    font-size: 11px;
+    line-height: 1.62;
+  }
+
+  .board-pricing .pricing-note {
+    margin-top: 16px;
+    font-size: 8px;
+  }
+
+  .board-pricing .pricing-grid {
+    gap: 12px;
+  }
+
+  .board-pricing .pricing-card {
+    padding: 20px;
+    border-radius: 17px;
+  }
+
+  .board-pricing .pricing-card--featured {
+    transform: translateY(-7px);
+  }
+
+  .board-pricing .pricing-card h2 {
+    margin-top: 14px;
+    font-size: 18px;
+  }
+
+  .board-pricing .pricing-card__price {
+    min-height: 62px;
+    margin: 10px 0 12px;
+  }
+
+  .board-pricing .pricing-card__price strong {
+    font-size: 31px;
+  }
+
+  .board-pricing .pricing-card p,
+  .board-pricing .pricing-card ul {
+    font-size: 8px;
+  }
+
+  .board-pricing .pricing-card ul {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .board-pricing .pricing-card .btn {
+    margin-top: 17px;
+  }
+}

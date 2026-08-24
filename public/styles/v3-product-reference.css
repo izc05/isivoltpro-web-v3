@@ -29,6 +29,10 @@ body:has(.app-stage) .app-window{border-color:#e4e8f2;background:rgba(255,255,25
 body:has(.app-stage) .app-phone{box-shadow:0 26px 62px rgba(31,47,90,.20)}
 body:has(.app-stage) .app-metric{box-shadow:0 9px 24px rgba(48,62,100,.05)}
 
+/* Home: use an original technical-equipment illustration in the highlighted asset card. */
+.saas-home .saas-asset__visual{min-height:118px;border-radius:15px;background:#f7f9fd url('../media/equipo-hvac-isivoltpro.svg') center/contain no-repeat;overflow:hidden}
+.saas-home .saas-asset__visual img{opacity:0}
+
 /* Recursos: convert the generic orbit into a compact library workspace. */
 body:has(#guias) .page-hero{padding-top:78px;padding-bottom:62px;background:radial-gradient(circle at 88% 16%,rgba(23,92,255,.08),transparent 24%),radial-gradient(circle at 70% 34%,rgba(109,74,255,.08),transparent 22%),#fff}
 body:has(#guias) .page-hero::before{display:none}

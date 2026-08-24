@@ -1,5 +1,6 @@
 ---
 import '../styles/v3-entry-3d.css';
+import '../styles/v3-entry-3d-fidelity.css';
 
 interface Props {
   accessHref: string;
@@ -26,7 +27,11 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     <div class="entry3d__scene" id="entry3d-scene">
       <div class="entry3d__network" aria-hidden="true"><i class="entry3d__line entry3d__line--1"></i><i class="entry3d__line entry3d__line--2"></i><i class="entry3d__line entry3d__line--3"></i><i class="entry3d__line entry3d__line--4"></i><i class="entry3d__line entry3d__line--5"></i><i class="entry3d__line entry3d__line--6"></i></div>
 
-      <div class="entry3d__core" aria-hidden="true"><canvas id="entry3d-canvas" class="entry3d__canvas"></canvas><div class="entry3d__pedestal"><i></i><i></i><i></i></div></div>
+      <div class="entry3d__core" aria-hidden="true">
+        <div class="entry3d__glass-shell"><i></i><i></i><i></i></div>
+        <canvas id="entry3d-canvas" class="entry3d__canvas"></canvas>
+        <div class="entry3d__pedestal"><i></i><i></i><i></i></div>
+      </div>
 
       <article class="entry3d__phone entry3d__float" aria-label="Incidencia de ejemplo"><div class="entry3d__phone-screen"><small>Incidencia #INC-1047 <b>NUEVO</b></small><span>Estado</span><strong>En curso</strong><span>Asignado a</span><strong>Técnico · ejemplo</strong><span>Ubicación</span><strong>Almacén · Zona Este</strong><button type="button" tabindex="-1">Ver detalles</button></div></article>
 
@@ -68,26 +73,22 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-    camera.position.set(0, 0.55, 7.5);
+    const camera = new THREE.PerspectiveCamera(31, 1, 0.1, 100);
+    camera.position.set(0, 0.3, 6.7);
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd6ff, 3.2));
-    const key = new THREE.PointLight(0x5269ff, 34, 20); key.position.set(-3, 4, 5); scene.add(key);
-    const magenta = new THREE.PointLight(0xf04acb, 24, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
-    const cyan = new THREE.PointLight(0x36d8ea, 22, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd6ff, 3.4));
+    const key = new THREE.PointLight(0x5269ff, 28, 20); key.position.set(-3, 4, 5); scene.add(key);
+    const magenta = new THREE.PointLight(0xf04acb, 19, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
+    const cyan = new THREE.PointLight(0x36d8ea, 18, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
 
-    const group = new THREE.Group(); group.rotation.x = -0.12; scene.add(group);
-    const glass = new THREE.MeshPhysicalMaterial({ color:0x725cff, metalness:0.06, roughness:0.08, transmission:0.72, transparent:true, opacity:0.82, thickness:1.2, ior:1.33, clearcoat:1, clearcoatRoughness:0.04, emissive:0x1a2e72, emissiveIntensity:0.28 });
-    const shell = new THREE.Mesh(new THREE.BoxGeometry(2.25,2.25,2.25,8,8,8), glass); shell.scale.set(1,.94,.74); group.add(shell);
-    const inner = new THREE.Mesh(new THREE.BoxGeometry(1.65,1.65,1.65,4,4,4), new THREE.MeshPhysicalMaterial({color:0x3b6dff,roughness:.12,transmission:.4,transparent:true,opacity:.48,emissive:0x263dcb,emissiveIntensity:.45})); inner.scale.z=.78; group.add(inner);
-
+    const group = new THREE.Group(); group.rotation.x = -0.08; scene.add(group);
     const logo = new THREE.Group();
-    const cubeMaterial = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.18,metalness:.08,emissive:0xeef4ff,emissiveIntensity:.24});
+    const cubeMaterial = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.15,metalness:.06,emissive:0xf4f8ff,emissiveIntensity:.30});
     const cubeGeo = new THREE.BoxGeometry(.68,.68,.68);
     [[-.34,.28,0],[.34,.28,0],[0,-.32,0]].forEach(([x,y,z],index)=>{const cube=new THREE.Mesh(cubeGeo,cubeMaterial);cube.position.set(x,y,z);cube.rotation.set(.36,.64+index*.12,.12);logo.add(cube)});
-    logo.position.z=1.02;logo.scale.setScalar(.78);group.add(logo);
+    logo.position.set(0,.08,.35);logo.scale.setScalar(.86);group.add(logo);
 
-    [1.55,1.82,2.08].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.008,12,110),new THREE.MeshBasicMaterial({color:0x6680ff,transparent:true,opacity:.22}));ring.rotation.x=Math.PI/2.16;ring.rotation.z=index*.22;ring.position.y=-1.18-index*.07;ring.scale.y=.52;group.add(ring)});
+    [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:.20}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
 
     const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
     resize(); const ro=new ResizeObserver(resize);ro.observe(canvas);
@@ -95,7 +96,7 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
     host.addEventListener('pointermove',onPointer,{passive:true});
     const clock=new THREE.Clock();
-    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.11)-group.rotation.y)*.035;group.rotation.x+=((-.12-pointerY*.055)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.065;logo.rotation.y=Math.sin(t*.72)*.09;glass.opacity=.79+Math.sin(t*1.2)*.035;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.08)-group.rotation.y)*.035;group.rotation.x+=((-.08-pointerY*.04)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.055;logo.rotation.y=Math.sin(t*.72)*.10;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
     const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose()};

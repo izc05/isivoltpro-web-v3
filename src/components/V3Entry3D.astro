@@ -13,71 +13,30 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
   <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
 
   <div class="entry3d__ambient" aria-hidden="true">
-    <span class="entry3d__particle entry3d__particle--1"></span>
-    <span class="entry3d__particle entry3d__particle--2"></span>
-    <span class="entry3d__particle entry3d__particle--3"></span>
-    <span class="entry3d__particle entry3d__particle--4"></span>
-    <span class="entry3d__particle entry3d__particle--5"></span>
-    <span class="entry3d__particle entry3d__particle--6"></span>
-    <span class="entry3d__particle entry3d__particle--7"></span>
+    <span class="entry3d__particle entry3d__particle--1"></span><span class="entry3d__particle entry3d__particle--2"></span><span class="entry3d__particle entry3d__particle--3"></span><span class="entry3d__particle entry3d__particle--4"></span><span class="entry3d__particle entry3d__particle--5"></span><span class="entry3d__particle entry3d__particle--6"></span><span class="entry3d__particle entry3d__particle--7"></span>
   </div>
 
   <div class="entry3d__shell">
     <header class="entry3d__heading">
-      <div class="entry3d__brand" aria-label="IsiVoltPro">
-        <i class="entry3d__brand-mark" aria-hidden="true"><span></span></i>
-        <strong>ISI VOLTPRO</strong>
-      </div>
+      <div class="entry3d__brand" aria-label="IsiVoltPro"><i class="entry3d__brand-mark" aria-hidden="true"><span></span></i><strong>ISI VOLTPRO</strong></div>
       <h1>Conectando <span>tu trabajo diario</span></h1>
       <p>Clientes, equipos, avisos y mantenimiento en un único ecosistema inteligente.</p>
     </header>
 
     <div class="entry3d__scene" id="entry3d-scene">
-      <div class="entry3d__network" aria-hidden="true">
-        <i class="entry3d__line entry3d__line--1"></i><i class="entry3d__line entry3d__line--2"></i><i class="entry3d__line entry3d__line--3"></i><i class="entry3d__line entry3d__line--4"></i><i class="entry3d__line entry3d__line--5"></i><i class="entry3d__line entry3d__line--6"></i>
-      </div>
+      <div class="entry3d__network" aria-hidden="true"><i class="entry3d__line entry3d__line--1"></i><i class="entry3d__line entry3d__line--2"></i><i class="entry3d__line entry3d__line--3"></i><i class="entry3d__line entry3d__line--4"></i><i class="entry3d__line entry3d__line--5"></i><i class="entry3d__line entry3d__line--6"></i></div>
 
-      <div class="entry3d__core" aria-hidden="true">
-        <canvas id="entry3d-canvas" class="entry3d__canvas"></canvas>
-        <div class="entry3d__pedestal"><i></i><i></i><i></i></div>
-      </div>
+      <div class="entry3d__core" aria-hidden="true"><canvas id="entry3d-canvas" class="entry3d__canvas"></canvas><div class="entry3d__pedestal"><i></i><i></i><i></i></div></div>
 
-      <article class="entry3d__phone entry3d__float" aria-label="Incidencia de ejemplo">
-        <div class="entry3d__phone-screen">
-          <small>Incidencia #INC-1047 <b>NUEVO</b></small>
-          <span>Estado</span><strong>En curso</strong>
-          <span>Asignado a</span><strong>Técnico · ejemplo</strong>
-          <span>Ubicación</span><strong>Almacén · Zona Este</strong>
-          <button type="button" tabindex="-1">Ver detalles</button>
-        </div>
-      </article>
+      <article class="entry3d__phone entry3d__float" aria-label="Incidencia de ejemplo"><div class="entry3d__phone-screen"><small>Incidencia #INC-1047 <b>NUEVO</b></small><span>Estado</span><strong>En curso</strong><span>Asignado a</span><strong>Técnico · ejemplo</strong><span>Ubicación</span><strong>Almacén · Zona Este</strong><button type="button" tabindex="-1">Ver detalles</button></div></article>
 
-      <article class="entry3d__orders entry3d__float" aria-label="Órdenes de trabajo de ejemplo">
-        <div class="entry3d__panel-title"><strong>Órdenes de trabajo</strong><span>•••</span></div>
-        <div class="entry3d__order"><i>✓</i><span>Chequeo rutinario</span><b>12</b><em>↗ 24%</em></div>
-        <div class="entry3d__order"><i>♙</i><span>Reparación preventiva</span><b>8</b><em>↗ 16%</em></div>
-        <div class="entry3d__order"><i>!</i><span>Incidencias</span><b>3</b><em class="is-down">↘ 12%</em></div>
-        <small>Ver todas →</small>
-      </article>
+      <article class="entry3d__orders entry3d__float" aria-label="Órdenes de trabajo de ejemplo"><div class="entry3d__panel-title"><strong>Órdenes de trabajo</strong><span>•••</span></div><div class="entry3d__order"><i>✓</i><span>Chequeo rutinario</span><b>12</b><em>↗ 24%</em></div><div class="entry3d__order"><i>♙</i><span>Reparación preventiva</span><b>8</b><em>↗ 16%</em></div><div class="entry3d__order"><i>!</i><span>Incidencias</span><b>3</b><em class="is-down">↘ 12%</em></div><small>Ver todas →</small></article>
 
-      <article class="entry3d__analytics entry3d__float" aria-label="Rendimiento operativo ilustrativo">
-        <div class="entry3d__analytics-top"><span>Rendimiento operativo</span><small>Últimos 30 días</small></div>
-        <strong>98%</strong><small>Disponibilidad · dato ilustrativo</small>
-        <svg viewBox="0 0 180 68" aria-hidden="true"><path d="M4 58 C18 55 24 43 35 47 S54 61 66 41 S88 23 100 35 S121 50 132 30 S151 29 176 9"/></svg>
-      </article>
+      <article class="entry3d__analytics entry3d__float" aria-label="Rendimiento operativo ilustrativo"><div class="entry3d__analytics-top"><span>Rendimiento operativo</span><small>Últimos 30 días</small></div><strong>98%</strong><small>Disponibilidad · dato ilustrativo</small><svg viewBox="0 0 180 68" aria-hidden="true"><path d="M4 58 C18 55 24 43 35 47 S54 61 66 41 S88 23 100 35 S121 50 132 30 S151 29 176 9"/></svg></article>
 
-      <article class="entry3d__qr-card entry3d__float" aria-label="Identificación QR y NFC">
-        <b>NFC / QR</b>
-        <div class="entry3d__qr" aria-hidden="true">
-          {qrCells.map((cell) => <i class:list={{ 'is-on': (cell * 7 + 3) % 5 !== 0 || cell < 8 || cell > 40 }}></i>)}
-        </div>
-      </article>
-
+      <article class="entry3d__qr-card entry3d__float" aria-label="Identificación QR y NFC"><b>NFC / QR</b><div class="entry3d__qr" aria-hidden="true">{qrCells.map((cell) => <i class:list={{ 'is-on': (cell * 7 + 3) % 5 !== 0 || cell < 8 || cell > 40 }}></i>)}</div></article>
       <div class="entry3d__gear entry3d__float" aria-hidden="true"><i></i></div>
-
-      <div class="entry3d__machines entry3d__float" aria-hidden="true">
-        <span class="entry3d__machine"><i></i><b></b><em></em></span><span class="entry3d__machine"><i></i><b></b><em></em></span>
-      </div>
+      <div class="entry3d__machines entry3d__float" aria-hidden="true"><span class="entry3d__machine"><i></i><b></b><em></em></span><span class="entry3d__machine"><i></i><b></b><em></em></span></div>
 
       <article class="entry3d__status entry3d__float"><i></i><div><strong>Sistema operativo</strong><small>Todos los servicios activos</small></div></article>
       <article class="entry3d__note entry3d__note--mobility entry3d__float"><i>⌁</i><div><strong>Movilidad</strong><small>Actúa desde cualquier lugar</small></div></article>
@@ -88,22 +47,22 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
       <article class="entry3d__note entry3d__note--scan entry3d__float"><i>⌁</i><div><strong>Identificación instantánea</strong><small>Escanea, accede, resuelve</small></div></article>
     </div>
 
-    <footer class="entry3d__actions">
-      <a class="entry3d__primary" href={accessHref}>Entrar en la plataforma <span aria-hidden="true">→</span></a>
-      <a class="entry3d__secondary" href={demoHref}>Ver demo <span aria-hidden="true">›</span></a>
-      <small><i aria-hidden="true">ⓘ</i> Vista conceptual · datos ilustrativos</small>
-    </footer>
+    <footer class="entry3d__actions"><a class="entry3d__primary" href={accessHref}>Entrar en la plataforma <span aria-hidden="true">→</span></a><a class="entry3d__secondary" href={demoHref}>Ver demo <span aria-hidden="true">›</span></a><small><i aria-hidden="true">ⓘ</i> Vista conceptual · datos ilustrativos</small></footer>
   </div>
 </div>
 
 <script>
-  import * as THREE from 'three';
-
   const canvas = document.querySelector<HTMLCanvasElement>('#entry3d-canvas');
   const host = document.querySelector<HTMLElement>('#entry3d-scene');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let alreadySeen = document.documentElement.classList.contains('skip-intro');
+  try { alreadySeen ||= sessionStorage.getItem('isivoltpro-intro-seen') === '1'; } catch (_) {}
 
-  if (canvas && host && !reduced) {
+  const mountEntry3D = async () => {
+    if (!canvas || !host || reduced || alreadySeen) return;
+    const THREE = await import('three');
+    if (document.querySelector('#intro')?.classList.contains('is-done')) return;
+
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -117,105 +76,31 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const magenta = new THREE.PointLight(0xf04acb, 24, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
     const cyan = new THREE.PointLight(0x36d8ea, 22, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
 
-    const group = new THREE.Group();
-    group.rotation.x = -0.12;
-    scene.add(group);
-
-    const glass = new THREE.MeshPhysicalMaterial({
-      color: 0x725cff,
-      metalness: 0.06,
-      roughness: 0.08,
-      transmission: 0.72,
-      transparent: true,
-      opacity: 0.82,
-      thickness: 1.2,
-      ior: 1.33,
-      clearcoat: 1,
-      clearcoatRoughness: 0.04,
-      emissive: 0x1a2e72,
-      emissiveIntensity: 0.28,
-    });
-
-    const shellGeometry = new THREE.BoxGeometry(2.25, 2.25, 2.25, 8, 8, 8);
-    const shell = new THREE.Mesh(shellGeometry, glass);
-    shell.scale.set(1, 0.94, 0.74);
-    group.add(shell);
-
-    const inner = new THREE.Mesh(
-      new THREE.BoxGeometry(1.65, 1.65, 1.65, 4, 4, 4),
-      new THREE.MeshPhysicalMaterial({ color:0x3b6dff, roughness:0.12, transmission:0.4, transparent:true, opacity:0.48, emissive:0x263dcb, emissiveIntensity:0.45 })
-    );
-    inner.scale.z = 0.78;
-    group.add(inner);
+    const group = new THREE.Group(); group.rotation.x = -0.12; scene.add(group);
+    const glass = new THREE.MeshPhysicalMaterial({ color:0x725cff, metalness:0.06, roughness:0.08, transmission:0.72, transparent:true, opacity:0.82, thickness:1.2, ior:1.33, clearcoat:1, clearcoatRoughness:0.04, emissive:0x1a2e72, emissiveIntensity:0.28 });
+    const shell = new THREE.Mesh(new THREE.BoxGeometry(2.25,2.25,2.25,8,8,8), glass); shell.scale.set(1,.94,.74); group.add(shell);
+    const inner = new THREE.Mesh(new THREE.BoxGeometry(1.65,1.65,1.65,4,4,4), new THREE.MeshPhysicalMaterial({color:0x3b6dff,roughness:.12,transmission:.4,transparent:true,opacity:.48,emissive:0x263dcb,emissiveIntensity:.45})); inner.scale.z=.78; group.add(inner);
 
     const logo = new THREE.Group();
-    const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.18, metalness: 0.08, emissive:0xeef4ff, emissiveIntensity:0.24 });
-    const cubeGeo = new THREE.BoxGeometry(0.68, 0.68, 0.68);
-    [[-0.34,0.28,0],[0.34,0.28,0],[0,-0.32,0]].forEach(([x,y,z], index) => {
-      const cube = new THREE.Mesh(cubeGeo, cubeMaterial);
-      cube.position.set(x as number,y as number,z as number);
-      cube.rotation.set(0.36,0.64 + index * 0.12,0.12);
-      logo.add(cube);
-    });
-    logo.position.z = 1.02;
-    logo.scale.setScalar(0.78);
-    group.add(logo);
+    const cubeMaterial = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.18,metalness:.08,emissive:0xeef4ff,emissiveIntensity:.24});
+    const cubeGeo = new THREE.BoxGeometry(.68,.68,.68);
+    [[-.34,.28,0],[.34,.28,0],[0,-.32,0]].forEach(([x,y,z],index)=>{const cube=new THREE.Mesh(cubeGeo,cubeMaterial);cube.position.set(x,y,z);cube.rotation.set(.36,.64+index*.12,.12);logo.add(cube)});
+    logo.position.z=1.02;logo.scale.setScalar(.78);group.add(logo);
 
-    const ringMat = new THREE.MeshBasicMaterial({ color:0x6680ff, transparent:true, opacity:0.22 });
-    [1.55, 1.82, 2.08].forEach((radius, index) => {
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(radius, 0.018 + index * 0.008, 12, 110), ringMat.clone());
-      ring.rotation.x = Math.PI / 2.16;
-      ring.rotation.z = index * 0.22;
-      ring.position.y = -1.18 - index * 0.07;
-      ring.scale.y = 0.52;
-      group.add(ring);
-    });
+    [1.55,1.82,2.08].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.008,12,110),new THREE.MeshBasicMaterial({color:0x6680ff,transparent:true,opacity:.22}));ring.rotation.x=Math.PI/2.16;ring.rotation.z=index*.22;ring.position.y=-1.18-index*.07;ring.scale.y=.52;group.add(ring)});
 
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height), false);
-      camera.aspect = Math.max(1, rect.width) / Math.max(1, rect.height);
-      camera.updateProjectionMatrix();
-    };
-    resize();
-    const ro = new ResizeObserver(resize); ro.observe(canvas);
-
-    let pointerX = 0, pointerY = 0, raf = 0;
-    const onPointer = (event: PointerEvent) => {
-      const rect = host.getBoundingClientRect();
-      pointerX = ((event.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 2;
-      pointerY = ((event.clientY - rect.top) / Math.max(1, rect.height) - 0.5) * 2;
-    };
-    host.addEventListener('pointermove', onPointer, { passive:true });
-
-    const clock = new THREE.Clock();
-    const animate = () => {
-      const t = clock.getElapsedTime();
-      group.rotation.y += ((pointerX * 0.11) - group.rotation.y) * 0.035;
-      group.rotation.x += ((-0.12 - pointerY * 0.055) - group.rotation.x) * 0.035;
-      group.position.y = Math.sin(t * 0.85) * 0.065;
-      logo.rotation.y = Math.sin(t * 0.72) * 0.09;
-      shell.material.opacity = 0.79 + Math.sin(t * 1.2) * 0.035;
-      renderer.render(scene, camera);
-      raf = requestAnimationFrame(animate);
-    };
+    const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
+    resize(); const ro=new ResizeObserver(resize);ro.observe(canvas);
+    let pointerX=0,pointerY=0,raf=0;
+    const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
+    host.addEventListener('pointermove',onPointer,{passive:true});
+    const clock=new THREE.Clock();
+    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.11)-group.rotation.y)*.035;group.rotation.x+=((-.12-pointerY*.055)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.065;logo.rotation.y=Math.sin(t*.72)*.09;glass.opacity=.79+Math.sin(t*1.2)*.035;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
-    const clean = () => {
-      cancelAnimationFrame(raf);
-      host.removeEventListener('pointermove', onPointer);
-      ro.disconnect();
-      scene.traverse((object: any) => {
-        if (object.geometry) object.geometry.dispose?.();
-        if (object.material) {
-          const materials = Array.isArray(object.material) ? object.material : [object.material];
-          materials.forEach((material: any) => material.dispose?.());
-        }
-      });
-      renderer.dispose();
-    };
-    document.querySelector('#intro')?.addEventListener('transitionend', (event) => {
-      if ((event.target as HTMLElement).classList.contains('is-done')) clean();
-    }, { once:true });
-  }
+    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose()};
+    document.querySelector('#intro')?.addEventListener('transitionend',(event)=>{if((event.target as HTMLElement).classList.contains('is-done'))clean()},{once:true});
+  };
+
+  void mountEntry3D();
 </script>

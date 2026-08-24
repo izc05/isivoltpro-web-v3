@@ -1,5 +1,6 @@
 ---
 import '../styles/v3-pages.css';
+import '../styles/v3-home-reference.css';
 import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
@@ -8,243 +9,107 @@ const base = import.meta.env.BASE_URL;
 const demo = `${base}demo/`;
 const experience = `${base}experiencia/`;
 const product = `${base}producto/`;
-const appMaintenance = `${base}app-mantenimiento/`;
 const modules = `${base}aplicaciones/`;
 const sectors = `${base}sectores/`;
-const security = `${base}seguridad/`;
 const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
-const sectorUrl = (slug: string) => `${base}sectores/${slug}/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
   <V3Seo
-    title="IsiVoltPro · Del aviso al informe, el mantenimiento más claro"
-    description="IsiVoltPro organiza avisos, órdenes de trabajo, activos, preventivos, fotos, documentación y trazabilidad para autónomos y pequeñas empresas de mantenimiento."
+    title="IsiVoltPro · Todo tu mantenimiento en un solo sistema"
+    description="IsiVoltPro conecta activos, avisos, órdenes de trabajo, preventivos, fotos y documentación para autónomos y pequeñas empresas de mantenimiento."
     path={base}
   />
   <script is:inline>
-    try {
-      if (sessionStorage.getItem('isivoltpro-intro-seen') === '1') document.documentElement.classList.add('skip-intro');
-    } catch (_) {}
+    try { if (sessionStorage.getItem('isivoltpro-intro-seen') === '1') document.documentElement.classList.add('skip-intro'); } catch (_) {}
   </script>
-  <style is:inline>
-    html.skip-intro .intro{display:none}
-    :root{--home-red:#ef2738;--home-red-dark:#d91f31;--home-ink:#0b1730;--home-muted:#677287;--home-line:#e8ebf1;--home-soft:#f7f8fb}
-    .home-ref{background:#fff;color:var(--home-ink)}
-    .home-ref .shell{width:min(1510px,calc(100% - 56px))}
-    .home-ref .eyebrow{padding:0;background:none;color:var(--home-red);letter-spacing:.11em;font-size:11px}
-    .home-ref .eyebrow::before{display:none}
-    .home-ref .btn{min-height:44px;border-radius:9px}
-    .home-ref .btn--primary{background:var(--home-red);box-shadow:0 12px 28px rgba(239,39,56,.18)}
-    .home-ref .btn--primary:hover{background:var(--home-red-dark)}
-
-    .ref-hero{border-bottom:1px solid var(--home-line);background:#fff;overflow:hidden}
-    .ref-hero__grid{display:grid;grid-template-columns:minmax(330px,.78fr) minmax(410px,1.08fr) minmax(390px,1fr);min-height:520px;align-items:stretch}
-    .ref-hero__copy{padding:58px 38px 52px 0;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
-    .ref-hero h1{margin:15px 0 17px;font:800 clamp(48px,4vw,70px)/1.02 Manrope,sans-serif;letter-spacing:-.062em;max-width:520px}
-    .ref-hero h1 em{font-style:normal;color:var(--home-red)}
-    .ref-hero__lead{margin:0;max-width:510px;color:var(--home-muted);font-size:16px;line-height:1.62}
-    .ref-hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-    .ref-hero__note{margin-top:16px;color:#768095;font-size:12px;font-weight:600}
-
-    .ref-hero__photo{position:relative;min-height:520px;overflow:hidden;background:#d9dfe7}
-    .ref-hero__photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.02)}
-    .ref-hero__photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.18),transparent 32%,rgba(8,18,36,.08))}
-    .ref-video-card{position:absolute;z-index:2;left:-8px;bottom:22px;width:215px;padding:8px;border-radius:12px;background:#fff;box-shadow:0 18px 38px rgba(19,32,55,.22)}
-    .ref-video-card__thumb{position:relative;height:116px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#1b2b43,#75869b)}
-    .ref-video-card__thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
-    .ref-video-card__play{position:absolute;left:50%;top:50%;width:45px;height:45px;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;background:#fff;color:#17253c;font-size:16px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
-    .ref-video-card strong{display:block;margin:9px 7px 2px;font-size:12px}
-    .ref-video-card small{display:block;margin:0 7px 5px;color:var(--home-red);font-weight:800;font-size:10px}
-
-    .ref-dashboard{position:relative;padding:24px 24px 22px 30px;background:#fbfcfe;border-left:1px solid var(--home-line);display:flex;flex-direction:column;gap:14px}
-    .ref-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .ref-kpi{padding:15px 12px;border:1px solid var(--home-line);border-radius:12px;background:#fff;box-shadow:0 8px 22px rgba(35,51,80,.04)}
-    .ref-kpi span{display:block;color:#758096;font-size:9px;font-weight:700}
-    .ref-kpi strong{display:block;margin-top:8px;font:800 24px/1 Manrope,sans-serif}
-    .ref-kpi small{display:block;margin-top:7px;color:#6b768a;font-size:8px}
-    .ref-kpi small b{color:var(--home-red)}
-    .ref-dash-lower{display:grid;grid-template-columns:1.06fr .94fr;gap:10px;flex:1}
-    .ref-dash-card{padding:17px;border:1px solid var(--home-line);border-radius:13px;background:#fff;box-shadow:0 10px 28px rgba(35,51,80,.045)}
-    .ref-dash-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-    .ref-dash-head strong{font-size:12px}
-    .ref-dash-head small{color:#8a93a5;font-size:8px}
-    .ref-ot h3{margin:0;font:800 20px Manrope,sans-serif;letter-spacing:-.035em}
-    .ref-pill{display:inline-flex;margin:8px 0 12px;padding:4px 7px;border-radius:999px;background:#fff0f1;color:var(--home-red);font-size:8px;font-weight:800}
-    .ref-ot-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:8px;color:#697488}
-    .ref-ot-grid b{display:block;margin-top:2px;color:#24314a;font-size:9px}
-    .ref-progress{height:5px;margin-top:15px;border-radius:99px;background:#edf0f5;overflow:hidden}.ref-progress i{display:block;width:63%;height:100%;background:#2875ff}
-    .ref-activity{display:grid;gap:13px;padding-top:3px}
-    .ref-activity div{display:grid;grid-template-columns:8px 34px 1fr;gap:8px;align-items:center;color:#556176;font-size:8px}
-    .ref-activity i{width:7px;height:7px;border-radius:50%;background:#31c98e;box-shadow:0 0 0 4px #e9f8f2}.ref-activity div:first-child i{background:#3478ff;box-shadow:0 0 0 4px #eaf1ff}
-    .ref-activity b{color:#1e2c45;font-weight:700}
-
-    .ref-workflow{padding:22px 0 14px;border-bottom:1px solid var(--home-line);background:#fff}
-    .ref-workflow__grid{display:grid;grid-template-columns:190px repeat(5,1fr);gap:14px;align-items:stretch}
-    .ref-workflow__title{display:flex;align-items:center;font:800 22px/1.15 Manrope,sans-serif;letter-spacing:-.04em}
-    .ref-step{position:relative;overflow:hidden;min-height:138px;border:1px solid var(--home-line);border-radius:10px;background:#fff}
-    .ref-step__top{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;font-size:9px;font-weight:800}
-    .ref-step__num{display:inline-grid;width:19px;height:19px;place-items:center;margin-right:6px;border-radius:50%;background:var(--home-red);color:#fff}
-    .ref-step__visual{height:98px;position:relative;overflow:hidden;background:linear-gradient(145deg,#e9edf4,#bcc6d3)}
-    .ref-step__visual img{width:100%;height:100%;object-fit:cover}
-    .ref-step:nth-child(3) .ref-step__visual img{object-position:20% 55%}.ref-step:nth-child(4) .ref-step__visual img{filter:grayscale(.15) contrast(1.08)}
-    .ref-step__overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(12,25,45,.10);color:#fff;font-size:28px;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.3)}
-
-    .ref-sectors{padding:18px 0 16px;background:#fff;border-bottom:1px solid var(--home-line)}
-    .ref-sectors__grid{display:grid;grid-template-columns:190px repeat(4,1fr);gap:14px}
-    .ref-section-title{font:800 22px/1.15 Manrope,sans-serif;letter-spacing:-.04em;padding-top:9px}
-    .ref-sector{position:relative;min-height:116px;overflow:hidden;border-radius:10px;background:#18243a;color:#fff}
-    .ref-sector img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.52) saturate(.8)}
-    .ref-sector__copy{position:relative;z-index:1;padding:17px}
-    .ref-sector h3{margin:0 0 7px;font:800 17px Manrope,sans-serif}.ref-sector p{margin:0;max-width:220px;font-size:9px;line-height:1.45;color:#e4e8ee}.ref-sector small{display:block;margin-top:11px;font-weight:800;font-size:9px}
-
-    .ref-platform{padding:18px 0 34px;background:#fff}
-    .ref-platform__box{display:grid;grid-template-columns:repeat(4,1fr) 240px;gap:14px;padding:14px;border:1px solid var(--home-line);border-radius:15px}
-    .ref-module{padding:16px;border:1px solid var(--home-line);border-radius:10px;background:#fff}
-    .ref-module h3{margin:0 0 7px;font:800 14px Manrope,sans-serif}.ref-module p{margin:0;color:#697488;font-size:9px;line-height:1.5}.ref-module small{display:block;margin-top:14px;color:#344159;font-weight:800;font-size:9px}
-    .ref-security{padding:18px;border-radius:11px;background:linear-gradient(145deg,#101f38,#172d4e);color:#fff}.ref-security h3{margin:13px 0 8px;font:800 17px Manrope,sans-serif}.ref-security p{margin:0;color:#c7d0de;font-size:10px;line-height:1.55}.ref-security a{display:inline-block;margin-top:17px;font-size:10px;font-weight:800;text-decoration:underline}
-    .ref-platform__heading{grid-column:1/-1;font:800 18px Manrope,sans-serif;padding:1px 2px 0}
-
-    .ref-final{padding:0 0 42px;background:#fff}.ref-final__inner{display:flex;justify-content:space-between;gap:28px;align-items:center;padding:22px 28px;border:1px solid #dfe4ed;border-radius:13px;background:linear-gradient(100deg,#fff,#f8f9fc)}.ref-final h2{margin:0 0 6px;font:800 21px Manrope,sans-serif}.ref-final p{margin:0;color:#707b8f;font-size:12px}
-
-    @media(max-width:1180px){
-      .home-ref .shell{width:min(1100px,calc(100% - 36px))}
-      .ref-hero__grid{grid-template-columns:.9fr 1.1fr}.ref-dashboard{grid-column:1/-1;border-left:0;border-top:1px solid var(--home-line);min-height:380px}.ref-hero__copy{padding-left:0}.ref-workflow__grid{grid-template-columns:150px repeat(5,1fr)}.ref-sectors__grid{grid-template-columns:150px repeat(4,1fr)}.ref-platform__box{grid-template-columns:repeat(2,1fr) 1fr}.ref-security{grid-column:3;grid-row:2/4}
-    }
-    @media(max-width:820px){
-      .home-ref .shell{width:min(100% - 28px,680px)}
-      .ref-hero__grid{grid-template-columns:1fr;min-height:0}.ref-hero__copy{padding:42px 0 32px}.ref-hero h1{font-size:clamp(43px,12vw,62px)}.ref-hero__photo{min-height:390px;border-radius:14px}.ref-video-card{left:14px;bottom:14px;width:190px}.ref-dashboard{padding:18px 0;background:#fff}.ref-kpis{grid-template-columns:repeat(2,1fr)}.ref-dash-lower{grid-template-columns:1fr}.ref-workflow{padding-top:30px}.ref-workflow__grid,.ref-sectors__grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}.ref-workflow__title,.ref-section-title{min-width:140px}.ref-step{min-width:235px;scroll-snap-align:start}.ref-sector{min-width:250px;scroll-snap-align:start}.ref-platform__box{grid-template-columns:1fr}.ref-platform__heading,.ref-security{grid-column:1;grid-row:auto}.ref-final__inner{align-items:flex-start;flex-direction:column}.ref-final .btn{width:100%}
-    }
-  </style>
+  <style is:inline>html.skip-intro .intro{display:none}</style>
 </head>
 <body class="intro-lock">
   <div class="intro" id="intro" aria-label="Presentación de IsiVoltPro">
-    <div class="intro__grid" aria-hidden="true"></div>
-    <div class="intro__nebula intro__nebula--a" aria-hidden="true"></div>
-    <div class="intro__nebula intro__nebula--b" aria-hidden="true"></div>
+    <div class="intro__grid" aria-hidden="true"></div><div class="intro__nebula intro__nebula--a" aria-hidden="true"></div><div class="intro__nebula intro__nebula--b" aria-hidden="true"></div>
     <button class="intro__skip" id="skip-intro" type="button">Saltar intro</button>
     <div class="intro__orbit" aria-hidden="true"><span class="intro__node">▣</span><span class="intro__node">⚙</span><span class="intro__node">✓</span><span class="intro__node">⌁</span><span class="intro__node">!</span><span class="intro__node">▤</span></div>
-    <div class="intro__content">
-      <p class="intro__label">ISIVOLTPRO · TRABAJO TÉCNICO CONECTADO</p>
-      <div class="intro__core" aria-hidden="true"><div class="intro__mark"><span>V</span></div></div>
-      <h1>Conectando tu trabajo diario.</h1>
-      <p class="intro__copy">Clientes, equipos, avisos, órdenes y mantenimiento dejan de vivir separados. Todo converge en un único lugar.</p>
-      <p class="intro__status">Preparando tu entorno de control…</p>
-      <div class="intro__bar" aria-hidden="true"><span></span></div>
-    </div>
+    <div class="intro__content"><p class="intro__label">ISIVOLTPRO · TRABAJO TÉCNICO CONECTADO</p><div class="intro__core" aria-hidden="true"><div class="intro__mark"><span>V</span></div></div><h1>Conectando tu trabajo diario.</h1><p class="intro__copy">Clientes, equipos, avisos, órdenes y mantenimiento dejan de vivir separados. Todo converge en un único lugar.</p><p class="intro__status">Preparando tu entorno de control…</p><div class="intro__bar" aria-hidden="true"><span></span></div></div>
   </div>
 
   <V3CommercialHeader />
 
-  <main class="home-ref">
-    <section class="ref-hero" id="inicio">
-      <div class="ref-hero__grid shell">
-        <div class="ref-hero__copy reveal">
-          <span class="eyebrow">Tecnología para equipos que no pueden parar</span>
-          <h1>Del aviso al informe,<br/>el mantenimiento más <em>claro</em></h1>
-          <p class="ref-hero__lead">Avisos, órdenes de trabajo, activos, preventivos, fotos y documentación. Todo conectado para que un autónomo o pequeño equipo tome mejores decisiones cada día.</p>
-          <div class="ref-hero__actions"><a class="btn btn--primary" href={experience}>Explorar IsiVoltPro <span aria-hidden="true">→</span></a><a class="btn" href={demo}>◉ Ver IsiVoltPro en 60 s</a></div>
-          <div class="ref-hero__note">Demo conceptual · sin datos de clientes · sin registro</div>
+  <main class="saas-home">
+    <section class="saas-hero" id="inicio">
+      <div class="saas-shell saas-hero__grid">
+        <div class="saas-hero__copy reveal">
+          <span class="saas-badge"><i aria-hidden="true"></i> Plataforma de mantenimiento para equipos técnicos</span>
+          <h1>Todo tu mantenimiento.<span>Un solo sistema.</span></h1>
+          <p class="saas-hero__lead">Conecta activos, avisos, órdenes de trabajo, preventivos, fotos y documentación en una experiencia clara, visual y preparada para trabajar desde escritorio, móvil o tablet.</p>
+          <div class="saas-actions"><a class="btn btn--primary" href={demo}>Solicitar / ver demo</a><a class="btn" href={experience}>Ver cómo funciona</a></div>
+          <div class="saas-trust"><small>Pensado para operaciones pequeñas que necesitan orden sin montar un ERP</small><div class="saas-trust__row"><span>Autónomos</span><span>Pequeñas mantenedoras</span><span>Instalaciones propias</span><span>Multisede</span></div></div>
         </div>
 
-        <div class="ref-hero__photo reveal" aria-label="Escena conceptual de trabajo técnico">
-          <img src={`${base}images/home/isivoltpro-industrial-core.webp`} alt="Escena industrial utilizada como referencia visual para explicar el trabajo técnico con IsiVoltPro." />
-          <a class="ref-video-card" href={demo} aria-label="Abrir demo guiada de IsiVoltPro">
-            <div class="ref-video-card__thumb"><img src={`${base}images/home/isivoltpro-industrial-core.webp`} alt="" aria-hidden="true"/><span class="ref-video-card__play" aria-hidden="true">▶</span></div>
-            <strong>Ver cómo trabaja IsiVoltPro</strong><small>60 segundos →</small>
-          </a>
-        </div>
-
-        <div class="ref-dashboard reveal" aria-label="Panel conceptual de IsiVoltPro con datos ilustrativos">
-          <div class="ref-kpis">
-            <article class="ref-kpi"><span>Avisos de hoy</span><strong>12</strong><small><b>3</b> prioritarios</small></article>
-            <article class="ref-kpi"><span>OT en curso</span><strong>8</strong><small>2 pendientes</small></article>
-            <article class="ref-kpi"><span>Trabajos asignados</span><strong>14</strong><small>Vista de equipo</small></article>
-            <article class="ref-kpi"><span>Preventivos</span><strong>23</strong><small>Esta semana</small></article>
+        <div class="saas-stage reveal" aria-label="Dashboard conceptual de IsiVoltPro con datos ficticios">
+          <div class="saas-dot saas-dot--a" aria-hidden="true"></div><div class="saas-dot saas-dot--b" aria-hidden="true"></div><div class="saas-dot saas-dot--c" aria-hidden="true"></div>
+          <div class="saas-dashboard">
+            <div class="saas-dashboard__top"><div class="saas-mini-brand"><i aria-hidden="true"></i><span>IsiVoltPro</span></div><small>INTERFAZ CONCEPTUAL · DATOS ILUSTRATIVOS</small></div>
+            <div class="saas-dashboard__body">
+              <aside class="saas-rail" aria-label="Módulos de ejemplo"><i>⌂</i><i>▣</i><i>✓</i><i>⚙</i><i>▤</i></aside>
+              <div class="saas-dashboard__main">
+                <div class="saas-greeting"><div><strong>Buenos días</strong><span>Resumen general de tu operativa</span></div><small>Hoy · ejemplo</small></div>
+                <div class="saas-kpis"><article class="saas-kpi"><span>Órdenes abiertas</span><strong>12</strong><small>+2 hoy</small></article><article class="saas-kpi"><span>Preventivos pendientes</span><strong>8</strong><small>Planificados</small></article><article class="saas-kpi"><span>Incidencias</span><strong>3</strong><small>1 prioritaria</small></article></div>
+                <article class="saas-asset"><div><small>ACTIVO DESTACADO</small><h3>UTA-02</h3><p>Climatización · Planta 1<br/>Última actuación: ejemplo<br/>Próximo preventivo: programado</p><span class="saas-status">Operativo</span></div><div class="saas-asset__visual"><img src={`${base}media/home-dashboard.svg`} alt="Representación conceptual de un activo dentro de IsiVoltPro"/></div></article>
+              </div>
+            </div>
           </div>
-          <div class="ref-dash-lower">
-            <article class="ref-dash-card ref-ot">
-              <div class="ref-dash-head"><strong>OT en curso</strong><small>Datos ilustrativos</small></div>
-              <h3>OT-2026-0148</h3><span class="ref-pill">Prioridad alta</span>
-              <div class="ref-ot-grid"><span>Ubicación<b>Planta 2 · Zona técnica</b></span><span>Estado<b>En curso</b></span><span>Activo<b>CL-02 · Cuadro</b></span><span>Progreso<b>63%</b></span></div>
-              <div class="ref-progress" aria-hidden="true"><i></i></div>
-            </article>
-            <article class="ref-dash-card">
-              <div class="ref-dash-head"><strong>Actividad en tiempo real</strong><small>Ejemplo</small></div>
-              <div class="ref-activity"><div><i></i><span>09:15</span><b>OT iniciada</b></div><div><i></i><span>09:18</span><b>Revisión del equipo</b></div><div><i></i><span>09:35</span><b>Intervención registrada</b></div><div><i></i><span>09:42</span><b>Pruebas de funcionamiento</b></div></div>
-            </article>
-          </div>
+          <article class="saas-chart-float" aria-label="Gráfica demostrativa de órdenes completadas"><small>Órdenes completadas</small><strong><b>+28</b> este mes</strong><svg class="saas-spark" viewBox="0 0 150 66" aria-hidden="true"><path d="M3 57 C17 50 22 44 31 48 S46 59 55 42 S71 24 80 35 S94 46 104 28 S125 24 147 7"/></svg></article>
         </div>
       </div>
     </section>
 
-    <section class="ref-workflow" aria-label="Así se trabaja cada día">
-      <div class="ref-workflow__grid shell reveal">
-        <div class="ref-workflow__title">Así se trabaja<br/>cada día</div>
-        <article class="ref-step"><div class="ref-step__top"><span><b class="ref-step__num">1</b>Entra el aviso</span><small>08:30</small></div><div class="ref-step__visual"><img src={`${base}media/tecnico-movil.svg`} alt="Aviso registrado desde móvil"/></div></article>
-        <article class="ref-step"><div class="ref-step__top"><span><b class="ref-step__num">2</b>Se asigna</span><small>08:32</small></div><div class="ref-step__visual"><img src={`${base}media/home-dashboard.svg`} alt="Asignación del trabajo desde el panel"/></div></article>
-        <article class="ref-step"><div class="ref-step__top"><span><b class="ref-step__num">3</b>Se consulta activo</span><small>08:40</small></div><div class="ref-step__visual"><img src={`${base}media/tecnico-movil.svg`} alt="Consulta del activo mediante identificación en campo"/><span class="ref-step__overlay" aria-hidden="true">⌁</span></div></article>
-        <article class="ref-step"><div class="ref-step__top"><span><b class="ref-step__num">4</b>Intervención</span><small>09:15</small></div><div class="ref-step__visual"><img src={`${base}images/home/isivoltpro-industrial-core.webp`} alt="Trabajo técnico sobre una instalación"/></div></article>
-        <article class="ref-step"><div class="ref-step__top"><span><b class="ref-step__num">5</b>Se documenta</span><small>10:05</small></div><div class="ref-step__visual"><img src={`${base}media/home-dashboard.svg`} alt="Cierre documentado de la orden de trabajo"/></div></article>
+    <section class="saas-benefits" aria-label="Ventajas de uso">
+      <div class="saas-shell saas-benefits__grid reveal"><article class="saas-benefit"><i>◇</i><div><strong>Implantación gradual</strong><span>Empieza por un flujo y amplía después</span></div></article><article class="saas-benefit"><i>✦</i><div><strong>Fácil de entender</strong><span>Diseñado alrededor del trabajo técnico</span></div></article><article class="saas-benefit"><i>▣</i><div><strong>Desde cualquier lugar</strong><span>Web, móvil y tablet</span></div></article><article class="saas-benefit"><i>✓</i><div><strong>Información trazable</strong><span>Activo, OT, fotos e histórico conectados</span></div></article></div>
+    </section>
+
+    <section class="saas-modules" id="modulos">
+      <div class="saas-shell">
+        <header class="saas-modules__head reveal"><h2>Una plataforma. Todos los módulos.</h2><p>IsiVoltPro reúne las piezas del mantenimiento en una única experiencia. Entra por el problema que hoy te hace perder más tiempo y conecta el resto cuando lo necesites.</p></header>
+        <div class="saas-modules__body">
+          <div class="reveal"><div class="saas-module-grid">
+            <a class="saas-module" href={moduleUrl('activos')}><i>▣</i><h3>Activos</h3><p>Equipos, ubicaciones, fotos e histórico.</p></a>
+            <a class="saas-module" href={moduleUrl('mantenimiento-preventivo')}><i>⚙</i><h3>Mantenimiento</h3><p>Preventivo, planificación y revisiones.</p></a>
+            <a class="saas-module" href={moduleUrl('ordenes-de-trabajo')}><i>✓</i><h3>Órdenes de trabajo</h3><p>Del aviso al cierre con evidencias.</p></a>
+            <a class="saas-module" href={moduleUrl('qr-nfc')}><i>⌁</i><h3>QR / NFC</h3><p>Acceso rápido al contexto del activo.</p></a>
+            <a class="saas-module" href={moduleUrl('inventario')}><i>▦</i><h3>Inventario</h3><p>Materiales y herramientas vinculados.</p></a>
+            <a class="saas-module" href={moduleUrl('inspecciones')}><i>☑</i><h3>Inspecciones</h3><p>Checklists, observaciones y fotos.</p></a>
+            <a class="saas-module" href={moduleUrl('documentacion')}><i>▤</i><h3>Documentación</h3><p>Informes, manuales y archivos.</p></a>
+          </div><a class="saas-modules__link" href={modules}>Explorar todos los módulos →</a></div>
+          <div class="saas-phone-scene reveal" aria-label="Vista conceptual móvil y QR"><div class="saas-phone"><img src={`${base}media/tecnico-movil.svg`} alt="Vista conceptual de IsiVoltPro usada por un técnico desde el móvil"/></div><div class="saas-qr-card"><div class="saas-qr" aria-hidden="true">{Array.from({length:49}).map(() => <i></i>)}</div><strong>Escanea el activo</strong><small>Acceso inmediato · demo</small></div></div>
+        </div>
       </div>
     </section>
 
-    <section class="ref-sectors" aria-label="Sectores donde encaja IsiVoltPro">
-      <div class="ref-sectors__grid shell reveal">
-        <div class="ref-section-title">Sectores donde<br/>encaja</div>
-        <a class="ref-sector" href={sectorUrl('autonomos-tecnicos')}><img src={`${base}media/sectores-operacion.svg`} alt="" aria-hidden="true"/><div class="ref-sector__copy"><h3>Autónomos técnicos</h3><p>Clientes, activos y trabajos sin depender de memoria y chats.</p><small>Ver solución →</small></div></a>
-        <a class="ref-sector" href={sectorUrl('empresas-mantenedoras')}><img src={`${base}images/home/isivoltpro-industrial-core.webp`} alt="" aria-hidden="true"/><div class="ref-sector__copy"><h3>Empresas mantenedoras</h3><p>Coordinación sencilla para equipos que trabajan en campo.</p><small>Ver solución →</small></div></a>
-        <a class="ref-sector" href={sectorUrl('instalaciones-propias')}><img src={`${base}media/sectores-operacion.svg`} alt="" aria-hidden="true"/><div class="ref-sector__copy"><h3>Instalaciones propias</h3><p>Activos, incidencias y preventivos unidos en el mismo histórico.</p><small>Ver solución →</small></div></a>
-        <a class="ref-sector" href={sectorUrl('multisede')}><img src={`${base}images/home/isivoltpro-industrial-core.webp`} alt="" aria-hidden="true"/><div class="ref-sector__copy"><h3>Operación multisede</h3><p>Ubicaciones organizadas sin mezclar equipos ni documentación.</p><small>Ver solución →</small></div></a>
+    <section class="saas-flow" aria-label="Flujo del aviso al histórico">
+      <div class="saas-shell reveal"><h2>Del aviso al cierre. Todo el ciclo en control.</h2><p>Un flujo de trabajo claro, trazable y fácil de seguir.</p><div class="saas-flow__track"><article class="saas-flow-step"><i>!</i><strong>Incidencia</strong><span>Se detecta y registra el problema</span></article><article class="saas-flow-step"><i>✓</i><strong>Orden de trabajo</strong><span>Se planifica la intervención</span></article><article class="saas-flow-step"><i>♙</i><strong>Técnico asignado</strong><span>Recibe el contexto y ejecuta</span></article><article class="saas-flow-step"><i>✦</i><strong>Actuación</strong><span>Registra notas, tiempos y evidencias</span></article><article class="saas-flow-step"><i>▤</i><strong>Informe</strong><span>La información queda preparada</span></article><article class="saas-flow-step"><i>⌁</i><strong>Histórico</strong><span>Todo queda unido al activo</span></article></div></div>
+    </section>
+
+    <section class="saas-results">
+      <div class="saas-shell saas-results__grid">
+        <div class="reveal"><h2>Más control.<br/>Menos imprevistos.<span>Mejores decisiones.</span></h2><p>La demo muestra cómo una operación pequeña puede visualizar pendientes, preventivos, activos e histórico sin saltar entre hojas de cálculo, chats y carpetas.</p><ul class="saas-checks"><li>Reduce información dispersa</li><li>Da contexto al técnico antes de actuar</li><li>Hace visible qué está pendiente y qué está cerrado</li><li>Deja evidencias junto al activo correcto</li></ul><div class="saas-actions"><a class="btn btn--primary" href={demo}>Ver demo</a></div></div>
+        <div class="saas-metric-grid reveal" aria-label="Indicadores demostrativos"><article class="saas-metric"><small>Preventivo ejecutado</small><strong>76%</strong><em>Dato ficticio para mostrar la interfaz</em><div class="saas-ring" aria-hidden="true"></div></article><article class="saas-metric"><small>OT abiertas</small><strong>12</strong><em>Ejemplo de panel operativo</em><svg class="saas-mini-line" viewBox="0 0 180 72" aria-hidden="true"><path d="M3 60 C18 56 25 39 38 44 S61 63 73 41 S96 23 108 32 S129 43 142 22 S162 20 177 8"/></svg></article><article class="saas-metric"><small>Trabajos cerrados</small><strong>28</strong><em>Últimos 30 días · ejemplo</em><svg class="saas-mini-line" viewBox="0 0 180 72" aria-hidden="true"><path d="M3 62 C26 55 27 45 41 48 S68 61 79 39 S102 18 115 31 S143 46 177 10" style="stroke:#34bd87"/></svg></article><article class="saas-metric"><small>Órdenes por tipo</small><strong>Demo</strong><em>Distribución ilustrativa</em><div class="saas-donut" aria-hidden="true"></div></article></div>
       </div>
     </section>
 
-    <section class="ref-platform" id="modulos">
-      <div class="ref-platform__box shell reveal">
-        <div class="ref-platform__heading">Todo lo que necesitas, en una sola plataforma</div>
-        <a class="ref-module" href={moduleUrl('ordenes-de-trabajo')}><h3>IsiVoltPro OT</h3><p>Del aviso al cierre con responsable, estado, evidencias y resultado.</p><small>Ver órdenes de trabajo →</small></a>
-        <a class="ref-module" href={moduleUrl('qr-nfc')}><h3>Activos QR / NFC</h3><p>Identificación rápida y trazabilidad de equipos e instalaciones.</p><small>Ver QR / NFC →</small></a>
-        <a class="ref-module" href={moduleUrl('inventario')}><h3>Inventario</h3><p>Materiales, herramientas y documentación asociados al trabajo.</p><small>Ver inventario →</small></a>
-        <a class="ref-module" href={moduleUrl('inspecciones')}><h3>Inspecciones</h3><p>Checklists, observaciones, fotos y evidencias dentro del flujo.</p><small>Ver inspecciones →</small></a>
-        <aside class="ref-security"><span aria-hidden="true">◇</span><h3>Datos claros,<br/>decisiones seguras.</h3><p>La arquitectura pública explica qué controles existen y cuáles siguen pendientes de validación antes de producción.</p><a href={security}>Más sobre seguridad →</a></aside>
-      </div>
-    </section>
-
-    <section class="ref-final">
-      <div class="ref-final__inner shell reveal"><div><h2>¿Quieres comprobar si encaja en tu forma de trabajar?</h2><p>Recorre la demo y el selector sin registro y con datos totalmente ficticios.</p></div><div class="ref-hero__actions" style="margin:0"><a class="btn" href={product}>Conocer el producto</a><a class="btn btn--primary" href={experience}>Probar IsiVoltPro →</a></div></div>
+    <section class="saas-dark">
+      <div class="saas-shell saas-dark__grid"><div class="reveal"><h2>Tu mantenimiento.<br/>Todo conectado.</h2><p>Prueba el recorrido comercial de IsiVoltPro con información ficticia y comprueba cómo encajaría en tu forma de trabajar antes de hablar de implantación.</p><div class="saas-actions"><a class="btn btn--primary" href={experience}>Probar IsiVoltPro</a><a class="btn" href={product}>Conocer el producto</a></div></div><div class="saas-dark-metrics reveal" aria-label="Métricas ficticias del ejemplo"><article class="saas-dark-metric"><small>Activos gestionados</small><strong>124</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Órdenes este mes</small><strong>28</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Preventivos</small><strong>8</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Técnicos</small><strong>4</strong><em>Ejemplo</em></article></div></div>
     </section>
   </main>
 
   <V3CommercialFooter />
 
   <script is:inline>
-    const intro = document.getElementById('intro');
-    const skip = document.getElementById('skip-intro');
-    const body = document.body;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let finished = false;
-    const finishIntro = () => {
-      if (finished) return;
-      finished = true;
-      try { sessionStorage.setItem('isivoltpro-intro-seen','1'); } catch (_) {}
-      intro?.classList.add('is-done');
-      body.classList.remove('intro-lock');
-      window.setTimeout(() => intro?.setAttribute('aria-hidden','true'), 750);
-    };
-    let seen = false;
-    try { seen = sessionStorage.getItem('isivoltpro-intro-seen') === '1'; } catch (_) {}
-    if (seen || reduced || document.documentElement.classList.contains('skip-intro')) {
-      intro?.classList.add('is-done'); body.classList.remove('intro-lock');
-    } else window.setTimeout(finishIntro, 3200);
-    skip?.addEventListener('click', finishIntro);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-      });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    const intro=document.getElementById('intro');const skip=document.getElementById('skip-intro');const body=document.body;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;let finished=false;
+    const finishIntro=()=>{if(finished)return;finished=true;try{sessionStorage.setItem('isivoltpro-intro-seen','1')}catch(_){}intro?.classList.add('is-done');body.classList.remove('intro-lock');window.setTimeout(()=>intro?.setAttribute('aria-hidden','true'),750)};
+    let seen=false;try{seen=sessionStorage.getItem('isivoltpro-intro-seen')==='1'}catch(_){}if(seen||reduced||document.documentElement.classList.contains('skip-intro')){intro?.classList.add('is-done');body.classList.remove('intro-lock')}else window.setTimeout(finishIntro,3200);skip?.addEventListener('click',finishIntro);
+    const observer=new IntersectionObserver((entries)=>{entries.forEach((entry)=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach((el)=>observer.observe(el));
   </script>
 </body>
 </html>

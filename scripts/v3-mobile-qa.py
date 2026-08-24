@@ -124,7 +124,7 @@ def audit_layout(page, label: str, width: int) -> None:
           offenders: [...document.querySelectorAll('body *')]
             .map((el) => { const r = el.getBoundingClientRect(); return {tag: el.tagName, cls: String(el.className || '').slice(0, 90), left: r.left, right: r.right, width: r.width}; })
             .filter((x) => x.width > 0 && (x.left < -2 || x.right > document.documentElement.clientWidth + 2)).slice(0, 12),
-          smallControls: [...document.querySelectorAll('.btn, .v3-mobile-nav summary, .contact-back')]
+          smallControls: [...document.querySelectorAll('.btn, .v3-mobile-nav summary, .footer-group summary, .contact-back')]
             .map((el) => { const r = el.getBoundingClientRect(); return {tag: el.tagName, cls: String(el.className || ''), text: (el.textContent || '').trim().slice(0, 60), width: r.width, height: r.height}; })
             .filter((x) => x.width > 0 && x.height > 0 && x.height < 43)
         })"""
@@ -133,6 +133,29 @@ def audit_layout(page, label: str, width: int) -> None:
         failures.append(f"{label} ({width}px): scroll horizontal {metrics['scrollWidth']} > {metrics['clientWidth']} · {metrics['offenders']}")
     if metrics["smallControls"]:
         failures.append(f"{label} ({width}px): controles táctiles <43px · {metrics['smallControls']}")
+
+
+def audit_mobile_footer(page, label: str, width: int) -> None:
+    if width != 390 or label != "home":
+        return
+    groups = page.locator(".footer-group")
+    if groups.count() != 3:
+        failures.append(f"footer móvil (390px): se esperaban 3 grupos desplegables y hay {groups.count()}")
+        return
+    states = page.evaluate("""() => [...document.querySelectorAll('.footer-group')].map((el) => ({open: el.open, links: el.querySelectorAll('a').length}))""")
+    if any(item["open"] for item in states):
+        failures.append(f"footer móvil (390px): los grupos deben arrancar cerrados · {states}")
+    if any(item["links"] < 4 for item in states):
+        failures.append(f"footer móvil (390px): faltan enlaces de navegación · {states}")
+    first_summary = page.locator(".footer-group summary").first
+    first_summary.scroll_into_view_if_needed()
+    first_summary.click()
+    page.wait_for_timeout(80)
+    opened = page.locator(".footer-group").first.evaluate("el => el.open")
+    visible_links = page.locator(".footer-group").first.locator("a:visible").count()
+    if not opened or visible_links < 4:
+        failures.append(f"footer móvil (390px): el primer grupo no despliega enlaces correctamente · open={opened}, visibles={visible_links}")
+    first_summary.click()
 
 
 def full_screenshot(page, path: Path) -> None:
@@ -152,6 +175,7 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     page.wait_for_timeout(180)
     render_full_page(page, name, width)
     audit_layout(page, name, width)
+    audit_mobile_footer(page, name, width)
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
     if width == 390 and name in {"home", "contacto", "app-mantenimiento", "apps-especializadas", "alcance", "experiencia", "demo", "selector", "piloto", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")

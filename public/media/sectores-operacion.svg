@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Escenarios de trabajo con IsiVoltPro</title>
+  <desc id="desc">Composición conceptual con cuatro escenarios: autónomo, pequeño equipo, instalaciones propias y operación multisede.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f6f8ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2d6bff"/><stop offset="1" stop-color="#6d4aff"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#19b985"/><stop offset="1" stop-color="#24c58c"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#304069" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1200" height="760" rx="42" fill="url(#bg)"/>
+  <g opacity=".45" stroke="#dfe6fb" stroke-width="1"><path d="M40 110H1160M40 250H1160M40 390H1160M40 530H1160M40 670H1160"/><path d="M180 40V720M420 40V720M660 40V720M900 40V720"/></g>
+  <circle cx="995" cy="118" r="170" fill="#eef2ff"/>
+  <circle cx="130" cy="650" r="210" fill="#effbf7"/>
+  <g filter="url(#shadow)">
+    <rect x="90" y="90" width="470" height="250" rx="30" fill="#fff"/>
+    <rect x="640" y="90" width="470" height="250" rx="30" fill="#fff"/>
+    <rect x="90" y="420" width="470" height="250" rx="30" fill="#fff"/>
+    <rect x="640" y="420" width="470" height="250" rx="30" fill="#fff"/>
+  </g>
+  <g font-family="Inter,Arial,sans-serif" fill="#1d2742">
+    <g transform="translate(125 125)">
+      <circle cx="42" cy="42" r="42" fill="#edf3ff"/><path d="M30 52c6-20 18-31 34-31 9 0 15 3 21 8-8 3-13 11-13 20 0 8 4 15 11 19-8 7-17 10-28 10-13 0-22-9-25-26Z" fill="#2d6bff" opacity=".85"/>
+      <text x="105" y="30" font-size="18" font-weight="700" fill="#2d6bff">AUTÓNOMO</text><text x="105" y="60" font-size="30" font-weight="800">Todo desde el móvil</text>
+      <text x="105" y="92" font-size="16" fill="#69748f">Cliente · activo · fotos · trabajo · cierre</text>
+      <rect x="0" y="125" width="120" height="66" rx="14" fill="#f6f8ff"/><text x="18" y="151" font-size="13" fill="#69748f">Pendientes</text><text x="18" y="178" font-size="25" font-weight="800">04</text>
+      <rect x="136" y="125" width="120" height="66" rx="14" fill="#effbf7"/><text x="154" y="151" font-size="13" fill="#69748f">Hoy</text><text x="154" y="178" font-size="25" font-weight="800" fill="#159f71">07</text>
+      <rect x="272" y="125" width="132" height="66" rx="14" fill="#fff5ec"/><text x="290" y="151" font-size="13" fill="#69748f">Revisiones</text><text x="290" y="178" font-size="25" font-weight="800" fill="#e37427">02</text>
+    </g>
+    <g transform="translate(675 125)">
+      <circle cx="42" cy="42" r="42" fill="#f2efff"/><circle cx="31" cy="38" r="12" fill="#6d4aff"/><circle cx="55" cy="34" r="12" fill="#8b73ff"/><path d="M12 66c5-14 15-21 29-21s24 7 29 21H12Zm27 0c5-15 15-23 30-23 11 0 21 8 26 23H39Z" fill="#6d4aff" opacity=".9"/>
+      <text x="105" y="30" font-size="18" font-weight="700" fill="#6d4aff">PEQUEÑO EQUIPO</text><text x="105" y="60" font-size="30" font-weight="800">Coordinar sin llamadas</text>
+      <text x="105" y="92" font-size="16" fill="#69748f">Asignaciones claras y mismo contexto para todos</text>
+      <path d="M15 155H390" stroke="#edf0f7" stroke-width="12" stroke-linecap="round"/><path d="M15 155H300" stroke="url(#blue)" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="94" cy="155" r="18" fill="#fff" stroke="#2d6bff" stroke-width="6"/><circle cx="205" cy="155" r="18" fill="#fff" stroke="#6d4aff" stroke-width="6"/><circle cx="300" cy="155" r="18" fill="#fff" stroke="#24c58c" stroke-width="6"/>
+      <text x="15" y="195" font-size="13" fill="#69748f">Aviso</text><text x="177" y="195" font-size="13" fill="#69748f">Técnico</text><text x="345" y="195" font-size="13" fill="#69748f">Cierre</text>
+    </g>
+    <g transform="translate(125 455)">
+      <circle cx="42" cy="42" r="42" fill="#eafafd"/><rect x="19" y="30" width="46" height="40" rx="5" fill="#139db9"/><rect x="27" y="19" width="30" height="13" rx="3" fill="#59c8dd"/><path d="M29 41h8m8 0h8M29 52h8m8 0h8" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <text x="105" y="30" font-size="18" font-weight="700" fill="#139db9">INSTALACIONES PROPIAS</text><text x="105" y="60" font-size="30" font-weight="800">Activos bajo control</text>
+      <text x="105" y="92" font-size="16" fill="#69748f">Equipos, incidencias, revisiones y proveedores</text>
+      <rect x="0" y="128" width="404" height="72" rx="16" fill="#f7fbfc"/>
+      <circle cx="30" cy="164" r="9" fill="#24c58c"/><text x="52" y="159" font-size="15" font-weight="700">UTA-02 · Operativa</text><text x="52" y="180" font-size="13" fill="#69748f">Próxima revisión programada</text>
+      <rect x="322" y="147" width="62" height="34" rx="17" fill="#eaf9f3"/><text x="338" y="169" font-size="12" font-weight="700" fill="#159f71">OK</text>
+    </g>
+    <g transform="translate(675 455)">
+      <circle cx="42" cy="42" r="42" fill="#fff0f8"/><path d="M42 17c-17 0-30 13-30 30 0 23 30 47 30 47s30-24 30-47c0-17-13-30-30-30Zm0 42a12 12 0 1 1 0-24 12 12 0 0 1 0 24Z" fill="#d52f99"/>
+      <text x="105" y="30" font-size="18" font-weight="700" fill="#d52f99">MULTISEDE</text><text x="105" y="60" font-size="30" font-weight="800">Cada sede, bien separada</text>
+      <text x="105" y="92" font-size="16" fill="#69748f">Un único control sin mezclar ubicaciones ni históricos</text>
+      <g font-size="13" font-weight="700"><rect x="0" y="128" width="116" height="54" rx="14" fill="#f6f8ff"/><text x="20" y="160">SEDE NORTE</text><rect x="130" y="128" width="116" height="54" rx="14" fill="#effbf7"/><text x="150" y="160">SEDE CENTRO</text><rect x="260" y="128" width="116" height="54" rx="14" fill="#fff5ec"/><text x="280" y="160">SEDE SUR</text></g>
+    </g>
+  </g>
+  <g transform="translate(500 346)">
+    <rect width="200" height="68" rx="34" fill="#fff" stroke="#dfe6fb" stroke-width="2" filter="url(#shadow)"/>
+    <circle cx="35" cy="34" r="16" fill="url(#green)"/><path d="M27 34l6 6 11-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="62" y="29" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#69748f">ISIVOLTPRO</text><text x="62" y="49" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" fill="#1d2742">Un mismo contexto</text>
+  </g>
+</svg>

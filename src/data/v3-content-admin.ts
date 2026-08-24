@@ -47,6 +47,13 @@ export type V3SocialPublication = {
   approvedAt?: string;
 };
 
+export type V3AdminPreview = {
+  media: V3MediaAsset[];
+  entries: V3ContentEntry[];
+  revisions: V3ContentRevision[];
+  social: V3SocialPublication[];
+};
+
 /**
  * Contract for the future authenticated content API.
  *
@@ -81,7 +88,7 @@ export const v3ContentAdminContract = {
   },
 };
 
-export const v3AdminPreview = {
+export const v3AdminPreview: V3AdminPreview = {
   media: [
     {
       id: 'media-home-dashboard',
@@ -103,7 +110,7 @@ export const v3AdminPreview = {
       tags: ['home', 'sectores', 'app'],
       published: false,
     },
-  ] satisfies V3MediaAsset[],
+  ],
   entries: [
     {
       id: 'content-home-hero',
@@ -125,7 +132,7 @@ export const v3AdminPreview = {
       status: 'review',
       updatedAt: '2026-08-24',
     },
-  ] satisfies V3ContentEntry[],
+  ],
   revisions: [
     {
       id: 'revision-home-hero-v3',
@@ -157,7 +164,7 @@ export const v3AdminPreview = {
       createdAt: '2026-08-24T00:08:00+02:00',
       restorable: false,
     },
-  ] satisfies V3ContentRevision[],
+  ],
   social: [
     {
       id: 'social-home-launch',
@@ -169,5 +176,5 @@ export const v3AdminPreview = {
       mediaIds: ['media-field-mobile'],
       scheduledFor: '2026-08-26T10:00:00+02:00',
     },
-  ] satisfies V3SocialPublication[],
+  ],
 };

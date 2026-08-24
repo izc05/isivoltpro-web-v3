@@ -1,0 +1,21 @@
+/* Final mobile-density pass for the approved 3D entry.
+   Keeps the desktop/tablet composition untouched and only tightens <=600px. */
+@media(max-width:600px){
+  .entry3d.entry3d .entry3d__scene{min-height:455px!important;margin-top:-18px!important}
+  .entry3d.entry3d .entry3d__core{top:43%!important;width:240px!important;height:240px!important}
+  .entry3d.entry3d .entry3d__status{top:5%!important}
+  .entry3d.entry3d .entry3d__phone{top:21%!important}
+  .entry3d.entry3d .entry3d__orders{top:20%!important}
+  .entry3d.entry3d .entry3d__analytics{bottom:3%!important}
+  .entry3d.entry3d .entry3d__machines{bottom:11%!important}
+  .entry3d.entry3d .entry3d__qr-card{bottom:1%!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{opacity:.58!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:before,
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.18!important}
+}
+@media(max-width:390px){
+  .entry3d.entry3d .entry3d__scene{min-height:438px!important;margin-top:-20px!important}
+  .entry3d.entry3d .entry3d__core{width:220px!important;height:220px!important;top:42.5%!important}
+  .entry3d.entry3d .entry3d__phone{top:21.5%!important}
+  .entry3d.entry3d .entry3d__orders{top:20.5%!important}
+}

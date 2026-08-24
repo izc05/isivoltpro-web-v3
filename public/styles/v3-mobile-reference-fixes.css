@@ -1,0 +1,70 @@
+/* Mobile-only visual corrections discovered from real Chromium screenshots. */
+@media (max-width: 430px) {
+  .saas-home .saas-shell { width: calc(100% - 24px); max-width: 100%; }
+  .saas-home .saas-hero__grid,
+  .saas-home .saas-hero__copy,
+  .saas-home .saas-stage,
+  .saas-home .saas-trust,
+  .saas-home .saas-actions { min-width: 0; max-width: 100%; }
+
+  .saas-home .saas-badge {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    font-size: 10px;
+  }
+
+  .saas-home .saas-hero__copy h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(40px, 10.5vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -.058em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .saas-home .saas-hero__lead {
+    width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .saas-home .saas-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .saas-home .saas-actions .btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .saas-home .saas-trust {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .saas-home .saas-trust__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .saas-home .saas-trust__row span {
+    min-width: 0;
+    overflow-wrap: normal;
+  }
+}
+
+@media (max-width: 370px) {
+  .saas-home .saas-hero__copy h1 { font-size: 39px; }
+  .saas-home .saas-trust__row { grid-template-columns: 1fr; }
+}

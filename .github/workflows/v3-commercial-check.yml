@@ -120,8 +120,11 @@ jobs:
             fi
           done
 
-          if grep -RniE 'posthog|sentry\.io|PUBLIC_POSTHOG_KEY|PUBLIC_SENTRY_DSN' dist --include='*.html' --include='*.js' --include='*.css'; then
-            echo "::error::La V3 preproducción contiene telemetría externa aunque debe permanecer apagada hasta cerrar privacidad/consentimiento."
+          # Detecta telemetría técnicamente activa o preparada para ejecución en el build,
+          # sin confundir menciones editoriales transparentes a PostHog/Sentry con código cargado.
+          telemetry_pattern='PUBLIC_POSTHOG_KEY|PUBLIC_SENTRY_DSN|sentry\.io|posthog-js|@sentry/|cdn\.posthog\.com|eu\.posthog\.com|us\.posthog\.com|app\.posthog\.com'
+          if grep -RniE "$telemetry_pattern" dist --include='*.html' --include='*.js' --include='*.css'; then
+            echo "::error::La V3 preproducción contiene integración técnica de telemetría externa aunque debe permanecer apagada hasta cerrar privacidad/consentimiento."
             exit 1
           fi
 

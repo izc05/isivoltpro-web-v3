@@ -1,4 +1,4 @@
-import { publishedV3BlogPosts } from '../data/v3-blog';
+import { v3BlogFeed } from '../data/v3-blog-feed';
 
 export const prerender = true;
 
@@ -43,7 +43,7 @@ const routes = [
   'recursos/mantenimiento-preventivo-pequena-empresa/',
   'recursos/piloto-mantenimiento-digital/',
   'blog/',
-  ...publishedV3BlogPosts.map((post) => `blog/${post.slug}/`),
+  ...v3BlogFeed.map((post) => `blog/${post.slug}/`),
   'faq/',
   'empresa/',
   'ecosistema/',

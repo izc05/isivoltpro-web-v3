@@ -101,6 +101,15 @@ export const v3EditorialSources: V3EditorialSource[] = [
     topics: ['edificios', 'salubridad', 'energia', 'incendios', 'accesibilidad'],
     note: 'Usar para documentos y actualizaciones del CTE; evitar convertir recomendaciones o documentos de apoyo en obligaciones que no sean legales.',
   },
+  {
+    id: 'internal',
+    name: 'Conocimiento técnico propio IsiVoltPro',
+    domain: 'isivoltpro.com',
+    authority: 'internal',
+    jurisdiction: 'espana',
+    topics: ['operativa', 'casos-practicos', 'curiosidades', 'mantenimiento'],
+    note: 'Contenido evergreen o práctico redactado por IsiVoltPro. Si contiene afirmaciones normativas o temporales debe añadir además evidencia externa verificable.',
+  },
 ];
 
 export const v3DailyEditorialCadence: V3DailyEditorialSlot[] = [

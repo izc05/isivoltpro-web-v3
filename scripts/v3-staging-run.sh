@@ -8,6 +8,7 @@ STATE_DIR="${STAGING_STATE_DIR:-.staging-runtime}"
 PID_FILE="$STATE_DIR/preview.pid"
 LOG_FILE="$STATE_DIR/preview.log"
 ORIGIN="http://${STAGING_HOST}:${STAGING_PORT}"
+ASTRO_BIN="./node_modules/.bin/astro"
 
 fail(){ printf '\n[staging] ERROR: %s\n' "$1" >&2; exit 1; }
 info(){ printf '[staging] %s\n' "$1"; }
@@ -15,7 +16,8 @@ info(){ printf '[staging] %s\n' "$1"; }
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || fail "ejecuta este script dentro del repositorio"
 cd "$repo_root"
 
-[[ -d dist ]] || fail "no existe dist/. Ejecuta primero: bash scripts/v3-staging-prepare.sh"
+[[ -d dist ]] || fail "no existe dist/. Ejecuta primero: npm run staging:prepare"
+[[ -x "$ASTRO_BIN" ]] || fail "no existe el binario local de Astro. Ejecuta primero: npm run staging:prepare"
 mkdir -p "$STATE_DIR"
 
 if [[ -f "$PID_FILE" ]]; then
@@ -32,7 +34,7 @@ fi
 
 info "Arrancando preview en $ORIGIN"
 : > "$LOG_FILE"
-nohup npm run preview -- --host "$STAGING_HOST" --port "$STAGING_PORT" >>"$LOG_FILE" 2>&1 &
+nohup "$ASTRO_BIN" preview --host "$STAGING_HOST" --port "$STAGING_PORT" >>"$LOG_FILE" 2>&1 &
 pid=$!
 echo "$pid" > "$PID_FILE"
 

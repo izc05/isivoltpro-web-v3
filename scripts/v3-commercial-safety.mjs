@@ -15,6 +15,10 @@ const deepVisualRoutes = [
   'modulos/inspecciones', 'modulos/inventario', 'modulos/documentacion', 'modulos/avisos-incidencias',
   'sectores/autonomos-tecnicos', 'sectores/empresas-mantenedoras', 'sectores/instalaciones-propias',
   'sectores/climatizacion-frio', 'sectores/instalaciones-electricas', 'sectores/multisede',
+  'recursos/orden-trabajo-util', 'recursos/mantenimiento-preventivo-pequena-empresa',
+  'recursos/qr-activos-mantenimiento', 'recursos/organizar-activos-instalaciones',
+  'recursos/dejar-whatsapp-excel-mantenimiento', 'recursos/organizar-avisos-mantenimiento',
+  'recursos/cerrar-ot-historico-util', 'recursos/piloto-mantenimiento-digital',
 ];
 
 const sitemapRoutes = routes.filter((route) => route !== '');

@@ -1,3 +1,5 @@
+import { publishedV3BlogPosts } from '../data/v3-blog';
+
 export const prerender = true;
 
 const routes = [
@@ -40,6 +42,8 @@ const routes = [
   'recursos/qr-activos-mantenimiento/',
   'recursos/mantenimiento-preventivo-pequena-empresa/',
   'recursos/piloto-mantenimiento-digital/',
+  'blog/',
+  ...publishedV3BlogPosts.map((post) => `blog/${post.slug}/`),
   'faq/',
   'empresa/',
   'ecosistema/',

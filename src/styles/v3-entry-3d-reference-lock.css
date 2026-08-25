@@ -1,2 +1,93 @@
 /* Reference-lock pass: when WebGL is active, the physical prism is the visual source of truth. */
-.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{opacity:.32!important;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(96,122,255,.07) 45%,rgba(237,92,204,.045) 72%,rgba(54,207,220,.055))!important;box-shadow:inset 10px 9px 24px rgba(255,255,255,.34),0 22px 48px rgba(70,78,184,.07),0 0 26px rgba(75,124,255,.055)!important}.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:before{opacity:.34!important}.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{opacity:.18!important}.entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.20!important}.entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.14!important}.entry3d.entry3d.has-webgl-prism .entry3d__canvas{filter:drop-shadow(0 28px 38px rgba(76,86,214,.22)) drop-shadow(0 0 20px rgba(78,181,255,.10))}.entry3d.entry3d.has-webgl-prism .entry3d__pedestal{box-shadow:0 26px 56px rgba(54,78,157,.16),0 0 42px rgba(56,202,255,.22),0 0 58px rgba(125,83,255,.18) inset,0 0 74px rgba(237,82,204,.10) inset!important}@media(max-width:600px){.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{opacity:.42!important}.entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.15!important}.entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.10!important}}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{
+  opacity:.30!important;
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.22) 0 7%,rgba(255,255,255,.035) 17% 38%,rgba(91,129,255,.085) 49%,rgba(255,255,255,.025) 61%,rgba(237,92,204,.04) 73%,rgba(54,207,220,.07) 100%)!important;
+  background-size:180% 180%!important;
+  background-position:18% 22%!important;
+  border-color:rgba(255,255,255,.58)!important;
+  box-shadow:
+    inset 10px 9px 24px rgba(255,255,255,.38),
+    inset -9px -11px 28px rgba(70,104,230,.08),
+    inset 0 0 0 1px rgba(115,158,255,.10),
+    0 24px 54px rgba(70,78,184,.08),
+    0 0 30px rgba(75,124,255,.06)!important;
+  filter:saturate(1.04) contrast(1.02);
+  animation:entry-glass-specular 4.8s ease-in-out infinite alternate;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:before{
+  opacity:.42!important;
+  background:
+    linear-gradient(132deg,rgba(255,255,255,.48) 0 3%,rgba(255,255,255,.08) 12%,transparent 28%),
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,.34),transparent 24%),
+    radial-gradient(circle at 77% 78%,rgba(89,153,255,.14),transparent 28%)!important;
+  mix-blend-mode:screen;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after{
+  content:'';
+  position:absolute;
+  inset:9% 11% 11% 12%;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.48;
+  background:
+    linear-gradient(105deg,transparent 30%,rgba(255,255,255,.38) 45%,rgba(189,226,255,.16) 50%,transparent 61%),
+    radial-gradient(ellipse at 50% 94%,rgba(73,195,255,.16),transparent 47%);
+  background-size:220% 100%,100% 100%;
+  background-position:-90% 0,0 0;
+  filter:blur(.15px);
+  mix-blend-mode:screen;
+  animation:entry-glass-sweep 5.6s cubic-bezier(.45,.05,.22,1) infinite;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{opacity:.16!important}
+.entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.22!important;filter:blur(12px)}
+.entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.16!important;filter:blur(18px)}
+.entry3d.entry3d.has-webgl-prism .entry3d__canvas{
+  filter:
+    drop-shadow(0 30px 42px rgba(76,86,214,.22))
+    drop-shadow(0 0 23px rgba(78,181,255,.11))
+    drop-shadow(0 8px 11px rgba(255,255,255,.08));
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__pedestal{
+  box-shadow:
+    0 28px 58px rgba(54,78,157,.15),
+    0 0 38px rgba(56,202,255,.20),
+    0 0 54px rgba(125,83,255,.17) inset,
+    0 0 70px rgba(237,82,204,.085) inset!important;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after{
+  content:'';
+  position:absolute;
+  left:12%;right:12%;top:-12px;height:22px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(ellipse,rgba(165,232,255,.34),rgba(89,142,255,.10) 45%,transparent 72%);
+  filter:blur(6px);
+  opacity:.65;
+  animation:entry-caustic-breathe 3.8s ease-in-out infinite alternate;
+}
+@keyframes entry-glass-specular{
+  0%{background-position:18% 22%;filter:saturate(1.02) contrast(1.01)}
+  100%{background-position:82% 66%;filter:saturate(1.07) contrast(1.025)}
+}
+@keyframes entry-glass-sweep{
+  0%,16%{background-position:-90% 0,0 0;opacity:.24}
+  52%{opacity:.52}
+  82%,100%{background-position:140% 0,0 0;opacity:.28}
+}
+@keyframes entry-caustic-breathe{
+  from{transform:scaleX(.94);opacity:.48}
+  to{transform:scaleX(1.05);opacity:.72}
+}
+@media(max-width:600px){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{opacity:.38!important;animation-duration:6.2s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after{opacity:.34;animation-duration:7.2s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.16!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.11!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after{opacity:.48}
+}
+@media(prefers-reduced-motion:reduce){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell,
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after,
+  .entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after{animation:none!important}
+}

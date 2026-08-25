@@ -22,10 +22,13 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
-      - name: Validar scripts de QA
+      - name: Validar scripts de QA y staging
         run: |
           node --check scripts/v3-staging-smoke.mjs
           node --check scripts/v3-link-audit.mjs
+          bash -n scripts/v3-staging-prepare.sh
+          bash -n scripts/v3-staging-run.sh
+          bash -n scripts/v3-staging-stop.sh
       - run: npm run check
       - name: Auditar enlaces internos comerciales
         env:

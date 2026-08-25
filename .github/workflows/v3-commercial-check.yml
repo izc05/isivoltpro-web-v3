@@ -62,6 +62,8 @@ jobs:
             dist/recursos/cerrar-ot-historico-util/index.html
             dist/recursos/piloto-mantenimiento-digital/index.html
             dist/recursos/orden-trabajo-util/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
             dist/faq/index.html
             dist/contacto/index.html
             dist/sitemap.xml
@@ -103,6 +105,8 @@ jobs:
             dist/de-whatsapp-excel-a-isivoltpro/index.html
             dist/precios/index.html
             dist/recursos/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
             dist/faq/index.html
             dist/contacto/index.html
           )
@@ -121,6 +125,8 @@ jobs:
             dist/de-whatsapp-excel-a-isivoltpro/index.html
             dist/precios/index.html
             dist/recursos/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
             dist/faq/index.html
             dist/contacto/index.html
           )
@@ -166,6 +172,14 @@ jobs:
             echo "::error::Falta breadcrumb estructurado en una landing profunda de módulos."
             exit 1
           fi
+          if ! grep -q 'BreadcrumbList' dist/blog/historico-util-empieza-al-cerrar-ot/index.html; then
+            echo "::error::Falta breadcrumb estructurado en una entrada profunda del blog."
+            exit 1
+          fi
+          if ! grep -q 'BlogPosting' dist/blog/historico-util-empieza-al-cerrar-ot/index.html; then
+            echo "::error::Falta schema BlogPosting en la entrada editorial de referencia."
+            exit 1
+          fi
 
           sitemap_required=(
             'producto/' 'soluciones/' 'app-mantenimiento/' 'aplicaciones/' 'apps-especializadas/'
@@ -173,7 +187,7 @@ jobs:
             'modulos/ordenes-de-trabajo/' 'sectores/autonomos-tecnicos/'
             'recursos/dejar-whatsapp-excel-mantenimiento/' 'recursos/organizar-avisos-mantenimiento/'
             'recursos/cerrar-ot-historico-util/' 'recursos/piloto-mantenimiento-digital/'
-            'recursos/orden-trabajo-util/' 'faq/'
+            'recursos/orden-trabajo-util/' 'blog/' 'blog/historico-util-empieza-al-cerrar-ot/' 'faq/'
           )
           for route in "${sitemap_required[@]}"; do
             if ! grep -Fq "$route" dist/sitemap.xml; then
@@ -183,7 +197,7 @@ jobs:
           done
 
           sitemap_forbidden=(
-            '/lab-3d' '/acceso/</loc>' '/mantenimiento/</loc>' '/privacidad/</loc>' '/cookies/</loc>' '/aviso-legal/</loc>'
+            '/lab-3d' '/acceso/</loc>' '/mantenimiento/</loc>' '/privacidad/</loc>' '/cookies/</loc>' '/aviso-legal/</loc>' '/gestion-contenido/'
           )
           for route in "${sitemap_forbidden[@]}"; do
             if grep -Fq "$route" dist/sitemap.xml; then
@@ -192,7 +206,7 @@ jobs:
             fi
           done
 
-          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/apps-especializadas/index.html dist/alcance/index.html dist/demo/index.html dist/piloto/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html; do
+          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/apps-especializadas/index.html dist/alcance/index.html dist/demo/index.html dist/piloto/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html dist/blog/index.html dist/blog/historico-util-empieza-al-cerrar-ot/index.html; do
             if ! grep -q 'property="og:image"' "$page"; then
               echo "::error::Falta og:image en $page"
               exit 1
@@ -216,10 +230,11 @@ jobs:
             exit 1
           fi
 
-          # Presupuesto deliberadamente acotado: 3.2 MiB base + 64 KiB para el
-          # workspace visual de soluciones del día a día. Si vuelve a crecer, debe revisarse.
+          # Presupuesto deliberadamente acotado: base comercial + workspace visual +
+          # hasta 128 KiB adicionales para el nuevo blog/editorial HTML. No se aceptan
+          # nuevos binarios pesados para justificar este margen.
           dist_kb=$(du -sk dist | cut -f1)
-          max_kb=3264
+          max_kb=3392
           if (( dist_kb > max_kb )); then
             echo "::error::El build V3 ocupa ${dist_kb} KiB y supera el presupuesto de ${max_kb} KiB."
             exit 1
@@ -229,6 +244,7 @@ jobs:
           echo "Enlaces internos comerciales: OK"
           echo "Ruta heredada de mantenimiento: OK"
           echo "Breadcrumbs y skip link: OK"
+          echo "Blog y schema editorial: OK"
           echo "Sitemap comercial limpio: OK"
           echo "Preview social: OK"
           echo "CSP y fuentes locales: OK"

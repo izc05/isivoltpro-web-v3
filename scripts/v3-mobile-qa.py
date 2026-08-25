@@ -176,6 +176,10 @@ def capture_route(browser, route: str, name: str, viewport_name: str, width: int
     render_full_page(page, name, width)
     audit_layout(page, name, width)
     audit_mobile_footer(page, name, width)
+    # Audits may scroll to off-screen controls (notably the compact footer). Reset
+    # deterministically so every *-top.png really represents the page top.
+    page.evaluate("window.scrollTo(0, 0)")
+    page.wait_for_timeout(140)
     page.screenshot(path=str(OUT / f"{name}-{viewport_name}-top.png"), full_page=False)
     if width == 390 and name in {"home", "contacto", "app-mantenimiento", "apps-especializadas", "alcance", "experiencia", "demo", "selector", "piloto", "implantacion", "seguridad", "transicion-whatsapp-excel"}:
         full_screenshot(page, OUT / f"{name}-390-full.png")

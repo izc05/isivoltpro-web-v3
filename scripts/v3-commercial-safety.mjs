@@ -6,7 +6,7 @@ const dist = process.argv[2] || 'dist';
 const routes = [
   '', 'producto', 'soluciones', 'app-mantenimiento', 'aplicaciones', 'apps-especializadas',
   'alcance', 'experiencia', 'demo', 'selector', 'piloto', 'implantacion', 'seguridad',
-  'de-whatsapp-excel-a-isivoltpro', 'sectores', 'precios', 'recursos', 'empresa', 'ecosistema',
+  'de-whatsapp-excel-a-isivoltpro', 'sectores', 'precios', 'recursos', 'blog', 'empresa', 'ecosistema',
   'faq', 'contacto',
 ];
 
@@ -19,6 +19,10 @@ const deepVisualRoutes = [
   'recursos/qr-activos-mantenimiento', 'recursos/organizar-activos-instalaciones',
   'recursos/dejar-whatsapp-excel-mantenimiento', 'recursos/organizar-avisos-mantenimiento',
   'recursos/cerrar-ot-historico-util', 'recursos/piloto-mantenimiento-digital',
+];
+
+const sourcedEditorialRoutes = [
+  'blog/agregacion-independiente-flexibilidad-electrica-instalaciones',
 ];
 
 const sitemapRoutes = routes.filter((route) => route !== '');
@@ -49,6 +53,19 @@ for (const route of deepVisualRoutes) {
   if (!html.includes('property="og:image"')) failures.push(`${label(route)} no contiene og:image`);
 }
 
+for (const route of sourcedEditorialRoutes) {
+  const file = htmlPath(route);
+  if (!existsSync(file)) { failures.push(`${label(route)} no se ha construido`); continue; }
+  const html = readFileSync(file, 'utf8');
+  if (!html.includes('Fuente verificada')) failures.push(`${label(route)} no muestra la fuente al lector`);
+  if (!html.includes('Ministerio para la Transición Ecológica y el Reto Demográfico')) failures.push(`${label(route)} ha perdido el nombre de la fuente oficial`);
+  if (!html.includes('https://www.miteco.gob.es/es/prensa/ultimas-noticias/2026/agosto/el-miteco-avanza-en-la-implantacion-del-agregador-independiente-.html')) failures.push(`${label(route)} ha perdido el enlace a la fuente original`);
+  if (!html.includes('consulta')) failures.push(`${label(route)} no conserva el estado regulatorio de consulta`);
+  if (!html.includes('"@type":"BlogPosting"')) failures.push(`${label(route)} no contiene BlogPosting estructurado`);
+  if (!html.includes('"citation":"https://www.miteco.gob.es/')) failures.push(`${label(route)} no declara citation en los datos estructurados`);
+  if (!html.includes('Saltar al contenido')) failures.push(`${label(route)} no contiene skip link accesible`);
+}
+
 const home = readFileSync(htmlPath(''), 'utf8');
 if (!home.includes('entry3d-canvas')) failures.push('Home ha perdido la entrada 3D aprobada');
 
@@ -58,6 +75,7 @@ if (!existsSync(sitemapPath)) {
 } else {
   const sitemap = readFileSync(sitemapPath, 'utf8');
   for (const route of sitemapRoutes) if (!sitemap.includes(`${route}/`)) failures.push(`/${route}/ falta en sitemap.xml`);
+  for (const route of sourcedEditorialRoutes) if (!sitemap.includes(`${route}/`)) failures.push(`/${route}/ falta en sitemap.xml`);
   for (const forbidden of ['/lab-3d', '/acceso/</loc>', '/mantenimiento/</loc>', '/privacidad/</loc>', '/cookies/</loc>', '/aviso-legal/</loc>', '/gestion-contenido/</loc>']) {
     if (sitemap.includes(forbidden)) failures.push(`Ruta no indexable presente en sitemap.xml: ${forbidden}`);
   }
@@ -70,10 +88,17 @@ if (existsSync(adminPath)) {
   if (!admin.includes('Vista administrativa bloqueada por defecto')) failures.push('/gestion-contenido/ debe permanecer bloqueada por defecto');
 }
 
+const editorialAdminPath = join(dist, 'gestion-contenido', 'blog', 'index.html');
+if (existsSync(editorialAdminPath)) {
+  const editorialAdmin = readFileSync(editorialAdminPath, 'utf8');
+  if (!editorialAdmin.includes('noindex,nofollow')) failures.push('/gestion-contenido/blog/ debe permanecer noindex,nofollow');
+  if (!editorialAdmin.includes('Publicación externa bloqueada')) failures.push('/gestion-contenido/blog/ debe mostrar el bloqueo de publicación externa');
+}
+
 if (failures.length) {
   console.error('\nSeguridad comercial V3: FALLÓ');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + sitemap + gestor bloqueado + sin heroes orbitales legacy`);
+console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + ${sourcedEditorialRoutes.length} artículo(s) con fuente + sitemap + gestor bloqueado + sin heroes orbitales legacy`);

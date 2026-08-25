@@ -10,32 +10,43 @@ Levantar una copia temporal de la Web V3 comercial con:
 - commit exacto del PR #1;
 - build limpio y safety gates;
 - puerto local independiente;
+- proceso de preview con PID/log propios;
 - hostname de Cloudflare Tunnel dedicado exclusivamente a staging;
 - smoke test HTTP sobre rutas comerciales críticas.
 
-## Ruta recomendada: preparación en un comando
+## Ruta recomendada: tres comandos
 
 En un checkout limpio de la rama segura:
 
 ```bash
 cd ~/staging/isivoltpro-web-v3-staging
-chmod +x scripts/v3-staging-prepare.sh
 EXPECTED_SHA="SHA-DEL-HEAD-VALIDADO" \
 PUBLIC_SITE_URL="https://HOSTNAME-DE-STAGING" \
 PUBLIC_BASE_PATH="/" \
 STAGING_PORT="4322" \
-./scripts/v3-staging-prepare.sh
+npm run staging:prepare
+
+STAGING_PORT="4322" STAGING_BASE_PATH="/" npm run staging:start
+
+# Cuando termine la revisión:
+npm run staging:stop
 ```
 
-El script se niega a continuar si:
+`staging:prepare` se niega a continuar si la rama es incorrecta, existen cambios locales, el SHA no coincide, Node es anterior a 22 o falla cualquier gate de build/seguridad.
 
-- no estás en `feat/v3-smb-commercial-redesign`;
-- existen cambios locales sin commit;
-- el SHA no coincide con `EXPECTED_SHA` cuando se proporciona;
-- Node es anterior a la versión 22;
-- falla la instalación, el build o los safety gates.
+`staging:start`:
 
-No contiene tokens, credenciales ni hostnames de producción.
+- exige un `dist/` ya construido;
+- escucha solo en `127.0.0.1` por defecto;
+- rechaza un puerto ocupado;
+- guarda PID y log en `.staging-runtime/`;
+- espera a que el servidor responda;
+- ejecuta automáticamente `smoke:staging`;
+- se detiene y limpia el PID si el arranque o el smoke test fallan.
+
+`staging:stop` termina únicamente el proceso cuyo PID fue creado por este staging y limpia su estado local.
+
+Los archivos de runtime están ignorados por Git y ningún script contiene tokens, credenciales ni hostnames de producción.
 
 ## 1. Preparar un directorio separado
 
@@ -71,38 +82,48 @@ export PUBLIC_SITE_URL="https://HOSTNAME-DE-STAGING"
 export PUBLIC_BASE_PATH="/"
 export EXPECTED_SHA="SHA-DEL-HEAD-VALIDADO"
 export STAGING_PORT="4322"
-./scripts/v3-staging-prepare.sh
+npm run staging:prepare
 ```
 
 El script ejecuta `npm install --no-audit --no-fund` y `npm run check`.
 
-## 4. Levantar el preview
-
-El preview debe escuchar únicamente en localhost para que el acceso exterior pase por Cloudflare Tunnel:
+## 4. Levantar el preview y validar automáticamente
 
 ```bash
-PUBLIC_SITE_URL="https://HOSTNAME-DE-STAGING" \
-PUBLIC_BASE_PATH="/" \
-npm run preview -- --host 127.0.0.1 --port 4322
-```
-
-No usar `0.0.0.0` para este staging salvo que exista una necesidad de red local deliberada y controlada.
-
-## 5. Ejecutar smoke test local
-
-En otra terminal:
-
-```bash
-cd ~/staging/isivoltpro-web-v3-staging
-STAGING_ORIGIN="http://127.0.0.1:4322" \
+STAGING_PORT="4322" \
 STAGING_BASE_PATH="/" \
-npm run smoke:staging
+npm run staging:start
 ```
 
-Resultado esperado:
+Resultado esperado tras el arranque:
 
 ```text
 Smoke test V3: OK (10 rutas + sitemap)
+[staging] STAGING LOCAL ACTIVO
+```
+
+El preview escucha únicamente en `127.0.0.1` para que el acceso exterior pase por Cloudflare Tunnel.
+
+Para revisar el log:
+
+```bash
+tail -f .staging-runtime/preview.log
+```
+
+Para detenerlo:
+
+```bash
+npm run staging:stop
+```
+
+## 5. Smoke test manual opcional
+
+Si se quiere repetir manualmente el smoke test local:
+
+```bash
+STAGING_ORIGIN="http://127.0.0.1:4322" \
+STAGING_BASE_PATH="/" \
+npm run smoke:staging
 ```
 
 Comprueba Home, Producto, Módulos, landings críticas, Planes, Recursos, FAQ, Contacto, sitemap, CSP, ausencia de Three.js en rutas comerciales y ausencia de copy interno.

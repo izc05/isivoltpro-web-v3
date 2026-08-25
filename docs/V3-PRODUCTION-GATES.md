@@ -2,6 +2,23 @@
 
 Este documento define cuándo la Web V3 puede avanzar de fase y, sobre todo, cuándo **NO** debe avanzar. Su objetivo es evitar que “seguir desarrollando” se convierta en añadir funciones, claims o integraciones sin una necesidad comercial o una validación real.
 
+## Checkpoint de cierre frontend
+
+**Estado actual:** CÓDIGO + QA VISUAL CERRADOS sobre `feat/v3-smb-commercial-redesign`.
+
+Checkpoint validado: `7b13b0d380161aea16ec5633416208194ccaaeb7`.
+
+Evidencia del gate:
+- CI comercial: verde.
+- Preview móvil: verde.
+- QA móvil Chromium: verde en 360 / 390 / 430 px.
+- QA tablet/escritorio Chromium: verde en 768 / 1024 / 1280 / 1440 px.
+- QA aislado del gestor de contenido: verde, manteniendo el preview administrativo bloqueado por defecto.
+- Capturas reales revisadas tras corregir la generación determinista de screenshots `*-top.png`.
+- Línea visual revisada en Home, Producto, Módulos, Apps especializadas, Sectores, Planes, Recursos, Empresa, Contacto, Demo, Selector, Experiencia, Implantación, Piloto, Alcance y Seguridad.
+
+Este checkpoint **no significa “lista para producción”**. Significa que no hay motivo técnico o visual para seguir inflando el frontend. Los bloqueos restantes son staging, legal/privacidad, backend/canal comercial, oferta final y destino de acceso.
+
 ## Principios permanentes
 
 1. **Público objetivo:** autónomos, pequeños equipos, empresas mantenedoras y negocios con instalaciones propias.
@@ -62,7 +79,7 @@ Criterios:
 
 ## Fase 3 — QA móvil real
 
-**Estado:** CERRADA en el núcleo; se vuelve a ejecutar con cada cambio.
+**Estado:** CERRADA; se vuelve a ejecutar con cada cambio.
 
 Viewports obligatorios:
 - 360 px.
@@ -73,9 +90,11 @@ Comprobaciones:
 - sin scroll horizontal.
 - controles principales >= 43 px.
 - menú móvil dentro del viewport.
+- footer móvil compacto y accesible.
 - recorrido completo para activar contenido `reveal`.
 - capturas reales Chromium.
 - revisión visual de páginas clave.
+- screenshots superiores generados tras forzar `scrollY=0` para evitar falsos positivos de revisión.
 
 **Contraindicación para avanzar:** una ruta comercial representativa falla geometría o presenta un defecto visual relevante aunque el test automático sea verde.
 
@@ -83,7 +102,7 @@ Comprobaciones:
 
 ## Fase 4 — QA tablet y escritorio real
 
-**Estado:** EN CURSO.
+**Estado:** CERRADA.
 
 Viewports obligatorios:
 - 768 px.
@@ -91,30 +110,32 @@ Viewports obligatorios:
 - 1280 px.
 - 1440 px.
 
-Comprobaciones:
+Comprobaciones superadas:
 - sin overflow horizontal.
 - navegación móvil/desktop correcta según breakpoint.
 - botones y CTA legibles.
-- heroes, grids y mockups sin solapes.
-- capturas de Home, App Mantenimiento, Demo y Planes.
+- heroes, grids y mockups sin solapes relevantes.
+- capturas de fidelidad reales revisadas.
+- workflow Chromium verde.
 
-**Gate de salida:** workflow Chromium verde + revisión visual de artefactos.
+**Gate de salida:** SUPERADO.
 
-**Contraindicación para avanzar:** confiar solo en CSS o en el build sin revisar navegador real.
+**Contraindicación para reabrir:** confiar solo en CSS o en el build sin revisar navegador real tras un cambio visual importante.
 
 ---
 
 ## Fase 5 — Conversión y confianza
 
-**Estado:** EN CURSO.
+**Estado:** CERRADA EN FRONTEND / copy comercial sujeto a datos definitivos.
 
-Debe cerrar:
+Cerrado:
 - recorrido coherente Home → Soluciones/App → Demo → Piloto → Implantación.
-- CTA de “demo” no debe terminar en un formulario bloqueado.
+- CTA de demo conduce a experiencias útiles sin fingir envío de formulario.
 - alcance y límites visibles.
 - apps especializadas con estado de madurez.
 - FAQ alineada con producto, seguridad, piloto e implantación.
-- no usar logos, testimonios o métricas ficticias como prueba social.
+- no se usan logos, testimonios o métricas ficticias como prueba social.
+- dashboard, selector, QR, demo 60 s y timeline se presentan como demostraciones cuando corresponde.
 
 Señales de confianza permitidas:
 - transparencia de alcance.
@@ -182,31 +203,34 @@ La Web V3 no implementa autenticación paralela.
 
 ## Fase 9 — Gate PRE-MINI-PC
 
-**Estado:** BLOQUEADO.
+**Estado:** SUPERADO PARA STAGING FRONTEND.
 
-No se despliega en Mini PC hasta que estén cerradas:
+Cerradas:
 - Fase 1 arquitectura.
 - Fase 2 integridad técnica.
 - Fase 3 móvil.
 - Fase 4 tablet/escritorio.
-- Fase 5 conversión/confianza.
-- revisión de copy y rutas indexables.
+- Fase 5 conversión/confianza de frontend.
+- revisión de copy y rutas indexables en el estado de preproducción actual.
 
-Las fases 6–8 pueden seguir con elementos deshabilitados/provisionales únicamente si esa condición es visible, segura y no impide revisar el frontend; **no permiten declarar la web lista para producción**.
+Las fases 6–8 siguen bloqueadas, pero pueden permanecer con elementos deshabilitados/provisionales durante staging siempre que esa condición sea visible y segura. **No permiten declarar la web lista para producción.**
 
 ---
 
 ## Fase 10 — Staging Mini PC
 
-**Estado:** NO INICIAR TODAVÍA.
+**Estado:** LISTA PARA INICIAR; PENDIENTE DE INFRAESTRUCTURA/STAGING REAL.
 
-Cuando el gate PRE-MINI-PC esté aprobado:
-- checkout separado de la rama.
+Siguiente bloque válido de trabajo:
+- checkout separado de `feat/v3-smb-commercial-redesign`.
 - puerto/hostname de staging independiente.
 - no sustituir la web estable.
-- `npm run smoke:staging`.
+- ejecutar `npm run smoke:staging`.
 - revisar Home y rutas comerciales en dispositivos reales.
-- corregir cualquier diferencia de infraestructura.
+- revisar la zona administrativa solo en QA aislado, nunca habilitada por defecto.
+- corregir únicamente diferencias reales de infraestructura o dispositivo.
+
+No volver a añadir páginas o rediseños generales antes de staging salvo regresión confirmada.
 
 ---
 
@@ -225,4 +249,4 @@ Antes de mergear a `main`:
 
 ## Regla de parada
 
-Si el trabajo pendiente depende exclusivamente de una decisión externa (datos jurídicos, precios, backend, URL de plataforma o consentimiento), **no inventar una solución para aparentar avance**. Documentar el bloqueo y continuar únicamente con QA, contenido verificable o deuda técnica que realmente mejore la V3.
+Si el trabajo pendiente depende exclusivamente de una decisión externa (datos jurídicos, precios, backend, URL de plataforma o consentimiento), **no inventar una solución para aparentar avance**. Documentar el bloqueo y continuar únicamente con staging, QA, contenido verificable o deuda técnica que realmente mejore la V3.

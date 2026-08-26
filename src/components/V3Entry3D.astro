@@ -102,16 +102,16 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     const prismMaterial = new THREE.MeshPhysicalMaterial({
       color: 0xa9b6ff,
       transparent: true,
-      opacity: .30,
-      transmission: .50,
-      thickness: .76,
-      roughness: .10,
+      opacity: .26,
+      transmission: .58,
+      thickness: .82,
+      roughness: .085,
       metalness: 0,
-      ior: 1.28,
-      clearcoat: .62,
-      clearcoatRoughness: .06,
+      ior: 1.31,
+      clearcoat: .68,
+      clearcoatRoughness: .045,
       emissive: 0x4258b8,
-      emissiveIntensity: .09,
+      emissiveIntensity: .065,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
@@ -123,17 +123,17 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
 
     const middleGeometry = new RoundedBoxGeometry(2.08, 2.08, 1.60, 6, .14);
     const middleMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xb6b7ff,
+      color: 0xc4cbff,
       transparent: true,
-      opacity: .15,
-      transmission: .52,
-      thickness: .54,
-      roughness: .085,
-      ior: 1.24,
-      clearcoat: .48,
-      clearcoatRoughness: .05,
-      emissive: 0x6a55cc,
-      emissiveIntensity: .055,
+      opacity: .11,
+      transmission: .62,
+      thickness: .58,
+      roughness: .07,
+      ior: 1.26,
+      clearcoat: .54,
+      clearcoatRoughness: .04,
+      emissive: 0x6158c7,
+      emissiveIntensity: .038,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
@@ -145,17 +145,17 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
 
     const innerGeometry = new RoundedBoxGeometry(1.80, 1.80, 1.40, 6, .12);
     const innerMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xc7d2ff,
+      color: 0xd8e2ff,
       transparent: true,
-      opacity: .11,
-      transmission: .58,
-      thickness: .42,
-      roughness: .07,
-      ior: 1.22,
-      clearcoat: .44,
-      clearcoatRoughness: .05,
-      emissive: 0x6b62cf,
-      emissiveIntensity: .045,
+      opacity: .075,
+      transmission: .68,
+      thickness: .44,
+      roughness: .055,
+      ior: 1.23,
+      clearcoat: .48,
+      clearcoatRoughness: .04,
+      emissive: 0x746bd0,
+      emissiveIntensity: .025,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
@@ -167,12 +167,68 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
 
     const prismEdges = new THREE.LineSegments(
       new THREE.EdgesGeometry(prismGeometry, 28),
-      new THREE.LineBasicMaterial({ color: 0xe7efff, transparent: true, opacity: .29 })
+      new THREE.LineBasicMaterial({ color: 0xf2f7ff, transparent: true, opacity: .34 })
     );
     prismEdges.position.copy(prism.position);
     prismEdges.rotation.copy(prism.rotation);
-    prismEdges.renderOrder = 3;
+    prismEdges.renderOrder = 5;
     group.add(prismEdges);
+
+    const opticalDepth = new THREE.Group();
+    opticalDepth.position.set(0, .02, -.16);
+    opticalDepth.rotation.set(.08, -.12, .014);
+    group.add(opticalDepth);
+
+    const opticalSheets = [
+      { z: .44, rotation: -.16, color: 0xeaf7ff, opacity: .075, width: 1.64, height: 1.72 },
+      { z: .06, rotation: .12, color: 0xb8f2ff, opacity: .052, width: 1.72, height: 1.58 },
+      { z: -.38, rotation: -.09, color: 0xd8ceff, opacity: .045, width: 1.60, height: 1.66 },
+    ];
+    opticalSheets.forEach(({ z, rotation, color, opacity, width, height }, index) => {
+      const sheet = new THREE.Mesh(
+        new THREE.PlaneGeometry(width, height),
+        new THREE.MeshBasicMaterial({
+          color,
+          transparent: true,
+          opacity,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        })
+      );
+      sheet.position.z = z;
+      sheet.rotation.z = rotation;
+      sheet.renderOrder = 3 + index * .1;
+      opticalDepth.add(sheet);
+    });
+
+    const causticMaterial = new THREE.MeshBasicMaterial({
+      color: 0xdafcff,
+      transparent: true,
+      opacity: .16,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const caustic = new THREE.Mesh(new THREE.PlaneGeometry(1.36, .055), causticMaterial);
+    caustic.position.set(.02, -.32, .66);
+    caustic.rotation.z = -.48;
+    caustic.renderOrder = 4.5;
+    opticalDepth.add(caustic);
+
+    const depthEdgeMaterial = new THREE.MeshBasicMaterial({
+      color: 0xa7eaff,
+      transparent: true,
+      opacity: .11,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const depthEdge = new THREE.Mesh(new THREE.PlaneGeometry(.045, 1.46), depthEdgeMaterial);
+    depthEdge.position.set(-.48, .03, .22);
+    depthEdge.rotation.z = .31;
+    depthEdge.renderOrder = 4.4;
+    opticalDepth.add(depthEdge);
 
     const logo = new THREE.Group();
     const logoWhite = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.13,metalness:.04,emissive:0xf7fbff,emissiveIntensity:.38});
@@ -200,7 +256,7 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     host.addEventListener('pointermove',onPointer,{passive:true});
     host.addEventListener('pointerleave',onPointerLeave,{passive:true});
     const clock=new THREE.Clock();
-    const animate=()=>{const t=clock.getElapsedTime();smoothX+=(pointerX-smoothX)*.045;smoothY+=(pointerY-smoothY)*.045;host.style.setProperty('--entry-core-x',`${smoothX*-5}px`);host.style.setProperty('--entry-core-y',`${smoothY*-3}px`);host.style.setProperty('--entry-near-x',`${smoothX*10}px`);host.style.setProperty('--entry-near-y',`${smoothY*7}px`);host.style.setProperty('--entry-mid-x',`${smoothX*6}px`);host.style.setProperty('--entry-mid-y',`${smoothY*4}px`);host.style.setProperty('--entry-far-x',`${smoothX*3}px`);host.style.setProperty('--entry-far-y',`${smoothY*2}px`);group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    const animate=()=>{const t=clock.getElapsedTime();smoothX+=(pointerX-smoothX)*.045;smoothY+=(pointerY-smoothY)*.045;host.style.setProperty('--entry-core-x',`${smoothX*-5}px`);host.style.setProperty('--entry-core-y',`${smoothY*-3}px`);host.style.setProperty('--entry-near-x',`${smoothX*10}px`);host.style.setProperty('--entry-near-y',`${smoothY*7}px`);host.style.setProperty('--entry-mid-x',`${smoothX*6}px`);host.style.setProperty('--entry-mid-y',`${smoothY*4}px`);host.style.setProperty('--entry-far-x',`${smoothX*3}px`);host.style.setProperty('--entry-far-y',`${smoothY*2}px`);group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;opticalDepth.rotation.z=.014+Math.sin(t*.34)*.012;caustic.position.x=.02+Math.sin(t*.62)*.08;causticMaterial.opacity=.13+(Math.sin(t*.88)+1)*.025;depthEdgeMaterial.opacity=.085+(Math.sin(t*.72+.8)+1)*.016;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
     const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);host.removeEventListener('pointerleave',onPointerLeave);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};

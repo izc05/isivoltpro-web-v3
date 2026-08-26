@@ -173,3 +173,64 @@
   .entry3d.has-webgl-prism .entry3d__core,
   .entry3d.has-webgl-prism .entry3d__network{transform:none!important}
 }
+
+/* Optical depth pass: use the three existing shell layers as separate refractive planes.
+   This gives the cube visible wall thickness and internal parallax without extra WebGL geometry. */
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{
+  transform-style:preserve-3d;
+  overflow:visible;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{
+  position:absolute;
+  pointer-events:none;
+  border-style:solid;
+  border-width:1px;
+  border-radius:18%;
+  transform-origin:center;
+  mix-blend-mode:screen;
+  box-shadow:inset 0 0 22px rgba(255,255,255,.08),0 0 18px rgba(111,181,255,.035);
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(1){
+  inset:8% 9% 10% 8%;
+  opacity:.27!important;
+  transform:translate3d(-5px,-4px,16px) rotate(.8deg) skewX(-.6deg);
+  background:linear-gradient(124deg,rgba(255,255,255,.18),transparent 24% 67%,rgba(125,217,255,.08));
+  animation:entry-refraction-plane-a 6.8s ease-in-out infinite alternate;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(2){
+  inset:14% 14% 15% 15%;
+  opacity:.16!important;
+  transform:translate3d(6px,4px,7px) rotate(-1.15deg) skewY(.7deg);
+  background:linear-gradient(54deg,rgba(129,99,255,.055),transparent 38% 64%,rgba(255,255,255,.14));
+  animation:entry-refraction-plane-b 7.6s ease-in-out infinite alternate-reverse;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(3){
+  inset:21% 20% 20% 21%;
+  opacity:.11!important;
+  transform:translate3d(-2px,7px,-2px) rotate(.6deg);
+  background:
+    radial-gradient(circle at 32% 25%,rgba(255,255,255,.17),transparent 34%),
+    linear-gradient(140deg,transparent 38%,rgba(102,211,255,.08) 50%,transparent 63%);
+  box-shadow:inset 0 0 28px rgba(102,174,255,.055),0 0 14px rgba(255,255,255,.035);
+  animation:entry-refraction-plane-c 8.4s ease-in-out infinite alternate;
+}
+@keyframes entry-refraction-plane-a{
+  from{transform:translate3d(-5px,-4px,16px) rotate(.8deg) skewX(-.6deg)}
+  to{transform:translate3d(3px,2px,20px) rotate(-.25deg) skewX(.25deg)}
+}
+@keyframes entry-refraction-plane-b{
+  from{transform:translate3d(6px,4px,7px) rotate(-1.15deg) skewY(.7deg)}
+  to{transform:translate3d(-3px,-1px,10px) rotate(.45deg) skewY(-.2deg)}
+}
+@keyframes entry-refraction-plane-c{
+  from{transform:translate3d(-2px,7px,-2px) rotate(.6deg)}
+  to{transform:translate3d(4px,-2px,1px) rotate(-.35deg)}
+}
+@media(max-width:600px){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(1){transform:translate3d(-2px,-2px,6px) rotate(.4deg);animation-duration:9s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(2){transform:translate3d(2px,2px,3px) rotate(-.4deg);animation-duration:10s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(3){transform:none;animation:none;opacity:.07!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{animation:none!important;transform:none!important}
+}

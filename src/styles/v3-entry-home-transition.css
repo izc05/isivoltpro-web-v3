@@ -13,5 +13,22 @@ body.intro-lock .site-header,body.intro-lock .saas-home{opacity:.72;transform:tr
 .entry3d.is-leaving .entry3d__phone,.entry3d.is-leaving .entry3d__analytics,.entry3d.is-leaving .entry3d__note--mobility,.entry3d.is-leaving .entry3d__note--data{transform:translate3d(-18px,14px,-30px) scale(.96)}
 .entry3d.is-leaving .entry3d__orders,.entry3d.is-leaving .entry3d__machines,.entry3d.is-leaving .entry3d__gear,.entry3d.is-leaving .entry3d__note--control,.entry3d.is-leaving .entry3d__note--assets,.entry3d.is-leaving .entry3d__note--maintenance{transform:translate3d(18px,14px,-30px) scale(.96)}
 .entry3d.is-leaving .entry3d__qr-card,.entry3d.is-leaving .entry3d__status,.entry3d.is-leaving .entry3d__note--scan{transform:translateY(16px) scale(.95)}
-@media(max-width:760px){body.intro-lock .site-header,body.intro-lock .saas-home{transform:translateY(10px);filter:blur(2px)}.entry3d.is-leaving .entry3d__float{filter:none}.entry3d.is-leaving .entry3d__core{filter:blur(5px);transform:translate(-50%,-46%) scale(.9)}}
-@media(prefers-reduced-motion:reduce){.site-header,.saas-home,.entry3d,.entry3d .entry3d__heading,.entry3d .entry3d__actions,.entry3d .entry3d__network,.entry3d .entry3d__core,.entry3d .entry3d__float{transition:none!important;filter:none!important;transform:none!important}}
+
+/* Carry the intro optics into the first commercial viewport. This is deliberately CSS-only: no new assets or runtime weight. */
+.saas-hero{position:relative;isolation:isolate;overflow:hidden}
+.saas-hero::before,.saas-hero::after{content:"";position:absolute;pointer-events:none;z-index:-1;opacity:1;transition:opacity .9s ease,transform 1s cubic-bezier(.22,.8,.24,1)}
+.saas-hero::before{width:min(58vw,820px);aspect-ratio:1;right:-9vw;top:-26%;border-radius:50%;background:radial-gradient(circle,rgba(88,120,255,.14) 0,rgba(117,91,236,.09) 28%,rgba(67,202,221,.055) 49%,transparent 70%);filter:blur(12px);transform:scale(1)}
+.saas-hero::after{width:min(52vw,720px);height:180px;right:3vw;top:54%;border-radius:50%;background:radial-gradient(ellipse,rgba(89,91,236,.12) 0,rgba(74,175,224,.07) 42%,transparent 72%);filter:blur(22px);transform:scaleX(1.08)}
+.saas-stage{position:relative;isolation:isolate;transform-style:preserve-3d}
+.saas-stage::before{content:"";position:absolute;inset:8% -7% 3% 4%;z-index:-2;border-radius:34px;background:linear-gradient(135deg,rgba(119,92,240,.10),rgba(95,180,235,.055) 47%,rgba(73,198,168,.045));filter:blur(28px);opacity:.92;transform:translate3d(0,10px,-1px);transition:opacity .88s ease,transform .95s cubic-bezier(.22,.8,.24,1)}
+.saas-stage::after{content:"";position:absolute;left:16%;right:7%;bottom:-8px;height:38px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,rgba(69,89,194,.16),rgba(97,126,225,.055) 48%,transparent 72%);filter:blur(14px);opacity:.72;transform:scaleX(.96);transition:opacity .88s ease,transform .95s cubic-bezier(.22,.8,.24,1)}
+.saas-dashboard{box-shadow:0 34px 90px rgba(61,77,140,.14),0 9px 28px rgba(83,110,217,.08),inset 0 1px 0 rgba(255,255,255,.96);transition:box-shadow .9s ease,transform .9s cubic-bezier(.22,.8,.24,1)}
+.saas-chart-float{box-shadow:0 24px 50px rgba(57,70,125,.14),0 9px 22px rgba(94,109,205,.08)}
+body.intro-lock .saas-hero::before{opacity:.42;transform:scale(.86) translate3d(2%,2%,0)}
+body.intro-lock .saas-hero::after{opacity:.24;transform:scaleX(.82) translateY(16px)}
+body.intro-lock .saas-stage::before{opacity:.25;transform:translate3d(0,24px,-1px) scale(.92)}
+body.intro-lock .saas-stage::after{opacity:.16;transform:scaleX(.82) translateY(14px)}
+body.intro-lock .saas-dashboard{box-shadow:0 18px 54px rgba(61,77,140,.06);transform:translateY(7px) scale(.992)}
+
+@media(max-width:760px){body.intro-lock .site-header,body.intro-lock .saas-home{transform:translateY(10px);filter:blur(2px)}.entry3d.is-leaving .entry3d__float{filter:none}.entry3d.is-leaving .entry3d__core{filter:blur(5px);transform:translate(-50%,-46%) scale(.9)}.saas-hero::before{width:560px;right:-280px;top:-10%;opacity:.55;filter:blur(18px)}.saas-hero::after{width:420px;right:-210px;top:48%;opacity:.45}.saas-stage::before{inset:10% -2% 7% 2%;filter:blur(22px);opacity:.58}.saas-stage::after{left:18%;right:8%;bottom:-2px;opacity:.48}.saas-dashboard{box-shadow:0 22px 52px rgba(61,77,140,.10),0 7px 18px rgba(83,110,217,.05)}}
+@media(prefers-reduced-motion:reduce){.site-header,.saas-home,.entry3d,.entry3d .entry3d__heading,.entry3d .entry3d__actions,.entry3d .entry3d__network,.entry3d .entry3d__core,.entry3d .entry3d__float,.saas-hero::before,.saas-hero::after,.saas-stage::before,.saas-stage::after,.saas-dashboard{transition:none!important;filter:none!important;transform:none!important}}

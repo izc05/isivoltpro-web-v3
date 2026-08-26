@@ -51,7 +51,7 @@ if (currentPath.startsWith(`${modulePrefix}/`)) {
 } else if (currentPath.startsWith(`${blogPrefix}/`)) {
   const slug = currentPath.slice(blogPrefix.length + 1).split('/')[0];
   const item = publishedV3BlogPosts.find((post) => post.slug === slug);
-  if (item) breadcrumb = { parentLabel: 'Blog', parentHref: blog, currentLabel: item.title };
+  if (item) breadcrumb = { parentLabel: 'Blog y noticias', parentHref: blog, currentLabel: item.title };
 }
 
 const breadcrumbSchema = breadcrumb ? JSON.stringify({
@@ -84,10 +84,10 @@ const breadcrumbSchema = breadcrumb ? JSON.stringify({
       <a href={modules} aria-current={ariaCurrent(modules,[`${base}modulos/`,appMaintenance,`${base}apps-especializadas/`])}>Apps</a>
       <a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a>
       <a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a>
-      <a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog</a>
+      <a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a>
       <a href={company} aria-current={ariaCurrent(company)}>Empresa</a>
     </nav>
-    <div class="header-actions"><a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a><details class="v3-mobile-nav"><summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary><nav class="v3-mobile-nav__panel" aria-label="Navegación móvil"><a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules,[`${base}modulos/`,appMaintenance,`${base}apps-especializadas/`])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a><a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog</a><a href={company} aria-current={ariaCurrent(company)}>Empresa</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a></nav></details></div>
+    <div class="header-actions"><a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a><details class="v3-mobile-nav"><summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary><nav class="v3-mobile-nav__panel" aria-label="Navegación móvil"><a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules,[`${base}modulos/`,appMaintenance,`${base}apps-especializadas/`])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a><a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a><a href={company} aria-current={ariaCurrent(company)}>Empresa</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a></nav></details></div>
   </div>
 </header>
 {breadcrumb && (<><nav class="v3-breadcrumb" aria-label="Migas de pan"><div class="v3-breadcrumb__inner shell"><a href={home}>Inicio</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><a href={breadcrumb.parentHref}>{breadcrumb.parentLabel}</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><span class="v3-breadcrumb__current" aria-current="page">{breadcrumb.currentLabel}</span></div></nav><script is:inline type="application/ld+json" set:html={breadcrumbSchema}></script></>)}

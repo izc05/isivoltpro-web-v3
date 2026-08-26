@@ -57,6 +57,16 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
   </div>
 </div>
 
+<style>
+  .entry3d__scene{--entry-core-x:0px;--entry-core-y:0px;--entry-near-x:0px;--entry-near-y:0px;--entry-mid-x:0px;--entry-mid-y:0px;--entry-far-x:0px;--entry-far-y:0px;transform-style:preserve-3d}
+  .entry3d__core{translate:var(--entry-core-x) var(--entry-core-y);will-change:translate}
+  .entry3d__phone,.entry3d__orders{translate:var(--entry-near-x) var(--entry-near-y);will-change:translate}
+  .entry3d__analytics,.entry3d__qr-card,.entry3d__gear,.entry3d__machines{translate:var(--entry-mid-x) var(--entry-mid-y);will-change:translate}
+  .entry3d__status,.entry3d__note{translate:var(--entry-far-x) var(--entry-far-y);will-change:translate}
+  .entry3d__network{translate:calc(var(--entry-far-x) * -.35) calc(var(--entry-far-y) * -.35);will-change:translate}
+  @media(max-width:860px),(prefers-reduced-motion:reduce){.entry3d__core,.entry3d__float,.entry3d__network{translate:none!important;will-change:auto}}
+</style>
+
 <script>
   const canvas = document.querySelector<HTMLCanvasElement>('#entry3d-canvas');
   const host = document.querySelector<HTMLElement>('#entry3d-scene');
@@ -184,14 +194,16 @@ const qrCells = Array.from({ length: 49 }, (_, index) => index);
     intro?.classList.add('has-webgl-prism');
     const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
     resize(); const ro=new ResizeObserver(resize);ro.observe(canvas);
-    let pointerX=0,pointerY=0,raf=0;
+    let pointerX=0,pointerY=0,smoothX=0,smoothY=0,raf=0;
     const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
+    const onPointerLeave=()=>{pointerX=0;pointerY=0};
     host.addEventListener('pointermove',onPointer,{passive:true});
+    host.addEventListener('pointerleave',onPointerLeave,{passive:true});
     const clock=new THREE.Clock();
-    const animate=()=>{const t=clock.getElapsedTime();group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    const animate=()=>{const t=clock.getElapsedTime();smoothX+=(pointerX-smoothX)*.045;smoothY+=(pointerY-smoothY)*.045;host.style.setProperty('--entry-core-x',`${smoothX*-5}px`);host.style.setProperty('--entry-core-y',`${smoothY*-3}px`);host.style.setProperty('--entry-near-x',`${smoothX*10}px`);host.style.setProperty('--entry-near-y',`${smoothY*7}px`);host.style.setProperty('--entry-mid-x',`${smoothX*6}px`);host.style.setProperty('--entry-mid-y',`${smoothY*4}px`);host.style.setProperty('--entry-far-x',`${smoothX*3}px`);host.style.setProperty('--entry-far-y',`${smoothY*2}px`);group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
     animate();
 
-    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};
+    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);host.removeEventListener('pointerleave',onPointerLeave);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};
     intro?.addEventListener('transitionend',(event)=>{if((event.target as HTMLElement).classList.contains('is-done'))clean()},{once:true});
   };
 

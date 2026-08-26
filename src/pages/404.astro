@@ -4,5 +4,271 @@ import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
 const base = import.meta.env.BASE_URL;
+
+const recoveryLinks = [
+  {
+    href: `${base}experiencia/`,
+    label: 'Probar IsiVoltPro',
+    copy: 'Recorre la demo guiada, el selector de necesidades y el producto interactivo.',
+  },
+  {
+    href: `${base}recursos/`,
+    label: 'Recursos prácticos',
+    copy: 'Guías y contenidos de mantenimiento pensados para resolver trabajo real.',
+  },
+  {
+    href: `${base}blog/`,
+    label: 'Blog + noticias',
+    copy: 'Actualidad técnica, normativa y contexto editorial con fuente y fecha.',
+  },
+];
 ---
-<!doctype html><html lang="es"><head><V3Seo title="Página no encontrada · IsiVoltPro" description="La página solicitada no existe o ha cambiado de ubicación." path={`${base}404/`} noindex={true} /></head><body><V3CommercialHeader/><main class="page-main"><section class="page-hero" style="min-height:70svh;display:grid;align-items:center"><div class="page-shell" style="text-align:center"><span class="eyebrow">Error 404</span><h1 style="margin:20px auto;font:800 clamp(64px,11vw,140px)/.9 Manrope,sans-serif;letter-spacing:-.07em">Esta OT no existe.<br/><span class="gradient-text">La página tampoco.</span></h1><p style="margin:0 auto;max-width:650px;color:var(--muted);font-size:18px;line-height:1.7">Puede que el enlace haya cambiado o que hayas llegado a una ruta que todavía no está publicada.</p><div class="page-hero__actions" style="justify-content:center"><a class="btn btn--primary" href={base}>Volver a IsiVoltPro →</a></div></div></section></main><V3CommercialFooter/></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <V3Seo
+      title="Página no encontrada · IsiVoltPro"
+      description="La página solicitada no existe o ha cambiado de ubicación. Vuelve a IsiVoltPro o continúa por una de sus áreas principales."
+      path={`${base}404/`}
+      noindex={true}
+    />
+  </head>
+  <body>
+    <V3CommercialHeader />
+    <main class="page-main error-page">
+      <section class="error-hero" aria-labelledby="error-title">
+        <div class="page-shell error-shell">
+          <div class="error-orbit" aria-hidden="true">
+            <span class="error-orbit__ring"></span>
+            <span class="error-orbit__core">404</span>
+          </div>
+          <div class="error-copy">
+            <span class="eyebrow">Ruta no encontrada</span>
+            <h1 id="error-title">Esta OT no existe.<br /><span class="gradient-text">La página tampoco.</span></h1>
+            <p>
+              Puede que el enlace haya cambiado o que hayas llegado a una ruta que todavía no está publicada.
+              Puedes volver al inicio o continuar por una de las áreas principales.
+            </p>
+            <div class="page-hero__actions error-actions">
+              <a class="btn btn--primary" href={base}>Volver a IsiVoltPro →</a>
+              <a class="btn btn--secondary" href={`${base}contacto/`}>Contactar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="error-recovery" aria-labelledby="recovery-title">
+        <div class="page-shell">
+          <div class="section-heading error-recovery__heading">
+            <span class="eyebrow">Seguir explorando</span>
+            <h2 id="recovery-title">Tres caminos útiles desde aquí.</h2>
+          </div>
+          <div class="error-recovery__grid">
+            {recoveryLinks.map((item, index) => (
+              <a class="error-card" href={item.href}>
+                <span class="error-card__index" aria-hidden="true">0{index + 1}</span>
+                <strong>{item.label}</strong>
+                <span>{item.copy}</span>
+                <em aria-hidden="true">↗</em>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+    <V3CommercialFooter />
+  </body>
+</html>
+
+<style>
+  .error-page {
+    overflow: hidden;
+  }
+
+  .error-hero {
+    position: relative;
+    min-height: 68svh;
+    display: grid;
+    align-items: center;
+    padding: clamp(72px, 9vw, 128px) 0 clamp(56px, 7vw, 96px);
+    background:
+      radial-gradient(circle at 18% 32%, rgba(70, 144, 255, .13), transparent 34%),
+      radial-gradient(circle at 82% 52%, rgba(127, 92, 255, .09), transparent 30%),
+      linear-gradient(180deg, rgba(247, 250, 255, .98), rgba(255, 255, 255, 1));
+  }
+
+  .error-shell {
+    display: grid;
+    grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr);
+    gap: clamp(40px, 7vw, 104px);
+    align-items: center;
+  }
+
+  .error-orbit {
+    position: relative;
+    width: min(32vw, 360px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    margin-inline: auto;
+    filter: drop-shadow(0 30px 44px rgba(45, 101, 192, .12));
+  }
+
+  .error-orbit::before,
+  .error-orbit::after,
+  .error-orbit__ring {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    border: 1px solid rgba(68, 129, 231, .24);
+  }
+
+  .error-orbit::before {
+    transform: rotate(57deg) scaleY(.38);
+  }
+
+  .error-orbit::after {
+    transform: rotate(-42deg) scaleY(.52);
+  }
+
+  .error-orbit__ring {
+    inset: 19%;
+    border-color: rgba(94, 150, 242, .18);
+    background: radial-gradient(circle, rgba(255,255,255,.94) 0 28%, rgba(91,148,242,.06) 58%, transparent 72%);
+    box-shadow: inset 0 0 30px rgba(71, 133, 235, .08);
+  }
+
+  .error-orbit__core {
+    position: relative;
+    z-index: 2;
+    font: 800 clamp(64px, 8vw, 116px)/1 Manrope, sans-serif;
+    letter-spacing: -.08em;
+    color: rgba(29, 82, 168, .93);
+    text-shadow: 0 12px 28px rgba(55, 116, 214, .15);
+  }
+
+  .error-copy h1 {
+    margin: 18px 0 24px;
+    max-width: 760px;
+    font: 800 clamp(48px, 6vw, 92px)/.94 Manrope, sans-serif;
+    letter-spacing: -.06em;
+  }
+
+  .error-copy p {
+    margin: 0;
+    max-width: 680px;
+    color: var(--muted);
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.72;
+  }
+
+  .error-actions {
+    margin-top: 30px;
+  }
+
+  .error-recovery {
+    padding: clamp(58px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);
+    background: #fff;
+  }
+
+  .error-recovery__heading {
+    max-width: 720px;
+    margin-bottom: 30px;
+  }
+
+  .error-recovery__heading h2 {
+    margin-bottom: 0;
+  }
+
+  .error-recovery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .error-card {
+    position: relative;
+    min-height: 196px;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid rgba(30, 79, 158, .12);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(250, 252, 255, .98), rgba(244, 248, 255, .82));
+    box-shadow: 0 18px 48px rgba(30, 79, 158, .07);
+    color: inherit;
+    text-decoration: none;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+
+  .error-card:hover,
+  .error-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(43, 112, 224, .28);
+    box-shadow: 0 24px 56px rgba(30, 79, 158, .11);
+  }
+
+  .error-card__index {
+    font: 700 12px/1 Manrope, sans-serif;
+    letter-spacing: .14em;
+    color: rgba(51, 105, 194, .62);
+  }
+
+  .error-card strong {
+    font: 750 clamp(19px, 1.6vw, 23px)/1.2 Manrope, sans-serif;
+    letter-spacing: -.025em;
+  }
+
+  .error-card > span:not(.error-card__index) {
+    color: var(--muted);
+    line-height: 1.58;
+  }
+
+  .error-card em {
+    position: absolute;
+    right: 22px;
+    bottom: 20px;
+    font-style: normal;
+    color: rgba(51, 105, 194, .72);
+  }
+
+  @media (max-width: 860px) {
+    .error-shell {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .error-orbit {
+      width: min(62vw, 300px);
+    }
+
+    .error-copy p {
+      margin-inline: auto;
+    }
+
+    .error-actions {
+      justify-content: center;
+    }
+
+    .error-recovery__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .error-card {
+      min-height: 168px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .error-card {
+      transition: none;
+    }
+
+    .error-card:hover,
+    .error-card:focus-visible {
+      transform: none;
+    }
+  }
+</style>

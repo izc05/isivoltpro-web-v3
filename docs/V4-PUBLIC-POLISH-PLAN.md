@@ -101,7 +101,8 @@ Primer checkpoint V4: restaurar `Producto · Módulos · Sectores · Precios · 
 - `5b876fce…`: Home reescrita para explicar el flujo de trabajo y añadir la microsecuencia `El aviso entra una vez → El técnico recibe contexto → El cierre alimenta el histórico`.
 - Ese checkpoint pasó comercial, preview móvil, QA móvil y QA tablet/escritorio.
 - `22f633ec…`: segundo pase de confianza de la intro; los porcentajes de rendimiento y crecimiento dejan de ser protagonistas visuales y se sustituyen por estados de trabajo/trazabilidad de una vista demo.
-- Este segundo checkpoint debe quedar verde antes de dar Fase 2 por cerrada.
+- Comercial y preview móvil del pase `22f633ec…` ya están verdes; QA móvil y QA tablet/escritorio siguen siendo la frontera pendiente antes de cerrar Fase 2.
+- `00a825f0…`: documentación del checkpoint sincronizada; no cambia runtime.
 
 ## Regla de publicación
 

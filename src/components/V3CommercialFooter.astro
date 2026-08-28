@@ -1,9 +1,10 @@
 ---
 const base = import.meta.env.BASE_URL;
+const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
 ---
 <style is:inline>
   .page-footer{padding:50px 0 28px!important;color:#566176!important;background:#fff!important;border-top:1px solid #eceef4!important}
-  .page-footer .brand{color:#11182b!important}.page-footer .brand__icon{background:linear-gradient(145deg,#42c9a0,#4e91ea 36%,#7558e5 68%,#d65cc1)!important;box-shadow:0 7px 18px rgba(92,79,201,.14)!important}
+  .page-footer .brand{color:#11182b!important}.page-footer .brand__icon{width:34px;height:34px;display:block;object-fit:contain;border-radius:0;background:none!important;box-shadow:none!important;transform:none;filter:drop-shadow(0 7px 11px rgba(77,72,210,.12))}.page-footer .brand__word{display:inline-flex;align-items:baseline;color:#101a34}.page-footer .brand__word strong{font:inherit;font-weight:800;color:transparent;background:linear-gradient(100deg,#2563eb,#18b9d7 58%,#7c3aed);-webkit-background-clip:text;background-clip:text}
   .page-footer p{color:#7e8899!important;line-height:1.65}.page-footer h4{color:#172036!important}.page-footer a{color:#657086!important}.page-footer a:hover{color:#6255d9!important}
   .page-footer__bottom{margin-top:32px!important;padding-top:18px!important;border-top:1px solid #edf0f5!important;color:#929aa8!important}
   .page-footer__bottom a{display:inline;margin:0;color:#788295!important}.page-footer__bottom a:hover{text-decoration:underline;color:#6255d9!important}
@@ -22,7 +23,7 @@ const base = import.meta.env.BASE_URL;
 <footer class="page-footer" aria-label="Pie de página">
   <div class="page-shell">
     <div class="page-footer__grid">
-      <div><div class="brand"><i class="brand__icon" aria-hidden="true"></i><span>IsiVoltPro</span></div><p>Soluciones y aplicaciones para autónomos, pequeños equipos y empresas de mantenimiento: activos, avisos, OT, preventivos, documentación y trabajo de campo en un solo ecosistema.</p></div>
+      <div><div class="brand"><img class="brand__icon" src={brandMark} alt="" width="34" height="34" loading="lazy" decoding="async"/><span class="brand__word">IsiVolt<strong>Pro</strong></span></div><p>Soluciones y aplicaciones para autónomos, pequeños equipos y empresas de mantenimiento: activos, avisos, OT, preventivos, documentación y trabajo de campo en un solo ecosistema.</p></div>
       <details class="footer-group"><summary>Producto y módulos</summary><nav class="footer-group__links" aria-label="Producto y módulos"><a href={`${base}producto/`}>Plataforma</a><a href={`${base}aplicaciones/`}>Módulos</a><a href={`${base}app-mantenimiento/`}>App Mantenimiento</a><a href={`${base}apps-especializadas/`}>Módulos especializados</a><a href={`${base}alcance/`}>Alcance del producto</a><a href={`${base}precios/`}>Precios</a></nav></details>
       <details class="footer-group"><summary>Soluciones</summary><nav class="footer-group__links" aria-label="Soluciones"><a href={`${base}soluciones/`}>Problemas que resolvemos</a><a href={`${base}sectores/`}>Por sector y actividad</a><a href={`${base}implantacion/`}>Implantación</a><a href={`${base}piloto/`}>Piloto y contratación</a><a href={`${base}demo/`}>Ver demo</a><a href={`${base}seguridad/`}>Seguridad y privacidad</a></nav></details>
       <details class="footer-group"><summary>Recursos, noticias y empresa</summary><nav class="footer-group__links" aria-label="Recursos, noticias y empresa"><a href={`${base}recursos/`}>Guías prácticas</a><a href={`${base}blog/`}>Blog y noticias</a><a href={`${base}faq/`}>Preguntas frecuentes</a><a href={`${base}empresa/`}>Quiénes somos</a><a href={`${base}contacto/`}>Contacto</a><a href={`${base}acceso/`}>Acceder</a></nav></details>

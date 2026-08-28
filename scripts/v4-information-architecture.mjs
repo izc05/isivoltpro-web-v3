@@ -44,11 +44,8 @@ const requiredFooterRoutes = [
   'aviso-legal/', 'privacidad/', 'cookies/',
 ];
 for (const route of requiredFooterRoutes) {
-  if (!footer.includes(`${baseToken}${route}`)) fail(`falta la ruta ${route} en el footer`);
+  const templateRoute = `\${base}${route}`;
+  if (!footer.includes(templateRoute)) fail(`falta la ruta ${route} en el footer`);
 }
 
 if (!process.exitCode) console.log('V4 INFORMATION ARCHITECTURE OK');
-
-function baseToken(strings, ...values) {
-  return String.raw({ raw: strings }, ...values);
-}

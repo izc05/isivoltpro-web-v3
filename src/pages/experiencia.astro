@@ -1,0 +1,83 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
+
+const base = import.meta.env.BASE_URL;
+const demo = `${base}demo/`;
+const selector = `${base}selector/`;
+const product = `${base}producto/`;
+const modules = `${base}aplicaciones/`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Prueba IsiVoltPro · Demo, selector y experiencia de producto" description="Recorre IsiVoltPro sin registro: prueba la demo guiada de 60 segundos, descubre qué módulos encajan contigo y explora una experiencia QR demostrativa." path={`${base}experiencia/`} />
+  <style is:inline>
+    .experience-hero{padding:88px 0 56px;background:radial-gradient(circle at 12% 10%,rgba(23,92,255,.09),transparent 30%),radial-gradient(circle at 88% 18%,rgba(242,56,169,.08),transparent 28%),#fff}
+    .experience-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);gap:54px;align-items:center}
+    .experience-copy h1{font-size:clamp(42px,6vw,76px);line-height:.98;letter-spacing:-.055em;margin:16px 0 24px;max-width:760px}
+    .experience-copy>p{font-size:19px;line-height:1.7;color:#59657f;max-width:700px}
+    .experience-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .experience-visual{position:relative;padding:18px;border:1px solid #e8ecf5;border-radius:30px;background:linear-gradient(145deg,#fff,#f7f9ff);box-shadow:0 30px 80px rgba(34,49,85,.12)}
+    .experience-visual img{display:block;width:100%;height:auto;border-radius:20px}
+    .experience-badge{position:absolute;right:-16px;bottom:26px;padding:12px 16px;border:1px solid #e5eaf4;border-radius:16px;background:rgba(255,255,255,.96);box-shadow:0 16px 40px rgba(31,46,80,.14);font-size:12px;font-weight:800;color:#47536d}
+    .journey{padding:72px 0;background:#f8faff}
+    .journey-head{text-align:center;max-width:760px;margin:0 auto 38px}
+    .journey-head h2{font-size:clamp(32px,4vw,50px);letter-spacing:-.04em;margin:12px 0}
+    .journey-head p{color:#66718a;line-height:1.7}
+    .journey-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .journey-card{position:relative;display:flex;flex-direction:column;min-height:330px;padding:28px;border:1px solid #e4e9f3;border-radius:24px;background:#fff;color:inherit;text-decoration:none;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .journey-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(34,49,85,.1);border-color:#cad5ef}
+    .journey-card:focus-visible{outline:3px solid rgba(23,92,255,.24);outline-offset:4px}
+    .journey-step{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#edf3ff;color:#175cff;font-weight:900;margin-bottom:34px}
+    .journey-card:nth-child(2) .journey-step{background:#f3efff;color:#6d4aff}.journey-card:nth-child(3) .journey-step{background:#eaf9f3;color:#159f71}
+    .journey-card h3{font-size:25px;letter-spacing:-.025em;margin:0 0 12px}.journey-card p{color:#68738b;line-height:1.65;margin:0 0 26px}.journey-card strong{margin-top:auto;color:#29405f}
+    .field-story{padding:76px 0}.field-grid{display:grid;grid-template-columns:.9fr 1fr;gap:52px;align-items:center}.field-image{padding:20px;border-radius:30px;background:linear-gradient(145deg,#f1f5ff,#fff4fa);border:1px solid #e8ecf5}.field-image img{display:block;width:100%;height:auto}.field-copy h2{font-size:clamp(34px,4vw,52px);letter-spacing:-.04em;margin:14px 0 18px}.field-copy p{color:#637089;line-height:1.72}.field-points{display:grid;gap:12px;margin:26px 0}.field-points span{display:flex;gap:10px;align-items:flex-start;color:#39465f;font-weight:700}.field-points i{font-style:normal;color:#159f71}
+    .experience-note{margin-top:24px;padding:16px 18px;border-radius:16px;background:#f6f8fc;color:#66718a;font-size:13px;line-height:1.55}
+    @media(max-width:900px){.experience-grid,.field-grid{grid-template-columns:1fr}.experience-visual{max-width:680px}.journey-grid{grid-template-columns:1fr}.journey-card{min-height:250px}.experience-badge{right:12px}}
+    @media(max-width:600px){.experience-hero{padding-top:54px}.experience-copy h1{font-size:44px}.experience-copy>p{font-size:17px}.experience-visual{padding:10px;border-radius:22px}.experience-badge{position:static;display:inline-block;margin-top:10px}.journey,.field-story{padding:54px 0}}
+    @media(prefers-reduced-motion:reduce){.journey-card{transition:none}.journey-card:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main>
+    <section class="experience-hero">
+      <div class="shell experience-grid">
+        <div class="experience-copy">
+          <span class="eyebrow">Prueba el concepto antes de pedir una demo</span>
+          <h1>No te lo contamos.<br/><span class="gradient-text">Recórrelo.</span></h1>
+          <p>Entra por el camino que prefieras: simula un trabajo completo en 60 segundos, responde tres preguntas para descubrir qué necesitas o explora cómo un QR puede llevar al técnico directamente al contexto de un activo.</p>
+          <div class="experience-actions"><a class="btn btn--primary" href={demo}>Empezar demo 60 s →</a><a class="btn" href={selector}>Descubrir qué necesito</a></div>
+          <div class="experience-note">Experiencia demostrativa. Los datos son ficticios, no se guardan respuestas y ninguna acción de esta página escribe en sistemas de clientes.</div>
+        </div>
+        <div class="experience-visual" aria-label="Vista conceptual del panel IsiVoltPro">
+          <img src={`${base}media/home-dashboard.svg`} alt="Ilustración propia de un panel de trabajo IsiVoltPro con órdenes, activos y mantenimiento" width="980" height="720" loading="eager" decoding="async" />
+          <span class="experience-badge">● Demo local · sin datos reales</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="shell">
+        <div class="journey-head"><span class="eyebrow">Tres puertas de entrada</span><h2 id="journey-title">Elige cómo quieres conocer <span class="gradient-text">IsiVoltPro.</span></h2><p>No hay formularios obligatorios ni pantallas de venta entre medias. Cada recorrido termina conectando con el producto y sus módulos para que puedas seguir profundizando.</p></div>
+        <div class="journey-grid">
+          <a class="journey-card" href={demo}><span class="journey-step">01</span><h3>Demo guiada</h3><p>Recorre aviso → OT → QR → trabajo → cierre → histórico con una simulación breve y comprensible.</p><strong>Probar en 60 segundos →</strong></a>
+          <a class="journey-card" href={selector}><span class="journey-step">02</span><h3>Selector de necesidades</h3><p>Responde tres preguntas y obtén una recomendación orientativa de módulos según tu forma de trabajar.</p><strong>Encontrar mi punto de entrada →</strong></a>
+          <a class="journey-card" href={product}><span class="journey-step">03</span><h3>Producto interactivo</h3><p>Manipula el dashboard demostrativo, simula avisos y cierres de OT y entiende cómo se conecta el trabajo diario.</p><strong>Explorar Producto →</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="field-story">
+      <div class="shell field-grid">
+        <div class="field-image"><img src={`${base}media/tecnico-movil.svg`} alt="Ilustración propia de un técnico utilizando IsiVoltPro desde el móvil junto a un equipo" width="900" height="760" loading="lazy" decoding="async" /></div>
+        <div class="field-copy"><span class="eyebrow">Del escritorio al equipo real</span><h2>La información sirve cuando llega <span class="gradient-text">al lugar de trabajo.</span></h2><p>La experiencia pública está pensada para explicar la misma idea que después debe vivir en la aplicación: identificar un activo, abrir su contexto, actuar y dejar histórico sin volver a empezar desde cero.</p><div class="field-points"><span><i>✓</i> QR/NFC como acceso al activo y su histórico</span><span><i>✓</i> Órdenes y preventivos disponibles desde móvil</span><span><i>✓</i> Fotos, documentación y evidencias junto al trabajo</span></div><div class="experience-actions"><a class="btn btn--primary" href={product}>Ver Producto →</a><a class="btn" href={modules}>Explorar apps y módulos</a></div></div>
+      </div>
+    </section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

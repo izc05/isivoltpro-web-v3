@@ -1,0 +1,267 @@
+---
+import '../styles/v3-entry-3d.css';
+import '../styles/v3-entry-3d-fidelity.css';
+import '../styles/v3-entry-3d-reference-lock.css';
+
+interface Props {
+  accessHref: string;
+  demoHref: string;
+}
+
+const { accessHref, demoHref } = Astro.props;
+const qrCells = Array.from({ length: 49 }, (_, index) => index);
+---
+<div class="intro entry3d" id="intro" aria-label="Presentación 3D de IsiVoltPro">
+  <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
+
+  <div class="entry3d__ambient" aria-hidden="true">
+    <span class="entry3d__particle entry3d__particle--1"></span><span class="entry3d__particle entry3d__particle--2"></span><span class="entry3d__particle entry3d__particle--3"></span><span class="entry3d__particle entry3d__particle--4"></span><span class="entry3d__particle entry3d__particle--5"></span><span class="entry3d__particle entry3d__particle--6"></span><span class="entry3d__particle entry3d__particle--7"></span>
+  </div>
+
+  <div class="entry3d__shell">
+    <header class="entry3d__heading">
+      <div class="entry3d__brand" aria-label="IsiVoltPro"><i class="entry3d__brand-mark" aria-hidden="true"><span></span></i><strong>ISI VOLTPRO</strong></div>
+      <h1>Conectando <span>tu trabajo diario</span></h1>
+      <p>Clientes, equipos, avisos y mantenimiento en un único ecosistema inteligente.</p>
+    </header>
+
+    <div class="entry3d__scene" id="entry3d-scene">
+      <div class="entry3d__network" aria-hidden="true"><i class="entry3d__line entry3d__line--1"></i><i class="entry3d__line entry3d__line--2"></i><i class="entry3d__line entry3d__line--3"></i><i class="entry3d__line entry3d__line--4"></i><i class="entry3d__line entry3d__line--5"></i><i class="entry3d__line entry3d__line--6"></i></div>
+
+      <div class="entry3d__core" aria-hidden="true">
+        <div class="entry3d__glass-shell"><i></i><i></i><i></i></div>
+        <canvas id="entry3d-canvas" class="entry3d__canvas"></canvas>
+        <div class="entry3d__pedestal"><i></i><i></i><i></i></div>
+      </div>
+
+      <article class="entry3d__phone entry3d__float" aria-label="Incidencia de ejemplo"><div class="entry3d__phone-screen"><small>Incidencia #INC-1047 <b>NUEVO</b></small><span>Estado</span><strong>En curso</strong><span>Asignado a</span><strong>Técnico · ejemplo</strong><span>Ubicación</span><strong>Almacén · Zona Este</strong><button type="button" tabindex="-1">Ver detalles</button></div></article>
+
+      <article class="entry3d__orders entry3d__float" aria-label="Órdenes de trabajo de ejemplo"><div class="entry3d__panel-title"><strong>Órdenes de trabajo</strong><span>•••</span></div><div class="entry3d__order"><i>✓</i><span>Chequeo rutinario</span><b>12</b><em>↗ 24%</em></div><div class="entry3d__order"><i>♙</i><span>Reparación preventiva</span><b>8</b><em>↗ 16%</em></div><div class="entry3d__order"><i>!</i><span>Incidencias</span><b>3</b><em class="is-down">↘ 12%</em></div><small>Ver todas →</small></article>
+
+      <article class="entry3d__analytics entry3d__float" aria-label="Rendimiento operativo ilustrativo"><div class="entry3d__analytics-top"><span>Rendimiento operativo</span><small>Últimos 30 días</small></div><strong>98%</strong><small>Disponibilidad · dato ilustrativo</small><svg viewBox="0 0 180 68" aria-hidden="true"><path d="M4 58 C18 55 24 43 35 47 S54 61 66 41 S88 23 100 35 S121 50 132 30 S151 29 176 9"/></svg></article>
+
+      <article class="entry3d__qr-card entry3d__float" aria-label="Identificación QR y NFC"><b>NFC / QR</b><div class="entry3d__qr" aria-hidden="true">{qrCells.map((cell) => <i class:list={{ 'is-on': (cell * 7 + 3) % 5 !== 0 || cell < 8 || cell > 40 }}></i>)}</div></article>
+      <div class="entry3d__gear entry3d__float" aria-hidden="true"><i></i></div>
+      <div class="entry3d__machines entry3d__float" aria-hidden="true"><span class="entry3d__machine"><i></i><b></b><em></em></span><span class="entry3d__machine"><i></i><b></b><em></em></span></div>
+
+      <article class="entry3d__status entry3d__float"><i></i><div><strong>Sistema operativo</strong><small>Todos los servicios activos</small></div></article>
+      <article class="entry3d__note entry3d__note--mobility entry3d__float"><i>⌁</i><div><strong>Movilidad</strong><small>Actúa desde cualquier lugar</small></div></article>
+      <article class="entry3d__note entry3d__note--control entry3d__float"><i>▣</i><div><strong>Control total</strong><small>Todo tu trabajo en tiempo real</small></div></article>
+      <article class="entry3d__note entry3d__note--data entry3d__float"><i>▥</i><div><strong>Decisiones con datos</strong><small>Información clara para decidir mejor</small></div></article>
+      <article class="entry3d__note entry3d__note--assets entry3d__float"><i>▦</i><div><strong>Activos conectados</strong><small>Equipos críticos bajo control</small></div></article>
+      <article class="entry3d__note entry3d__note--maintenance entry3d__float"><i>⚙</i><div><strong>Mantenimiento inteligente</strong><small>Preventivo, correctivo y predictivo</small></div></article>
+      <article class="entry3d__note entry3d__note--scan entry3d__float"><i>⌁</i><div><strong>Identificación instantánea</strong><small>Escanea, accede, resuelve</small></div></article>
+    </div>
+
+    <footer class="entry3d__actions"><a class="entry3d__primary" href={accessHref}>Entrar en la plataforma <span aria-hidden="true">→</span></a><a class="entry3d__secondary" href={demoHref}>Ver demo <span aria-hidden="true">›</span></a><small><i aria-hidden="true">ⓘ</i> Vista conceptual · datos ilustrativos</small></footer>
+  </div>
+</div>
+
+<style>
+  .entry3d__scene{--entry-core-x:0px;--entry-core-y:0px;--entry-near-x:0px;--entry-near-y:0px;--entry-mid-x:0px;--entry-mid-y:0px;--entry-far-x:0px;--entry-far-y:0px;transform-style:preserve-3d}
+  .entry3d__core{translate:var(--entry-core-x) var(--entry-core-y);will-change:translate}
+  .entry3d__phone,.entry3d__orders{translate:var(--entry-near-x) var(--entry-near-y);will-change:translate}
+  .entry3d__analytics,.entry3d__qr-card,.entry3d__gear,.entry3d__machines{translate:var(--entry-mid-x) var(--entry-mid-y);will-change:translate}
+  .entry3d__status,.entry3d__note{translate:var(--entry-far-x) var(--entry-far-y);will-change:translate}
+  .entry3d__network{translate:calc(var(--entry-far-x) * -.35) calc(var(--entry-far-y) * -.35);will-change:translate}
+  @media(max-width:860px),(prefers-reduced-motion:reduce){.entry3d__core,.entry3d__float,.entry3d__network{translate:none!important;will-change:auto}}
+</style>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('#entry3d-canvas');
+  const host = document.querySelector<HTMLElement>('#entry3d-scene');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let alreadySeen = document.documentElement.classList.contains('skip-intro');
+  try { alreadySeen ||= sessionStorage.getItem('isivoltpro-intro-seen') === '1'; } catch (_) {}
+
+  const mountEntry3D = async () => {
+    if (!canvas || !host || reduced || alreadySeen) return;
+    const THREE = await import('three');
+    const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
+    const intro = document.querySelector<HTMLElement>('#intro');
+    if (intro?.classList.contains('is-done')) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(31, 1, 0.1, 100);
+    camera.position.set(0, 0.78, 6.7);
+    camera.lookAt(0, -0.10, 0);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xcbd6ff, 3.6));
+    const key = new THREE.PointLight(0x5269ff, 30, 20); key.position.set(-3, 4, 5); scene.add(key);
+    const magenta = new THREE.PointLight(0xf04acb, 21, 16); magenta.position.set(3, 1, 4); scene.add(magenta);
+    const cyan = new THREE.PointLight(0x36d8ea, 20, 15); cyan.position.set(-2, -2, 4); scene.add(cyan);
+    const coreGlow = new THREE.PointLight(0xa8bdff, 10, 7); coreGlow.position.set(0, .1, 2); scene.add(coreGlow);
+
+    const group = new THREE.Group(); group.rotation.x = -0.055; scene.add(group);
+
+    const prismGeometry = new RoundedBoxGeometry(2.34, 2.34, 1.78, 7, .16);
+    const prismMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xa9b6ff,
+      transparent: true,
+      opacity: .26,
+      transmission: .58,
+      thickness: .82,
+      roughness: .085,
+      metalness: 0,
+      ior: 1.31,
+      clearcoat: .68,
+      clearcoatRoughness: .045,
+      emissive: 0x4258b8,
+      emissiveIntensity: .065,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const prism = new THREE.Mesh(prismGeometry, prismMaterial);
+    prism.position.set(0, .02, -.28);
+    prism.rotation.set(.09, -.14, .018);
+    prism.renderOrder = 0;
+    group.add(prism);
+
+    const middleGeometry = new RoundedBoxGeometry(2.08, 2.08, 1.60, 6, .14);
+    const middleMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xc4cbff,
+      transparent: true,
+      opacity: .11,
+      transmission: .62,
+      thickness: .58,
+      roughness: .07,
+      ior: 1.26,
+      clearcoat: .54,
+      clearcoatRoughness: .04,
+      emissive: 0x6158c7,
+      emissiveIntensity: .038,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const middlePrism = new THREE.Mesh(middleGeometry, middleMaterial);
+    middlePrism.position.set(.015, .02, -.19);
+    middlePrism.rotation.set(.082, -.122, .015);
+    middlePrism.renderOrder = 1;
+    group.add(middlePrism);
+
+    const innerGeometry = new RoundedBoxGeometry(1.80, 1.80, 1.40, 6, .12);
+    const innerMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xd8e2ff,
+      transparent: true,
+      opacity: .075,
+      transmission: .68,
+      thickness: .44,
+      roughness: .055,
+      ior: 1.23,
+      clearcoat: .48,
+      clearcoatRoughness: .04,
+      emissive: 0x746bd0,
+      emissiveIntensity: .025,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const innerPrism = new THREE.Mesh(innerGeometry, innerMaterial);
+    innerPrism.position.set(.03, .025, -.08);
+    innerPrism.rotation.set(.075, -.105, .012);
+    innerPrism.renderOrder = 2;
+    group.add(innerPrism);
+
+    const prismEdges = new THREE.LineSegments(
+      new THREE.EdgesGeometry(prismGeometry, 28),
+      new THREE.LineBasicMaterial({ color: 0xf2f7ff, transparent: true, opacity: .34 })
+    );
+    prismEdges.position.copy(prism.position);
+    prismEdges.rotation.copy(prism.rotation);
+    prismEdges.renderOrder = 5;
+    group.add(prismEdges);
+
+    const opticalDepth = new THREE.Group();
+    opticalDepth.position.set(0, .02, -.16);
+    opticalDepth.rotation.set(.08, -.12, .014);
+    group.add(opticalDepth);
+
+    const opticalSheets = [
+      { z: .44, rotation: -.16, color: 0xeaf7ff, opacity: .075, width: 1.64, height: 1.72 },
+      { z: .06, rotation: .12, color: 0xb8f2ff, opacity: .052, width: 1.72, height: 1.58 },
+      { z: -.38, rotation: -.09, color: 0xd8ceff, opacity: .045, width: 1.60, height: 1.66 },
+    ];
+    opticalSheets.forEach(({ z, rotation, color, opacity, width, height }, index) => {
+      const sheet = new THREE.Mesh(
+        new THREE.PlaneGeometry(width, height),
+        new THREE.MeshBasicMaterial({
+          color,
+          transparent: true,
+          opacity,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+        })
+      );
+      sheet.position.z = z;
+      sheet.rotation.z = rotation;
+      sheet.renderOrder = 3 + index * .1;
+      opticalDepth.add(sheet);
+    });
+
+    const causticMaterial = new THREE.MeshBasicMaterial({
+      color: 0xdafcff,
+      transparent: true,
+      opacity: .16,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const caustic = new THREE.Mesh(new THREE.PlaneGeometry(1.36, .055), causticMaterial);
+    caustic.position.set(.02, -.32, .66);
+    caustic.rotation.z = -.48;
+    caustic.renderOrder = 4.5;
+    opticalDepth.add(caustic);
+
+    const depthEdgeMaterial = new THREE.MeshBasicMaterial({
+      color: 0xa7eaff,
+      transparent: true,
+      opacity: .11,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const depthEdge = new THREE.Mesh(new THREE.PlaneGeometry(.045, 1.46), depthEdgeMaterial);
+    depthEdge.position.set(-.48, .03, .22);
+    depthEdge.rotation.z = .31;
+    depthEdge.renderOrder = 4.4;
+    opticalDepth.add(depthEdge);
+
+    const logo = new THREE.Group();
+    const logoWhite = new THREE.MeshStandardMaterial({color:0xffffff,roughness:.13,metalness:.04,emissive:0xf7fbff,emissiveIntensity:.38});
+    const logoCyan = new THREE.MeshStandardMaterial({color:0xbff4ff,roughness:.14,metalness:.03,emissive:0x62dfff,emissiveIntensity:.32});
+    const logoViolet = new THREE.MeshStandardMaterial({color:0xd6c9ff,roughness:.14,metalness:.03,emissive:0x9a78ff,emissiveIntensity:.30});
+    const blockGeometry = new RoundedBoxGeometry(.64,.64,.64,4,.075);
+    const logoBlocks = [
+      { p:[-.31,.25,.02], r:[.38,.66,.12], m:logoCyan },
+      { p:[.31,.25,-.03], r:[.36,.80,.10], m:logoWhite },
+      { p:[0,-.31,.08], r:[.34,.70,.14], m:logoViolet },
+    ];
+    logoBlocks.forEach(({p,r,m})=>{const block=new THREE.Mesh(blockGeometry,m);block.position.set(p[0],p[1],p[2]);block.rotation.set(r[0],r[1],r[2]);logo.add(block)});
+    logo.position.set(0,.045,.66);
+    logo.scale.setScalar(.72);
+    group.add(logo);
+
+    [1.52,1.78,2.02].forEach((radius,index)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,.018+index*.007,12,110),new THREE.MeshBasicMaterial({color:index===1?0x45cad8:0x6680ff,transparent:true,opacity:index===1?.24:.21}));ring.rotation.x=Math.PI/2.12;ring.rotation.z=index*.20;ring.position.y=-1.16-index*.065;ring.scale.y=.50;group.add(ring)});
+
+    intro?.classList.add('has-webgl-prism');
+    const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(Math.max(1,rect.width),Math.max(1,rect.height),false);camera.aspect=Math.max(1,rect.width)/Math.max(1,rect.height);camera.updateProjectionMatrix()};
+    resize(); const ro=new ResizeObserver(resize);ro.observe(canvas);
+    let pointerX=0,pointerY=0,smoothX=0,smoothY=0,raf=0;
+    const onPointer=(event:PointerEvent)=>{const rect=host.getBoundingClientRect();pointerX=((event.clientX-rect.left)/Math.max(1,rect.width)-.5)*2;pointerY=((event.clientY-rect.top)/Math.max(1,rect.height)-.5)*2};
+    const onPointerLeave=()=>{pointerX=0;pointerY=0};
+    host.addEventListener('pointermove',onPointer,{passive:true});
+    host.addEventListener('pointerleave',onPointerLeave,{passive:true});
+    const clock=new THREE.Clock();
+    const animate=()=>{const t=clock.getElapsedTime();smoothX+=(pointerX-smoothX)*.045;smoothY+=(pointerY-smoothY)*.045;host.style.setProperty('--entry-core-x',`${smoothX*-5}px`);host.style.setProperty('--entry-core-y',`${smoothY*-3}px`);host.style.setProperty('--entry-near-x',`${smoothX*10}px`);host.style.setProperty('--entry-near-y',`${smoothY*7}px`);host.style.setProperty('--entry-mid-x',`${smoothX*6}px`);host.style.setProperty('--entry-mid-y',`${smoothY*4}px`);host.style.setProperty('--entry-far-x',`${smoothX*3}px`);host.style.setProperty('--entry-far-y',`${smoothY*2}px`);group.rotation.y+=((pointerX*.075)-group.rotation.y)*.035;group.rotation.x+=((-.055-pointerY*.035)-group.rotation.x)*.035;group.position.y=Math.sin(t*.85)*.05;logo.rotation.y=Math.sin(t*.72)*.055;opticalDepth.rotation.z=.014+Math.sin(t*.34)*.012;caustic.position.x=.02+Math.sin(t*.62)*.08;causticMaterial.opacity=.13+(Math.sin(t*.88)+1)*.025;depthEdgeMaterial.opacity=.085+(Math.sin(t*.72+.8)+1)*.016;prism.rotation.y=-.14+Math.sin(t*.48)*.022;middlePrism.rotation.y=-.122+Math.sin(t*.52+.4)*.019;innerPrism.rotation.y=-.105+Math.sin(t*.55+.8)*.018;prismEdges.rotation.y=prism.rotation.y;renderer.render(scene,camera);raf=requestAnimationFrame(animate)};
+    animate();
+
+    const clean=()=>{cancelAnimationFrame(raf);host.removeEventListener('pointermove',onPointer);host.removeEventListener('pointerleave',onPointerLeave);ro.disconnect();scene.traverse((object:any)=>{object.geometry?.dispose?.();if(object.material){const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach((material:any)=>material.dispose?.())}});renderer.dispose();intro?.classList.remove('has-webgl-prism')};
+    intro?.addEventListener('transitionend',(event)=>{if((event.target as HTMLElement).classList.contains('is-done'))clean()},{once:true});
+  };
+
+  void mountEntry3D();
+</script>

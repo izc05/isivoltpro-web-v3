@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Crecimiento progresivo de IsiVoltPro</title>
+  <desc id="desc">Composición conceptual con tres etapas: autónomo, pequeño equipo y empresa, conectadas por una misma base de trabajo.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f7f9ff"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#25c7b8"/><stop offset=".42" stop-color="#245cff"/><stop offset=".7" stop-color="#744aff"/><stop offset="1" stop-color="#ef43ac"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#26355f" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="44" fill="url(#bg)"/>
+  <circle cx="1020" cy="90" r="170" fill="#f3efff" opacity=".7"/>
+  <circle cx="160" cy="650" r="190" fill="#eaf9f3" opacity=".75"/>
+  <text x="72" y="92" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#66728f">UNA MISMA BASE · TRES FORMAS DE CRECER</text>
+  <text x="72" y="145" font-family="Arial,sans-serif" font-size="40" font-weight="800" fill="#111a34">Empieza pequeño. Amplía cuando lo necesites.</text>
+  <path d="M180 520 C350 450 520 455 695 372 S930 280 1050 230" fill="none" stroke="url(#line)" stroke-width="12" stroke-linecap="round" opacity=".85"/>
+  <g filter="url(#shadow)">
+    <rect x="80" y="260" width="300" height="310" rx="34" fill="#fff" stroke="#e3e8f2"/>
+    <rect x="450" y="205" width="300" height="310" rx="34" fill="#fff" stroke="#d9d9fb"/>
+    <rect x="820" y="150" width="300" height="310" rx="34" fill="#fff" stroke="#eadcf5"/>
+  </g>
+  <g font-family="Arial,sans-serif">
+    <circle cx="130" cy="315" r="24" fill="#eaf9f3"/><text x="130" y="324" text-anchor="middle" font-size="25" font-weight="800" fill="#159f71">1</text>
+    <text x="170" y="322" font-size="25" font-weight="800" fill="#111a34">Autónomo</text>
+    <text x="120" y="375" font-size="18" fill="#66728f">Clientes · Activos · OT</text><text x="120" y="410" font-size="18" fill="#66728f">Preventivos · QR · Histórico</text>
+    <rect x="120" y="455" width="205" height="58" rx="18" fill="#f3fbf8"/><text x="222" y="490" text-anchor="middle" font-size="16" font-weight="700" fill="#157d5d">Control esencial</text>
+
+    <circle cx="500" cy="260" r="24" fill="#eef3ff"/><text x="500" y="269" text-anchor="middle" font-size="25" font-weight="800" fill="#245cff">2</text>
+    <text x="540" y="267" font-size="25" font-weight="800" fill="#111a34">Equipo</text>
+    <text x="490" y="320" font-size="18" fill="#66728f">Usuarios · Asignaciones</text><text x="490" y="355" font-size="18" fill="#66728f">Coordinación · Documentación</text>
+    <rect x="490" y="400" width="205" height="58" rx="18" fill="#f3f5ff"/><text x="592" y="435" text-anchor="middle" font-size="16" font-weight="700" fill="#2450c9">Trabajo compartido</text>
+
+    <circle cx="870" cy="205" r="24" fill="#f5efff"/><text x="870" y="214" text-anchor="middle" font-size="25" font-weight="800" fill="#744aff">3</text>
+    <text x="910" y="212" font-size="25" font-weight="800" fill="#111a34">Empresa</text>
+    <text x="860" y="265" font-size="18" fill="#66728f">Más sedes · Más permisos</text><text x="860" y="300" font-size="18" fill="#66728f">Módulos · Implantación</text>
+    <rect x="860" y="345" width="205" height="58" rx="18" fill="#faf2ff"/><text x="962" y="380" text-anchor="middle" font-size="16" font-weight="700" fill="#7440bd">Operación ampliada</text>
+  </g>
+  <rect x="330" y="620" width="540" height="54" rx="27" fill="#fff" stroke="#e2e7f1"/>
+  <circle cx="374" cy="647" r="8" fill="#25c7b8"/><text x="398" y="654" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#52607e">Sin precios ficticios · alcance validado mediante demo y piloto</text>
+</svg>

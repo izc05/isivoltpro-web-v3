@@ -1,0 +1,353 @@
+/* Visual corrections discovered from real Chromium screenshots.
+   Desktop rules refine proportions and depth against the approved SaaS board.
+   Mobile rules keep every element inside 360 / 390 / 430 px viewports. */
+
+@media (min-width: 861px) {
+  .site-header__inner {
+    min-height: 60px !important;
+    gap: 24px;
+  }
+
+  .site-header .brand {
+    gap: 8px;
+    font-size: 16px;
+    letter-spacing: -.035em;
+  }
+
+  .site-header .brand__icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(82,89,255,.16);
+  }
+
+  .site-header .brand__icon::after {
+    font-size: 10px;
+  }
+
+  .site-header .nav {
+    gap: 24px;
+    font-size: 12px;
+  }
+
+  .site-header .header-actions {
+    gap: 8px;
+  }
+
+  .site-header .header-actions > .btn {
+    min-height: 44px;
+    padding-inline: 15px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+
+  .page-footer {
+    padding-top: 38px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .page-footer .brand {
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .page-footer .brand__icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+  }
+
+  .page-footer p,
+  .page-footer a {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 981px) {
+  .board-modules .modules-hero {
+    min-height: 470px;
+    padding: 54px 0 32px;
+  }
+
+  .board-modules .modules-hero__grid {
+    grid-template-columns: .78fr 1.22fr;
+    gap: 48px;
+  }
+
+  .board-modules .modules-hero h1 {
+    max-width: 430px;
+    margin: 12px 0 14px;
+    font-size: clamp(39px, 3.3vw, 49px);
+    line-height: 1.01;
+    letter-spacing: -.057em;
+  }
+
+  .board-modules .modules-hero p {
+    max-width: 440px;
+    font-size: 12px;
+    line-height: 1.62;
+  }
+
+  .board-modules .page-hero__actions {
+    margin-top: 21px;
+  }
+
+  .board-modules .module-stack {
+    min-height: 345px;
+  }
+
+  .board-modules .module-window--back {
+    inset: 38px 8px 54px 84px;
+  }
+
+  .board-modules .module-window--mid {
+    inset: 18px 56px 42px 42px;
+  }
+
+  .board-modules .module-window--front {
+    inset: 49px 21px 18px 72px;
+  }
+
+  .board-modules .module-chip {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    font-size: 18px;
+  }
+
+  .board-modules .modules-cards {
+    padding: 25px 0 52px;
+  }
+
+  .board-modules .modules-cards__head {
+    display: none;
+  }
+
+  .board-modules .board-module-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .board-modules .board-module-card {
+    min-height: 148px;
+    padding: 17px;
+    border-radius: 15px;
+  }
+
+  .board-modules .board-module-card i {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+  }
+
+  .board-modules .board-module-card h3 {
+    margin: 13px 0 6px;
+    font-size: 13px;
+  }
+
+  .board-modules .board-module-card p {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .board-modules .board-module-card small {
+    margin-top: 11px;
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 1051px) {
+  .saas-home .saas-trust {
+    margin-top: 34px;
+    padding-top: 20px;
+  }
+
+  .saas-home .saas-trust__row {
+    gap: 24px;
+    color: #8d95a4;
+    font-size: 11px;
+    letter-spacing: .005em;
+  }
+
+  .saas-home .saas-trust__row span {
+    position: relative;
+    padding-left: 15px;
+  }
+
+  .saas-home .saas-trust__row span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid #aeb5c3;
+    border-radius: 3px;
+    transform: translateY(-50%) rotate(45deg);
+    opacity: .72;
+  }
+
+  .saas-home .saas-modules {
+    padding-top: 54px;
+    padding-bottom: 58px;
+  }
+
+  .saas-home .saas-modules__body {
+    grid-template-columns: minmax(0, 1.18fr) 390px;
+    gap: 28px;
+    margin-top: 28px;
+  }
+
+  .saas-home .saas-phone-scene {
+    min-height: 354px;
+  }
+
+  .saas-home .saas-phone {
+    left: 58px;
+    top: -4px;
+    width: 202px;
+    height: 365px;
+    transform: rotate(-7deg);
+  }
+
+  .saas-home .saas-qr-card {
+    right: 12px;
+    top: 142px;
+    width: 126px;
+  }
+
+  .saas-home .saas-results__grid {
+    grid-template-columns: .96fr 1.04fr;
+    gap: 56px;
+  }
+
+  .saas-home .saas-results h2 {
+    max-width: 540px;
+    font-size: clamp(39px, 3.15vw, 48px);
+  }
+
+  .saas-home .saas-metric-grid {
+    gap: 14px;
+  }
+
+  .saas-home .saas-metric {
+    min-height: 154px;
+  }
+}
+
+.saas-home .saas-dark {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 74% 40%, rgba(101, 72, 192, .24), transparent 31%),
+    linear-gradient(115deg, #070c15, #10182b 50%, #08111e);
+}
+
+.saas-home .saas-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(7,12,21,.94) 0%, rgba(7,12,21,.64) 41%, rgba(7,12,21,.08) 76%);
+  pointer-events: none;
+}
+
+.saas-home .saas-dark::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  right: -2%;
+  bottom: -12%;
+  width: 78%;
+  height: 116%;
+  background: url('../media/cta-mesh-isivoltpro.svg') center bottom / cover no-repeat;
+  opacity: .92;
+  pointer-events: none;
+}
+
+.saas-home .saas-dark__grid {
+  position: relative;
+  z-index: 1;
+}
+
+.saas-home .saas-dark-metric {
+  border-color: rgba(255,255,255,.14);
+  background: linear-gradient(145deg, rgba(105,75,196,.23), rgba(47,77,123,.16));
+  box-shadow: 0 18px 42px rgba(0,0,0,.18);
+}
+
+@media (max-width: 430px) {
+  .saas-home .saas-shell { width: calc(100% - 24px); max-width: 100%; }
+  .saas-home .saas-hero__grid,
+  .saas-home .saas-hero__copy,
+  .saas-home .saas-stage,
+  .saas-home .saas-trust,
+  .saas-home .saas-actions { min-width: 0; max-width: 100%; }
+
+  .saas-home .saas-badge {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    font-size: 10px;
+  }
+
+  .saas-home .saas-hero__copy h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(40px, 10.5vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -.058em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .saas-home .saas-hero__lead {
+    width: 100%;
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .saas-home .saas-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .saas-home .saas-actions .btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .saas-home .saas-trust {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .saas-home .saas-trust__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .saas-home .saas-trust__row span {
+    min-width: 0;
+    overflow-wrap: normal;
+  }
+
+  .saas-home .saas-dark::after {
+    right: -35%;
+    width: 145%;
+    opacity: .58;
+  }
+}
+
+@media (max-width: 370px) {
+  .saas-home .saas-hero__copy h1 { font-size: 39px; }
+  .saas-home .saas-trust__row { grid-template-columns: 1fr; }
+}

@@ -1,4 +1,58 @@
 ---
-import '../styles/global.css';
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
+
+const base = import.meta.env.BASE_URL;
+const preventive = `${base}modulos/mantenimiento-preventivo/`;
+const modules = `${base}aplicaciones/`;
 ---
-<!doctype html><html lang="es"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>IsiVoltPro · Mantenimiento</title></head><body><main class="shell" style="padding:96px 0"><p style="color:#6ea0ff;letter-spacing:.2em;font-size:12px">ISIVOLTPRO V3</p><h1 style="font-size:clamp(48px,7vw,92px);margin:0">Mantenimiento</h1><p style="color:#9caabd">Página reservada para su fase correspondiente.</p></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo
+    title="Mantenimiento · IsiVoltPro"
+    description="Acceso de compatibilidad a la nueva sección de mantenimiento preventivo de IsiVoltPro."
+    path={`${base}mantenimiento/`}
+    noindex={true}
+  />
+  <style is:inline>
+    .legacy-maintenance{min-height:72svh;display:grid;align-items:center;padding:72px 0;background:radial-gradient(circle at 78% 36%,rgba(99,84,225,.13),transparent 28%),radial-gradient(circle at 91% 66%,rgba(44,184,139,.09),transparent 20%),#fff;overflow:hidden}.legacy-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:66px;align-items:center}.legacy-copy h1{margin:14px 0 18px;font:800 clamp(48px,4.7vw,68px)/.98 var(--v3-font-display,system-ui);letter-spacing:-.06em}.legacy-copy p{max-width:560px;color:#727d91;line-height:1.72}.legacy-copy .btn--primary{background:#111827;border-color:#111827;color:#fff}.legacy-workspace{position:relative;min-height:430px}.legacy-window{position:absolute;inset:20px 30px 26px 20px;border:1px solid #e4e8f0;border-radius:24px;background:#fff;box-shadow:0 30px 74px rgba(56,65,108,.14);overflow:hidden}.legacy-bar{height:43px;display:flex;align-items:center;gap:6px;padding:0 14px;border-bottom:1px solid #edf0f5}.legacy-bar i{width:7px;height:7px;border-radius:50%;background:#d9deea}.legacy-body{display:grid;grid-template-columns:108px 1fr;height:calc(100% - 43px)}.legacy-side{padding:17px 10px;background:#fafbfe;border-right:1px solid #edf0f5}.legacy-side b{display:block;margin-bottom:16px;font-size:10px}.legacy-side span{display:block;margin:7px 0;padding:7px;border-radius:7px;color:#838c9e;font-size:8px}.legacy-side span:nth-of-type(3){background:#f1efff;color:#6954d8;font-weight:800}.legacy-main{padding:19px}.legacy-head{display:flex;justify-content:space-between;gap:14px;align-items:center}.legacy-head strong{font-size:17px}.legacy-head small{padding:6px 9px;border-radius:999px;background:#eaf9f3;color:#168f69;font-weight:800}.legacy-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0}.legacy-kpis div{padding:11px;border:1px solid #eceef4;border-radius:11px}.legacy-kpis small{display:block;color:#919aa9;font-size:7px}.legacy-kpis b{display:block;margin-top:4px;font-size:18px}.legacy-list{display:grid;gap:7px}.legacy-list div{display:grid;grid-template-columns:1fr auto;align-items:center;padding:9px 10px;border:1px solid #edf0f5;border-radius:9px;font-size:8px}.legacy-list em{font-style:normal;color:#6f798c}.legacy-list span{padding:4px 6px;border-radius:999px;background:#f1efff;color:#6752d7;font-weight:800}.legacy-chip{position:absolute;z-index:3;border:1px solid #e5e8f0;background:#fff;box-shadow:0 14px 34px rgba(50,59,103,.14)}.legacy-chip--calendar{right:0;top:52px;width:73px;height:73px;display:grid;place-items:center;border-radius:21px;color:#4f73dc;font-size:25px}.legacy-chip--done{right:22px;bottom:8px;padding:12px 16px;border-radius:15px;color:#159f71;font-size:10px;font-weight:900}.legacy-chip--done small{display:block;margin-top:2px;color:#8c95a5;font-size:7px;font-weight:600}@media(max-width:900px){.legacy-grid{grid-template-columns:1fr}.legacy-workspace{min-height:390px}}@media(max-width:560px){.legacy-maintenance{padding:54px 0}.legacy-copy h1{font-size:clamp(42px,12vw,56px)}.legacy-workspace{min-height:350px}.legacy-window{inset:12px 6px 24px}.legacy-body{grid-template-columns:72px 1fr}.legacy-side{padding:13px 5px}.legacy-main{padding:12px}.legacy-kpis{grid-template-columns:1fr 1fr}.legacy-kpis div:last-child{display:none}.legacy-chip--calendar{width:53px;height:53px}.legacy-chip--done{right:7px}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="page-main">
+    <section class="legacy-maintenance">
+      <div class="page-shell legacy-grid">
+        <div class="legacy-copy">
+          <span class="eyebrow">Ruta actualizada</span>
+          <h1>El mantenimiento ahora vive<br /><span class="gradient-text">dentro del producto.</span></h1>
+          <p>Hemos reorganizado la Web V3 para explicar cada problema de forma más clara. La planificación, las revisiones periódicas y el histórico están ahora integrados en el módulo de Mantenimiento preventivo.</p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href={preventive}>Ver Mantenimiento preventivo →</a>
+            <a class="btn" href={modules}>Explorar módulos</a>
+          </div>
+        </div>
+        <div class="legacy-workspace" aria-label="Vista conceptual del mantenimiento preventivo">
+          <div class="legacy-window">
+            <div class="legacy-bar"><i></i><i></i><i></i></div>
+            <div class="legacy-body">
+              <aside class="legacy-side"><b>IsiVoltPro</b><span>Resumen</span><span>Activos</span><span>Preventivo</span><span>OT</span><span>Histórico</span></aside>
+              <div class="legacy-main">
+                <div class="legacy-head"><strong>Mantenimiento preventivo</strong><small>Al día</small></div>
+                <div class="legacy-kpis"><div><small>Programados</small><b>18</b></div><div><small>Esta semana</small><b>6</b></div><div><small>Vencidos</small><b>0</b></div></div>
+                <div class="legacy-list"><div><em>UTA-04 · Revisión mensual</em><span>Hoy</span></div><div><em>Cuadro QGBT-02 · Inspección</em><span>26 ago</span></div><div><em>Bomba B-07 · Preventivo</em><span>29 ago</span></div><div><em>Climatizadora CL-03 · Filtros</em><span>2 sep</span></div></div>
+              </div>
+            </div>
+          </div>
+          <span class="legacy-chip legacy-chip--calendar" aria-hidden="true">◫</span>
+          <span class="legacy-chip legacy-chip--done" aria-hidden="true">✓ Histórico preparado<small>resultado + evidencias</small></span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

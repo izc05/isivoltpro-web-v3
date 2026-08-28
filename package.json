@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "check": "astro check && astro build",
-    "preview": "astro preview --host 0.0.0.0"
+    "check": "astro check && astro build && node scripts/v3-commercial-safety.mjs dist",
+    "preview": "astro preview --host 0.0.0.0",
+    "smoke:staging": "node scripts/v3-staging-smoke.mjs",
+    "staging:prepare": "bash scripts/v3-staging-prepare.sh",
+    "staging:start": "bash scripts/v3-staging-run.sh",
+    "staging:stop": "bash scripts/v3-staging-stop.sh"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",

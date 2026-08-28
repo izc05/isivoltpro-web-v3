@@ -1,0 +1,48 @@
+name: Preparar preview móvil V3
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout V3 comercial
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar proyecto
+        run: npm install --no-audit --no-fund
+
+      - name: Construir preview V3 aislado
+        env:
+          PUBLIC_SITE_URL: https://izc05.github.io
+          PUBLIC_BASE_PATH: /isivoltpro-web-v3/v3-preview
+        run: npm run check
+
+      - name: Blindar preview contra indexación
+        shell: bash
+        run: |
+          set -euo pipefail
+          find dist -type f -name '*.html' -print0 | xargs -0 sed -i 's/content="index,follow,max-image-preview:large"/content="noindex,nofollow"/g'
+          test -f dist/index.html
+          test -f dist/producto/index.html
+          test -f dist/contacto/index.html
+          grep -q 'noindex,nofollow' dist/index.html
+
+      - name: Guardar sitio de preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v3-preview-site
+          path: dist
+          if-no-files-found: error

@@ -1,0 +1,107 @@
+name: QA móvil V3
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar proyecto
+        run: npm install --no-audit --no-fund
+
+      - name: Construir V3 para QA local
+        run: npm run build
+
+      - name: Instalar Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Levantar preview local
+        run: |
+          nohup npm run preview -- --port 4321 > /tmp/isivoltpro-v3-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4321/isivoltpro-web-v3/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/isivoltpro-v3-preview.log
+          exit 1
+
+      - name: Auditar 360 / 390 / 430 px y capturar pantallas
+        env:
+          V3_PREVIEW_URL: http://127.0.0.1:4321/isivoltpro-web-v3/
+          V3_MOBILE_QA_DIR: mobile-qa
+        run: python scripts/v3-mobile-qa.py
+
+      - name: Guardar capturas móviles
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v3-mobile-qa
+          path: mobile-qa
+          if-no-files-found: warn
+
+  content-admin-preview-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar proyecto
+        run: npm install --no-audit --no-fund
+
+      - name: Construir preview administrativo aislado
+        env:
+          PUBLIC_V3_CONTENT_ADMIN_PREVIEW: 'true'
+        run: npm run build
+
+      - name: Instalar Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Levantar preview administrativo aislado
+        run: |
+          nohup npm run preview -- --port 4322 > /tmp/isivoltpro-v3-admin-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4322/isivoltpro-web-v3/gestion-contenido/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/isivoltpro-v3-admin-preview.log
+          exit 1
+
+      - name: Auditar gestor seguro en 390 y 1440 px
+        env:
+          V3_PREVIEW_URL: http://127.0.0.1:4322/isivoltpro-web-v3/
+          V3_CONTENT_ADMIN_QA_DIR: content-admin-qa
+        run: python scripts/v3-content-admin-qa.py
+
+      - name: Guardar capturas del gestor seguro
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v3-content-admin-qa
+          path: content-admin-qa
+          if-no-files-found: warn

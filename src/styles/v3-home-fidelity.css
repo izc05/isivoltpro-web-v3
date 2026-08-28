@@ -1,0 +1,12 @@
+@import './v3-entry-mobile-final.css';
+
+@media (min-width:1051px){
+  .saas-home .saas-hero__grid{grid-template-columns:1fr 1fr;gap:48px}
+  .saas-home .saas-hero__copy h1{max-width:610px;font-size:clamp(50px,4vw,56px);line-height:1.01}
+  .saas-home .saas-module-grid{grid-template-columns:repeat(7,1fr);gap:9px}
+  .saas-home .saas-module{min-height:148px;padding:13px 11px;border-radius:14px}
+  .saas-home .saas-module i{width:31px;height:31px;border-radius:10px;font-size:13px}
+  .saas-home .saas-module h3{margin-top:11px;font-size:10px}
+  .saas-home .saas-module p{font-size:7.5px}
+  .saas-home .saas-phone-scene{min-height:390px}
+}

@@ -1,0 +1,262 @@
+name: Validar rediseño comercial V3
+
+on:
+  push:
+    branches:
+      - feat/v3-smb-commercial-redesign
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Validar scripts de QA y staging
+        run: |
+          node --check scripts/v3-staging-smoke.mjs
+          node --check scripts/v3-link-audit.mjs
+          bash -n scripts/v3-staging-prepare.sh
+          bash -n scripts/v3-staging-run.sh
+          bash -n scripts/v3-staging-stop.sh
+      - run: npm run check
+      - name: Auditar enlaces internos comerciales
+        env:
+          PUBLIC_BASE_PATH: /isivoltpro-web-v3
+        run: node scripts/v3-link-audit.mjs dist
+      - name: Validar rutas y presupuesto comercial
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required=(
+            dist/index.html
+            dist/producto/index.html
+            dist/soluciones/index.html
+            dist/app-mantenimiento/index.html
+            dist/aplicaciones/index.html
+            dist/apps-especializadas/index.html
+            dist/alcance/index.html
+            dist/demo/index.html
+            dist/piloto/index.html
+            dist/implantacion/index.html
+            dist/seguridad/index.html
+            dist/de-whatsapp-excel-a-isivoltpro/index.html
+            dist/mantenimiento/index.html
+            dist/modulos/ordenes-de-trabajo/index.html
+            dist/modulos/activos/index.html
+            dist/sectores/autonomos-tecnicos/index.html
+            dist/sectores/empresas-mantenedoras/index.html
+            dist/recursos/dejar-whatsapp-excel-mantenimiento/index.html
+            dist/recursos/organizar-avisos-mantenimiento/index.html
+            dist/recursos/cerrar-ot-historico-util/index.html
+            dist/recursos/piloto-mantenimiento-digital/index.html
+            dist/recursos/orden-trabajo-util/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
+            dist/faq/index.html
+            dist/contacto/index.html
+            dist/sitemap.xml
+            dist/images/home/isivoltpro-industrial-core.webp
+          )
+
+          for file in "${required[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "::error::Falta ruta o recurso comercial construido: $file"
+              exit 1
+            fi
+          done
+
+          if find dist -type f -name '*.mp4' -print -quit | grep -q .; then
+            echo "::error::El build comercial vuelve a incluir MP4. Revisar antes de aceptar el incremento de peso."
+            find dist -type f -name '*.mp4' -print
+            exit 1
+          fi
+
+          # La entrada 3D aprobada vive únicamente en Home. El resto del sitio comercial
+          # debe seguir siendo HTML/CSS ligero y no incluir la escena ni referencias WebGL.
+          if ! grep -q 'entry3d-canvas' dist/index.html; then
+            echo "::error::La Home no contiene la entrada 3D aprobada."
+            exit 1
+          fi
+
+          commercial_pages=(
+            dist/index.html
+            dist/producto/index.html
+            dist/soluciones/index.html
+            dist/app-mantenimiento/index.html
+            dist/aplicaciones/index.html
+            dist/apps-especializadas/index.html
+            dist/alcance/index.html
+            dist/demo/index.html
+            dist/piloto/index.html
+            dist/implantacion/index.html
+            dist/seguridad/index.html
+            dist/de-whatsapp-excel-a-isivoltpro/index.html
+            dist/precios/index.html
+            dist/recursos/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
+            dist/faq/index.html
+            dist/contacto/index.html
+          )
+
+          non_home_pages=(
+            dist/producto/index.html
+            dist/soluciones/index.html
+            dist/app-mantenimiento/index.html
+            dist/aplicaciones/index.html
+            dist/apps-especializadas/index.html
+            dist/alcance/index.html
+            dist/demo/index.html
+            dist/piloto/index.html
+            dist/implantacion/index.html
+            dist/seguridad/index.html
+            dist/de-whatsapp-excel-a-isivoltpro/index.html
+            dist/precios/index.html
+            dist/recursos/index.html
+            dist/blog/index.html
+            dist/blog/historico-util-empieza-al-cerrar-ot/index.html
+            dist/faq/index.html
+            dist/contacto/index.html
+          )
+
+          for page in "${non_home_pages[@]}"; do
+            if grep -qE 'entry3d-canvas|V3Entry3D|three\.module' "$page"; then
+              echo "::error::La página comercial $page está cargando la experiencia 3D de Home de forma inesperada."
+              exit 1
+            fi
+          done
+
+          for page in "${commercial_pages[@]}"; do
+            if ! grep -q 'Content-Security-Policy' "$page"; then
+              echo "::error::Falta CSP comercial en $page"
+              exit 1
+            fi
+            if ! grep -q "font-src 'self' data:" "$page"; then
+              echo "::error::La CSP de $page no restringe las fuentes a recursos locales."
+              exit 1
+            fi
+            if grep -q 'Web V3 en desarrollo comercial' "$page"; then
+              echo "::error::Copy interno de desarrollo visible en $page"
+              exit 1
+            fi
+            if ! grep -q 'Saltar al contenido' "$page"; then
+              echo "::error::Falta skip link accesible en $page"
+              exit 1
+            fi
+          done
+
+          telemetry_pattern='PUBLIC_POSTHOG_KEY|PUBLIC_SENTRY_DSN|sentry\.io|posthog-js|@sentry/|cdn\.posthog\.com|eu\.posthog\.com|us\.posthog\.com|app\.posthog\.com'
+          if grep -RniE "$telemetry_pattern" dist --include='*.html' --include='*.js' --include='*.css'; then
+            echo "::error::La V3 preproducción contiene integración técnica de telemetría externa aunque debe permanecer apagada hasta cerrar privacidad/consentimiento."
+            exit 1
+          fi
+
+          if ! grep -q 'noindex,nofollow' dist/mantenimiento/index.html; then
+            echo "::error::La ruta heredada /mantenimiento/ debe permanecer fuera de indexación."
+            exit 1
+          fi
+
+          if ! grep -q 'BreadcrumbList' dist/modulos/ordenes-de-trabajo/index.html; then
+            echo "::error::Falta breadcrumb estructurado en una landing profunda de módulos."
+            exit 1
+          fi
+          if ! grep -q 'BreadcrumbList' dist/blog/historico-util-empieza-al-cerrar-ot/index.html; then
+            echo "::error::Falta breadcrumb estructurado en una entrada profunda del blog."
+            exit 1
+          fi
+          if ! grep -q 'BlogPosting' dist/blog/historico-util-empieza-al-cerrar-ot/index.html; then
+            echo "::error::Falta schema BlogPosting en la entrada editorial de referencia."
+            exit 1
+          fi
+
+          sitemap_required=(
+            'producto/' 'soluciones/' 'app-mantenimiento/' 'aplicaciones/' 'apps-especializadas/'
+            'alcance/' 'demo/' 'piloto/' 'implantacion/' 'seguridad/' 'de-whatsapp-excel-a-isivoltpro/'
+            'modulos/ordenes-de-trabajo/' 'sectores/autonomos-tecnicos/'
+            'recursos/dejar-whatsapp-excel-mantenimiento/' 'recursos/organizar-avisos-mantenimiento/'
+            'recursos/cerrar-ot-historico-util/' 'recursos/piloto-mantenimiento-digital/'
+            'recursos/orden-trabajo-util/' 'blog/' 'blog/historico-util-empieza-al-cerrar-ot/' 'faq/'
+          )
+          for route in "${sitemap_required[@]}"; do
+            if ! grep -Fq "$route" dist/sitemap.xml; then
+              echo "::error::Falta $route en sitemap.xml"
+              exit 1
+            fi
+          done
+
+          sitemap_forbidden=(
+            '/lab-3d' '/acceso/</loc>' '/mantenimiento/</loc>' '/privacidad/</loc>' '/cookies/</loc>' '/aviso-legal/</loc>' '/gestion-contenido/'
+          )
+          for route in "${sitemap_forbidden[@]}"; do
+            if grep -Fq "$route" dist/sitemap.xml; then
+              echo "::error::Ruta no indexable presente en sitemap.xml: $route"
+              exit 1
+            fi
+          done
+
+          for page in dist/index.html dist/producto/index.html dist/soluciones/index.html dist/app-mantenimiento/index.html dist/apps-especializadas/index.html dist/alcance/index.html dist/demo/index.html dist/piloto/index.html dist/implantacion/index.html dist/seguridad/index.html dist/de-whatsapp-excel-a-isivoltpro/index.html dist/blog/index.html dist/blog/historico-util-empieza-al-cerrar-ot/index.html; do
+            if ! grep -q 'property="og:image"' "$page"; then
+              echo "::error::Falta og:image en $page"
+              exit 1
+            fi
+            if ! grep -q 'name="twitter:card" content="summary_large_image"' "$page"; then
+              echo "::error::Falta Twitter Card grande en $page"
+              exit 1
+            fi
+          done
+
+          if ! grep -q '<fieldset[^>]*disabled' dist/contacto/index.html; then
+            echo "::error::Contacto debe mantener los campos de datos personales desactivados hasta disponer de privacidad y backend definitivos."
+            exit 1
+          fi
+          if ! grep -q 'No introduzcas datos personales todavía' dist/contacto/index.html; then
+            echo "::error::Falta el aviso explícito de privacidad en la vista previa de Contacto."
+            exit 1
+          fi
+          if grep -Eq '<form[^>]+(action|method)=' dist/contacto/index.html; then
+            echo "::error::Contacto no debe configurar envío de formulario antes de conectar el canal comercial seguro."
+            exit 1
+          fi
+
+          # Presupuesto deliberadamente acotado: base comercial + workspace visual +
+          # hasta 128 KiB adicionales para el nuevo blog/editorial HTML. No se aceptan
+          # nuevos binarios pesados para justificar este margen.
+          dist_kb=$(du -sk dist | cut -f1)
+          max_kb=3392
+          if (( dist_kb > max_kb )); then
+            echo "::error::El build V3 ocupa ${dist_kb} KiB y supera el presupuesto de ${max_kb} KiB."
+            exit 1
+          fi
+
+          echo "Rutas comerciales: OK"
+          echo "Enlaces internos comerciales: OK"
+          echo "Ruta heredada de mantenimiento: OK"
+          echo "Breadcrumbs y skip link: OK"
+          echo "Blog y schema editorial: OK"
+          echo "Sitemap comercial limpio: OK"
+          echo "Preview social: OK"
+          echo "CSP y fuentes locales: OK"
+          echo "Telemetría externa desactivada: OK"
+          echo "Contacto sin captura de PII: OK"
+          echo "Sin copy interno: OK"
+          echo "Sin MP4 heredados: OK"
+          echo "Three.js limitado a la entrada 3D de Home: OK"
+          echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"
+      - name: Guardar build V3
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v3-commercial-dist
+          path: dist
+          if-no-files-found: error

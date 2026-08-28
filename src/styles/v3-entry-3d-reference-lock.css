@@ -1,0 +1,236 @@
+/* Reference-lock pass: when WebGL is active, the physical prism is the visual source of truth. */
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{
+  opacity:.23!important;
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.34) 0 7%,rgba(255,255,255,.045) 17% 38%,rgba(116,176,255,.055) 49%,rgba(255,255,255,.035) 61%,rgba(220,113,214,.025) 73%,rgba(91,220,229,.045) 100%)!important;
+  background-size:180% 180%!important;
+  background-position:18% 22%!important;
+  border-color:rgba(255,255,255,.78)!important;
+  box-shadow:
+    inset 12px 10px 26px rgba(255,255,255,.52),
+    inset -9px -11px 28px rgba(70,104,230,.055),
+    inset 0 0 0 1px rgba(151,207,255,.13),
+    0 24px 54px rgba(70,78,184,.065),
+    0 0 30px rgba(75,124,255,.04)!important;
+  filter:saturate(.96) contrast(1.025) brightness(1.025);
+  animation:entry-glass-specular 4.8s ease-in-out infinite alternate;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:before{
+  opacity:.48!important;
+  background:
+    linear-gradient(132deg,rgba(255,255,255,.62) 0 3%,rgba(255,255,255,.10) 12%,transparent 28%),
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,.42),transparent 24%),
+    radial-gradient(circle at 77% 78%,rgba(118,198,255,.10),transparent 28%)!important;
+  mix-blend-mode:screen;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after{
+  content:'';
+  position:absolute;
+  inset:9% 11% 11% 12%;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.52;
+  background:
+    linear-gradient(105deg,transparent 30%,rgba(255,255,255,.48) 45%,rgba(207,241,255,.18) 50%,transparent 61%),
+    radial-gradient(ellipse at 50% 94%,rgba(108,218,255,.12),transparent 47%);
+  background-size:220% 100%,100% 100%;
+  background-position:-90% 0,0 0;
+  filter:blur(.15px);
+  mix-blend-mode:screen;
+  animation:entry-glass-sweep 5.6s cubic-bezier(.45,.05,.22,1) infinite;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{opacity:.22!important;border-color:rgba(255,255,255,.58)!important}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(2){opacity:.13!important;border-color:rgba(211,242,255,.48)!important}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(3){opacity:.075!important;border-color:rgba(226,248,255,.42)!important}
+.entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.16!important;filter:blur(14px) saturate(.92)}
+.entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.13!important;filter:blur(18px)}
+.entry3d.entry3d.has-webgl-prism .entry3d__canvas{
+  opacity:.94;
+  filter:
+    saturate(.88)
+    brightness(1.04)
+    drop-shadow(0 30px 42px rgba(76,86,214,.18))
+    drop-shadow(0 0 23px rgba(78,181,255,.09))
+    drop-shadow(0 8px 11px rgba(255,255,255,.10));
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__pedestal{
+  box-shadow:
+    0 28px 58px rgba(54,78,157,.13),
+    0 0 38px rgba(86,210,255,.17),
+    0 0 54px rgba(125,83,255,.12) inset,
+    0 0 70px rgba(237,82,204,.055) inset!important;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after{
+  content:'';
+  position:absolute;
+  left:12%;right:12%;top:-12px;height:22px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(ellipse,rgba(195,242,255,.38),rgba(113,184,255,.08) 45%,transparent 72%);
+  filter:blur(6px);
+  opacity:.58;
+  animation:entry-caustic-breathe 3.8s ease-in-out infinite alternate;
+}
+
+/* Depth pass: the surrounding UI should feel suspended around the same optical core,
+   not pasted onto a flat hero. Keep transforms small so copy remains crisp. */
+.entry3d.has-webgl-prism .entry3d__scene{
+  perspective:1200px;
+  perspective-origin:50% 46%;
+  transform-style:preserve-3d;
+}
+.entry3d.has-webgl-prism .entry3d__core{
+  transform:translateZ(38px);
+  transform-style:preserve-3d;
+}
+.entry3d.has-webgl-prism .entry3d__float{
+  will-change:transform;
+  backface-visibility:hidden;
+  transition:box-shadow .45s ease,border-color .45s ease,filter .45s ease;
+}
+.entry3d.has-webgl-prism .entry3d__phone,
+.entry3d.has-webgl-prism .entry3d__orders{
+  animation:entry-orbit-near 6.6s ease-in-out infinite alternate;
+}
+.entry3d.has-webgl-prism .entry3d__analytics,
+.entry3d.has-webgl-prism .entry3d__qr-card{
+  animation:entry-orbit-mid 7.4s ease-in-out infinite alternate-reverse;
+}
+.entry3d.has-webgl-prism .entry3d__status,
+.entry3d.has-webgl-prism .entry3d__note{
+  animation:entry-orbit-far 8.2s ease-in-out infinite alternate;
+}
+.entry3d.has-webgl-prism .entry3d__gear,
+.entry3d.has-webgl-prism .entry3d__machines{
+  animation:entry-orbit-soft 9s ease-in-out infinite alternate-reverse;
+}
+.entry3d.has-webgl-prism .entry3d__phone,
+.entry3d.has-webgl-prism .entry3d__analytics{
+  filter:drop-shadow(0 18px 26px rgba(79,93,180,.10));
+}
+.entry3d.has-webgl-prism .entry3d__orders,
+.entry3d.has-webgl-prism .entry3d__qr-card,
+.entry3d.has-webgl-prism .entry3d__status,
+.entry3d.has-webgl-prism .entry3d__note{
+  box-shadow:0 18px 42px rgba(61,78,151,.10),0 2px 10px rgba(255,255,255,.65) inset;
+}
+.entry3d.has-webgl-prism .entry3d__network{
+  transform:translateZ(-34px) scale(.985);
+  opacity:.82;
+}
+.entry3d.has-webgl-prism .entry3d__heading,
+.entry3d.has-webgl-prism .entry3d__actions{
+  position:relative;
+  z-index:6;
+}
+
+@keyframes entry-glass-specular{
+  0%{background-position:18% 22%;filter:saturate(.94) contrast(1.015) brightness(1.02)}
+  100%{background-position:82% 66%;filter:saturate(.99) contrast(1.03) brightness(1.04)}
+}
+@keyframes entry-glass-sweep{
+  0%,16%{background-position:-90% 0,0 0;opacity:.25}
+  52%{opacity:.56}
+  82%,100%{background-position:140% 0,0 0;opacity:.29}
+}
+@keyframes entry-caustic-breathe{
+  from{transform:scaleX(.94);opacity:.44}
+  to{transform:scaleX(1.05);opacity:.64}
+}
+@keyframes entry-orbit-near{
+  from{transform:translate3d(-2px,-3px,34px) rotateX(.15deg) rotateY(-.35deg)}
+  to{transform:translate3d(4px,4px,44px) rotateX(-.25deg) rotateY(.45deg)}
+}
+@keyframes entry-orbit-mid{
+  from{transform:translate3d(2px,2px,21px) rotateX(-.12deg) rotateY(.28deg)}
+  to{transform:translate3d(-4px,-4px,29px) rotateX(.24deg) rotateY(-.38deg)}
+}
+@keyframes entry-orbit-far{
+  from{transform:translate3d(-1px,2px,12px)}
+  to{transform:translate3d(3px,-3px,18px)}
+}
+@keyframes entry-orbit-soft{
+  from{transform:translate3d(1px,-1px,6px)}
+  to{transform:translate3d(-3px,3px,12px)}
+}
+@media(max-width:600px){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{opacity:.32!important;animation-duration:6.2s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after{opacity:.31;animation-duration:7.2s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:before{opacity:.13!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__core:after{opacity:.09!important}
+  .entry3d.entry3d.has-webgl-prism .entry3d__canvas{opacity:.96;filter:saturate(.90) brightness(1.03) drop-shadow(0 18px 24px rgba(76,86,214,.14)) drop-shadow(0 0 14px rgba(78,181,255,.07))}
+  .entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after{opacity:.44}
+  .entry3d.has-webgl-prism .entry3d__scene{perspective:900px}
+  .entry3d.has-webgl-prism .entry3d__core{transform:translateZ(18px)}
+  .entry3d.has-webgl-prism .entry3d__float{animation-duration:10s!important}
+  .entry3d.has-webgl-prism .entry3d__network{transform:translateZ(-14px) scale(.99)}
+}
+@media(prefers-reduced-motion:reduce){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell,
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell:after,
+  .entry3d.entry3d.has-webgl-prism .entry3d__pedestal:after,
+  .entry3d.has-webgl-prism .entry3d__float{animation:none!important}
+  .entry3d.has-webgl-prism .entry3d__core,
+  .entry3d.has-webgl-prism .entry3d__network{transform:none!important}
+}
+
+/* Optical depth pass: use the three existing shell layers as separate refractive planes.
+   This gives the cube visible wall thickness and internal parallax without extra WebGL geometry. */
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell{
+  transform-style:preserve-3d;
+  overflow:visible;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{
+  position:absolute;
+  pointer-events:none;
+  border-style:solid;
+  border-width:1px;
+  border-radius:18%;
+  transform-origin:center;
+  mix-blend-mode:screen;
+  box-shadow:inset 0 0 22px rgba(255,255,255,.08),0 0 18px rgba(111,181,255,.035);
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(1){
+  inset:8% 9% 10% 8%;
+  opacity:.27!important;
+  transform:translate3d(-5px,-4px,16px) rotate(.8deg) skewX(-.6deg);
+  background:linear-gradient(124deg,rgba(255,255,255,.18),transparent 24% 67%,rgba(125,217,255,.08));
+  animation:entry-refraction-plane-a 6.8s ease-in-out infinite alternate;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(2){
+  inset:14% 14% 15% 15%;
+  opacity:.16!important;
+  transform:translate3d(6px,4px,7px) rotate(-1.15deg) skewY(.7deg);
+  background:linear-gradient(54deg,rgba(129,99,255,.055),transparent 38% 64%,rgba(255,255,255,.14));
+  animation:entry-refraction-plane-b 7.6s ease-in-out infinite alternate-reverse;
+}
+.entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(3){
+  inset:21% 20% 20% 21%;
+  opacity:.11!important;
+  transform:translate3d(-2px,7px,-2px) rotate(.6deg);
+  background:
+    radial-gradient(circle at 32% 25%,rgba(255,255,255,.17),transparent 34%),
+    linear-gradient(140deg,transparent 38%,rgba(102,211,255,.08) 50%,transparent 63%);
+  box-shadow:inset 0 0 28px rgba(102,174,255,.055),0 0 14px rgba(255,255,255,.035);
+  animation:entry-refraction-plane-c 8.4s ease-in-out infinite alternate;
+}
+@keyframes entry-refraction-plane-a{
+  from{transform:translate3d(-5px,-4px,16px) rotate(.8deg) skewX(-.6deg)}
+  to{transform:translate3d(3px,2px,20px) rotate(-.25deg) skewX(.25deg)}
+}
+@keyframes entry-refraction-plane-b{
+  from{transform:translate3d(6px,4px,7px) rotate(-1.15deg) skewY(.7deg)}
+  to{transform:translate3d(-3px,-1px,10px) rotate(.45deg) skewY(-.2deg)}
+}
+@keyframes entry-refraction-plane-c{
+  from{transform:translate3d(-2px,7px,-2px) rotate(.6deg)}
+  to{transform:translate3d(4px,-2px,1px) rotate(-.35deg)}
+}
+@media(max-width:600px){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(1){transform:translate3d(-2px,-2px,6px) rotate(.4deg);animation-duration:9s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(2){transform:translate3d(2px,2px,3px) rotate(-.4deg);animation-duration:10s}
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i:nth-child(3){transform:none;animation:none;opacity:.07!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .entry3d.entry3d.has-webgl-prism .entry3d__glass-shell i{animation:none!important;transform:none!important}
+}

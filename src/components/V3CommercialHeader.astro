@@ -1,0 +1,94 @@
+---
+import '../styles/v3-polish.css';
+import { moduleLandings, sectorLandings, resourceGuides } from '../data/v3-commercial';
+import { publishedV3BlogPosts } from '../data/v3-blog';
+
+const base = import.meta.env.BASE_URL;
+const home = base;
+const product = `${base}producto/`;
+const solutions = `${base}soluciones/`;
+const modules = `${base}aplicaciones/`;
+const appMaintenance = `${base}app-mantenimiento/`;
+const sectors = `${base}sectores/`;
+const pricing = `${base}precios/`;
+const resources = `${base}recursos/`;
+const blog = `${base}blog/`;
+const company = `${base}empresa/`;
+const access = `${base}acceso/`;
+const demo = `${base}demo/`;
+const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+const pathOf = (href: string) => normalizePath(new URL(href, Astro.url.origin).pathname);
+const ariaCurrent = (href: string, sectionPrefixes: string[] = []) => {
+  const targetPath = pathOf(href);
+  if (currentPath === targetPath) return 'page';
+  const isCurrentSection = sectionPrefixes.some((prefix) => {
+    const sectionPath = pathOf(prefix);
+    return currentPath === sectionPath || currentPath.startsWith(`${sectionPath}/`);
+  });
+  return isCurrentSection ? 'location' : undefined;
+};
+
+type Breadcrumb = { parentLabel: string; parentHref: string; currentLabel: string };
+let breadcrumb: Breadcrumb | undefined;
+const modulePrefix = pathOf(`${base}modulos/`);
+const sectorPrefix = pathOf(`${base}sectores/`);
+const resourcePrefix = pathOf(`${base}recursos/`);
+const blogPrefix = pathOf(`${base}blog/`);
+
+if (currentPath.startsWith(`${modulePrefix}/`)) {
+  const slug = currentPath.slice(modulePrefix.length + 1).split('/')[0];
+  const item = moduleLandings[slug];
+  if (item) breadcrumb = { parentLabel: 'Apps', parentHref: modules, currentLabel: item.name };
+} else if (currentPath.startsWith(`${sectorPrefix}/`)) {
+  const slug = currentPath.slice(sectorPrefix.length + 1).split('/')[0];
+  const item = sectorLandings[slug];
+  if (item) breadcrumb = { parentLabel: 'Sectores', parentHref: sectors, currentLabel: item.name };
+} else if (currentPath.startsWith(`${resourcePrefix}/`)) {
+  const slug = currentPath.slice(resourcePrefix.length + 1).split('/')[0];
+  const item = resourceGuides[slug];
+  if (item) breadcrumb = { parentLabel: 'Recursos', parentHref: resources, currentLabel: item.title };
+} else if (currentPath.startsWith(`${blogPrefix}/`)) {
+  const slug = currentPath.slice(blogPrefix.length + 1).split('/')[0];
+  const item = publishedV3BlogPosts.find((post) => post.slug === slug);
+  if (item) breadcrumb = { parentLabel: 'Blog y noticias', parentHref: blog, currentLabel: item.title };
+}
+
+const breadcrumbSchema = breadcrumb ? JSON.stringify({
+  '@context': 'https://schema.org','@type': 'BreadcrumbList',itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(home, Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 2, name: breadcrumb.parentLabel, item: new URL(breadcrumb.parentHref, Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 3, name: breadcrumb.currentLabel, item: Astro.url.toString() },
+  ],
+}) : undefined;
+---
+<style is:inline>
+  .v3-skip-link{position:fixed;left:14px;top:10px;z-index:10000;padding:10px 14px;border-radius:12px;background:#101827;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(12,21,48,.22);transform:translateY(-160%);transition:transform .18s ease}.v3-skip-link:focus{transform:translateY(0)}.v3-skip-target{display:block;position:relative;top:-88px;width:1px;height:1px;overflow:hidden}
+  .site-header{background:rgba(255,255,255,.93);backdrop-filter:blur(18px);border-bottom:1px solid rgba(232,235,244,.8)}
+  .site-header .brand__icon{background:linear-gradient(145deg,#42c9a0,#4e91ea 36%,#7558e5 68%,#d65cc1);box-shadow:0 7px 18px rgba(92,79,201,.17)}
+  .site-header .nav a:hover,.site-header .nav a[aria-current]{color:#6255d9}
+  .site-header .header-actions>.btn--primary{background:#111827;border-color:#111827;color:#fff;box-shadow:0 9px 22px rgba(17,24,39,.14)}.site-header .header-actions>.btn--primary:hover{background:#222b3d;border-color:#222b3d}
+  .v3-mobile-nav{display:none;position:relative}.v3-mobile-nav summary{list-style:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:19px;cursor:pointer}.v3-mobile-nav summary::-webkit-details-marker{display:none}.v3-mobile-nav summary:focus-visible{outline:3px solid rgba(109,74,255,.22);outline-offset:3px}.v3-mobile-nav__panel{position:absolute;right:0;top:54px;width:min(300px,calc(100vw - 28px));padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.98);box-shadow:var(--shadow);display:grid;gap:4px}.v3-mobile-nav__panel a{padding:11px 12px;border-radius:10px;color:#34405d;font-size:14px;font-weight:700}.v3-mobile-nav__panel a:hover{background:#f6f3ff;color:#6752db}.v3-mobile-nav__panel a[aria-current]{background:#f1efff;color:#6752db}.v3-mobile-nav__panel .mobile-cta{margin-top:6px;color:#fff;background:#111827}
+  .v3-breadcrumb{border-bottom:1px solid rgba(229,234,244,.72);background:rgba(251,252,255,.9)}.v3-breadcrumb__inner{min-height:42px;display:flex;align-items:center;gap:8px;overflow:hidden;color:#76829b;font-size:12px;white-space:nowrap}.v3-breadcrumb__inner a{color:#52607b;font-weight:700}.v3-breadcrumb__inner a:hover{color:#6752db}.v3-breadcrumb__current{overflow:hidden;text-overflow:ellipsis;color:#7f8ba3}.v3-breadcrumb__sep{color:#b0b9cb}
+  @media(max-width:860px){.v3-mobile-nav{display:block}.site-header .nav{display:none}.site-header .header-actions>.btn{display:none}.site-header__inner{min-height:68px}}
+</style>
+<link rel="stylesheet" href={`${base}styles/v3-reference-pages.css`} />
+<link rel="stylesheet" href={`${base}styles/v3-board-density.css`} />
+<a class="v3-skip-link" href="#v3-main-content">Saltar al contenido</a>
+<header class="site-header">
+  <div class="site-header__inner shell">
+    <a class="brand" href={home} aria-label="IsiVoltPro, inicio" aria-current={ariaCurrent(home)}><i class="brand__icon" aria-hidden="true"></i><span>IsiVoltPro</span></a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href={product} aria-current={ariaCurrent(product)}>Producto</a>
+      <a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a>
+      <a href={modules} aria-current={ariaCurrent(modules,[`${base}modulos/`,appMaintenance,`${base}apps-especializadas/`])}>Apps</a>
+      <a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a>
+      <a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a>
+      <a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a>
+      <a href={company} aria-current={ariaCurrent(company)}>Empresa</a>
+    </nav>
+    <div class="header-actions"><a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a><details class="v3-mobile-nav"><summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary><nav class="v3-mobile-nav__panel" aria-label="Navegación móvil"><a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules,[`${base}modulos/`,appMaintenance,`${base}apps-especializadas/`])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a><a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a><a href={company} aria-current={ariaCurrent(company)}>Empresa</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a></nav></details></div>
+  </div>
+</header>
+{breadcrumb && (<><nav class="v3-breadcrumb" aria-label="Migas de pan"><div class="v3-breadcrumb__inner shell"><a href={home}>Inicio</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><a href={breadcrumb.parentHref}>{breadcrumb.parentLabel}</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><span class="v3-breadcrumb__current" aria-current="page">{breadcrumb.currentLabel}</span></div></nav><script is:inline type="application/ld+json" set:html={breadcrumbSchema}></script></>)}
+<span id="v3-main-content" class="v3-skip-target" tabindex="-1"></span>

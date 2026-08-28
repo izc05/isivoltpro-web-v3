@@ -32,13 +32,23 @@ for (const [label, route] of requiredHeaderRoutes) {
   if (!header.includes(route) || !header.includes(`>${label}</a>`)) fail(`falta ${label} en la cabecera/móvil`);
 }
 
-const requiredFooterLabels = [
-  'Producto y módulos', 'Módulos', 'App Mantenimiento', 'Soluciones', 'Precios',
-  'Implantación', 'Piloto', 'Demo', 'Seguridad', 'Blog y noticias', 'FAQ', 'Contacto',
-  'Acceder', 'Aviso legal', 'Privacidad', 'Cookies',
+const requiredFooterGroups = ['Producto y módulos', 'Soluciones', 'Recursos, noticias y empresa'];
+for (const label of requiredFooterGroups) {
+  if (!footer.includes(`<summary>${label}</summary>`)) fail(`falta el grupo ${label} en el footer`);
+}
+
+const requiredFooterRoutes = [
+  'producto/', 'aplicaciones/', 'app-mantenimiento/', 'apps-especializadas/', 'alcance/', 'precios/',
+  'soluciones/', 'sectores/', 'implantacion/', 'piloto/', 'demo/', 'seguridad/',
+  'recursos/', 'blog/', 'faq/', 'empresa/', 'contacto/', 'acceso/',
+  'aviso-legal/', 'privacidad/', 'cookies/',
 ];
-for (const label of requiredFooterLabels) {
-  if (!footer.includes(label)) fail(`falta ${label} en el footer`);
+for (const route of requiredFooterRoutes) {
+  if (!footer.includes(`${baseToken}${route}`)) fail(`falta la ruta ${route} en el footer`);
 }
 
 if (!process.exitCode) console.log('V4 INFORMATION ARCHITECTURE OK');
+
+function baseToken(strings, ...values) {
+  return String.raw({ raw: strings }, ...values);
+}

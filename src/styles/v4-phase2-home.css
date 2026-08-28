@@ -1,0 +1,15 @@
+/* V4 · Fase 2 — continuidad entre la promesa de la intro y el primer viewport comercial. */
+.saas-hero__continuity{display:flex;align-items:center;gap:10px;margin-top:24px;max-width:650px;color:#66738d;font-size:11px;font-weight:720;letter-spacing:-.01em}
+.saas-hero__continuity span{display:inline-flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+.saas-hero__continuity b{width:23px;height:23px;display:inline-grid;place-items:center;flex:0 0 auto;border:1px solid rgba(108,82,224,.14);border-radius:8px;background:linear-gradient(145deg,rgba(245,242,255,.96),rgba(239,248,255,.96));color:#6853db;font-size:9px;box-shadow:0 7px 18px rgba(74,84,150,.06)}
+.saas-hero__continuity i{width:24px;height:1px;flex:0 1 24px;background:linear-gradient(90deg,rgba(105,83,220,.18),rgba(57,174,207,.28));position:relative}
+.saas-hero__continuity i::after{content:"";position:absolute;right:-1px;top:-2px;width:5px;height:5px;border-top:1px solid rgba(55,160,199,.48);border-right:1px solid rgba(55,160,199,.48);transform:rotate(45deg)}
+.saas-hero__lead{max-width:650px}
+
+/* La Home debe aparecer como continuación de la misma superficie luminosa, no como una pantalla distinta. */
+.saas-hero__copy,.saas-stage{transition:opacity .72s cubic-bezier(.22,.8,.24,1),transform .82s cubic-bezier(.22,.8,.24,1)}
+body.intro-lock .saas-hero__copy{opacity:.18;transform:translateY(14px)}
+body.intro-lock .saas-stage{opacity:.14;transform:translateY(18px) scale(.986)}
+
+@media(max-width:780px){.saas-hero__continuity{display:grid;grid-template-columns:1fr;gap:7px;margin-top:20px}.saas-hero__continuity span{white-space:normal}.saas-hero__continuity i{display:none}}
+@media(prefers-reduced-motion:reduce){.saas-hero__copy,.saas-stage{transition:none}}

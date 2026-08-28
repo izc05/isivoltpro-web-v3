@@ -11,5 +11,29 @@
 body.intro-lock .saas-hero__copy{opacity:.18;transform:translateY(14px)}
 body.intro-lock .saas-stage{opacity:.14;transform:translateY(18px) scale(.986)}
 
+/* La intro vende claridad operativa, no resultados ficticios. Conservamos la composición aprobada y
+   sustituimos visualmente porcentajes/claims absolutos por estados de una demo explícita. */
+.entry3d__orders .entry3d__order em{font-size:0;min-width:38px;text-align:right}
+.entry3d__orders .entry3d__order em::after{font-size:7px;font-style:normal;font-weight:800;color:#2fa477}
+.entry3d__orders .entry3d__order:nth-of-type(1) em::after{content:"Cerrada"}
+.entry3d__orders .entry3d__order:nth-of-type(2) em::after{content:"Plan";color:#6475d9}
+.entry3d__orders .entry3d__order:nth-of-type(3) em::after{content:"Prior.";color:#d76b76}
+.entry3d__analytics>strong{font-size:0}
+.entry3d__analytics>strong::after{content:"Trazable";font-size:25px;letter-spacing:-.04em}
+.entry3d__analytics>small{font-size:0}
+.entry3d__analytics>small::after{content:"Actividad e histórico · ejemplo";font-size:7px}
+.entry3d__analytics-top small{font-size:0}
+.entry3d__analytics-top small::after{content:"Vista demo";font-size:7px}
+.entry3d__status strong{font-size:0}
+.entry3d__status strong::after{content:"Operativa conectada";font-size:inherit}
+.entry3d__status small{font-size:0}
+.entry3d__status small::after{content:"Vista conceptual de ejemplo";font-size:inherit}
+.entry3d__note--control strong{font-size:0}
+.entry3d__note--control strong::after{content:"Trabajo visible";font-size:inherit}
+.entry3d__note--control small{font-size:0}
+.entry3d__note--control small::after{content:"Pendientes y contexto juntos";font-size:inherit}
+.entry3d__note--maintenance small{font-size:0}
+.entry3d__note--maintenance small::after{content:"Preventivo y correctivo";font-size:inherit}
+
 @media(max-width:780px){.saas-hero__continuity{display:grid;grid-template-columns:1fr;gap:7px;margin-top:20px}.saas-hero__continuity span{white-space:normal}.saas-hero__continuity i{display:none}}
 @media(prefers-reduced-motion:reduce){.saas-hero__copy,.saas-stage{transition:none}}

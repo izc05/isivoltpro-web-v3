@@ -1,5 +1,13 @@
 export type V4AdminAreaState = 'ready-preview' | 'partial' | 'backend-required';
 export type V4AdminRole = 'owner' | 'admin' | 'editor' | 'marketing';
+export type V4BackendCapability =
+  | 'content-write'
+  | 'media-upload'
+  | 'form-intake'
+  | 'social-publish'
+  | 'release-publish'
+  | 'identity-access'
+  | 'audit-log';
 
 export type V4AdminArea = {
   id: string;
@@ -9,6 +17,7 @@ export type V4AdminArea = {
   controls: string[];
   roles: V4AdminRole[];
   state: V4AdminAreaState;
+  backendCapabilities: V4BackendCapability[];
 };
 
 export const v4AdminAreas: V4AdminArea[] = [
@@ -20,6 +29,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['textos', 'CTAs', 'estado editorial', 'historial'],
     roles: ['owner', 'admin', 'editor'],
     state: 'ready-preview',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'blog',
@@ -29,6 +39,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['artículos', 'categorías', 'SEO', 'estado editorial'],
     roles: ['owner', 'admin', 'editor'],
     state: 'ready-preview',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'resources',
@@ -38,6 +49,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['guías', 'resúmenes', 'medios', 'publicación'],
     roles: ['owner', 'admin', 'editor'],
     state: 'partial',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'media',
@@ -47,6 +59,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['subidas', 'alt', 'etiquetas', 'uso'],
     roles: ['owner', 'admin', 'editor', 'marketing'],
     state: 'ready-preview',
+    backendCapabilities: ['media-upload', 'content-write', 'audit-log'],
   },
   {
     id: 'navigation',
@@ -55,6 +68,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['menú principal', 'footer', 'migas', 'enlaces'],
     roles: ['owner', 'admin', 'editor'],
     state: 'partial',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'catalog',
@@ -63,6 +77,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['producto', 'módulos', 'sectores', 'CTA'],
     roles: ['owner', 'admin', 'editor'],
     state: 'partial',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'pricing',
@@ -71,6 +86,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['planes', 'copy', 'CTA', 'visibilidad'],
     roles: ['owner', 'admin'],
     state: 'partial',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'seo',
@@ -79,6 +95,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['title', 'description', 'canonical', 'redirecciones'],
     roles: ['owner', 'admin', 'editor'],
     state: 'partial',
+    backendCapabilities: ['content-write', 'audit-log'],
   },
   {
     id: 'forms',
@@ -87,6 +104,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['formularios', 'estado', 'destino', 'seguimiento'],
     roles: ['owner', 'admin'],
     state: 'backend-required',
+    backendCapabilities: ['form-intake', 'identity-access', 'audit-log'],
   },
   {
     id: 'social',
@@ -96,6 +114,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['copy', 'medios', 'aprobación', 'programación'],
     roles: ['owner', 'admin', 'marketing'],
     state: 'backend-required',
+    backendCapabilities: ['social-publish', 'identity-access', 'audit-log'],
   },
   {
     id: 'release',
@@ -105,6 +124,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['preview', 'QA', 'estado CI', 'publicar versión'],
     roles: ['owner', 'admin'],
     state: 'backend-required',
+    backendCapabilities: ['release-publish', 'identity-access', 'audit-log'],
   },
   {
     id: 'security',
@@ -114,6 +134,7 @@ export const v4AdminAreas: V4AdminArea[] = [
     controls: ['usuarios', 'roles', 'sesiones', 'auditoría'],
     roles: ['owner'],
     state: 'backend-required',
+    backendCapabilities: ['identity-access', 'audit-log'],
   },
 ];
 
@@ -126,7 +147,27 @@ export const v4AdminPolicy = {
   revisionsRequired: true,
   socialApprovalRequired: true,
   releaseRequiresGreenChecks: true,
+  backendMustAuthenticateWrites: true,
+  backendMustAuditPrivilegedActions: true,
+  formDataMustNotPersistInPublicFrontend: true,
+  mediaUploadsRequireAuthenticatedBackend: true,
+  releaseAndSocialNeedExplicitApproval: true,
   productionReleaseRoles: ['owner', 'admin'] as const,
+} as const;
+
+export const v4BackendBoundary = {
+  publicLayer: 'github-pages-static',
+  publiclyWritable: false,
+  authenticatedBackendRequired: true,
+  capabilities: {
+    'content-write': { publicAllowed: false, requiresAuth: true, requiresAudit: true },
+    'media-upload': { publicAllowed: false, requiresAuth: true, requiresAudit: true },
+    'form-intake': { publicAllowed: false, requiresAuth: false, requiresServerValidation: true, requiresAudit: true },
+    'social-publish': { publicAllowed: false, requiresAuth: true, requiresAudit: true, requiresApproval: true },
+    'release-publish': { publicAllowed: false, requiresAuth: true, requiresAudit: true, requiresApproval: true, requiresGreenChecks: true },
+    'identity-access': { publicAllowed: false, requiresAuth: true, requiresAudit: true },
+    'audit-log': { publicAllowed: false, requiresAuth: true },
+  },
 } as const;
 
 export const v4AdminSummary = {

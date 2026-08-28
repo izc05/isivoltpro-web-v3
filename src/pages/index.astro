@@ -16,6 +16,7 @@ const experience = `${base}experiencia/`;
 const product = `${base}producto/`;
 const modules = `${base}aplicaciones/`;
 const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
+const premiumCube = `${base}media/isivoltpro-premium-cube-v4.avif`;
 ---
 <!doctype html>
 <html lang="es">
@@ -43,6 +44,7 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
         </div>
 
         <div class="saas-stage reveal" aria-label="Dashboard conceptual de IsiVoltPro con datos ficticios">
+          <figure class="v4-premium-cube" aria-hidden="true"><img src={premiumCube} alt="" width="720" height="450" decoding="async" fetchpriority="high" /></figure>
           <div class="saas-dot saas-dot--a" aria-hidden="true"></div><div class="saas-dot saas-dot--b" aria-hidden="true"></div><div class="saas-dot saas-dot--c" aria-hidden="true"></div>
           <div class="saas-dashboard">
             <div class="saas-dashboard__top"><div class="saas-mini-brand"><i aria-hidden="true"></i><span>IsiVoltPro</span></div><small>INTERFAZ CONCEPTUAL · DATOS ILUSTRATIVOS</small></div>

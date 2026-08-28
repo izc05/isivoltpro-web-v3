@@ -47,12 +47,40 @@ for (const policy of [
   'adminRequiresAuthorization: true',
   'socialApprovalRequired: true',
   'releaseRequiresGreenChecks: true',
+  'backendMustAuthenticateWrites: true',
+  'backendMustAuditPrivilegedActions: true',
+  'formDataMustNotPersistInPublicFrontend: true',
+  'mediaUploadsRequireAuthenticatedBackend: true',
+  'releaseAndSocialNeedExplicitApproval: true',
 ]) {
   if (!contract.includes(policy)) fail(`política ausente: ${policy}`);
 }
 
 for (const role of ["'owner'", "'admin'", "'editor'", "'marketing'"]) {
   if (!contract.includes(role)) fail(`rol V4 ausente: ${role}`);
+}
+
+for (const capability of [
+  "'content-write'",
+  "'media-upload'",
+  "'form-intake'",
+  "'social-publish'",
+  "'release-publish'",
+  "'identity-access'",
+  "'audit-log'",
+]) {
+  if (!contract.includes(capability)) fail(`capacidad backend V4 ausente: ${capability}`);
+}
+
+for (const boundary of [
+  "publicLayer: 'github-pages-static'",
+  'publiclyWritable: false',
+  'authenticatedBackendRequired: true',
+  "'form-intake': { publicAllowed: false, requiresAuth: false, requiresServerValidation: true, requiresAudit: true }",
+  "'social-publish': { publicAllowed: false, requiresAuth: true, requiresAudit: true, requiresApproval: true }",
+  "'release-publish': { publicAllowed: false, requiresAuth: true, requiresAudit: true, requiresApproval: true, requiresGreenChecks: true }",
+]) {
+  if (!contract.includes(boundary)) fail(`límite backend ausente o debilitado: ${boundary}`);
 }
 
 if (!workspaceSource.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
@@ -70,4 +98,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, backend autenticado delimitado, sin escrituras públicas y release gate protegido.');

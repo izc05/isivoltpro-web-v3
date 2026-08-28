@@ -1,0 +1,20 @@
+/* V4 Home product-focus pass.
+   Keep the daily workflow feeling like one product surface instead of a stack of generic cards. */
+.daily-solutions{position:relative;isolation:isolate;overflow:hidden}
+.daily-solutions::before{content:"";position:absolute;z-index:-1;pointer-events:none;width:min(72vw,980px);aspect-ratio:1;right:-24vw;top:-34%;border-radius:50%;background:radial-gradient(circle,rgba(104,82,229,.09),rgba(72,157,231,.052) 36%,rgba(49,191,153,.03) 52%,transparent 72%);filter:blur(10px)}
+.daily-solutions__grid{align-items:stretch}
+.daily-solutions__problems{align-content:center}
+.daily-problem{transition:transform .28s cubic-bezier(.22,.8,.24,1),border-color .28s ease,box-shadow .28s ease,background .28s ease}
+.daily-problem:hover,.daily-problem:focus-visible{transform:translateX(4px);border-color:rgba(103,82,220,.22);box-shadow:0 16px 34px rgba(67,78,135,.08);background:rgba(255,255,255,.94)}
+.daily-problem--active{position:relative;overflow:hidden;box-shadow:0 18px 42px rgba(75,81,145,.10)}
+.daily-problem--active::after{content:"";position:absolute;inset:auto 8% 0 8%;height:1px;background:linear-gradient(90deg,transparent,rgba(101,78,222,.42),rgba(65,183,213,.35),transparent)}
+.daily-workspace{position:relative;isolation:isolate;box-shadow:0 34px 80px rgba(57,69,124,.14),0 10px 28px rgba(91,103,190,.08);transform:translateZ(0)}
+.daily-workspace::before{content:"";position:absolute;z-index:-1;inset:7% -5% -5% 8%;border-radius:34px;background:linear-gradient(135deg,rgba(104,83,231,.10),rgba(67,163,226,.055) 48%,rgba(45,187,143,.045));filter:blur(25px);opacity:.8}
+.daily-workspace__top{backdrop-filter:saturate(1.06)}
+.daily-workspace__summary,.daily-workspace__timeline article,.daily-workspace__bottom article{transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease}
+.daily-workspace__timeline article:hover{transform:translateX(3px);border-color:rgba(92,83,206,.18);box-shadow:0 10px 22px rgba(63,76,130,.06)}
+.daily-workspace__cta{position:relative;overflow:hidden}
+.daily-workspace__cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 18%,rgba(255,255,255,.22) 46%,transparent 72%);transform:translateX(-130%);transition:transform .62s cubic-bezier(.22,.8,.24,1)}
+.daily-workspace__cta:hover::after,.daily-workspace__cta:focus-visible::after{transform:translateX(130%)}
+@media(max-width:860px){.daily-solutions::before{width:95vw;right:-44vw;top:-12%}.daily-problem:hover,.daily-problem:focus-visible,.daily-workspace__timeline article:hover{transform:none}.daily-workspace::before{inset:5% -3% -3% 5%;filter:blur(20px)}}
+@media(prefers-reduced-motion:reduce){.daily-problem,.daily-workspace__summary,.daily-workspace__timeline article,.daily-workspace__bottom article,.daily-workspace__cta::after{transition:none}.daily-problem:hover,.daily-problem:focus-visible,.daily-workspace__timeline article:hover{transform:none}.daily-workspace__cta::after{display:none}}

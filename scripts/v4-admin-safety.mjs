@@ -18,14 +18,16 @@ for (const file of requiredBuildFiles) {
   if (/<form\b[^>]*(?:action|method)\s*=/i.test(html)) fail(`${file} no puede enviar formularios desde la web pública`);
 }
 
-const adminHtml = readFileSync('dist/admin/index.html', 'utf8');
-const workspaceHtml = readFileSync('dist/gestion-contenido/index.html', 'utf8');
 const contract = readFileSync('src/data/v4-web-admin.ts', 'utf8');
+const workspaceSource = readFileSync('src/pages/gestion-contenido.astro', 'utf8');
+const adminSource = readFileSync('src/pages/admin.astro', 'utf8');
 
 for (const label of [
   'Páginas públicas',
   'Blog y noticias',
+  'Recursos y guías',
   'Biblioteca multimedia',
+  'Navegación y estructura',
   'Producto, módulos y sectores',
   'Precios y planes',
   'SEO y descubrimiento',
@@ -34,9 +36,7 @@ for (const label of [
   'Publicación de la web',
   'Usuarios y seguridad',
 ]) {
-  if (!adminHtml.includes(label) && !workspaceHtml.includes(label)) {
-    fail(`falta el dominio administrativo «${label}» en el build`);
-  }
+  if (!contract.includes(`label: '${label}'`)) fail(`falta el dominio administrativo «${label}» en el contrato`);
 }
 
 for (const policy of [
@@ -55,8 +55,9 @@ for (const role of ["'owner'", "'admin'", "'editor'", "'marketing'"]) {
   if (!contract.includes(role)) fail(`rol V4 ausente: ${role}`);
 }
 
-if (!workspaceHtml.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
-if (!workspaceHtml.includes('disabled')) fail('el workspace debe conservar controles de escritura desactivados');
+if (!workspaceSource.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
+if (!workspaceSource.includes('disabled')) fail('el workspace debe conservar controles de escritura desactivados');
+if (!adminSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('el centro de control debe permanecer detrás del flag de preview administrativo');
 
 const forbidden = [
   /pb_superuser/i,
@@ -64,9 +65,9 @@ const forbidden = [
   /private[_-]?key/i,
   /access[_-]?token\s*[:=]\s*["'][^"']+/i,
 ];
-const publicAdminSurface = `${adminHtml}\n${workspaceHtml}`;
+const publicAdminSurface = requiredBuildFiles.map((file) => readFileSync(file, 'utf8')).join('\n');
 for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, sin escrituras públicas, roles y release gate protegidos.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, sin escrituras públicas y release gate protegido.');

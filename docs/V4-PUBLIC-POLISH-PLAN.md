@@ -38,6 +38,8 @@ Las rutas secundarias no desaparecen. Deben seguir accesibles desde el lugar cor
 
 - Pulir intro, escena 3D/pseudo-3D, transición y rendimiento.
 - Reforzar Home con producto, beneficios y CTAs claros.
+- El primer viewport debe explicar el flujo `aviso → contexto → cierre/histórico`.
+- Los datos de la intro son demostrativos: no usar porcentajes o claims visuales que puedan confundirse con resultados reales de clientes.
 
 ### Fase 3 — Problemas → Soluciones
 
@@ -93,6 +95,13 @@ Rama de trabajo: `feat/v4-public-polish`.
 Primer defecto confirmado: la cabecera pública se había alejado del contrato visual y mostraba `Soluciones`, `Apps` y `Blog + noticias` como elementos primarios, mientras `Precios` quedaba fuera de la navegación de escritorio.
 
 Primer checkpoint V4: restaurar `Producto · Módulos · Sectores · Precios · Recursos · Empresa`, conservar `Acceder · Solicitar demo` y mantener Soluciones/Blog como rutas secundarias.
+
+## Checkpoint Fase 2 — 28/08/2026
+
+- `5b876fce…`: Home reescrita para explicar el flujo de trabajo y añadir la microsecuencia `El aviso entra una vez → El técnico recibe contexto → El cierre alimenta el histórico`.
+- Ese checkpoint pasó comercial, preview móvil, QA móvil y QA tablet/escritorio.
+- `22f633ec…`: segundo pase de confianza de la intro; los porcentajes de rendimiento y crecimiento dejan de ser protagonistas visuales y se sustituyen por estados de trabajo/trazabilidad de una vista demo.
+- Este segundo checkpoint debe quedar verde antes de dar Fase 2 por cerrada.
 
 ## Regla de publicación
 

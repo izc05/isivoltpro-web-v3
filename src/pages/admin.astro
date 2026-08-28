@@ -1,0 +1,68 @@
+---
+import '../styles/v3-pages.css';
+import V3CommercialHeader from '../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../components/V3CommercialFooter.astro';
+import V3Seo from '../components/V3Seo.astro';
+import { v4AdminAreas, v4AdminSummary } from '../data/v4-web-admin';
+
+const base = import.meta.env.BASE_URL;
+const enabled = import.meta.env.PUBLIC_V3_CONTENT_ADMIN_PREVIEW === 'true';
+const stateLabel = {
+  'ready-preview': 'Preview listo',
+  partial: 'Parcial',
+  'backend-required': 'Requiere backend',
+} as const;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Centro de control web · IsiVoltPro" description="Centro de control V4 para administrar contenido, medios, SEO y publicación de la web de IsiVoltPro." path={`${base}admin/`} noindex={true} />
+  <style is:inline>
+    .control{min-height:82vh;padding:52px 0 88px;background:radial-gradient(circle at 86% 5%,rgba(101,82,220,.12),transparent 24%),radial-gradient(circle at 74% 20%,rgba(34,186,197,.08),transparent 18%),linear-gradient(180deg,#fff,#f7f9fe)}
+    .shell{width:min(1180px,calc(100% - 32px));margin:auto}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:end}.hero h1{margin:12px 0 16px;font:800 clamp(42px,6vw,72px)/.98 Manrope,sans-serif;letter-spacing:-.055em}.hero p{max-width:720px;margin:0;color:#66728c;font-size:18px;line-height:1.65}
+    .guard{padding:20px;border:1px solid #e4e9f3;border-radius:22px;background:rgba(255,255,255,.94);box-shadow:0 18px 54px rgba(47,64,108,.08)}.guard strong{display:block;margin-bottom:7px}.guard small{color:#6f7a91;line-height:1.5}.guard span{display:inline-flex;margin-top:13px;padding:6px 9px;border-radius:999px;background:#eaf9f3;color:#147d5b;font-size:10px;font-weight:900}
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0}.metric{padding:17px;border:1px solid #e6eaf3;border-radius:18px;background:#fff}.metric small{display:block;color:#8490a6;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.metric strong{display:block;margin-top:7px;font:800 30px/1 Manrope,sans-serif;letter-spacing:-.04em}.metric span{display:block;margin-top:5px;color:#737f96;font-size:11px;line-height:1.4}
+    .layout{display:grid;grid-template-columns:238px 1fr;gap:20px}.side,.panel{border:1px solid #e5e9f2;border-radius:22px;background:#fff;box-shadow:0 16px 50px rgba(44,62,106,.06)}.side{align-self:start;position:sticky;top:90px;padding:14px}.side b{display:block;padding:8px 10px 12px;color:#98a2b4;font-size:9px;letter-spacing:.09em}.side a{display:block;padding:11px 12px;border-radius:12px;color:#33405b;text-decoration:none;font-weight:800;font-size:13px}.side a:hover,.side a:focus-visible{background:#eef3ff;color:#175cff;outline:none}
+    .panel{padding:24px}.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.panel h2{margin:0 0 5px;font:800 28px/1.1 Manrope,sans-serif}.panel p{margin:0;color:#6d7891;line-height:1.55}.areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.area{padding:17px;border:1px solid #e8ebf3;border-radius:17px;background:linear-gradient(180deg,#fff,#fbfcff)}.area-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}.area h3{margin:0;font-size:16px}.state{flex:0 0 auto;padding:5px 7px;border-radius:999px;background:#fff3e9;color:#a45d19;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.state.ready-preview{background:#eaf9f3;color:#167b5b}.state.backend-required{background:#fff0ed;color:#a64b32}.area p{margin:9px 0 12px;font-size:13px}.tags{display:flex;gap:6px;flex-wrap:wrap}.tags span{padding:5px 7px;border-radius:999px;background:#f1f4f9;color:#5c6880;font-size:10px;font-weight:800}.area a{display:inline-flex;margin-top:13px;color:#175cff;text-decoration:none;font-size:12px;font-weight:900}.area a:hover{text-decoration:underline}
+    .boundary{margin-top:18px;padding:16px 18px;border-radius:16px;border:1px solid #eeddbc;background:#fff8ed;color:#704f1d;line-height:1.55}.off{margin-top:24px;padding:26px;border-radius:20px;background:#111827;color:#fff}.off p{margin:8px 0 0;color:#cbd5e1;line-height:1.6}.off code{padding:2px 6px;border-radius:6px;background:#263249}
+    @media(max-width:900px){.hero,.layout{grid-template-columns:1fr}.side{position:static}.metrics{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:650px){.areas,.metrics{grid-template-columns:1fr}.control{padding-top:36px}.hero p{font-size:15px}.panel{padding:18px}.panel-head{display:grid}.side{display:none}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="control">
+    <div class="shell">
+      <section class="hero">
+        <div><span class="eyebrow">Administración V4</span><h1>Controla la web<br/><span class="gradient-text">desde un solo centro.</span></h1><p>Mapa de control de páginas, blog, recursos, medios, navegación, producto, precios, SEO, formularios y publicación. La interfaz distingue lo que ya puede representarse en preview de lo que necesita backend autenticado.</p></div>
+        <aside class="guard"><strong>Separación segura</strong><small>GitHub Pages sigue siendo la capa pública. Ninguna escritura, credencial, publicación social o formulario persistente se activa desde esta ruta.</small><span>◈ Noindex · sin secretos · sin escrituras</span></aside>
+      </section>
+
+      {enabled ? (
+        <>
+          <section class="metrics" aria-label="Estado del centro de control">
+            <article class="metric"><small>Áreas gobernadas</small><strong>{v4AdminSummary.totalAreas}</strong><span>mapa funcional completo de la web</span></article>
+            <article class="metric"><small>Preview listo</small><strong>{v4AdminSummary.previewReady}</strong><span>ya representadas de forma segura</span></article>
+            <article class="metric"><small>Parciales</small><strong>{v4AdminSummary.partial}</strong><span>requieren ampliar controles</span></article>
+            <article class="metric"><small>Backend</small><strong>{v4AdminSummary.backendRequired}</strong><span>escritura o integración protegida</span></article>
+          </section>
+
+          <div class="layout">
+            <nav class="side" aria-label="Áreas de administración"><b>CENTRO DE CONTROL</b>{v4AdminAreas.map((area) => <a href={`#${area.id}`}>{area.label}</a>)}</nav>
+            <section class="panel">
+              <div class="panel-head"><div><h2>Mapa de administración</h2><p>Cada área declara qué debe poder controlarse y cuál es su límite real actual.</p></div><a class="btn btn-secondary" href={`${base}gestion-contenido/`}>Abrir gestor editorial</a></div>
+              <div class="areas">
+                {v4AdminAreas.map((area) => <article class="area" id={area.id}><div class="area-top"><h3>{area.label}</h3><span class:list={["state", area.state]}>{stateLabel[area.state]}</span></div><p>{area.description}</p><div class="tags">{area.controls.map((control) => <span>{control}</span>)}</div>{area.route && <a href={`${base}${area.route.replace(/^\/+/, '')}`}>Abrir área →</a>}</article>)}
+              </div>
+              <div class="boundary"><strong>Arquitectura de activación:</strong> el panel puede evolucionar visual y funcionalmente en esta rama, pero persistencia, usuarios/roles, subida de archivos, formularios y publicación necesitan backend autenticado y auditoría. No se simularán como funciones reales hasta que esa capa exista y pase QA.</div>
+            </section>
+          </div>
+        </>
+      ) : (
+        <section class="off"><strong>Centro de control bloqueado por defecto.</strong><p>La arquitectura está incluida en el build, pero el contenido administrativo solo se muestra en QA aislado con <code>PUBLIC_V3_CONTENT_ADMIN_PREVIEW=true</code>. La web pública no expone operaciones administrativas.</p></section>
+      )}
+    </div>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

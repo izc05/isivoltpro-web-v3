@@ -12,13 +12,11 @@ const cubeFallback = `${base}media/isivoltpro-premium-cube-v4.avif`;
 ---
 <div class="intro entry3d" id="intro" aria-label="Presentación de IsiVoltPro">
   <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
-
   <div class="entry3d__minimal">
     <div class="entry3d__logo" aria-label="IsiVoltPro">
       <img src={brandMark} alt="" width="78" height="78" decoding="async" />
       <span>IsiVolt<strong>Pro</strong></span>
     </div>
-
     <div class="entry3d__scene" id="entry3d-scene" aria-label="Cubo de cristal multicolor de IsiVoltPro en movimiento">
       <div class="entry3d__halo" aria-hidden="true"></div>
       <canvas id="entry3d-canvas" class="entry3d__canvas" aria-hidden="true"></canvas>
@@ -37,7 +35,6 @@ const cubeFallback = `${base}media/isivoltpro-premium-cube-v4.avif`;
 
   const mountEntry3D = async () => {
     if (!canvas || !host || !intro || reduced || alreadySeen || intro.classList.contains('is-done')) return;
-
     const THREE = await import('three');
     const { RoundedBoxGeometry } = await import('three/addons/geometries/RoundedBoxGeometry.js');
     if (intro.classList.contains('is-done')) return;
@@ -46,167 +43,101 @@ const cubeFallback = `${base}media/isivoltpro-premium-cube-v4.avif`;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.55));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.24;
+    renderer.toneMappingExposure = 1.12;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(31, 1, .1, 100);
-    camera.position.set(0, .1, 5.35);
+    camera.position.set(0, .08, 5.25);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x768ad8, 2.8));
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8098e8, 3.2));
-    const blue = new THREE.PointLight(0x2563eb, 54, 16); blue.position.set(-3.1, 2.5, 3.7); scene.add(blue);
-    const cyan = new THREE.PointLight(0x20d9e8, 48, 16); cyan.position.set(3.1, 1.6, 3.4); scene.add(cyan);
-    const violet = new THREE.PointLight(0x8057ee, 43, 15); violet.position.set(-2.2, -2.0, 3.0); scene.add(violet);
-    const magenta = new THREE.PointLight(0xf05ac8, 35, 14); magenta.position.set(2.4, -1.7, 2.7); scene.add(magenta);
-    const whiteKey = new THREE.PointLight(0xffffff, 24, 13); whiteKey.position.set(.2, 3.8, 4.8); scene.add(whiteKey);
+    const blue = new THREE.PointLight(0x2563eb, 42, 16); blue.position.set(-3, 2.5, 3.6); scene.add(blue);
+    const cyan = new THREE.PointLight(0x20d9e8, 38, 16); cyan.position.set(3, 1.6, 3.3); scene.add(cyan);
+    const violet = new THREE.PointLight(0x8057ee, 35, 15); violet.position.set(-2.1, -2, 2.9); scene.add(violet);
+    const magenta = new THREE.PointLight(0xf05ac8, 26, 14); magenta.position.set(2.3, -1.7, 2.7); scene.add(magenta);
+    const whiteKey = new THREE.PointLight(0xffffff, 18, 13); whiteKey.position.set(.2, 3.6, 4.6); scene.add(whiteKey);
 
     const group = new THREE.Group();
-    group.rotation.set(-.07, -.3, .018);
+    group.rotation.set(-.14, -.44, .028);
     scene.add(group);
 
     const cubeGeometry = new RoundedBoxGeometry(2.72, 2.72, 2.14, 8, .18);
     const cubeMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x4f79ff,
-      transparent: true,
-      opacity: .54,
-      transmission: .36,
-      thickness: 1.18,
-      roughness: .06,
-      metalness: 0,
-      ior: 1.39,
-      clearcoat: 1,
-      clearcoatRoughness: .025,
-      emissive: 0x173ba7,
-      emissiveIntensity: .07,
-      side: THREE.DoubleSide,
-      depthWrite: false,
+      color: 0x4773f7, transparent: true, opacity: .5, transmission: .38, thickness: 1.12,
+      roughness: .065, metalness: 0, ior: 1.39, clearcoat: 1, clearcoatRoughness: .025,
+      emissive: 0x163aa0, emissiveIntensity: .055, side: THREE.DoubleSide, depthWrite: false,
     });
-    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    group.add(cube);
+    group.add(new THREE.Mesh(cubeGeometry, cubeMaterial));
 
     const innerGeometry = new RoundedBoxGeometry(2.34, 2.34, 1.82, 7, .145);
     const innerMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x6f61e9,
-      transparent: true,
-      opacity: .28,
-      transmission: .28,
-      thickness: .66,
-      roughness: .045,
-      ior: 1.3,
-      clearcoat: .8,
-      emissive: 0x4430a4,
-      emissiveIntensity: .1,
+      color: 0x684fd8, transparent: true, opacity: .2, transmission: .34, thickness: .62,
+      roughness: .05, ior: 1.3, clearcoat: .8, emissive: 0x472f9f, emissiveIntensity: .07,
       depthWrite: false,
     });
     group.add(new THREE.Mesh(innerGeometry, innerMaterial));
 
-    const gradientCanvas = document.createElement('canvas');
-    gradientCanvas.width = 384;
-    gradientCanvas.height = 384;
-    const context = gradientCanvas.getContext('2d');
-    if (context) {
-      const gradient = context.createLinearGradient(0, 0, gradientCanvas.width, gradientCanvas.height);
-      gradient.addColorStop(0, '#20d9e8');
-      gradient.addColorStop(.34, '#2563eb');
-      gradient.addColorStop(.68, '#8057ee');
-      gradient.addColorStop(1, '#ef58bd');
-      context.fillStyle = gradient;
-      context.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
-      const radial = context.createRadialGradient(255, 80, 12, 210, 150, 250);
-      radial.addColorStop(0, 'rgba(255,255,255,.72)');
-      radial.addColorStop(.4, 'rgba(255,255,255,.10)');
-      radial.addColorStop(1, 'rgba(255,255,255,0)');
-      context.fillStyle = radial;
-      context.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
-    }
-    const gradientTexture = new THREE.CanvasTexture(gradientCanvas);
-    gradientTexture.colorSpace = THREE.SRGBColorSpace;
-    const colorLayer = new THREE.Mesh(
-      new THREE.PlaneGeometry(2.02, 2.02),
-      new THREE.MeshBasicMaterial({ map: gradientTexture, transparent: true, opacity: .48, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide })
-    );
-    colorLayer.position.z = .92;
-    group.add(colorLayer);
+    const makeGlowTexture = (center: string, middle: string) => {
+      const surface = document.createElement('canvas'); surface.width = 192; surface.height = 192;
+      const context = surface.getContext('2d');
+      if (context) {
+        const gradient = context.createRadialGradient(96, 96, 4, 96, 96, 92);
+        gradient.addColorStop(0, center); gradient.addColorStop(.35, middle); gradient.addColorStop(1, 'rgba(0,0,0,0)');
+        context.fillStyle = gradient; context.fillRect(0, 0, 192, 192);
+      }
+      const texture = new THREE.CanvasTexture(surface); texture.colorSpace = THREE.SRGBColorSpace; return texture;
+    };
+    const cyanTexture = makeGlowTexture('rgba(38,225,238,.95)', 'rgba(38,180,238,.36)');
+    const violetTexture = makeGlowTexture('rgba(119,80,238,.9)', 'rgba(101,70,230,.34)');
+    const pinkTexture = makeGlowTexture('rgba(239,84,190,.82)', 'rgba(210,70,190,.30)');
+    const addGlow = (texture: any, x: number, y: number, z: number, size: number, opacity: number) => {
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending }));
+      sprite.position.set(x, y, z); sprite.scale.set(size, size, 1); group.add(sprite);
+    };
+    addGlow(cyanTexture, .72, .42, .2, 1.75, .74);
+    addGlow(violetTexture, -.68, .36, .12, 1.7, .72);
+    addGlow(pinkTexture, -.25, -.7, .38, 1.45, .6);
 
-    const backLayer = colorLayer.clone();
-    backLayer.material = (colorLayer.material as InstanceType<typeof THREE.MeshBasicMaterial>).clone();
-    (backLayer.material as InstanceType<typeof THREE.MeshBasicMaterial>).opacity = .18;
-    backLayer.position.z = -.91;
-    backLayer.rotation.y = Math.PI;
-    group.add(backLayer);
-
-    const edgeGeometry = new THREE.EdgesGeometry(cubeGeometry, 28);
-    const edges = new THREE.LineSegments(edgeGeometry, new THREE.LineBasicMaterial({ color: 0xe7f4ff, transparent: true, opacity: .9 }));
-    edges.renderOrder = 5;
-    group.add(edges);
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(cubeGeometry, 28), new THREE.LineBasicMaterial({ color: 0xe8f5ff, transparent: true, opacity: .88 }));
+    edges.renderOrder = 5; group.add(edges);
 
     const boltShape = new THREE.Shape();
-    boltShape.moveTo(.15, 1.04);
-    boltShape.lineTo(-.8, -.05);
-    boltShape.lineTo(-.18, -.05);
-    boltShape.lineTo(-.48, -1.04);
-    boltShape.lineTo(.8, .18);
-    boltShape.lineTo(.18, .18);
-    boltShape.closePath();
+    boltShape.moveTo(.15, 1.04); boltShape.lineTo(-.8, -.05); boltShape.lineTo(-.18, -.05);
+    boltShape.lineTo(-.48, -1.04); boltShape.lineTo(.8, .18); boltShape.lineTo(.18, .18); boltShape.closePath();
     const boltGeometry = new THREE.ExtrudeGeometry(boltShape, { depth: .18, bevelEnabled: true, bevelSize: .05, bevelThickness: .05, bevelSegments: 3 });
     boltGeometry.center();
-    const boltMaterial = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .2, roughness: .1, clearcoat: 1, emissive: 0xa9e8ff, emissiveIntensity: .42 });
-    const bolt = new THREE.Mesh(boltGeometry, boltMaterial);
-    bolt.scale.set(.92, .92, .92);
-    bolt.position.z = 1.03;
-    bolt.rotation.z = -.035;
-    bolt.renderOrder = 8;
-    group.add(bolt);
+    const bolt = new THREE.Mesh(boltGeometry, new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .18, roughness: .11, clearcoat: 1, emissive: 0xa9e8ff, emissiveIntensity: .32 }));
+    bolt.scale.set(.72, .72, .72); bolt.position.z = 1.04; bolt.rotation.z = -.035; bolt.renderOrder = 8; group.add(bolt);
 
-    const glow = new THREE.Mesh(
-      new THREE.CircleGeometry(1.08, 48),
-      new THREE.MeshBasicMaterial({ color: 0x6a62ff, transparent: true, opacity: .14, blending: THREE.AdditiveBlending, depthWrite: false })
-    );
-    glow.position.z = -.98;
-    group.add(glow);
+    const backGlow = new THREE.Mesh(new THREE.CircleGeometry(1.04, 48), new THREE.MeshBasicMaterial({ color: 0x645dff, transparent: true, opacity: .1, blending: THREE.AdditiveBlending, depthWrite: false }));
+    backGlow.position.z = -.99; group.add(backGlow);
 
-    const pointer = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
+    const pointer = { x: 0, y: 0 }, target = { x: 0, y: 0 };
     host.addEventListener('pointermove', (event) => {
       const rect = host.getBoundingClientRect();
-      target.x = ((event.clientX - rect.left) / rect.width - .5) * .34;
-      target.y = ((event.clientY - rect.top) / rect.height - .5) * .2;
+      target.x = ((event.clientX - rect.left) / rect.width - .5) * .3;
+      target.y = ((event.clientY - rect.top) / rect.height - .5) * .18;
     }, { passive: true });
     host.addEventListener('pointerleave', () => { target.x = 0; target.y = 0; }, { passive: true });
 
     const resize = () => {
-      const width = Math.max(1, host.clientWidth);
-      const height = Math.max(1, host.clientHeight);
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
+      const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight);
+      renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix();
     };
-    resize();
-    const observer = new ResizeObserver(resize);
-    observer.observe(host);
+    resize(); const observer = new ResizeObserver(resize); observer.observe(host);
 
-    const start = performance.now();
-    let raf = 0;
+    const start = performance.now(); let raf = 0;
     const render = (now: number) => {
       if (intro.classList.contains('is-done')) {
-        observer.disconnect();
-        gradientTexture.dispose();
-        renderer.dispose();
-        cancelAnimationFrame(raf);
-        return;
+        observer.disconnect(); cyanTexture.dispose(); violetTexture.dispose(); pinkTexture.dispose(); renderer.dispose(); cancelAnimationFrame(raf); return;
       }
       const t = (now - start) / 1000;
-      pointer.x += (target.x - pointer.x) * .045;
-      pointer.y += (target.y - pointer.y) * .045;
-      group.rotation.y = -.3 + Math.sin(t * .5) * .18 + pointer.x;
-      group.rotation.x = -.07 + Math.sin(t * .4) * .05 - pointer.y;
-      group.rotation.z = Math.sin(t * .35) * .026;
-      group.position.y = Math.sin(t * .88) * .08;
-      blue.intensity = 52 + Math.sin(t * 1.1) * 7;
-      cyan.intensity = 46 + Math.cos(t * .93) * 7;
-      violet.intensity = 41 + Math.sin(t * .77 + 1.4) * 6;
-      magenta.intensity = 33 + Math.cos(t * .7) * 5;
-      renderer.render(scene, camera);
-      raf = requestAnimationFrame(render);
+      pointer.x += (target.x - pointer.x) * .045; pointer.y += (target.y - pointer.y) * .045;
+      group.rotation.y = -.44 + Math.sin(t * .48) * .16 + pointer.x;
+      group.rotation.x = -.14 + Math.sin(t * .4) * .045 - pointer.y;
+      group.rotation.z = .028 + Math.sin(t * .35) * .022; group.position.y = Math.sin(t * .88) * .075;
+      blue.intensity = 40 + Math.sin(t * 1.1) * 6; cyan.intensity = 36 + Math.cos(t * .93) * 6;
+      violet.intensity = 33 + Math.sin(t * .77 + 1.4) * 5; magenta.intensity = 25 + Math.cos(t * .7) * 4;
+      renderer.render(scene, camera); raf = requestAnimationFrame(render);
     };
     raf = requestAnimationFrame(render);
   };

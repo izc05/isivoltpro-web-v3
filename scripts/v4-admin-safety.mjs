@@ -52,6 +52,10 @@ for (const policy of [
   'backendMustAuthenticateWrites: true',
   'backendMustAuditPrivilegedActions: true',
   'formDataMustNotPersistInPublicFrontend: true',
+  'formIntakeMustValidateOnServer: true',
+  'formIntakeMustRateLimit: true',
+  'formIntakeRequiresConsent: true',
+  'formRetentionMustBeDefinedBeforeEnable: true',
   'mediaUploadsRequireAuthenticatedBackend: true',
   'releaseAndSocialNeedExplicitApproval: true',
 ]) {
@@ -85,6 +89,26 @@ for (const boundary of [
   if (!contract.includes(boundary)) fail(`límite backend ausente o debilitado: ${boundary}`);
 }
 
+for (const formId of ["id: 'contact'", "id: 'demo'", "id: 'pilot'"]) {
+  if (!contract.includes(formId)) fail(`formulario V4 ausente del contrato: ${formId}`);
+}
+for (const formGuard of [
+  "status: 'preview-disabled'",
+  'consentRequired: true',
+  'serverValidationRequired: true',
+  'rateLimitRequired: true',
+  'auditRequired: true',
+  'publicPersistenceAllowed: false',
+  'publicSecretsAllowed: false',
+  'backendEndpoint: null',
+  "retentionPolicy: 'define-before-enable'",
+]) {
+  if (!contract.includes(formGuard)) fail(`protección de formularios ausente o debilitada: ${formGuard}`);
+}
+for (const route of ["publicRoute: '/contacto/'", "publicRoute: '/demo/'", "publicRoute: '/piloto/'"]) {
+  if (!contract.includes(route)) fail(`ruta pública de intake ausente: ${route}`);
+}
+
 if (!workspaceSource.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
 if (!workspaceSource.includes('disabled')) fail('el workspace debe conservar controles de escritura desactivados');
 if (!adminSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('el centro de control debe permanecer detrás del flag de preview administrativo');
@@ -111,4 +135,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, matriz operativa protegida, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, intake público definido pero desactivado, matriz operativa protegida, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');

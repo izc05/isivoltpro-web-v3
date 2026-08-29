@@ -1,6 +1,6 @@
 ---
 import '../styles/v4-entry-minimal.css';
-import premiumCube from '../assets/isivoltpro-cube-premium-v4.webp';
+import premiumCubeUrl from '../assets/isivoltpro-cube-premium-v4.webp?url';
 
 interface Props {
   accessHref: string;
@@ -20,7 +20,7 @@ const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
     <div class="entry3d__scene" id="entry3d-scene" aria-label="Cubo de cristal multicolor de IsiVoltPro en movimiento">
       <div class="entry3d__halo" aria-hidden="true"></div>
       <canvas id="entry3d-canvas" class="entry3d__canvas" aria-hidden="true"></canvas>
-      <img class="entry3d__fallback" src={premiumCube.src} alt="" width="690" height="670" loading="eager" decoding="sync" fetchpriority="high" />
+      <img class="entry3d__fallback" src={premiumCubeUrl} alt="" width="690" height="670" loading="eager" decoding="sync" fetchpriority="high" />
     </div>
   </div>
 </div>

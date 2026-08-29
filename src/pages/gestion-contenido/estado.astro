@@ -1,0 +1,75 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+import { v4AdminAreas, v4AdminPolicy, v4BackendBoundary } from '../../data/v4-web-admin';
+
+const base = import.meta.env.BASE_URL;
+const enabled = import.meta.env.PUBLIC_V3_CONTENT_ADMIN_PREVIEW === 'true';
+const capabilityLabel = {
+  'content-write': 'Escritura editorial',
+  'media-upload': 'Subida multimedia',
+  'form-intake': 'Recepción de formularios',
+  'social-publish': 'Publicación social',
+  'release-publish': 'Publicación de versión',
+  'identity-access': 'Identidad y acceso',
+  'audit-log': 'Auditoría',
+} as const;
+const stateLabel = {
+  'ready-preview': 'Preview disponible',
+  partial: 'Preview parcial',
+  'backend-required': 'Backend requerido',
+} as const;
+const readiness = v4AdminAreas.map((area) => ({
+  ...area,
+  capabilities: area.backendCapabilities.map((capability) => ({
+    id: capability,
+    label: capabilityLabel[capability],
+    boundary: v4BackendBoundary.capabilities[capability],
+  })),
+}));
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Estado operativo del workspace V4 · IsiVoltPro" description="Matriz segura del estado operativo del workspace administrativo de IsiVoltPro V4." path={`${base}gestion-contenido/estado/`} noindex={true} />
+  <style is:inline>
+    .readiness{min-height:82vh;padding:48px 0 84px;background:radial-gradient(circle at 86% 4%,rgba(91,76,223,.12),transparent 24%),linear-gradient(180deg,#fff,#f7f9fd)}
+    .shell{width:min(1180px,calc(100% - 32px));margin:auto}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:end;margin-bottom:24px}.hero h1{margin:10px 0 14px;font:800 clamp(40px,5.5vw,68px)/.98 Manrope,sans-serif;letter-spacing:-.055em}.hero p{max-width:720px;margin:0;color:#66718b;font-size:16px;line-height:1.65}
+    .guard,.card,.summary{border:1px solid #e5e9f2;background:rgba(255,255,255,.97);box-shadow:0 18px 52px rgba(45,65,110,.07)}.guard{padding:20px;border-radius:22px}.guard strong{display:block;margin-bottom:6px}.guard small{color:#68738d;line-height:1.5}.guard span{display:inline-flex;margin-top:12px;padding:6px 9px;border-radius:999px;background:#eaf9f3;color:#16845f;font-size:10px;font-weight:900}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:18px;border-radius:20px;overflow:hidden}.summary article{padding:18px;background:#fff}.summary small{display:block;color:#8791a5;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.summary strong{display:block;margin-top:7px;font:800 26px/1 Manrope,sans-serif}.summary span{display:block;margin-top:6px;color:#6f7990;font-size:11px;line-height:1.45}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:18px;border-radius:18px}.card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.card h2{margin:0;font-size:17px}.state{flex:0 0 auto;padding:5px 8px;border-radius:999px;background:#eef3ff;color:#315ca8;font-size:9px;font-weight:900}.state.backend-required{background:#fff0ed;color:#a64b32}.state.partial{background:#fff3e9;color:#a45d19}.card>p{margin:9px 0 13px;color:#68738d;font-size:12px;line-height:1.55}.caps{display:grid;gap:7px}.cap{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 10px;border-radius:12px;background:#f7f9fd}.cap strong{font-size:11px}.badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.badges span{padding:4px 6px;border-radius:999px;background:#eef3ff;color:#315ca8;font-size:8px;font-weight:900}.badges .approval{background:#fff3e9;color:#9a5b1f}.badges .checks{background:#eaf9f3;color:#16845f}.badges .server{background:#f3efff;color:#6b4fc7}.roles{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}.roles span{padding:4px 7px;border-radius:999px;background:#eef8f4;color:#247357;font-size:9px;font-weight:850}.boundary{margin-top:18px;padding:16px 18px;border:1px solid #eeddbc;border-radius:16px;background:#fff8ed;color:#704f1d;font-size:12px;line-height:1.6}.off{padding:26px;border-radius:20px;background:#111827;color:#fff}.off p{color:#cbd5e1;line-height:1.6}.off code{padding:3px 6px;border-radius:6px;background:#243047}
+    @media(max-width:820px){.hero,.grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr}.hero p{font-size:15px}}@media(max-width:520px){.readiness{padding-top:34px}.hero h1{font-size:clamp(38px,12vw,52px)}.card-top{display:grid}.cap{grid-template-columns:1fr}.badges{justify-content:flex-start}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="readiness">
+    <div class="shell">
+      <section class="hero">
+        <div><span class="eyebrow">Workspace V4 · estado operativo</span><h1>Qué funciona hoy.<br/><span class="gradient-text">Qué sigue protegido.</span></h1><p>Esta vista deriva del mismo contrato V4 que gobierna /admin/. No inventa backend: separa lo que ya puede revisarse en preview de lo que exige autenticación, validación de servidor, aprobación o checks verdes.</p></div>
+        <aside class="guard"><strong>Una sola fuente de verdad</strong><small>Las capacidades se leen de <code>v4-web-admin.ts</code>. GitHub Pages continúa siendo una capa pública estática y no writable.</small><span>◈ Noindex · sin secretos · sin escrituras públicas</span></aside>
+      </section>
+
+      {enabled ? (
+        <>
+          <section class="summary" aria-label="Resumen del estado operativo">
+            <article><small>Áreas gobernadas</small><strong>{readiness.length}</strong><span>dominios del admin V4 con permisos y límites declarados</span></article>
+            <article><small>Backend protegido</small><strong>{Object.keys(v4BackendBoundary.capabilities).length}</strong><span>capacidades sensibles fuera de GitHub Pages</span></article>
+            <article><small>Publicación</small><strong>{v4AdminPolicy.releaseRequiresGreenChecks ? 'QA' : '—'}</strong><span>release y redes mantienen aprobación explícita</span></article>
+          </section>
+
+          <section class="grid" aria-label="Matriz operativa V4">
+            {readiness.map((area) => <article class="card" id={area.id}><div class="card-top"><h2>{area.label}</h2><span class:list={["state", area.state]}>{stateLabel[area.state]}</span></div><p>{area.description}</p><div class="caps">{area.capabilities.map((capability) => <div class="cap"><strong>{capability.label}</strong><div class="badges">{capability.boundary.requiresAuth && <span>AUTH</span>}{'requiresServerValidation' in capability.boundary && capability.boundary.requiresServerValidation && <span class="server">SERVER VALIDATION</span>}{'requiresApproval' in capability.boundary && capability.boundary.requiresApproval && <span class="approval">APROBACIÓN</span>}{'requiresGreenChecks' in capability.boundary && capability.boundary.requiresGreenChecks && <span class="checks">CHECKS VERDES</span>}</div></div>)}</div><div class="roles">{area.roles.map((role) => <span>{role}</span>)}</div></article>)}
+          </section>
+          <div class="boundary"><strong>Límite de activación:</strong> escribir contenido, subir medios, programar redes, publicar versiones, administrar identidades y consultar auditoría solo podrá activarse detrás de backend autenticado y autorizado. La recepción de formularios seguirá siendo anónima para el visitante, pero con validación de servidor y sin persistencia en el frontend público.</div>
+        </>
+      ) : (
+        <section class="off"><strong>Matriz operativa bloqueada por defecto.</strong><p>La vista existe para QA administrativo aislado y solo se muestra con <code>PUBLIC_V3_CONTENT_ADMIN_PREVIEW=true</code>. La web pública no expone información operativa ni controles administrativos.</p></section>
+      )}
+    </div>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

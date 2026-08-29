@@ -63,6 +63,34 @@ for (const route of ["publicRoute: '/contacto/'", "publicRoute: '/demo/'", "publ
   if (!contract.includes(route)) fail(`ruta pública de intake ausente: ${route}`);
 }
 
+for (const handoffGuard of [
+  "activation: 'blocked'",
+  'endpoint: null',
+  "transport: 'https-only'",
+  "allowedMethods: ['POST']",
+  'schemaRequired: true',
+  'rejectUnknownFields: true',
+  "status: 'not-defined'",
+  'deleteAfterDays: null',
+  "status: 'required-not-configured'",
+  "keyStrategy: 'privacy-preserving-server-key'",
+  'windowSeconds: null',
+  'maxRequests: null',
+  'actorRequiredForAdminEvents: true',
+  'secretsInClient: false',
+  'adminReadRequiresAuth: true',
+  'adminWriteRequiresAuth: true',
+  'persistOnlyAfterValidation: true',
+]) {
+  if (!contract.includes(handoffGuard)) fail(`handoff backend ausente o prematuramente activado: ${handoffGuard}`);
+}
+for (const serverField of ['requestId', 'receivedAt', 'sourceFingerprint', 'auditTrail']) {
+  if (!contract.includes(`'${serverField}'`)) fail(`campo propiedad del servidor ausente: ${serverField}`);
+}
+for (const auditEvent of ['received', 'rejected', 'viewed', 'status-changed', 'deleted']) {
+  if (!contract.includes(`'${auditEvent}'`)) fail(`evento mínimo de auditoría ausente: ${auditEvent}`);
+}
+
 if (!workspaceSource.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
 if (!workspaceSource.includes('disabled')) fail('el workspace debe conservar controles de escritura desactivados');
 if (!adminSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('el centro de control debe permanecer detrás del flag de preview administrativo');
@@ -80,10 +108,14 @@ for (const marker of ['AUTH', 'SERVER VALIDATION', 'APROBACIÓN', 'CHECKS VERDES
   if (!readinessSource.includes(marker)) fail(`la matriz operativa debe explicar el requisito ${marker}`);
 }
 
-if (!formsWorkspaceSource.includes("import { v4PublicFormIntake }")) fail('la activación de formularios debe consumir la fuente única V4');
+if (!formsWorkspaceSource.includes('v4PublicFormIntake')) fail('la activación de formularios debe consumir la fuente única V4');
+if (!formsWorkspaceSource.includes('v4FormBackendContract')) fail('la activación de formularios debe consumir el handoff backend V4');
 if (!formsWorkspaceSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('la activación de formularios debe permanecer detrás del flag administrativo');
 for (const marker of ['Endpoint backend','Política de retención','Validación de servidor','Rate limiting','Consentimiento','Auditoría','PREVIEW · SIN ENVÍO']) {
   if (!formsWorkspaceSource.includes(marker)) fail(`la activación de formularios debe mostrar el bloqueo «${marker}»`);
+}
+for (const marker of ['Handoff backend definido','ACTIVACIÓN BLOQUEADA','Registro mínimo server-side','Eventos de auditoría','Campos propiedad del servidor','HTTPS only','rechazar campos desconocidos','persistir solo tras validar']) {
+  if (!formsWorkspaceSource.includes(marker)) fail(`la vista de intake debe exponer el contrato backend «${marker}»`);
 }
 if (!formsWorkspaceSource.includes('GitHub Pages no recibe, guarda ni transmite datos personales')) fail('la activación debe explicar el límite de datos públicos');
 if (/<form\b/i.test(formsWorkspaceSource)) fail('la vista de activación no debe implementar formularios reales');
@@ -99,4 +131,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, intake público definido y visible pero desactivado, activación fail-closed, matriz operativa protegida, backend autenticado delimitado, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, intake público desactivado, handoff backend fail-closed, retención/rate-limit/auditoría sin fingir configuración, matriz operativa protegida, sin escrituras públicas y release gate protegido.');

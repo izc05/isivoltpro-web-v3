@@ -1,5 +1,6 @@
 ---
 import '../styles/v4-entry-minimal.css';
+import premiumCube from '../assets/isivoltpro-cube-premium-v4.webp?url';
 
 interface Props {
   accessHref: string;
@@ -8,7 +9,6 @@ interface Props {
 
 const base = import.meta.env.BASE_URL;
 const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
-const premiumCube = `${base}media/isivoltpro-cube-premium-v4.webp`;
 ---
 <div class="intro entry3d" id="intro" aria-label="Presentación de IsiVoltPro">
   <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
@@ -21,7 +21,7 @@ const premiumCube = `${base}media/isivoltpro-cube-premium-v4.webp`;
       <div class="entry3d__halo" aria-hidden="true"></div>
       <canvas id="entry3d-canvas" class="entry3d__canvas" aria-hidden="true"></canvas>
       <div class="entry3d__cube-frame">
-        <img class="entry3d__premium-cube" src={premiumCube} alt="" width="690" height="670" decoding="async" fetchpriority="high" />
+        <img id="entry3d-premium-cube" class="entry3d__premium-cube" src={premiumCube} alt="" width="690" height="670" loading="eager" decoding="sync" fetchpriority="high" />
       </div>
     </div>
   </div>
@@ -31,9 +31,19 @@ const premiumCube = `${base}media/isivoltpro-cube-premium-v4.webp`;
   const canvas = document.querySelector<HTMLCanvasElement>('#entry3d-canvas');
   const host = document.querySelector<HTMLElement>('#entry3d-scene');
   const intro = document.querySelector<HTMLElement>('#intro');
+  const premiumImage = document.querySelector<HTMLImageElement>('#entry3d-premium-cube');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let alreadySeen = document.documentElement.classList.contains('skip-intro');
   try { alreadySeen ||= sessionStorage.getItem('isivoltpro-intro-seen') === '1'; } catch (_) {}
+
+  const markCubeReady = () => {
+    if (premiumImage?.complete && (premiumImage.naturalWidth || 0) > 300) host?.classList.add('is-cube-ready');
+  };
+  if (premiumImage) {
+    if (premiumImage.complete) markCubeReady();
+    premiumImage.addEventListener('load', markCubeReady, { once: true });
+    premiumImage.addEventListener('error', () => host?.classList.add('is-cube-fallback'), { once: true });
+  }
 
   const setTilt = (x = 0, y = 0) => {
     if (!host) return;
@@ -83,9 +93,8 @@ const premiumCube = `${base}media/isivoltpro-cube-premium-v4.webp`;
       roughness: .045, ior: 1.42, clearcoat: 1, clearcoatRoughness: .02,
       emissive: 0x3348ad, emissiveIntensity: .035, side: THREE.DoubleSide, depthWrite: false,
     });
-    const glass = new THREE.Mesh(geometry, material); group.add(glass);
-    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geometry, 28), new THREE.LineBasicMaterial({ color: 0xdff8ff, transparent: true, opacity: .28 }));
-    group.add(edges);
+    group.add(new THREE.Mesh(geometry, material));
+    group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geometry, 28), new THREE.LineBasicMaterial({ color: 0xdff8ff, transparent: true, opacity: .28 })));
 
     const resize = () => {
       const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight);

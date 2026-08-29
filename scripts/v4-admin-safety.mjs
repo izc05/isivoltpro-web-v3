@@ -23,6 +23,7 @@ const contract = readFileSync('src/data/v4-web-admin.ts', 'utf8');
 const workspaceSource = readFileSync('src/pages/gestion-contenido.astro', 'utf8');
 const readinessSource = readFileSync('src/pages/gestion-contenido/estado.astro', 'utf8');
 const adminSource = readFileSync('src/pages/admin.astro', 'utf8');
+const headerSource = readFileSync('src/components/V3CommercialHeader.astro', 'utf8');
 
 for (const label of [
   'Páginas públicas',
@@ -119,10 +120,16 @@ if (!adminSource.includes('validación de servidor')) fail('el centro de control
 if (!contract.includes("route: '/gestion-contenido/estado/#forms'")) fail('contactos debe enlazar a la matriz operativa protegida');
 if (!contract.includes("route: '/gestion-contenido/estado/#security'")) fail('seguridad debe enlazar a la matriz operativa protegida');
 if (!readinessSource.includes('v4BackendBoundary')) fail('la matriz operativa debe derivar límites desde el contrato V4');
+if (!readinessSource.includes('v4PublicFormIntake')) fail('la matriz operativa debe derivar el intake público desde el contrato V4');
+if (!readinessSource.includes('Intake público protegido')) fail('la matriz operativa debe mostrar el estado de Contacto/Demo/Piloto');
 if (!readinessSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('la matriz operativa debe permanecer detrás del flag de preview administrativo');
 for (const marker of ['AUTH', 'SERVER VALIDATION', 'APROBACIÓN', 'CHECKS VERDES']) {
   if (!readinessSource.includes(marker)) fail(`la matriz operativa debe explicar el requisito ${marker}`);
 }
+if (!headerSource.includes("import { v4PublicFormIntake }")) fail('las rutas públicas de intake deben consumir la fuente única V4');
+if (!headerSource.includes('publicIntake')) fail('la cabecera debe resolver el estado de intake según la ruta pública');
+if (!headerSource.includes('PREVIEW · SIN ENVÍO')) fail('las rutas públicas de intake deben mostrar que el envío está desactivado');
+if (!headerSource.includes('No se envían ni almacenan datos personales')) fail('las rutas públicas de intake deben explicar el límite de datos');
 
 const forbidden = [
   /pb_superuser/i,
@@ -135,4 +142,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, intake público definido pero desactivado, matriz operativa protegida, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, intake público definido y visible pero desactivado, matriz operativa protegida, backend autenticado delimitado, sin escrituras públicas y release gate protegido.');

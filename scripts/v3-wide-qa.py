@@ -36,41 +36,35 @@ def capture_entry(browser, width: int, height: int, name: str) -> None:
     page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
     response = page.goto(BASE_URL, wait_until="networkidle")
     if response is None or response.status >= 400:
-        failures.append(f"entrada V4 {name}: HTTP inválido"); page.close(); return
-    page.wait_for_timeout(1200)
+        failures.append(f"entrada estática {name}: HTTP inválido"); page.close(); return
+    page.wait_for_timeout(500)
     metrics = page.evaluate(
         """() => {
           const root=document.documentElement;
           const visible=(el)=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};
           const intro=document.querySelector('.entry3d');
-          const scene=document.querySelector('#entry3d-scene');
-          const logo=document.querySelector('.entry3d__logo');
-          const cube=document.querySelector('.entry3d__premium-cube');
+          const art=document.querySelector('.entry3d__static-art');
           const skip=document.querySelector('#skip-intro');
-          const sr=scene?.getBoundingClientRect(); const lr=logo?.getBoundingClientRect(); const cr=cube?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
+          const ar=art?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
           const introStyle=intro?getComputedStyle(intro):null;
           return {
             introVisible:visible(intro)&&!intro.classList.contains('is-done'),
-            sceneW:sr?.width||0,sceneH:sr?.height||0,
-            cubeVisible:visible(cube),cubeW:cr?.width||0,cubeH:cr?.height||0,
-            cubeComplete:cube?.complete===true,cubeNaturalW:cube?.naturalWidth||0,cubeNaturalH:cube?.naturalHeight||0,
-            logoVisible:visible(logo),logoW:lr?.width||0,
+            artVisible:visible(art),artW:ar?.width||0,artH:ar?.height||0,
+            artComplete:art?.complete===true,artNaturalW:art?.naturalWidth||0,artNaturalH:art?.naturalHeight||0,
             skipVisible:visible(skip),skipH:kr?.height||0,
-            legacyCount:document.querySelectorAll('.entry3d__heading,.entry3d__note,.entry3d__actions,.entry3d__phone,.entry3d__orders').length,
-            bgColor:introStyle?.backgroundColor||'',bgImage:introStyle?.backgroundImage||'',
+            oldEffectCount:document.querySelectorAll('#entry3d-scene,.entry3d__logo,.entry3d__halo,.entry3d__cube-frame,.entry3d__premium-cube,#entry3d-canvas').length,
+            bgColor:introStyle?.backgroundColor||'',
             scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,
           };
         }"""
     )
-    if not metrics["introVisible"]: failures.append(f"entrada V4 {name}: la escena no está visible")
-    if metrics["sceneW"] < min(width * .75, 680) or metrics["sceneH"] < 460: failures.append(f"entrada V4 {name}: cubo/escena demasiado pequeño · {metrics['sceneW']}x{metrics['sceneH']}")
-    if not metrics["cubeVisible"] or metrics["cubeW"] < min(width * .6, 560): failures.append(f"entrada V4 {name}: cubo premium ausente o pequeño · {metrics['cubeW']}x{metrics['cubeH']}")
-    if not metrics["cubeComplete"] or metrics["cubeNaturalW"] < 800 or metrics["cubeNaturalH"] < 600: failures.append(f"entrada V4 {name}: imagen premium no cargó píxeles reales · {metrics['cubeNaturalW']}x{metrics['cubeNaturalH']}")
-    if not metrics["logoVisible"] or metrics["logoW"] < 210: failures.append(f"entrada V4 {name}: marca IsiVoltPro ausente o demasiado pequeña")
-    if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada V4 {name}: control Saltar intro no accesible · {metrics['skipH']}px")
-    if metrics["legacyCount"] != 0: failures.append(f"entrada V4 {name}: reapareció contenido periférico retirado · {metrics['legacyCount']}")
-    if metrics["bgColor"] in {"rgba(0, 0, 0, 0)", "transparent"}: failures.append(f"entrada V4 {name}: fondo de intro transparente")
-    if metrics["scrollWidth"] > metrics["clientWidth"] + 1: failures.append(f"entrada V4 {name}: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
+    if not metrics["introVisible"]: failures.append(f"entrada estática {name}: no está visible")
+    if not metrics["artVisible"] or metrics["artW"] < width - 1 or metrics["artH"] < height - 1: failures.append(f"entrada estática {name}: imagen no cubre viewport · {metrics['artW']}x{metrics['artH']}")
+    if not metrics["artComplete"] or metrics["artNaturalW"] < 1200 or metrics["artNaturalH"] < 700: failures.append(f"entrada estática {name}: imagen aprobada sin píxeles reales · {metrics['artNaturalW']}x{metrics['artNaturalH']}")
+    if metrics["oldEffectCount"] != 0: failures.append(f"entrada estática {name}: siguen presentes capas/efectos antiguos · {metrics['oldEffectCount']}")
+    if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada estática {name}: control Saltar intro no accesible · {metrics['skipH']}px")
+    if metrics["bgColor"] in {"rgba(0, 0, 0, 0)", "transparent"}: failures.append(f"entrada estática {name}: fondo transparente")
+    if metrics["scrollWidth"] > metrics["clientWidth"] + 1: failures.append(f"entrada estática {name}: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
     page.screenshot(path=str(OUT / f"entrada-3d-{name}.png"), full_page=False)
     page.close()
 
@@ -123,4 +117,4 @@ if failures:
     print("\nQA tablet/escritorio V4: FALLÓ",file=sys.stderr)
     for item in failures: print(f"- {item}",file=sys.stderr)
     raise SystemExit(1)
-print("QA tablet/escritorio V4: OK · cubo ultrarrealista + 19 rutas × 4 viewports")
+print("QA tablet/escritorio V4: OK · entrada estática aprobada + 19 rutas × 4 viewports")

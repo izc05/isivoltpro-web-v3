@@ -86,6 +86,10 @@ for (const boundary of [
 if (!workspaceSource.includes('Preview seguro')) fail('el workspace debe declarar su modo seguro');
 if (!workspaceSource.includes('disabled')) fail('el workspace debe conservar controles de escritura desactivados');
 if (!adminSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('el centro de control debe permanecer detrás del flag de preview administrativo');
+if (!adminSource.includes('v4BackendBoundary')) fail('el centro de control debe consumir el límite backend desde la fuente V4');
+if (!adminSource.includes('area.backendCapabilities')) fail('el centro de control debe exponer las capacidades backend por área');
+if (!adminSource.includes('Backend necesario')) fail('el centro de control debe explicar visualmente qué requiere backend');
+if (!adminSource.includes('validación de servidor')) fail('el centro de control debe distinguir formularios públicos de escrituras administrativas autenticadas');
 
 const forbidden = [
   /pb_superuser/i,
@@ -98,4 +102,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, backend autenticado delimitado, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');

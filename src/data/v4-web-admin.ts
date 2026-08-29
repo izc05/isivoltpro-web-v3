@@ -38,6 +38,43 @@ export type V4PublicFormIntake = {
   retentionPolicy: 'define-before-enable';
 };
 
+export type V4FormBackendContract = {
+  activation: 'blocked';
+  endpoint: null;
+  transport: 'https-only';
+  allowedMethods: readonly ['POST'];
+  recordFields: readonly string[];
+  sensitiveFields: readonly string[];
+  serverOwnedFields: readonly string[];
+  validation: {
+    schemaRequired: true;
+    rejectUnknownFields: true;
+    normalizeInput: true;
+  };
+  retention: {
+    status: 'not-defined';
+    deleteAfterDays: null;
+    legalHoldSupported: false;
+  };
+  rateLimit: {
+    status: 'required-not-configured';
+    keyStrategy: 'privacy-preserving-server-key';
+    windowSeconds: null;
+    maxRequests: null;
+  };
+  audit: {
+    status: 'required-not-configured';
+    events: readonly string[];
+    actorRequiredForAdminEvents: true;
+  };
+  security: {
+    secretsInClient: false;
+    adminReadRequiresAuth: true;
+    adminWriteRequiresAuth: true;
+    persistOnlyAfterValidation: true;
+  };
+};
+
 export const v4AdminAreas: V4AdminArea[] = [
   {
     id: 'pages',
@@ -207,6 +244,43 @@ export const v4PublicFormIntake: V4PublicFormIntake[] = [
     retentionPolicy: 'define-before-enable',
   },
 ];
+
+export const v4FormBackendContract: V4FormBackendContract = {
+  activation: 'blocked',
+  endpoint: null,
+  transport: 'https-only',
+  allowedMethods: ['POST'],
+  recordFields: ['requestId', 'kind', 'receivedAt', 'status', 'name', 'email', 'payload', 'consentVersion', 'privacyAcceptedAt'],
+  sensitiveFields: ['name', 'email', 'phone', 'business', 'need', 'problem', 'scope', 'locations'],
+  serverOwnedFields: ['requestId', 'receivedAt', 'status', 'sourceFingerprint', 'auditTrail'],
+  validation: {
+    schemaRequired: true,
+    rejectUnknownFields: true,
+    normalizeInput: true,
+  },
+  retention: {
+    status: 'not-defined',
+    deleteAfterDays: null,
+    legalHoldSupported: false,
+  },
+  rateLimit: {
+    status: 'required-not-configured',
+    keyStrategy: 'privacy-preserving-server-key',
+    windowSeconds: null,
+    maxRequests: null,
+  },
+  audit: {
+    status: 'required-not-configured',
+    events: ['received', 'rejected', 'viewed', 'status-changed', 'deleted'],
+    actorRequiredForAdminEvents: true,
+  },
+  security: {
+    secretsInClient: false,
+    adminReadRequiresAuth: true,
+    adminWriteRequiresAuth: true,
+    persistOnlyAfterValidation: true,
+  },
+};
 
 export const v4AdminPolicy = {
   publicSiteStoresSecrets: false,

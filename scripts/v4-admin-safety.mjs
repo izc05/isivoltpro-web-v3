@@ -4,6 +4,7 @@ const requiredBuildFiles = [
   'dist/admin/index.html',
   'dist/gestion-contenido/index.html',
   'dist/gestion-contenido/blog/index.html',
+  'dist/gestion-contenido/estado/index.html',
 ];
 
 const fail = (message) => {
@@ -20,6 +21,7 @@ for (const file of requiredBuildFiles) {
 
 const contract = readFileSync('src/data/v4-web-admin.ts', 'utf8');
 const workspaceSource = readFileSync('src/pages/gestion-contenido.astro', 'utf8');
+const readinessSource = readFileSync('src/pages/gestion-contenido/estado.astro', 'utf8');
 const adminSource = readFileSync('src/pages/admin.astro', 'utf8');
 
 for (const label of [
@@ -90,6 +92,13 @@ if (!adminSource.includes('v4BackendBoundary')) fail('el centro de control debe 
 if (!adminSource.includes('area.backendCapabilities')) fail('el centro de control debe exponer las capacidades backend por área');
 if (!adminSource.includes('Backend necesario')) fail('el centro de control debe explicar visualmente qué requiere backend');
 if (!adminSource.includes('validación de servidor')) fail('el centro de control debe distinguir formularios públicos de escrituras administrativas autenticadas');
+if (!contract.includes("route: '/gestion-contenido/estado/#forms'")) fail('contactos debe enlazar a la matriz operativa protegida');
+if (!contract.includes("route: '/gestion-contenido/estado/#security'")) fail('seguridad debe enlazar a la matriz operativa protegida');
+if (!readinessSource.includes('v4BackendBoundary')) fail('la matriz operativa debe derivar límites desde el contrato V4');
+if (!readinessSource.includes('PUBLIC_V3_CONTENT_ADMIN_PREVIEW')) fail('la matriz operativa debe permanecer detrás del flag de preview administrativo');
+for (const marker of ['AUTH', 'SERVER VALIDATION', 'APROBACIÓN', 'CHECKS VERDES']) {
+  if (!readinessSource.includes(marker)) fail(`la matriz operativa debe explicar el requisito ${marker}`);
+}
 
 const forbidden = [
   /pb_superuser/i,
@@ -102,4 +111,4 @@ for (const pattern of forbidden) {
   if (pattern.test(publicAdminSurface)) fail(`posible secreto expuesto: ${pattern}`);
 }
 
-console.log('V4 admin safety OK: rutas noindex, contrato único, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');
+console.log('V4 admin safety OK: rutas noindex, contrato único, matriz operativa protegida, backend autenticado delimitado y visible, sin escrituras públicas y release gate protegido.');

@@ -68,7 +68,7 @@ jobs:
             dist/contacto/index.html
             dist/sitemap.xml
             dist/images/home/isivoltpro-industrial-core.webp
-            dist/media/isivoltpro-cube-ultrareal-v4.webp
+            dist/media/isivoltpro-entry-static-approved.webp
           )
 
           for file in "${required[@]}"; do
@@ -84,14 +84,13 @@ jobs:
             exit 1
           fi
 
-          # La entrada premium ultrarrealista vive únicamente en Home. El resto del sitio
-          # comercial debe seguir siendo HTML/CSS ligero y no cargar la experiencia de entrada.
-          if ! grep -q 'entry3d__premium-cube' dist/index.html || ! grep -q 'isivoltpro-cube-ultrareal-v4.webp' dist/index.html; then
-            echo "::error::La Home no contiene el cubo ultrarrealista aprobado."
+          # La entrada aprobada es una única imagen estática en Home.
+          if ! grep -q 'entry3d__static-art' dist/index.html || ! grep -q 'isivoltpro-entry-static-approved.webp' dist/index.html; then
+            echo "::error::La Home no contiene la imagen estática de entrada aprobada."
             exit 1
           fi
-          if grep -q 'entry3d-canvas' dist/index.html; then
-            echo "::error::La Home ha reintroducido el canvas 3D retirado de la entrada premium."
+          if grep -qE 'entry3d-canvas|entry3d-scene|entry3d__premium-cube|entry3d__halo|entry3d__cube-frame|isivoltpro-cube-ultrareal-v4' dist/index.html; then
+            echo "::error::La Home ha reintroducido capas o efectos retirados de la entrada estática."
             exit 1
           fi
 
@@ -137,8 +136,8 @@ jobs:
           )
 
           for page in "${non_home_pages[@]}"; do
-            if grep -qE 'entry3d__premium-cube|V3Entry3D|isivoltpro-cube-ultrareal-v4' "$page"; then
-              echo "::error::La página comercial $page está cargando la experiencia premium de Home de forma inesperada."
+            if grep -qE 'entry3d__static-art|isivoltpro-entry-static-approved|V3Entry3D' "$page"; then
+              echo "::error::La página comercial $page está cargando la entrada de Home de forma inesperada."
               exit 1
             fi
           done
@@ -235,9 +234,7 @@ jobs:
             exit 1
           fi
 
-          # Presupuesto deliberadamente acotado: base comercial + workspace visual +
-          # hasta 128 KiB adicionales para el nuevo blog/editorial HTML. No se aceptan
-          # nuevos binarios pesados para justificar este margen.
+          # Presupuesto deliberadamente acotado; no se aumenta para aceptar esta entrada.
           dist_kb=$(du -sk dist | cut -f1)
           max_kb=3392
           if (( dist_kb > max_kb )); then
@@ -257,7 +254,7 @@ jobs:
           echo "Contacto sin captura de PII: OK"
           echo "Sin copy interno: OK"
           echo "Sin MP4 heredados: OK"
-          echo "Entrada ultrarrealista limitada a Home: OK"
+          echo "Entrada estática aprobada limitada a Home: OK"
           echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"
       - name: Guardar build V3
         uses: actions/upload-artifact@v4

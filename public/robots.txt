@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /gestion-contenido
+Disallow: /isivoltpro-web-v3/admin
+Disallow: /isivoltpro-web-v3/gestion-contenido
 Disallow: /lab-3d
 Disallow: /isivoltpro-web-v3/lab-3d

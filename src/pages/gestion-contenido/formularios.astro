@@ -1,0 +1,58 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+import { v4PublicFormIntake } from '../../data/v4-web-admin';
+
+const base = import.meta.env.BASE_URL;
+const enabled = import.meta.env.PUBLIC_V3_CONTENT_ADMIN_PREVIEW === 'true';
+const names = { contact: 'Contacto', demo: 'Solicitud de demo', pilot: 'Solicitud de piloto' } as const;
+const activation = v4PublicFormIntake.map((form) => ({
+  ...form,
+  blockers: [
+    { label: 'Endpoint backend', ready: form.backendEndpoint !== null },
+    { label: 'Política de retención', ready: form.retentionPolicy !== 'define-before-enable' },
+    { label: 'Validación de servidor', ready: !form.serverValidationRequired },
+    { label: 'Rate limiting', ready: !form.rateLimitRequired },
+    { label: 'Consentimiento', ready: !form.consentRequired },
+    { label: 'Auditoría', ready: !form.auditRequired },
+  ],
+}));
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Activación de formularios V4 · IsiVoltPro" description="Vista operativa protegida para preparar Contacto, Demo y Piloto antes de habilitar intake real." path={`${base}gestion-contenido/formularios/`} noindex={true} />
+  <style is:inline>
+    .forms{min-height:82vh;padding:48px 0 84px;background:radial-gradient(circle at 86% 3%,rgba(72,112,235,.13),transparent 25%),linear-gradient(180deg,#fff,#f7f9fd)}.shell{width:min(1120px,calc(100% - 32px));margin:auto}.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:end;margin-bottom:22px}.hero h1{margin:10px 0 14px;font:800 clamp(40px,5.5vw,66px)/.98 Manrope,sans-serif;letter-spacing:-.055em}.hero p{max-width:720px;margin:0;color:#66718b;font-size:15px;line-height:1.65}.guard{padding:19px;border:1px solid #e5e9f2;border-radius:20px;background:#fff;box-shadow:0 18px 52px rgba(45,65,110,.07)}.guard strong{display:block;margin-bottom:7px}.guard small{color:#68738d;line-height:1.55}.guard span{display:inline-flex;margin-top:11px;padding:6px 9px;border-radius:999px;background:#fff0ed;color:#a64b32;font-size:9px;font-weight:900}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{padding:18px;border:1px solid #e5e9f2;border-radius:20px;background:#fff;box-shadow:0 18px 48px rgba(45,65,110,.065)}.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.top h2{margin:0;font-size:17px}.status{padding:5px 8px;border-radius:999px;background:#fff0ed;color:#a64b32;font-size:8px;font-weight:900}.purpose{min-height:52px;margin:9px 0;color:#68738d;font-size:11px;line-height:1.5}.route{display:block;margin-bottom:13px;color:#50617f;font:800 9px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}.fields{margin:12px 0;padding:12px;border-radius:14px;background:#f7f9fd}.fields strong{display:block;margin-bottom:7px;font-size:10px}.chips{display:flex;gap:5px;flex-wrap:wrap}.chips span{padding:4px 6px;border-radius:999px;background:#eef3ff;color:#315ca8;font-size:8px;font-weight:850}.chips.optional span{background:#f3efff;color:#6b4fc7}.checks{display:grid;gap:7px;margin-top:14px}.check{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:9px 10px;border-radius:12px;background:#fbfcfe}.check strong{font-size:10px}.check span{font-size:8px;font-weight:900;color:#a64b32}.check span.ready{color:#16845f}.note{margin-top:15px;padding-top:12px;border-top:1px solid #edf0f5;color:#7c879b;font-size:9px;line-height:1.5}.off{padding:26px;border-radius:20px;background:#111827;color:#fff}.off p{color:#cbd5e1;line-height:1.6}.off code{padding:3px 6px;border-radius:6px;background:#243047}@media(max-width:900px){.hero,.grid{grid-template-columns:1fr}.purpose{min-height:0}}@media(max-width:520px){.forms{padding-top:34px}.hero h1{font-size:clamp(38px,12vw,52px)}.top{display:grid}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="forms">
+    <div class="shell">
+      <section class="hero">
+        <div><span class="eyebrow">Workspace V4 · intake</span><h1>Preparar el backend.<br/><span class="gradient-text">Sin fingir que ya existe.</span></h1><p>Esta vista consume directamente el contrato único de Contacto, Demo y Piloto. Sirve para QA y preparación del backend real: muestra campos, controles obligatorios y bloqueos que deben resolverse antes de activar cualquier envío.</p></div>
+        <aside class="guard"><strong>Activación fail-closed</strong><small>Mientras exista un bloqueo, el intake permanece desactivado. GitHub Pages no recibe, guarda ni transmite datos personales.</small><span>PREVIEW · SIN ENVÍO</span></aside>
+      </section>
+
+      {enabled ? (
+        <section class="grid" aria-label="Preparación segura de formularios V4">
+          {activation.map((form) => <article class="card" id={form.id}>
+            <div class="top"><h2>{names[form.id]}</h2><span class="status">BLOQUEADO</span></div>
+            <p class="purpose">{form.purpose}</p><code class="route">{form.publicRoute}</code>
+            <div class="fields"><strong>Campos obligatorios</strong><div class="chips">{form.requiredFields.map((field) => <span>{field}</span>)}</div></div>
+            <div class="fields"><strong>Campos opcionales</strong><div class="chips optional">{form.optionalFields.map((field) => <span>{field}</span>)}</div></div>
+            <div class="checks">{form.blockers.map((item) => <div class="check"><strong>{item.label}</strong><span class:list={{ ready: item.ready }}>{item.ready ? 'LISTO' : 'PENDIENTE'}</span></div>)}</div>
+            <div class="note">Persistencia pública: prohibida · Secretos públicos: prohibidos · Estado contractual: {form.status}.</div>
+          </article>)}
+        </section>
+      ) : (
+        <section class="off"><strong>Vista operativa bloqueada por defecto.</strong><p>Solo se muestra en QA administrativo con <code>PUBLIC_V3_CONTENT_ADMIN_PREVIEW=true</code>. En publicación pública no expone controles ni datos operativos.</p></section>
+      )}
+    </div>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

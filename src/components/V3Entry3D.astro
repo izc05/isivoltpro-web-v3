@@ -1,6 +1,5 @@
 ---
 import '../styles/v4-entry-minimal.css';
-import premiumCube from '../assets/isivoltpro-cube-premium-v4.webp?url';
 
 interface Props {
   accessHref: string;
@@ -20,8 +19,69 @@ const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
     <div class="entry3d__scene" id="entry3d-scene" aria-label="Cubo de cristal multicolor de IsiVoltPro en movimiento">
       <div class="entry3d__halo" aria-hidden="true"></div>
       <canvas id="entry3d-canvas" class="entry3d__canvas" aria-hidden="true"></canvas>
-      <div class="entry3d__cube-frame">
-        <img id="entry3d-premium-cube" class="entry3d__premium-cube" src={premiumCube} alt="" width="690" height="670" loading="eager" decoding="sync" fetchpriority="high" />
+      <div class="entry3d__cube-frame" aria-hidden="true">
+        <svg class="entry3d__premium-cube" viewBox="0 0 760 660" role="presentation" focusable="false">
+          <defs>
+            <linearGradient id="cubeFront" x1="100" y1="80" x2="620" y2="590" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#6f6cf4" stop-opacity=".78" />
+              <stop offset=".34" stop-color="#3f6df2" stop-opacity=".78" />
+              <stop offset=".66" stop-color="#6c4ce7" stop-opacity=".8" />
+              <stop offset="1" stop-color="#8b3ed6" stop-opacity=".74" />
+            </linearGradient>
+            <linearGradient id="cubeRight" x1="585" y1="100" x2="700" y2="560" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#1fdcf0" stop-opacity=".72" />
+              <stop offset=".45" stop-color="#3478ef" stop-opacity=".62" />
+              <stop offset="1" stop-color="#6c43df" stop-opacity=".52" />
+            </linearGradient>
+            <linearGradient id="cubeBottom" x1="120" y1="540" x2="650" y2="625" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#e4ecff" stop-opacity=".72" />
+              <stop offset=".3" stop-color="#805ff1" stop-opacity=".58" />
+              <stop offset=".65" stop-color="#22d3ee" stop-opacity=".58" />
+              <stop offset="1" stop-color="#f2f7ff" stop-opacity=".72" />
+            </linearGradient>
+            <linearGradient id="edgeGlow" x1="80" y1="70" x2="650" y2="610" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset=".2" stop-color="#8feaff" />
+              <stop offset=".48" stop-color="#637cff" />
+              <stop offset=".72" stop-color="#b671ff" />
+              <stop offset="1" stop-color="#ffffff" />
+            </linearGradient>
+            <linearGradient id="boltFill" x1="300" y1="190" x2="455" y2="485" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset=".58" stop-color="#f8fbff" />
+              <stop offset="1" stop-color="#c8eaff" />
+            </linearGradient>
+            <radialGradient id="cyanGlow"><stop offset="0" stop-color="#42efff" stop-opacity=".95"/><stop offset="1" stop-color="#42efff" stop-opacity="0"/></radialGradient>
+            <radialGradient id="violetGlow"><stop offset="0" stop-color="#a36cff" stop-opacity=".9"/><stop offset="1" stop-color="#a36cff" stop-opacity="0"/></radialGradient>
+            <radialGradient id="pinkGlow"><stop offset="0" stop-color="#f35fd1" stop-opacity=".82"/><stop offset="1" stop-color="#f35fd1" stop-opacity="0"/></radialGradient>
+            <filter id="cubeShadow" x="-30%" y="-30%" width="170%" height="180%">
+              <feDropShadow dx="0" dy="28" stdDeviation="25" flood-color="#4055b8" flood-opacity=".26" />
+            </filter>
+            <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="18"/></filter>
+            <filter id="boltShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="10" dy="13" stdDeviation="8" flood-color="#2042a2" flood-opacity=".3" />
+              <feDropShadow dx="-5" dy="4" stdDeviation="5" flood-color="#f45bd1" flood-opacity=".24" />
+            </filter>
+          </defs>
+
+          <ellipse cx="385" cy="608" rx="250" ry="30" fill="#3f67d8" opacity=".12" filter="url(#softGlow)" />
+          <g filter="url(#cubeShadow)">
+            <path d="M578 94 L661 143 Q683 157 682 190 L674 513 Q674 543 651 560 L581 604 Z" fill="url(#cubeRight)" stroke="url(#edgeGlow)" stroke-width="8" />
+            <path d="M119 550 L579 550 L650 561 L584 615 Q572 625 549 625 L151 620 Q126 619 112 602 L91 579 Z" fill="url(#cubeBottom)" stroke="url(#edgeGlow)" stroke-width="8" />
+            <rect x="84" y="77" width="510" height="500" rx="68" fill="url(#cubeFront)" stroke="url(#edgeGlow)" stroke-width="10" />
+            <rect x="104" y="97" width="470" height="460" rx="56" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="4" />
+            <path d="M125 118 Q165 93 218 93 H510" fill="none" stroke="#ffffff" stroke-opacity=".72" stroke-width="11" stroke-linecap="round" />
+            <path d="M105 484 V180 Q105 138 136 116" fill="none" stroke="#dffaff" stroke-opacity=".42" stroke-width="8" stroke-linecap="round" />
+            <circle cx="496" cy="218" r="92" fill="url(#cyanGlow)" />
+            <circle cx="245" cy="185" r="98" fill="url(#violetGlow)" />
+            <circle cx="306" cy="454" r="88" fill="url(#pinkGlow)" />
+            <circle cx="183" cy="145" r="28" fill="#ffffff" opacity=".62" filter="url(#softGlow)" />
+            <circle cx="536" cy="143" r="18" fill="#ffffff" opacity=".48" filter="url(#softGlow)" />
+            <path d="M373 169 L250 347 L354 347 L319 503 L493 298 L389 298 Z" fill="url(#boltFill)" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" filter="url(#boltShadow)" />
+            <path d="M389 298 L493 298 L473 321 L374 321 Z" fill="#9cecff" opacity=".5" />
+            <path d="M354 347 L319 503 L342 480 L375 347 Z" fill="#6f8ef7" opacity=".25" />
+          </g>
+        </svg>
       </div>
     </div>
   </div>
@@ -31,19 +91,9 @@ const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
   const canvas = document.querySelector<HTMLCanvasElement>('#entry3d-canvas');
   const host = document.querySelector<HTMLElement>('#entry3d-scene');
   const intro = document.querySelector<HTMLElement>('#intro');
-  const premiumImage = document.querySelector<HTMLImageElement>('#entry3d-premium-cube');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let alreadySeen = document.documentElement.classList.contains('skip-intro');
   try { alreadySeen ||= sessionStorage.getItem('isivoltpro-intro-seen') === '1'; } catch (_) {}
-
-  const markCubeReady = () => {
-    if (premiumImage?.complete && (premiumImage.naturalWidth || 0) > 300) host?.classList.add('is-cube-ready');
-  };
-  if (premiumImage) {
-    if (premiumImage.complete) markCubeReady();
-    premiumImage.addEventListener('load', markCubeReady, { once: true });
-    premiumImage.addEventListener('error', () => host?.classList.add('is-cube-fallback'), { once: true });
-  }
 
   const setTilt = (x = 0, y = 0) => {
     if (!host) return;
@@ -68,53 +118,41 @@ const brandMark = `${base}brand/isivoltpro-mark-v4.svg`;
     if (intro.classList.contains('is-done')) return;
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.35));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, .1, 100);
     camera.position.set(0, .05, 5.4);
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x6476c8, 2.1));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x6476c8, 1.7));
+    const blue = new THREE.PointLight(0x2563eb, 18, 14); blue.position.set(-2.8, 2.1, 3.2); scene.add(blue);
+    const cyan = new THREE.PointLight(0x22d3ee, 18, 14); cyan.position.set(2.7, 1.5, 3.0); scene.add(cyan);
+    const violet = new THREE.PointLight(0x7c3aed, 16, 13); violet.position.set(-1.8, -1.7, 2.4); scene.add(violet);
+    const magenta = new THREE.PointLight(0xec4899, 13, 12); magenta.position.set(2.1, -1.4, 2.2); scene.add(magenta);
 
-    const blue = new THREE.PointLight(0x2563eb, 24, 14); blue.position.set(-2.8, 2.1, 3.2); scene.add(blue);
-    const cyan = new THREE.PointLight(0x22d3ee, 23, 14); cyan.position.set(2.7, 1.5, 3.0); scene.add(cyan);
-    const violet = new THREE.PointLight(0x7c3aed, 21, 13); violet.position.set(-1.8, -1.7, 2.4); scene.add(violet);
-    const magenta = new THREE.PointLight(0xec4899, 17, 12); magenta.position.set(2.1, -1.4, 2.2); scene.add(magenta);
-
-    const group = new THREE.Group();
-    group.rotation.set(-.12, -.36, .02);
-    scene.add(group);
-
+    const group = new THREE.Group(); group.rotation.set(-.12, -.36, .02); scene.add(group);
     const geometry = new RoundedBoxGeometry(2.85, 2.85, 2.18, 7, .19);
-    const material = new THREE.MeshPhysicalMaterial({
-      color: 0x5379ff, transparent: true, opacity: .13, transmission: .72, thickness: 1.05,
+    group.add(new THREE.Mesh(geometry, new THREE.MeshPhysicalMaterial({
+      color: 0x5379ff, transparent: true, opacity: .08, transmission: .78, thickness: 1.05,
       roughness: .045, ior: 1.42, clearcoat: 1, clearcoatRoughness: .02,
-      emissive: 0x3348ad, emissiveIntensity: .035, side: THREE.DoubleSide, depthWrite: false,
-    });
-    group.add(new THREE.Mesh(geometry, material));
-    group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geometry, 28), new THREE.LineBasicMaterial({ color: 0xdff8ff, transparent: true, opacity: .28 })));
+      side: THREE.DoubleSide, depthWrite: false,
+    })));
 
     const resize = () => {
       const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight);
       renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix();
     };
-    resize();
-    const observer = new ResizeObserver(resize); observer.observe(host);
+    resize(); const observer = new ResizeObserver(resize); observer.observe(host);
 
     const start = performance.now(); let raf = 0;
     const render = (now: number) => {
-      if (intro.classList.contains('is-done')) {
-        observer.disconnect(); renderer.dispose(); cancelAnimationFrame(raf); return;
-      }
+      if (intro.classList.contains('is-done')) { observer.disconnect(); renderer.dispose(); cancelAnimationFrame(raf); return; }
       const t = (now - start) / 1000;
       group.rotation.y = -.36 + Math.sin(t * .48) * .10;
       group.rotation.x = -.12 + Math.sin(t * .37) * .035;
       group.position.y = Math.sin(t * .9) * .055;
-      blue.intensity = 22 + Math.sin(t) * 4;
-      cyan.intensity = 22 + Math.cos(t * .9) * 4;
-      violet.intensity = 19 + Math.sin(t * .72 + 1.2) * 3;
+      blue.intensity = 17 + Math.sin(t) * 3; cyan.intensity = 17 + Math.cos(t * .9) * 3;
+      violet.intensity = 15 + Math.sin(t * .72 + 1.2) * 2.5;
       renderer.render(scene, camera); raf = requestAnimationFrame(render);
     };
     raf = requestAnimationFrame(render);

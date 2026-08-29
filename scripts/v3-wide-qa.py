@@ -43,16 +43,17 @@ def capture_entry(browser, width: int, height: int, name: str) -> None:
           const root=document.documentElement;
           const visible=(el)=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};
           const intro=document.querySelector('.entry3d');
-          const canvas=document.querySelector('#entry3d-canvas');
           const scene=document.querySelector('#entry3d-scene');
           const logo=document.querySelector('.entry3d__logo');
+          const cube=document.querySelector('.entry3d__premium-cube');
           const skip=document.querySelector('#skip-intro');
-          const sr=scene?.getBoundingClientRect(); const lr=logo?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
+          const sr=scene?.getBoundingClientRect(); const lr=logo?.getBoundingClientRect(); const cr=cube?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
           const introStyle=intro?getComputedStyle(intro):null;
           return {
             introVisible:visible(intro)&&!intro.classList.contains('is-done'),
-            canvasW:canvas?.width||0,canvasH:canvas?.height||0,
             sceneW:sr?.width||0,sceneH:sr?.height||0,
+            cubeVisible:visible(cube),cubeW:cr?.width||0,cubeH:cr?.height||0,
+            cubeComplete:cube?.complete===true,cubeNaturalW:cube?.naturalWidth||0,cubeNaturalH:cube?.naturalHeight||0,
             logoVisible:visible(logo),logoW:lr?.width||0,
             skipVisible:visible(skip),skipH:kr?.height||0,
             legacyCount:document.querySelectorAll('.entry3d__heading,.entry3d__note,.entry3d__actions,.entry3d__phone,.entry3d__orders').length,
@@ -62,8 +63,9 @@ def capture_entry(browser, width: int, height: int, name: str) -> None:
         }"""
     )
     if not metrics["introVisible"]: failures.append(f"entrada V4 {name}: la escena no está visible")
-    if metrics["canvasW"] < 240 or metrics["canvasH"] < 240: failures.append(f"entrada V4 {name}: canvas WebGL sin tamaño útil · {metrics['canvasW']}x{metrics['canvasH']}")
     if metrics["sceneW"] < min(width * .75, 680) or metrics["sceneH"] < 460: failures.append(f"entrada V4 {name}: cubo/escena demasiado pequeño · {metrics['sceneW']}x{metrics['sceneH']}")
+    if not metrics["cubeVisible"] or metrics["cubeW"] < min(width * .6, 560): failures.append(f"entrada V4 {name}: cubo premium ausente o pequeño · {metrics['cubeW']}x{metrics['cubeH']}")
+    if not metrics["cubeComplete"] or metrics["cubeNaturalW"] < 800 or metrics["cubeNaturalH"] < 600: failures.append(f"entrada V4 {name}: imagen premium no cargó píxeles reales · {metrics['cubeNaturalW']}x{metrics['cubeNaturalH']}")
     if not metrics["logoVisible"] or metrics["logoW"] < 210: failures.append(f"entrada V4 {name}: marca IsiVoltPro ausente o demasiado pequeña")
     if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada V4 {name}: control Saltar intro no accesible · {metrics['skipH']}px")
     if metrics["legacyCount"] != 0: failures.append(f"entrada V4 {name}: reapareció contenido periférico retirado · {metrics['legacyCount']}")
@@ -121,4 +123,4 @@ if failures:
     print("\nQA tablet/escritorio V4: FALLÓ",file=sys.stderr)
     for item in failures: print(f"- {item}",file=sys.stderr)
     raise SystemExit(1)
-print("QA tablet/escritorio V4: OK · entrada mínima + 19 rutas × 4 viewports")
+print("QA tablet/escritorio V4: OK · cubo ultrarrealista + 19 rutas × 4 viewports")

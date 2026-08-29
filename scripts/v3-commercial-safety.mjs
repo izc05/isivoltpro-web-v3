@@ -40,7 +40,7 @@ for (const route of routes) {
   if (!html.includes('Saltar al contenido')) failures.push(`${label(route)} no contiene skip link accesible`);
   if (!html.includes('property="og:image"')) failures.push(`${label(route)} no contiene og:image`);
   if (!html.includes('name="twitter:card" content="summary_large_image"')) failures.push(`${label(route)} no contiene Twitter Card grande`);
-  if (route && /entry3d-canvas|V3Entry3D|three\.module/.test(html)) failures.push(`${label(route)} está cargando la experiencia 3D reservada a Home`);
+  if (route && /entry3d-canvas|V3Entry3D|three\.module/.test(html)) failures.push(`${label(route)} está cargando la experiencia de entrada reservada a Home`);
   if (route && legacyOrbit.test(html)) failures.push(`${label(route)} ha reintroducido el hero orbital legacy; usar una composición SaaS visual específica`);
 }
 
@@ -69,15 +69,20 @@ for (const route of sourcedEditorialRoutes) {
 const home = readFileSync(htmlPath(''), 'utf8');
 const entryContract = [
   'class="intro entry3d"',
-  'class="entry3d__logo"',
-  'class="entry3d__premium-cube"',
-  'isivoltpro-cube-ultrareal-v4.webp',
+  'class="entry3d__static-art"',
+  'isivoltpro-entry-static-approved.webp',
   'id="skip-intro"',
 ];
 for (const marker of entryContract) {
-  if (!home.includes(marker)) failures.push(`Home ha perdido el contrato de entrada premium: ${marker}`);
+  if (!home.includes(marker)) failures.push(`Home ha perdido el contrato de entrada estática aprobada: ${marker}`);
 }
-if (home.includes('entry3d-canvas')) failures.push('Home ha reintroducido el canvas 3D retirado de la entrada premium');
+const forbiddenEntryLayers = [
+  'entry3d-canvas', 'entry3d-scene', 'entry3d__logo', 'entry3d__halo',
+  'entry3d__cube-frame', 'entry3d__premium-cube', 'isivoltpro-cube-ultrareal-v4.webp',
+];
+for (const marker of forbiddenEntryLayers) {
+  if (home.includes(marker)) failures.push(`Home ha reintroducido una capa/efecto retirado de la entrada estática: ${marker}`);
+}
 
 const sitemapPath = join(dist, 'sitemap.xml');
 if (!existsSync(sitemapPath)) {
@@ -111,4 +116,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + ${sourcedEditorialRoutes.length} artículo(s) con fuente + entrada ultrarrealista + sitemap + gestor bloqueado + sin heroes orbitales legacy`);
+console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + ${sourcedEditorialRoutes.length} artículo(s) con fuente + entrada estática aprobada + sitemap + gestor bloqueado + sin heroes orbitales legacy`);

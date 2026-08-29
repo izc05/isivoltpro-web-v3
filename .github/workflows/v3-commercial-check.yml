@@ -68,6 +68,7 @@ jobs:
             dist/contacto/index.html
             dist/sitemap.xml
             dist/images/home/isivoltpro-industrial-core.webp
+            dist/media/isivoltpro-cube-ultrareal-v4.webp
           )
 
           for file in "${required[@]}"; do
@@ -83,10 +84,14 @@ jobs:
             exit 1
           fi
 
-          # La entrada 3D aprobada vive únicamente en Home. El resto del sitio comercial
-          # debe seguir siendo HTML/CSS ligero y no incluir la escena ni referencias WebGL.
-          if ! grep -q 'entry3d-canvas' dist/index.html; then
-            echo "::error::La Home no contiene la entrada 3D aprobada."
+          # La entrada premium ultrarrealista vive únicamente en Home. El resto del sitio
+          # comercial debe seguir siendo HTML/CSS ligero y no cargar la experiencia de entrada.
+          if ! grep -q 'entry3d__premium-cube' dist/index.html || ! grep -q 'isivoltpro-cube-ultrareal-v4.webp' dist/index.html; then
+            echo "::error::La Home no contiene el cubo ultrarrealista aprobado."
+            exit 1
+          fi
+          if grep -q 'entry3d-canvas' dist/index.html; then
+            echo "::error::La Home ha reintroducido el canvas 3D retirado de la entrada premium."
             exit 1
           fi
 
@@ -132,8 +137,8 @@ jobs:
           )
 
           for page in "${non_home_pages[@]}"; do
-            if grep -qE 'entry3d-canvas|V3Entry3D|three\.module' "$page"; then
-              echo "::error::La página comercial $page está cargando la experiencia 3D de Home de forma inesperada."
+            if grep -qE 'entry3d__premium-cube|V3Entry3D|isivoltpro-cube-ultrareal-v4' "$page"; then
+              echo "::error::La página comercial $page está cargando la experiencia premium de Home de forma inesperada."
               exit 1
             fi
           done
@@ -252,7 +257,7 @@ jobs:
           echo "Contacto sin captura de PII: OK"
           echo "Sin copy interno: OK"
           echo "Sin MP4 heredados: OK"
-          echo "Three.js limitado a la entrada 3D de Home: OK"
+          echo "Entrada ultrarrealista limitada a Home: OK"
           echo "Presupuesto total: ${dist_kb} KiB / ${max_kb} KiB"
       - name: Guardar build V3
         uses: actions/upload-artifact@v4

@@ -20,6 +20,24 @@ export type V4AdminArea = {
   backendCapabilities: V4BackendCapability[];
 };
 
+export type V4PublicFormKind = 'contact' | 'demo' | 'pilot';
+export type V4PublicFormIntake = {
+  id: V4PublicFormKind;
+  publicRoute: string;
+  purpose: string;
+  status: 'preview-disabled' | 'backend-ready';
+  requiredFields: string[];
+  optionalFields: string[];
+  consentRequired: true;
+  serverValidationRequired: true;
+  rateLimitRequired: true;
+  auditRequired: true;
+  publicPersistenceAllowed: false;
+  publicSecretsAllowed: false;
+  backendEndpoint: null;
+  retentionPolicy: 'define-before-enable';
+};
+
 export const v4AdminAreas: V4AdminArea[] = [
   {
     id: 'pages',
@@ -139,6 +157,57 @@ export const v4AdminAreas: V4AdminArea[] = [
   },
 ];
 
+export const v4PublicFormIntake: V4PublicFormIntake[] = [
+  {
+    id: 'contact',
+    publicRoute: '/contacto/',
+    purpose: 'Solicitudes generales y primer contacto comercial.',
+    status: 'preview-disabled',
+    requiredFields: ['name', 'email', 'need', 'privacyConsent'],
+    optionalFields: ['business', 'phone', 'profile'],
+    consentRequired: true,
+    serverValidationRequired: true,
+    rateLimitRequired: true,
+    auditRequired: true,
+    publicPersistenceAllowed: false,
+    publicSecretsAllowed: false,
+    backendEndpoint: null,
+    retentionPolicy: 'define-before-enable',
+  },
+  {
+    id: 'demo',
+    publicRoute: '/demo/',
+    purpose: 'Solicitudes de demostración comercial con contexto mínimo de la necesidad.',
+    status: 'preview-disabled',
+    requiredFields: ['name', 'email', 'need', 'privacyConsent'],
+    optionalFields: ['business', 'phone', 'teamSize'],
+    consentRequired: true,
+    serverValidationRequired: true,
+    rateLimitRequired: true,
+    auditRequired: true,
+    publicPersistenceAllowed: false,
+    publicSecretsAllowed: false,
+    backendEndpoint: null,
+    retentionPolicy: 'define-before-enable',
+  },
+  {
+    id: 'pilot',
+    publicRoute: '/piloto/',
+    purpose: 'Solicitudes de piloto acotado con alcance operativo y responsable de contacto.',
+    status: 'preview-disabled',
+    requiredFields: ['name', 'email', 'problem', 'privacyConsent'],
+    optionalFields: ['business', 'phone', 'scope', 'locations'],
+    consentRequired: true,
+    serverValidationRequired: true,
+    rateLimitRequired: true,
+    auditRequired: true,
+    publicPersistenceAllowed: false,
+    publicSecretsAllowed: false,
+    backendEndpoint: null,
+    retentionPolicy: 'define-before-enable',
+  },
+];
+
 export const v4AdminPolicy = {
   publicSiteStoresSecrets: false,
   publicSiteCanWriteAdminData: false,
@@ -151,6 +220,10 @@ export const v4AdminPolicy = {
   backendMustAuthenticateWrites: true,
   backendMustAuditPrivilegedActions: true,
   formDataMustNotPersistInPublicFrontend: true,
+  formIntakeMustValidateOnServer: true,
+  formIntakeMustRateLimit: true,
+  formIntakeRequiresConsent: true,
+  formRetentionMustBeDefinedBeforeEnable: true,
   mediaUploadsRequireAuthenticatedBackend: true,
   releaseAndSocialNeedExplicitApproval: true,
   productionReleaseRoles: ['owner', 'admin'] as const,
@@ -176,4 +249,6 @@ export const v4AdminSummary = {
   previewReady: v4AdminAreas.filter((area) => area.state === 'ready-preview').length,
   partial: v4AdminAreas.filter((area) => area.state === 'partial').length,
   backendRequired: v4AdminAreas.filter((area) => area.state === 'backend-required').length,
+  publicFormsDefined: v4PublicFormIntake.length,
+  publicFormsEnabled: v4PublicFormIntake.filter((form) => form.status === 'backend-ready').length,
 };

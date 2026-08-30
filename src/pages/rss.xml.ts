@@ -1,4 +1,4 @@
-import { v3BlogPosts } from '../data/v3-blog';
+import { v3BlogFeed } from '../data/v3-blog-feed';
 
 export const prerender = true;
 
@@ -12,12 +12,10 @@ const escapeXml = (value: string) =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&apos;');
 
-const toRfc822 = (value: string) => new Date(`${value}T12:00:00Z`).toUTCString();
+const toRfc822 = (value: string) => new Date(`${value.slice(0, 10)}T12:00:00Z`).toUTCString();
 
 export function GET() {
-  const posts = v3BlogPosts
-    .filter((post) => post.status === 'published')
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const posts = v3BlogFeed;
 
   const latest = posts[0]?.updatedAt ?? '2026-08-26';
   const items = posts

@@ -3,6 +3,7 @@ import '../styles/v3-pages.css';
 import '../styles/v3-home-reference.css';
 import '../styles/v3-home-fidelity.css';
 import '../styles/v3-entry-home-transition.css';
+import '../styles/v4-phase2-home.css';
 import V3CommercialHeader from '../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../components/V3CommercialFooter.astro';
 import V3Seo from '../components/V3Seo.astro';
@@ -37,9 +38,10 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
         <div class="saas-hero__copy reveal">
           <span class="saas-badge"><i aria-hidden="true"></i> Plataforma de mantenimiento para equipos técnicos</span>
           <h1>Todo tu mantenimiento.<span>Un solo sistema.</span></h1>
-          <p class="saas-hero__lead">Conecta activos, avisos, órdenes de trabajo, preventivos, fotos y documentación en una experiencia clara, visual y preparada para trabajar desde escritorio, móvil o tablet.</p>
+          <p class="saas-hero__lead">Centraliza activos, avisos, órdenes de trabajo, preventivos, fotos y documentación para que cada intervención llegue al técnico con contexto y termine dejando un histórico útil.</p>
           <div class="saas-actions"><a class="btn btn--primary" href={demo}>Solicitar / ver demo</a><a class="btn" href={experience}>Ver cómo funciona</a></div>
-          <div class="saas-trust"><small>Pensado para operaciones pequeñas que necesitan orden sin montar un ERP</small><div class="saas-trust__row"><span>Autónomos</span><span>Pequeñas mantenedoras</span><span>Instalaciones propias</span><span>Multisede</span></div></div>
+          <div class="saas-hero__continuity reveal" aria-label="Cómo conecta IsiVoltPro el trabajo"><span><b>1</b> El aviso entra una vez</span><i aria-hidden="true"></i><span><b>2</b> El técnico recibe contexto</span><i aria-hidden="true"></i><span><b>3</b> El cierre alimenta el histórico</span></div>
+          <div class="saas-trust"><small>Empieza por un problema concreto y amplía cuando el siguiente módulo te aporte valor.</small><div class="saas-trust__row"><span>Autónomos</span><span>Pequeñas mantenedoras</span><span>Instalaciones propias</span><span>Multisede</span></div></div>
         </div>
 
         <div class="saas-stage reveal" aria-label="Dashboard conceptual de IsiVoltPro con datos ficticios">

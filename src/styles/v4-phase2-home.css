@@ -1,0 +1,39 @@
+/* V4 · Fase 2 — continuidad entre la promesa de la intro y el primer viewport comercial. */
+.saas-hero__continuity{display:flex;align-items:center;gap:10px;margin-top:24px;max-width:650px;color:#66738d;font-size:11px;font-weight:720;letter-spacing:-.01em}
+.saas-hero__continuity span{display:inline-flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+.saas-hero__continuity b{width:23px;height:23px;display:inline-grid;place-items:center;flex:0 0 auto;border:1px solid rgba(108,82,224,.14);border-radius:8px;background:linear-gradient(145deg,rgba(245,242,255,.96),rgba(239,248,255,.96));color:#6853db;font-size:9px;box-shadow:0 7px 18px rgba(74,84,150,.06)}
+.saas-hero__continuity i{width:24px;height:1px;flex:0 1 24px;background:linear-gradient(90deg,rgba(105,83,220,.18),rgba(57,174,207,.28));position:relative}
+.saas-hero__continuity i::after{content:"";position:absolute;right:-1px;top:-2px;width:5px;height:5px;border-top:1px solid rgba(55,160,199,.48);border-right:1px solid rgba(55,160,199,.48);transform:rotate(45deg)}
+.saas-hero__lead{max-width:650px}
+
+/* La Home debe aparecer como continuación de la misma superficie luminosa, no como una pantalla distinta. */
+.saas-hero__copy,.saas-stage{transition:opacity .72s cubic-bezier(.22,.8,.24,1),transform .82s cubic-bezier(.22,.8,.24,1)}
+body.intro-lock .saas-hero__copy{opacity:.18;transform:translateY(14px)}
+body.intro-lock .saas-stage{opacity:.14;transform:translateY(18px) scale(.986)}
+
+/* La intro vende claridad operativa, no resultados ficticios. Conservamos la composición aprobada y
+   sustituimos visualmente porcentajes/claims absolutos por estados de una demo explícita. */
+.entry3d__orders .entry3d__order em{font-size:0;min-width:38px;text-align:right}
+.entry3d__orders .entry3d__order em::after{font-size:7px;font-style:normal;font-weight:800;color:#2fa477}
+.entry3d__orders .entry3d__order:nth-of-type(1) em::after{content:"Cerrada"}
+.entry3d__orders .entry3d__order:nth-of-type(2) em::after{content:"Plan";color:#6475d9}
+.entry3d__orders .entry3d__order:nth-of-type(3) em::after{content:"Prior.";color:#d76b76}
+.entry3d__analytics>strong{font-size:0}
+.entry3d__analytics>strong::after{content:"Trazable";font-size:25px;letter-spacing:-.04em}
+.entry3d__analytics>small{font-size:0}
+.entry3d__analytics>small::after{content:"Actividad e histórico · ejemplo";font-size:7px}
+.entry3d__analytics-top small{font-size:0}
+.entry3d__analytics-top small::after{content:"Vista demo";font-size:7px}
+.entry3d__status strong{font-size:0}
+.entry3d__status strong::after{content:"Operativa conectada";font-size:inherit}
+.entry3d__status small{font-size:0}
+.entry3d__status small::after{content:"Vista conceptual de ejemplo";font-size:inherit}
+.entry3d__note--control strong{font-size:0}
+.entry3d__note--control strong::after{content:"Trabajo visible";font-size:inherit}
+.entry3d__note--control small{font-size:0}
+.entry3d__note--control small::after{content:"Pendientes y contexto juntos";font-size:inherit}
+.entry3d__note--maintenance small{font-size:0}
+.entry3d__note--maintenance small::after{content:"Preventivo y correctivo";font-size:inherit}
+
+@media(max-width:780px){.saas-hero__continuity{display:grid;grid-template-columns:1fr;gap:7px;margin-top:20px}.saas-hero__continuity span{white-space:normal}.saas-hero__continuity i{display:none}}
+@media(prefers-reduced-motion:reduce){.saas-hero__copy,.saas-stage{transition:none}}

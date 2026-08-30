@@ -6,8 +6,6 @@ import V3Seo from '../../components/V3Seo.astro';
 
 export function getStaticPaths() {
   return [
-    { params: { section: 'recursos' }, props: { title: 'Recursos V4', eyebrow: 'Conocimiento que ayuda a trabajar mejor', lead: 'Recursos se convertirá en una biblioteca útil para mantenimiento: guías, checklists, implantación, organización de OT, activos, QR y buenas prácticas.', publicPath: 'recursos/' } },
-    { params: { section: 'blog' }, props: { title: 'Blog + noticias V4', eyebrow: 'Autoridad técnica + actualidad', lead: 'El blog combinará conocimiento de campo, normativa, digitalización y novedades del sector sin convertirse en un listado genérico de artículos.', publicPath: 'blog/' } },
     { params: { section: 'empresa' }, props: { title: 'Empresa V4', eyebrow: 'Quién está detrás y por qué existe IsiVoltPro', lead: 'La página Empresa reforzará confianza, experiencia técnica, filosofía de producto y la conexión entre mantenimiento real, software y conocimiento.', publicPath: 'empresa/' } },
     { params: { section: 'precios' }, props: { title: 'Planes V4', eyebrow: 'Comprar sin complicaciones', lead: 'Revisaremos planes, alcance y crecimiento para explicar mejor qué incluye cada nivel y evitar sensación de suite sobredimensionada.', publicPath: 'precios/' } },
     { params: { section: 'acceso' }, props: { title: 'Acceso V4', eyebrow: 'Entrada clara y segura', lead: 'La futura pantalla de acceso mantendrá la separación entre la web comercial y las superficies privadas, sin fingir autenticación ni persistencia en GitHub Pages.', publicPath: 'acceso/' } },

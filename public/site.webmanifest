@@ -1,0 +1,24 @@
+{
+  "name": "IsiVoltPro",
+  "short_name": "IsiVoltPro",
+  "description": "Software y conocimiento para mantenimiento técnico.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#071638",
+  "icons": [
+    {
+      "src": "brand/isivoltpro-mark-v4.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "brand/isivoltpro-mark-v4.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 ---
 import '../styles/v4-entry-minimal.css';
+import V3Brand from './V3Brand.astro';
 
 interface Props {
   accessHref: string;
@@ -13,12 +14,13 @@ const introArtwork = `${base}media/isivoltpro-entry-static-approved.webp`;
   <img
     class="entry3d__static-art"
     src={introArtwork}
-    alt="IsiVoltPro con cubo de cristal ultrarrealista"
+    alt="Presentación visual de IsiVoltPro"
     width="1440"
     height="740"
     loading="eager"
     decoding="sync"
     fetchpriority="high"
   />
+  <div class="entry3d__brand" aria-label="IsiVoltPro"><V3Brand context="intro" /></div>
   <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
 </div>

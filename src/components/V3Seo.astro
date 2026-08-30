@@ -17,6 +17,7 @@ const {
   imageAlt = 'IsiVoltPro · mantenimiento bajo control',
 } = Astro.props;
 
+const base = import.meta.env.BASE_URL;
 const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(path, siteOrigin);
 const socialImage = new URL(image, siteOrigin);
@@ -28,8 +29,10 @@ const csp = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Security-Policy" content={csp} />
 <script is:inline>document.documentElement.classList.add('js');</script>
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#071638" />
 <meta name="color-scheme" content="light" />
+<meta name="application-name" content="IsiVoltPro" />
+<meta name="apple-mobile-web-app-title" content="IsiVoltPro" />
 <meta name="description" content={description} />
 <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -37,7 +40,9 @@ const csp = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-
 <link rel="alternate" hreflang="es" href={canonical} />
 <link rel="alternate" hreflang="x-default" href={canonical} />
 <link rel="alternate" type="application/rss+xml" title="IsiVoltPro · Blog y noticias" href={rssFeed} />
-<link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+<link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={`${base}brand/isivoltpro-touch-icon-180.png`} sizes="180x180" />
+<link rel="manifest" href={`${base}site.webmanifest`} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_ES" />
 <meta property="og:site_name" content="IsiVoltPro" />

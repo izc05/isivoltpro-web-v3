@@ -75,6 +75,7 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
   aplicaciones: `${base}preview-v4/apps/`,
   'app-mantenimiento': `${base}preview-v4/apps/`,
   'apps-especializadas': `${base}preview-v4/apps/`,
+  modulos: `${base}preview-v4/apps/`,
   sectores: `${base}preview-v4/sectores/`,
   recursos: `${base}preview-v4/recursos/`,
   blog: `${base}preview-v4/blog/`,
@@ -82,19 +83,10 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
   precios: `${base}preview-v4/precios/`,
   acceso: `${base}preview-v4/acceso/`,
   demo: `${base}preview-v4/demo/`,
+  contacto: `${base}preview-v4/demo/`,
 }) : undefined;
 ---
-<style is:inline>
-  .v3-skip-link{position:fixed;left:14px;top:10px;z-index:10000;padding:10px 14px;border-radius:12px;background:#101827;color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(12,21,48,.22);transform:translateY(-160%);transition:transform .18s ease}.v3-skip-link:focus{transform:translateY(0)}.v3-skip-target{display:block;position:relative;top:-88px;width:1px;height:1px;overflow:hidden}
-  .site-header{background:rgba(255,255,255,.93);backdrop-filter:blur(18px);border-bottom:1px solid rgba(232,235,244,.8)}
-  .site-header .brand__icon{background:linear-gradient(145deg,#42c9a0,#4e91ea 36%,#7558e5 68%,#d65cc1);box-shadow:0 7px 18px rgba(92,79,201,.17)}
-  .site-header .nav a:hover,.site-header .nav a[aria-current]{color:#6255d9}
-  .site-header .header-actions>.btn--primary{background:#111827;border-color:#111827;color:#fff;box-shadow:0 9px 22px rgba(17,24,39,.14)}.site-header .header-actions>.btn--primary:hover{background:#222b3d;border-color:#222b3d}
-  .v4-preview-pill{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:5px 8px;border-radius:999px;background:#f2efff;color:#6544e8;font-size:9px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}.v4-preview-pill:before{content:'';width:6px;height:6px;border-radius:50%;background:#24c58c}
-  .v3-mobile-nav{display:none;position:relative}.v3-mobile-nav summary{list-style:none;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:19px;cursor:pointer}.v3-mobile-nav summary::-webkit-details-marker{display:none}.v3-mobile-nav summary:focus-visible{outline:3px solid rgba(109,74,255,.22);outline-offset:3px}.v3-mobile-nav__panel{position:absolute;right:0;top:54px;width:min(300px,calc(100vw - 28px));padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.98);box-shadow:var(--shadow);display:grid;gap:4px}.v3-mobile-nav__panel a{padding:11px 12px;border-radius:10px;color:#34405d;font-size:14px;font-weight:700}.v3-mobile-nav__panel a:hover{background:#f6f3ff;color:#6752db}.v3-mobile-nav__panel a[aria-current]{background:#f1efff;color:#6752db}.v3-mobile-nav__panel .mobile-cta{margin-top:6px;color:#fff;background:#111827}
-  .v3-breadcrumb{border-bottom:1px solid rgba(229,234,244,.72);background:rgba(251,252,255,.9)}.v3-breadcrumb__inner{min-height:42px;display:flex;align-items:center;gap:8px;overflow:hidden;color:#76829b;font-size:12px;white-space:nowrap}.v3-breadcrumb__inner a{color:#52607b;font-weight:700}.v3-breadcrumb__inner a:hover{color:#6752db}.v3-breadcrumb__current{overflow:hidden;text-overflow:ellipsis;color:#7f8ba3}.v3-breadcrumb__sep{color:#b0b9cb}
-  @media(max-width:860px){.v3-mobile-nav{display:block}.site-header .nav{display:none}.site-header .header-actions>.btn{display:none}.site-header__inner{min-height:68px}.v4-preview-pill{display:none}}
-</style>
+<link rel="stylesheet" href={`${base}styles/v3-commercial-header.css`} />
 <link rel="stylesheet" href={`${base}styles/v3-reference-pages.css`} />
 <link rel="stylesheet" href={`${base}styles/v3-board-density.css`} />
 <a class="v3-skip-link" href="#v3-main-content">Saltar al contenido</a>
@@ -126,7 +118,8 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
         try { url = new URL(raw, window.location.origin); } catch { return; }
         if (url.origin !== window.location.origin || url.pathname.includes('/preview-v4/')) return;
         const parts = url.pathname.split('/').filter(Boolean);
-        const key = parts[parts.length - 1] || '';
+        const grouped = parts.find((part) => ['modulos','sectores','recursos','blog'].includes(part));
+        const key = grouped || parts[parts.length - 1] || '';
         if (map[key]) anchor.setAttribute('href', map[key]);
       });
     };

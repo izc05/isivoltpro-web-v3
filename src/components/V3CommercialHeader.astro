@@ -83,8 +83,10 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
   empresa: `${base}preview-v4/empresa/`,
   precios: `${base}preview-v4/precios/`,
   acceso: `${base}preview-v4/acceso/`,
+  seguridad: `${base}preview-v4/seguridad/`,
+  privacidad: `${base}preview-v4/privacidad/`,
   demo: `${base}preview-v4/demo/`,
-  contacto: `${base}preview-v4/demo/`,
+  contacto: `${base}preview-v4/contacto/`,
 }) : undefined;
 ---
 <link rel="stylesheet" href={`${base}styles/v3-commercial-header.css`} />
@@ -95,15 +97,28 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
   <div class="site-header__inner shell">
     <a class="brand" href={home} aria-label="IsiVoltPro, inicio" aria-current={ariaCurrent(home)}><V3Brand context="header" />{isV4Preview && <span class="v4-preview-pill">Preview V4</span>}</a>
     <nav class="nav" aria-label="Navegación principal">
-      <a href={product} aria-current={ariaCurrent(product)}>Producto</a>
-      <a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a>
-      <a href={modules} aria-current={ariaCurrent(modules,[modules,appMaintenance])}>Apps</a>
-      <a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a>
-      <a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a>
-      <a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a>
-      <a href={company} aria-current={ariaCurrent(company)}>Empresa</a>
+      {isV4Preview ? (
+        <>
+          <a href={product} aria-current={ariaCurrent(product,[product,solutions])}>Producto</a>
+          <a href={modules} aria-current={ariaCurrent(modules,[modules,appMaintenance])}>Apps</a>
+          <a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a>
+          <a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a>
+          <a href={resources} aria-current={ariaCurrent(resources,[resources,blog])}>Recursos</a>
+          <a href={company} aria-current={ariaCurrent(company)}>Empresa</a>
+        </>
+      ) : (
+        <>
+          <a href={product} aria-current={ariaCurrent(product)}>Producto</a>
+          <a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a>
+          <a href={modules} aria-current={ariaCurrent(modules,[modules,appMaintenance])}>Apps</a>
+          <a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a>
+          <a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a>
+          <a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a>
+          <a href={company} aria-current={ariaCurrent(company)}>Empresa</a>
+        </>
+      )}
     </nav>
-    <div class="header-actions"><a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a><details class="v3-mobile-nav"><summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary><nav class="v3-mobile-nav__panel" aria-label="Navegación móvil"><a href={home} aria-current={ariaCurrent(home)}>Inicio V4</a><a href={product} aria-current={ariaCurrent(product)}>Producto</a><a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a><a href={modules} aria-current={ariaCurrent(modules,[modules,appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a><a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a><a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a><a href={company} aria-current={ariaCurrent(company)}>Empresa</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a></nav></details></div>
+    <div class="header-actions"><a class="btn" href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="btn btn--primary" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a><details class="v3-mobile-nav"><summary aria-label="Abrir navegación"><span aria-hidden="true">☰</span></summary><nav class="v3-mobile-nav__panel" aria-label="Navegación móvil"><a href={home} aria-current={ariaCurrent(home)}>Inicio V4</a><a href={product} aria-current={ariaCurrent(product)}>Producto</a>{isV4Preview && <a href={solutions} aria-current={ariaCurrent(solutions)}>Soluciones</a>}<a href={modules} aria-current={ariaCurrent(modules,[modules,appMaintenance])}>Apps</a><a href={sectors} aria-current={ariaCurrent(sectors,[sectors])}>Sectores</a><a href={pricing} aria-current={ariaCurrent(pricing)}>Planes</a><a href={resources} aria-current={ariaCurrent(resources,[resources])}>Recursos</a><a href={blog} aria-current={ariaCurrent(blog,[blog])}>Blog + noticias</a><a href={company} aria-current={ariaCurrent(company)}>Empresa</a><a href={access} aria-current={ariaCurrent(access)}>Acceder</a><a class="mobile-cta" href={demo} aria-current={ariaCurrent(demo)}>Solicitar demo</a></nav></details></div>
   </div>
 </header>
 {breadcrumb && (<><nav class="v3-breadcrumb" aria-label="Migas de pan"><div class="v3-breadcrumb__inner shell"><a href={home}>Inicio</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><a href={breadcrumb.parentHref}>{breadcrumb.parentLabel}</a><span class="v3-breadcrumb__sep" aria-hidden="true">›</span><span class="v3-breadcrumb__current" aria-current="page">{breadcrumb.currentLabel}</span></div></nav><script is:inline type="application/ld+json" set:html={breadcrumbSchema}></script></>)}

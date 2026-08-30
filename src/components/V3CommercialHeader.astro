@@ -1,5 +1,6 @@
 ---
 import '../styles/v3-polish.css';
+import V3Brand from './V3Brand.astro';
 import { moduleLandings, sectorLandings, resourceGuides } from '../data/v3-commercial';
 import { publishedV3BlogPosts } from '../data/v3-blog';
 
@@ -92,7 +93,7 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
 <a class="v3-skip-link" href="#v3-main-content">Saltar al contenido</a>
 <header class="site-header">
   <div class="site-header__inner shell">
-    <a class="brand" href={home} aria-label="IsiVoltPro, inicio" aria-current={ariaCurrent(home)}><i class="brand__icon" aria-hidden="true"></i><span>IsiVoltPro</span>{isV4Preview && <span class="v4-preview-pill">Preview V4</span>}</a>
+    <a class="brand" href={home} aria-label="IsiVoltPro, inicio" aria-current={ariaCurrent(home)}><V3Brand context="header" />{isV4Preview && <span class="v4-preview-pill">Preview V4</span>}</a>
     <nav class="nav" aria-label="Navegación principal">
       <a href={product} aria-current={ariaCurrent(product)}>Producto</a>
       <a href={solutions} aria-current={ariaCurrent(solutions,[solutions])}>Soluciones</a>

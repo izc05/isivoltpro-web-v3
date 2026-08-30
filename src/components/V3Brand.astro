@@ -1,0 +1,20 @@
+---
+import '../styles/v4-brand.css';
+
+interface Props {
+  variant?: 'full' | 'mark';
+  context?: 'header' | 'footer' | 'intro' | 'compact';
+}
+
+const { variant = 'full', context = 'header' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const mark = `${base}brand/isivoltpro-mark-v4.svg`;
+---
+<span class:list={['ivp-brand', `ivp-brand--${context}`, { 'ivp-brand--mark-only': variant === 'mark' }] }>
+  <img class="ivp-brand__mark" src={mark} alt="" aria-hidden="true" width="64" height="64" decoding="async" />
+  {variant === 'full' && (
+    <span class="ivp-brand__word" aria-label="IsiVoltPro">
+      <span>IsiVolt</span><strong>Pro</strong>
+    </span>
+  )}
+</span>

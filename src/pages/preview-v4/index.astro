@@ -1,0 +1,36 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+const base = import.meta.env.BASE_URL;
+const productPreview = `${base}preview-v4/producto/`;
+const publicSite = base;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Preview V4 · IsiVoltPro" description="Laboratorio no indexado para revisar la evolución visual de IsiVoltPro antes de sustituir las páginas públicas." path={`${base}preview-v4/`} noindex={true} />
+  <style is:inline>
+    .preview-hub{min-height:70vh;padding:86px 0;background:radial-gradient(circle at 78% 10%,rgba(109,74,255,.12),transparent 28%),radial-gradient(circle at 90% 55%,rgba(36,197,140,.09),transparent 22%),#fff}.preview-hub h1{max-width:820px;margin:18px 0 18px;font:800 clamp(48px,6vw,78px)/.98 Manrope,sans-serif;letter-spacing:-.06em}.preview-hub__lead{max-width:760px;margin:0;color:#67738a;font-size:18px;line-height:1.72}.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}.preview-card{padding:26px;border:1px solid #e6e9f1;border-radius:26px;background:#fff;box-shadow:0 18px 48px rgba(54,64,102,.08)}.preview-card--active{border-color:rgba(109,74,255,.25);background:linear-gradient(145deg,#fff,#faf9ff)}.preview-card small{display:block;color:#7f8aa0;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.preview-card h2{margin:14px 0 9px;font-size:25px}.preview-card p{margin:0;color:#738097;line-height:1.65}.preview-card .btn{margin-top:22px}.preview-status{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 11px;border-radius:999px;background:#edf9f5;color:#168965;font-size:11px;font-weight:900}.preview-status::before{content:'';width:8px;height:8px;border-radius:50%;background:#24c58c}.preview-note{margin-top:28px;padding:17px 19px;border:1px dashed #d8deea;border-radius:17px;background:#fafbfe;color:#6e7a91;line-height:1.65}@media(max-width:900px){.preview-grid{grid-template-columns:1fr}}@media(max-width:680px){.preview-hub{padding:62px 0}.preview-hub h1{font-size:clamp(44px,13vw,62px)}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <main class="preview-hub">
+    <div class="page-shell">
+      <span class="eyebrow">Laboratorio visual V4 · No indexado</span>
+      <h1>Revisamos primero.<br/><span class="gradient-text">Publicamos después.</span></h1>
+      <p class="preview-hub__lead">Esta zona permite ver en GitHub Pages las propuestas nuevas sin sustituir todavía las rutas comerciales actuales. Iremos añadiendo aquí cada pantalla que trabajemos.</p>
+      <span class="preview-status">Preview pública de revisión activa</span>
+      <div class="preview-grid">
+        <article class="preview-card preview-card--active"><small>01 · En revisión</small><h2>Producto V4</h2><p>Hero más claro, etiquetado de datos de ejemplo, flujo Aviso → OT → Histórico y una lectura más comercial del producto.</p><a class="btn btn--primary" href={productPreview}>Abrir preview Producto →</a></article>
+        <article class="preview-card"><small>02 · Siguiente</small><h2>Home V4</h2><p>Continuidad desde la entrada aprobada, jerarquía comercial, producto visible antes y recorrido de conversión más corto.</p></article>
+        <article class="preview-card"><small>03 · Después</small><h2>Soluciones + Apps</h2><p>Reduciremos solapamientos de navegación y separaremos mejor problemas, producto base y aplicaciones especializadas.</p></article>
+      </div>
+      <div class="preview-note"><strong>La web principal no se ha sustituido.</strong> Solo hemos añadido rutas de revisión. Puedes comparar esta zona con la versión pública y aprobar cambios pantalla por pantalla. <a href={publicSite}>Volver a la web actual →</a></div>
+    </div>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

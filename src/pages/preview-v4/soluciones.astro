@@ -1,5 +1,5 @@
 ---
-import { readFileSync } from 'node:fs';
+import photoPayload from '../../../public/media/v4/hvac-inspection-tablet.webp.b64?raw';
 import '../../styles/v3-pages.css';
 import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
@@ -9,8 +9,7 @@ const demo = `${base}preview-v4/demo/`;
 const apps = `${base}preview-v4/apps/`;
 const product = `${base}preview-v4/producto/`;
 const sectors = `${base}preview-v4/sectores/`;
-const photoPayload = readFileSync(new URL('../../../public/media/v4/hvac-inspection-tablet.webp.b64', import.meta.url), 'utf8').trim();
-const photo = `data:image/webp;base64,${photoPayload}`;
+const photo = `data:image/webp;base64,${photoPayload.trim()}`;
 ---
 <!doctype html>
 <html lang="es">

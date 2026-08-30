@@ -60,7 +60,8 @@ def capture_entry(browser, width: int, height: int, name: str) -> None:
     )
     if not metrics["introVisible"]: failures.append(f"entrada estática {name}: no está visible")
     if not metrics["artVisible"] or metrics["artW"] < width - 1 or metrics["artH"] < height - 1: failures.append(f"entrada estática {name}: imagen no cubre viewport · {metrics['artW']}x{metrics['artH']}")
-    if not metrics["artComplete"] or metrics["artNaturalW"] < 1200 or metrics["artNaturalH"] < 700: failures.append(f"entrada estática {name}: imagen aprobada sin píxeles reales · {metrics['artNaturalW']}x{metrics['artNaturalH']}")
+    # El master aprobado de la entrada es 1200×617. Mantener 600 px como umbral evita aceptar placeholders pequeños sin rechazar el arte aprobado.
+    if not metrics["artComplete"] or metrics["artNaturalW"] < 1200 or metrics["artNaturalH"] < 600: failures.append(f"entrada estática {name}: imagen aprobada sin píxeles reales · {metrics['artNaturalW']}x{metrics['artNaturalH']}")
     if metrics["oldEffectCount"] != 0: failures.append(f"entrada estática {name}: siguen presentes capas/efectos antiguos · {metrics['oldEffectCount']}")
     if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada estática {name}: control Saltar intro no accesible · {metrics['skipH']}px")
     if metrics["bgColor"] in {"rgba(0, 0, 0, 0)", "transparent"}: failures.append(f"entrada estática {name}: fondo transparente")

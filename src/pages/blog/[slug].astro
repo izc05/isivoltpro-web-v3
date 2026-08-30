@@ -45,9 +45,6 @@ const articleSchema = JSON.stringify({
     path={`${base}blog/${post.slug}/`}
     image={`${base}${post.image.replace(/^\/+/, '')}`}
     imageAlt={post.imageAlt}
-    type="article"
-    publishedAt={post.publishedAt}
-    updatedAt={post.updatedAt}
   />
   <script is:inline type="application/ld+json" set:html={articleSchema}></script>
   <style is:inline>

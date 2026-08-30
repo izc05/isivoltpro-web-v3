@@ -6,7 +6,6 @@ import V3Seo from '../../components/V3Seo.astro';
 
 export function getStaticPaths() {
   return [
-    { params: { section: 'apps' }, props: { title: 'Apps V4', eyebrow: 'Producto base + aplicaciones especializadas', lead: 'Aquí reorganizaremos App Mantenimiento, QR/NFC y futuras apps para que el visitante entienda qué puede empezar a usar hoy y qué puede ampliar después.', publicPath: 'aplicaciones/' } },
     { params: { section: 'sectores' }, props: { title: 'Sectores V4', eyebrow: 'Casos de uso por entorno de trabajo', lead: 'La nueva versión mostrará empresas mantenedoras, instalaciones propias, electricidad, climatización y multisede con escenas técnicas específicas y mensajes de negocio.', publicPath: 'sectores/' } },
     { params: { section: 'recursos' }, props: { title: 'Recursos V4', eyebrow: 'Conocimiento que ayuda a trabajar mejor', lead: 'Recursos se convertirá en una biblioteca útil para mantenimiento: guías, checklists, implantación, organización de OT, activos, QR y buenas prácticas.', publicPath: 'recursos/' } },
     { params: { section: 'blog' }, props: { title: 'Blog + noticias V4', eyebrow: 'Autoridad técnica + actualidad', lead: 'El blog combinará conocimiento de campo, normativa, digitalización y novedades del sector sin convertirse en un listado genérico de artículos.', publicPath: 'blog/' } },

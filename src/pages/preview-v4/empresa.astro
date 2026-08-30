@@ -1,5 +1,5 @@
 ---
-import { readFileSync } from 'node:fs';
+import heroPhotoPayload from '../../../public/media/v4/team-plant-review.webp.b64?raw';
 import '../../styles/v3-pages.css';
 import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
@@ -9,8 +9,7 @@ const demo = `${base}preview-v4/demo/`;
 const resources = `${base}preview-v4/recursos/`;
 const product = `${base}preview-v4/producto/`;
 const sectors = `${base}preview-v4/sectores/`;
-const heroPhotoPayload = readFileSync(new URL('../../../public/media/v4/team-plant-review.webp.b64', import.meta.url), 'utf8').trim();
-const heroPhoto = `data:image/webp;base64,${heroPhotoPayload}`;
+const heroPhoto = `data:image/webp;base64,${heroPhotoPayload.trim()}`;
 const fieldPhoto = `${base}media/v4/app-qr-mobile.webp`;
 const principles = [
   ['01','El trabajo manda','La interfaz debe adaptarse a la operación técnica y reducir pasos, no obligar al técnico a trabajar para el software.'],

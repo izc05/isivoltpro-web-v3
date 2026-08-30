@@ -6,9 +6,7 @@ import V3Seo from '../../components/V3Seo.astro';
 
 export function getStaticPaths() {
   return [
-    { params: { section: 'precios' }, props: { title: 'Planes V4', eyebrow: 'Comprar sin complicaciones', lead: 'Revisaremos planes, alcance y crecimiento para explicar mejor qué incluye cada nivel y evitar sensación de suite sobredimensionada.', publicPath: 'precios/' } },
     { params: { section: 'acceso' }, props: { title: 'Acceso V4', eyebrow: 'Entrada clara y segura', lead: 'La futura pantalla de acceso mantendrá la separación entre la web comercial y las superficies privadas, sin fingir autenticación ni persistencia en GitHub Pages.', publicPath: 'acceso/' } },
-    { params: { section: 'demo' }, props: { title: 'Demo V4', eyebrow: 'Conversión comercial', lead: 'La demo será una ruta corta y convincente para explicar qué verá el cliente, qué necesitamos conocer de su caso y cuál es el siguiente paso.', publicPath: 'demo/' } },
   ];
 }
 

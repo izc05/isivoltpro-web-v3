@@ -1,4 +1,6 @@
 ---
+import { v3BlogFeed } from '../data/v3-blog-feed';
+
 interface Props {
   title: string;
   description: string;
@@ -13,15 +15,29 @@ const {
   description,
   path = Astro.url.pathname,
   noindex = false,
-  image = `${import.meta.env.BASE_URL}images/home/isivoltpro-industrial-core.webp`,
-  imageAlt = 'IsiVoltPro · mantenimiento bajo control',
+  image,
+  imageAlt,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
 const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(path, siteOrigin);
-const socialImage = new URL(image, siteOrigin);
-const rssFeed = new URL('/rss.xml', siteOrigin);
+const normalizedPath = canonical.pathname;
+const blogMatch = normalizedPath.match(/\/blog\/([^/]+)\/?$/);
+const blogPost = blogMatch ? v3BlogFeed.find((post) => post.slug === blogMatch[1]) : undefined;
+const defaultImage = `${base}images/home/isivoltpro-industrial-core.webp`;
+const effectiveImage = image ?? (blogPost ? `${base}${blogPost.image.replace(/^\/+/, '')}` : defaultImage);
+const effectiveImageAlt = imageAlt ?? blogPost?.imageAlt ?? 'IsiVoltPro · mantenimiento bajo control';
+const socialImage = new URL(effectiveImage, siteOrigin);
+const socialImagePath = socialImage.pathname.toLowerCase();
+const socialImageType = socialImagePath.endsWith('.svg')
+  ? 'image/svg+xml'
+  : socialImagePath.endsWith('.png')
+    ? 'image/png'
+    : socialImagePath.endsWith('.jpg') || socialImagePath.endsWith('.jpeg')
+      ? 'image/jpeg'
+      : 'image/webp';
+const rssFeed = new URL(`${base}rss.xml`, siteOrigin);
 const fullTitle = title.includes('IsiVoltPro') ? title : `${title} · IsiVoltPro`;
 const csp = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'";
 ---
@@ -43,20 +59,20 @@ const csp = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-
 <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
 <link rel="apple-touch-icon" href={`${base}brand/isivoltpro-touch-icon-180.png`} sizes="180x180" />
 <link rel="manifest" href={`${base}site.webmanifest`} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={blogPost ? 'article' : 'website'} />
 <meta property="og:locale" content="es_ES" />
 <meta property="og:site_name" content="IsiVoltPro" />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={socialImage} />
-<meta property="og:image:type" content="image/webp" />
-<meta property="og:image:width" content="744" />
-<meta property="og:image:height" content="296" />
-<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:image:type" content={socialImageType} />
+<meta property="og:image:alt" content={effectiveImageAlt} />
+{blogPost && <meta property="article:published_time" content={blogPost.publishedAt} />}
+{blogPost && <meta property="article:modified_time" content={blogPost.updatedAt} />}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />
-<meta name="twitter:image:alt" content={imageAlt} />
+<meta name="twitter:image:alt" content={effectiveImageAlt} />
 <title>{fullTitle}</title>

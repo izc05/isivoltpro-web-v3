@@ -1,4 +1,5 @@
 ---
+import { readFileSync } from 'node:fs';
 import '../../styles/v3-pages.css';
 import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
@@ -8,7 +9,8 @@ const demo = `${base}preview-v4/demo/`;
 const apps = `${base}preview-v4/apps/`;
 const product = `${base}preview-v4/producto/`;
 const sectors = `${base}preview-v4/sectores/`;
-const photo = `${base}media/v4/home-maintenance-tablet.webp`;
+const photoPayload = readFileSync(new URL('../../../public/media/v4/hvac-inspection-tablet.webp.b64', import.meta.url), 'utf8').trim();
+const photo = `data:image/webp;base64,${photoPayload}`;
 ---
 <!doctype html>
 <html lang="es">
@@ -22,7 +24,7 @@ const photo = `${base}media/v4/home-maintenance-tablet.webp`;
   <V3CommercialHeader />
   <div class="strip"><div class="page-shell"><strong>Preview V4 · Soluciones</strong><span>Problema → flujo → resultado · <a href={`${base}preview-v4/`}>Mapa V4</a></span></div></div>
   <main class="page-main">
-    <section class="hero"><div class="page-shell hero-grid"><div><span class="eyebrow">Empieza por el problema, no por el software</span><h1>Menos perseguir información.<br/><span class="gradient-text">Más mantener con contexto.</span></h1><p>IsiVoltPro organiza problemas cotidianos de mantenimiento —avisos dispersos, trabajos abiertos, revisiones olvidadas o históricos incompletos— dentro de un flujo común que acompaña al técnico desde el aviso hasta el cierre.</p><div class="actions"><a class="btn btn--primary" href={demo}>Contar mi caso →</a><a class="btn" href={product}>Ver cómo funciona</a></div></div><figure class="photo"><img src={photo} alt="Técnico de mantenimiento revisando una instalación técnica con una tablet" width="760" height="428" loading="eager"/><figcaption>Trabajo real · información en contexto</figcaption></figure></div></section>
+    <section class="hero"><div class="page-shell hero-grid"><div><span class="eyebrow">Empieza por el problema, no por el software</span><h1>Menos perseguir información.<br/><span class="gradient-text">Más mantener con contexto.</span></h1><p>IsiVoltPro organiza problemas cotidianos de mantenimiento —avisos dispersos, trabajos abiertos, revisiones olvidadas o históricos incompletos— dentro de un flujo común que acompaña al técnico desde el aviso hasta el cierre.</p><div class="actions"><a class="btn btn--primary" href={demo}>Contar mi caso →</a><a class="btn" href={product}>Ver cómo funciona</a></div></div><figure class="photo"><img src={photo} alt="Técnico de climatización inspeccionando maquinaria de una sala técnica con una tablet" width="600" height="338" loading="eager"/><figcaption>Climatización · revisión técnica en campo</figcaption></figure></div></section>
 
     <section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Problemas que reconoces al instante</span><h2>La web debe hablar primero<br/><span class="gradient-text">de lo que te hace perder tiempo.</span></h2></div><p>La V4 deja de presentar una lista de módulos como punto de entrada y empieza por situaciones de trabajo que una empresa o un técnico puede identificar en segundos.</p></div><div class="pain-grid"><article class="pain"><span>01</span><h3>“Los avisos me llegan por todas partes”</h3><p>Convierte llamadas, notas y mensajes en una entrada visible con ubicación, activo, prioridad, descripción y evidencias.</p></article><article class="pain"><span>02</span><h3>“No sé qué trabajos siguen abiertos”</h3><p>Responsable, estado y próxima acción quedan visibles sin depender de llamadas constantes para reconstruir la situación.</p></article><article class="pain"><span>03</span><h3>“Las revisiones dependen de acordarme”</h3><p>Periodicidades y tareas preventivas pasan a formar parte del trabajo planificado y quedan documentadas cuando se ejecutan.</p></article><article class="pain"><span>04</span><h3>“Vuelvo al equipo y empiezo de cero”</h3><p>El activo conserva averías, preventivos, fotos, documentos y actuaciones para que la siguiente intervención empiece con contexto.</p></article></div></div></section>
 

@@ -1,0 +1,71 @@
+---
+import '../../styles/v3-pages.css';
+import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
+import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
+import V3Seo from '../../components/V3Seo.astro';
+const base = import.meta.env.BASE_URL;
+const currentProduct = `${base}producto/`;
+const appMaintenance = `${base}app-mantenimiento/`;
+const solutions = `${base}soluciones/`;
+const previewHome = `${base}preview-v4/`;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <V3Seo title="Preview V4 · Producto · IsiVoltPro" description="Vista previa no indexada de la evolución visual de la página Producto de IsiVoltPro." path={`${base}preview-v4/producto/`} noindex={true} />
+  <style is:inline>
+    .preview-strip{border-bottom:1px solid #e8ebf3;background:#111827;color:#fff}.preview-strip__inner{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px}.preview-strip strong{letter-spacing:.08em;text-transform:uppercase}.preview-strip a{color:#dfe7ff;font-weight:800}.v4-hero{padding:86px 0 72px;background:radial-gradient(circle at 76% 14%,rgba(109,74,255,.12),transparent 29%),radial-gradient(circle at 92% 58%,rgba(36,197,140,.10),transparent 22%),#fff}.v4-hero__grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(520px,1.08fr);gap:62px;align-items:center}.v4-kicker{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #e7eaf2;border-radius:999px;background:rgba(255,255,255,.88);color:#46536d;font-size:11px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}.v4-kicker i{width:8px;height:8px;border-radius:50%;background:#28c693;box-shadow:0 0 0 5px rgba(40,198,147,.10)}.v4-hero h1{max-width:690px;margin:22px 0 20px;font:800 clamp(52px,5.8vw,82px)/.98 Manrope,sans-serif;letter-spacing:-.065em;text-wrap:balance}.v4-hero p{max-width:660px;margin:0;color:#657087;font-size:18px;line-height:1.72}.v4-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}.v4-proofline{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.v4-proofline span{display:inline-flex;align-items:center;gap:7px;color:#536079;font-size:12px;font-weight:800}.v4-proofline span::before{content:'✓';width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#edf9f5;color:#15986d;font-size:11px}.v4-stage{position:relative;min-height:470px;padding:26px;border:1px solid #e6e9f2;border-radius:34px;background:linear-gradient(145deg,#fff,#f8faff 52%,#fff8fc);box-shadow:0 34px 90px rgba(54,64,102,.15);overflow:hidden}.v4-stage::before{content:'';position:absolute;width:230px;height:230px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,rgba(109,74,255,.23),rgba(109,74,255,0) 70%)}.v4-stage::after{content:'';position:absolute;width:210px;height:210px;left:-80px;bottom:-95px;border-radius:50%;background:radial-gradient(circle,rgba(242,56,169,.14),rgba(242,56,169,0) 70%)}.v4-window{position:relative;z-index:1;border:1px solid #e8ebf2;border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 20px 48px rgba(35,50,88,.10);overflow:hidden}.v4-window__bar{min-height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid #edf0f5}.v4-window__bar strong{font-size:11px}.v4-demo-label{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#f4f1ff;color:#6544e8;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.v4-window__body{display:grid;grid-template-columns:86px 1fr;min-height:315px}.v4-rail{padding:16px 10px;border-right:1px solid #edf0f5;background:#fbfcff}.v4-rail span{display:block;height:29px;margin-bottom:8px;border-radius:9px;background:#f1f4f9}.v4-rail span:first-child{background:linear-gradient(90deg,#e8efff,#f1edff)}.v4-dashboard{padding:20px}.v4-dashboard__top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.v4-dashboard__top small{display:block;color:#8a95a8;font-size:9px;font-weight:800;letter-spacing:.05em}.v4-dashboard__top h3{margin:4px 0 0;font-size:24px}.v4-live{padding:6px 9px;border-radius:999px;background:#ecfaf5;color:#168965;font-size:9px;font-weight:900}.v4-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.v4-metric{padding:13px;border:1px solid #eceff5;border-radius:15px;background:#fff}.v4-metric small{color:#8590a4;font-size:9px}.v4-metric strong{display:block;margin-top:4px;font-size:22px}.v4-feed{display:grid;gap:8px;margin-top:13px}.v4-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:11px 12px;border-radius:12px;background:#f8faff;font-size:10px}.v4-row b{padding:5px 8px;border-radius:999px;background:#fff1f7;color:#c83485;font-size:8px}.v4-row:nth-child(2) b{background:#eef3ff;color:#3d64ce}.v4-row:nth-child(3) b{background:#ecfaf5;color:#168965}.v4-float{position:absolute;z-index:2;padding:10px 12px;border:1px solid #e4e8f1;border-radius:14px;background:#fff;box-shadow:0 16px 38px rgba(35,50,88,.13);color:#33415d;font-size:10px;font-weight:900}.v4-float--ot{left:10px;top:38px}.v4-float--qr{right:10px;bottom:20px}.v4-float i{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:#6d4aff}.v4-float--qr i{background:#24c58c}.v4-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.v4-flow article{position:relative;min-height:205px;padding:26px;border:1px solid #e7eaf2;border-radius:25px;background:#fff;box-shadow:0 14px 36px rgba(54,64,102,.065)}.v4-flow article:not(:last-child)::after{content:'→';position:absolute;right:-19px;top:50%;z-index:3;width:38px;height:38px;display:grid;place-items:center;border:1px solid #e4e8f1;border-radius:50%;background:#fff;color:#8290aa;font-weight:900;transform:translateY(-50%)}.v4-step{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#eef3ff;color:#4666da;font-weight:900}.v4-flow article:nth-child(2) .v4-step{background:#f2efff;color:#6544e8}.v4-flow article:nth-child(3) .v4-step{background:#eaf9f3;color:#15986d}.v4-flow h3{margin:20px 0 8px;font-size:22px}.v4-flow p{margin:0;color:#707c91;line-height:1.65}.v4-context{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:stretch}.v4-context__copy{padding:36px;border-radius:30px;background:linear-gradient(135deg,#111a31,#1a2a4d 58%,#392c77);color:#fff}.v4-context__copy h2{margin:12px 0 14px;font:800 clamp(36px,4.5vw,58px)/1.03 Manrope,sans-serif;letter-spacing:-.05em}.v4-context__copy p{margin:0;color:#c5d0e6;line-height:1.72}.v4-context__copy .eyebrow{color:#bcd1ff}.v4-context__cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}.v4-context__cards article{padding:22px;border:1px solid #e7eaf2;border-radius:23px;background:#fff}.v4-context__cards b{display:block;font-size:13px}.v4-context__cards p{margin:8px 0 0;color:#748096;font-size:13px;line-height:1.6}.v4-preview-note{margin-top:22px;padding:15px 17px;border:1px dashed #d9deea;border-radius:16px;background:#fafbfe;color:#6d788d;font-size:12px;line-height:1.6}.v4-compare{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}.v4-compare small{color:#7a8599}@media(max-width:1040px){.v4-hero__grid{grid-template-columns:1fr;gap:46px}.v4-stage{max-width:760px;width:100%}.v4-context{grid-template-columns:1fr}}@media(max-width:760px){.v4-hero{padding:62px 0 48px}.v4-hero h1{font-size:clamp(44px,13vw,64px)}.v4-stage{min-height:385px;padding:15px}.v4-window__body{grid-template-columns:58px 1fr}.v4-dashboard{padding:14px}.v4-metrics{grid-template-columns:1fr 1fr}.v4-metric:last-child{display:none}.v4-dashboard__top h3{font-size:20px}.v4-float--ot{left:2px;top:28px}.v4-float--qr{right:2px;bottom:8px}.v4-flow{grid-template-columns:1fr}.v4-flow article:not(:last-child)::after{display:none}.v4-context__cards{grid-template-columns:1fr}.preview-strip__inner{padding:8px 0;align-items:flex-start;flex-direction:column;gap:4px}}@media(max-width:430px){.v4-window__body{grid-template-columns:1fr}.v4-rail{display:none}.v4-stage{min-height:355px}.v4-row{font-size:9px}.v4-float{font-size:9px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <V3CommercialHeader />
+  <div class="preview-strip"><div class="page-shell preview-strip__inner"><strong>Preview V4 · Producto</strong><span>Esta ruta es de revisión y no sustituye la página pública. <a href={previewHome}>Volver al laboratorio V4</a></span></div></div>
+  <main class="page-main">
+    <section class="v4-hero">
+      <div class="page-shell v4-hero__grid">
+        <div>
+          <span class="v4-kicker"><i></i> Producto para trabajo técnico real</span>
+          <h1>Todo tu mantenimiento,<br/><span class="gradient-text">con el contexto que necesitas.</span></h1>
+          <p>IsiVoltPro reúne cliente, ubicación, activo, aviso, orden de trabajo, preventivo, fotos y documentación para que el trabajo no empiece cada vez desde cero.</p>
+          <div class="v4-actions"><a class="btn btn--primary" href={appMaintenance}>Ver App Mantenimiento →</a><a class="btn" href={solutions}>Qué problemas resuelve</a></div>
+          <div class="v4-proofline" aria-label="Capacidades destacadas"><span>Aviso → OT → cierre</span><span>QR / NFC en campo</span><span>Histórico por activo</span></div>
+        </div>
+        <div class="v4-stage" aria-label="Vista conceptual de IsiVoltPro con datos ficticios de demostración">
+          <div class="v4-float v4-float--ot"><i></i>OT #184 · En curso</div>
+          <div class="v4-window">
+            <div class="v4-window__bar"><strong>IsiVoltPro · Mantenimiento</strong><span class="v4-demo-label">Datos de ejemplo</span></div>
+            <div class="v4-window__body">
+              <aside class="v4-rail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></aside>
+              <div class="v4-dashboard">
+                <div class="v4-dashboard__top"><div><small>EMPRESA DEMO · HOY</small><h3>Buenos días, equipo</h3></div><span class="v4-live">● Operación al día</span></div>
+                <div class="v4-metrics"><div class="v4-metric"><small>OT abiertas</small><strong>12</strong></div><div class="v4-metric"><small>Para hoy</small><strong>4</strong></div><div class="v4-metric"><small>Preventivos</small><strong>8</strong></div></div>
+                <div class="v4-feed"><div class="v4-row"><span>UTA-02 · Temperatura alta</span><b>En curso</b></div><div class="v4-row"><span>QG-01 · Revisión periódica</span><b>Mañana</b></div><div class="v4-row"><span>Bomba ACS-01 · Correctivo</span><b>Cerrada</b></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="v4-float v4-float--qr"><i></i>QR leído · Activo localizado</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell">
+        <div class="page-section__head"><div><span class="eyebrow">El flujo importa más que la lista de funciones</span><h2>Un aviso entra una vez.<br/><span class="gradient-text">El contexto acompaña al trabajo.</span></h2></div><p>La propuesta V4 explica primero qué ocurre en el día a día y después qué módulos participan. Así el producto se entiende antes de hablar de arquitectura.</p></div>
+        <div class="v4-flow"><article><span class="v4-step">01</span><h3>Entra el aviso</h3><p>Ubicación, activo, prioridad, descripción y evidencias quedan vinculados desde el principio.</p></article><article><span class="v4-step">02</span><h3>El técnico recibe contexto</h3><p>La OT reúne qué ocurre, dónde, qué historial tiene el equipo y qué documentación necesita consultar.</p></article><article><span class="v4-step">03</span><h3>El cierre alimenta el histórico</h3><p>Notas, tiempos, fotos y resultado permanecen asociados al activo para la siguiente intervención.</p></article></div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="page-shell v4-context">
+        <div class="v4-context__copy"><span class="eyebrow">Un mismo contexto operativo</span><h2>Menos reconstruir.<br/>Más continuar.</h2><p>La idea no es sustituir todas las herramientas de una empresa de golpe. Es evitar que cada incidencia obligue a reconstruir cliente, ubicación, equipo, conversaciones, fotos y trabajos anteriores.</p><div class="v4-preview-note">Esta es una propuesta visual y de copy. No añade métricas comerciales ni resultados de clientes que todavía no podamos demostrar.</div></div>
+        <div class="v4-context__cards"><article><b>Cliente + ubicación</b><p>El trabajo siempre sabe para quién se realiza y dónde ocurre.</p></article><article><b>Activo + QR/NFC</b><p>La ficha técnica y el histórico quedan accesibles desde campo.</p></article><article><b>Aviso + OT</b><p>El problema y su resolución forman una única cadena operativa.</p></article><article><b>Fotos + documentos</b><p>Las evidencias se guardan junto al trabajo que les da significado.</p></article></div>
+      </div>
+    </section>
+
+    <section class="page-section page-section--soft">
+      <div class="page-shell"><div class="callout"><div><h2>Esta pantalla ya se puede comparar con la versión actual.</h2><p>La página pública sigue intacta. Cuando la dirección visual esté aprobada, podremos trasladar el patrón a Producto y después continuar con Home, Soluciones, Apps y Sectores.</p></div><a class="btn btn--primary" href={currentProduct}>Abrir Producto actual →</a></div><div class="v4-compare"><small>Ruta de preview: /preview-v4/producto/ · noindex,nofollow</small></div></div>
+    </section>
+  </main>
+  <V3CommercialFooter />
+</body>
+</html>

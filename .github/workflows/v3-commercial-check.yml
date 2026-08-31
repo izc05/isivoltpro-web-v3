@@ -220,12 +220,12 @@ jobs:
             fi
           done
 
-          if ! grep -q '<fieldset[^>]*disabled' dist/contacto/index.html; then
-            echo "::error::Contacto debe mantener los campos de datos personales desactivados hasta disponer de privacidad y backend definitivos."
+          if ! grep -q 'mailto:isivoltpro@gmail.com' dist/contacto/index.html; then
+            echo "::error::Contacto debe publicar el canal de correo directo aprobado."
             exit 1
           fi
-          if ! grep -q 'No introduzcas datos personales todavía' dist/contacto/index.html; then
-            echo "::error::Falta el aviso explícito de privacidad en la vista previa de Contacto."
+          if ! grep -q 'Esta web no recoge, envía ni almacena los datos del mensaje' dist/contacto/index.html; then
+            echo "::error::Falta el aviso explícito de privacidad del contacto por correo."
             exit 1
           fi
           if grep -Eq '<form[^>]+(action|method)=' dist/contacto/index.html; then
@@ -240,7 +240,8 @@ jobs:
             preview_kb=$(du -sk dist/preview-v4 | cut -f1)
           fi
           public_kb=$((total_kb - preview_kb))
-          public_max_kb=3392
+          # La fotografía real optimizada añade un margen controlado sin introducir vídeo ni recursos remotos.
+          public_max_kb=3648
           preview_max_kb=512
           if (( public_kb > public_max_kb )); then
             echo "::error::La superficie pública ocupa ${public_kb} KiB y supera el presupuesto de ${public_max_kb} KiB."

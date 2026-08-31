@@ -11,7 +11,7 @@ permissions:
 jobs:
   final-readiness:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,8 +24,10 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npm run build
-      - name: Validar script final
-        run: python -m py_compile scripts/v4-final-readiness.py
+      - name: Validar scripts finales
+        run: |
+          python -m py_compile scripts/v4-final-readiness.py
+          python -m py_compile scripts/v4-final-visual-qa.py
       - name: Auditar laboratorio completo
         run: python scripts/v4-final-readiness.py dist
       - name: Confirmar límites de publicación
@@ -37,4 +39,32 @@ jobs:
           ! grep -q 'scripts/v4-analytics-contract.js' dist/index.html
           grep -q 'scripts/v4-analytics-contract.js' dist/preview-v4/home/index.html
           grep -q 'Disallow: /preview-v4' dist/robots.txt
-          echo 'OK: laboratorio V4 aislado de la web estable y preparado para revisión final.'
+          echo 'OK: laboratorio V4 aislado de la web estable.'
+      - name: Instalar Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Levantar preview local
+        run: |
+          nohup npm run preview -- --port 4321 > /tmp/isivoltpro-v4-final.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4321/isivoltpro-web-v3/preview-v4/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/isivoltpro-v4-final.log
+          exit 1
+      - name: Auditar 17 pantallas en móvil y escritorio
+        env:
+          V4_PREVIEW_URL: http://127.0.0.1:4321/isivoltpro-web-v3/
+          V4_FINAL_VISUAL_QA_DIR: v4-final-visual-qa
+        run: python scripts/v4-final-visual-qa.py
+      - name: Guardar evidencia visual final
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isivoltpro-v4-final-visual-qa
+          path: v4-final-visual-qa
+          if-no-files-found: warn
+          retention-days: 30

@@ -59,8 +59,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-25',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/flujo-campo-isivoltpro.svg',
-    imageAlt: 'Flujo conceptual desde un aviso y una orden de trabajo hasta un histórico útil de mantenimiento.',
+    image: '/media/v4/home-dashboard-premium.webp',
+    imageAlt: 'Panel premium de IsiVoltPro con órdenes de trabajo, activos y seguimiento operativo de mantenimiento.',
     keywords: ['orden de trabajo', 'OT', 'histórico de mantenimiento', 'mantenimiento digital'],
     featured: true,
     sections: [
@@ -85,7 +85,7 @@ export const v3BlogPosts: V3BlogPost[] = [
         heading: 'El histórico debe poder leerse desde el activo',
         paragraphs: [
           'Una lista de órdenes aisladas obliga a buscar. Un histórico vinculado al activo permite ver recurrencias, comparar fallos y detectar cuándo una reparación deja de ser rentable.',
-          'La pregunta práctica es sencilla: si mañana otra persona escanea el equipo, ¿puede entender qué ha ocurrido sin llamar a quien estuvo allí?' 
+          'La pregunta práctica es sencilla: si mañana otra persona escanea el equipo, ¿puede entender qué ha ocurrido sin llamar a quien estuvo allí?'
         ]
       }
     ],
@@ -107,8 +107,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-22',
     readMinutes: 4,
     author: 'Equipo IsiVoltPro',
-    image: '/media/equipo-hvac-isivoltpro.svg',
-    imageAlt: 'Ilustración conceptual de un equipo HVAC identificado dentro de IsiVoltPro.',
+    image: '/media/v4/app-qr-mobile.webp',
+    imageAlt: 'Técnico de mantenimiento identificando un equipo industrial mediante un código QR con el teléfono móvil.',
     keywords: ['QR mantenimiento', 'NFC', 'activos', 'mantenimiento preventivo'],
     sections: [
       {
@@ -155,8 +155,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-19',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/home-dashboard.svg',
-    imageAlt: 'Vista conceptual del panel IsiVoltPro con órdenes, preventivos e incidencias.',
+    image: '/media/v4/home-maintenance-tablet.webp',
+    imageAlt: 'Técnico de mantenimiento revisando una instalación con una tablet durante una tarea preventiva.',
     keywords: ['mantenimiento preventivo', 'plan de mantenimiento', 'orden de trabajo', 'digitalización'],
     sections: [
       {
@@ -203,7 +203,7 @@ export const v3SocialAdaptations: V3SocialAdaptation[] = [
     postSlug: 'historico-util-empieza-al-cerrar-ot',
     channels: ['instagram', 'facebook', 'linkedin'],
     status: 'blocked',
-    media: '/media/flujo-campo-isivoltpro.svg',
+    media: '/media/v4/home-dashboard-premium.webp',
     publishAfter: '2026-08-26T10:00:00+02:00',
     captions: {
       instagram: 'Cerrar una OT con “reparado” sirve para hoy. Para mañana necesitamos saber qué falló, qué se hizo, qué evidencia quedó y qué sigue pendiente. Menos campos, mejor histórico. #mantenimiento #ordendetrabajo #gestiondemantenimiento',
@@ -216,7 +216,7 @@ export const v3SocialAdaptations: V3SocialAdaptation[] = [
     postSlug: 'qr-mantenimiento-valor-despues-escanear',
     channels: ['instagram', 'facebook', 'linkedin'],
     status: 'ready',
-    media: '/media/equipo-hvac-isivoltpro.svg',
+    media: '/media/v4/app-qr-mobile.webp',
     captions: {
       instagram: 'Un QR en una máquina no digitaliza nada por sí solo. El valor está en lo que ocurre después: identificar el activo, ver incidencias, histórico, documentos y la siguiente acción. #mantenimiento #QR #activos',
       facebook: 'La etiqueta QR es solo la puerta de entrada. El verdadero ahorro aparece cuando el técnico escanea y llega directamente al contexto del activo sin buscar códigos, carpetas o mensajes antiguos.',

@@ -1,0 +1,68 @@
+name: QA contrato proveedores sociales V4
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provider-contract-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validar sintaxis
+        run: python -m py_compile scripts/v4-social-provider-gate.py
+      - name: Preparar fixtures
+        run: |
+          mkdir -p provider-qa
+          cat > provider-qa/ready.json <<'JSON'
+          {
+            "queueId":"social-articulo-prueba",
+            "channel":"linkedin",
+            "provider":"linkedin",
+            "approval":{"approved":true,"approvedBy":"owner","approvedAt":"2026-08-31T11:00:00+02:00"},
+            "connection":{"state":"ready","credentialLocation":"backend_secret_store"},
+            "request":{"state":"queued","idempotencyKey":"social-articulo-prueba-linkedin-v1","caption":"Texto editorial suficientemente largo para validar el envío.","media":"/media/v4/home-dashboard-premium.webp","articlePath":"/blog/articulo-prueba/"}
+          }
+          JSON
+          cat > provider-qa/published.json <<'JSON'
+          {
+            "queueId":"social-articulo-prueba",
+            "channel":"linkedin",
+            "provider":"linkedin",
+            "approval":{"approved":true,"approvedBy":"owner","approvedAt":"2026-08-31T11:00:00+02:00"},
+            "connection":{"state":"ready","credentialLocation":"backend_secret_store"},
+            "request":{"state":"sending","idempotencyKey":"social-articulo-prueba-linkedin-v1","caption":"Texto editorial suficientemente largo para validar el envío.","media":"/media/v4/home-dashboard-premium.webp","articlePath":"/blog/articulo-prueba/"},
+            "receipt":{"queueId":"social-articulo-prueba","channel":"linkedin","provider":"linkedin","state":"published","idempotencyKey":"social-articulo-prueba-linkedin-v1","providerPublicationId":"urn:li:share:123","confirmedAt":"2026-08-31T11:05:00+02:00"}
+          }
+          JSON
+          cp provider-qa/ready.json provider-qa/no-approval.json
+          python - <<'PY'
+          import json
+          p='provider-qa/no-approval.json'; d=json.load(open(p)); d['approval']['approved']=False; json.dump(d,open(p,'w'))
+          p='provider-qa/secret.json'; d=json.load(open('provider-qa/ready.json')); d['connection']['access_token']='never-store-this'; json.dump(d,open(p,'w'))
+          p='provider-qa/fake-published.json'; d=json.load(open('provider-qa/ready.json')); d['request']['state']='published'; json.dump(d,open(p,'w'))
+          p='provider-qa/scheduled-receipt.json'; d=json.load(open('provider-qa/published.json')); d['receipt']['state']='scheduled'; json.dump(d,open(p,'w'))
+          PY
+      - name: Aceptar envío aprobado
+        run: |
+          python scripts/v4-social-provider-gate.py validate-send provider-qa/ready.json --output provider-qa/send-result.json
+          grep -q 'ready_to_send' provider-qa/send-result.json
+      - name: Aceptar solo publicación confirmada
+        run: |
+          python scripts/v4-social-provider-gate.py validate-receipt provider-qa/published.json --output provider-qa/receipt-result.json
+          grep -q 'published_confirmed' provider-qa/receipt-result.json
+          grep -q 'urn:li:share:123' provider-qa/receipt-result.json
+      - name: Rechazar atajos inseguros
+        run: |
+          ! python scripts/v4-social-provider-gate.py validate-send provider-qa/no-approval.json
+          ! python scripts/v4-social-provider-gate.py validate-send provider-qa/secret.json
+          ! python scripts/v4-social-provider-gate.py validate-send provider-qa/fake-published.json
+          ! python scripts/v4-social-provider-gate.py validate-receipt provider-qa/scheduled-receipt.json

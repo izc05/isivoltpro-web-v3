@@ -34,7 +34,10 @@ fi
 
 info "Arrancando preview en $ORIGIN"
 : > "$LOG_FILE"
-nohup "$ASTRO_BIN" preview --host "$STAGING_HOST" --port "$STAGING_PORT" >>"$LOG_FILE" 2>&1 &
+nohup env \
+  PUBLIC_SITE_URL="${PUBLIC_SITE_URL:-$ORIGIN}" \
+  PUBLIC_BASE_PATH="${PUBLIC_BASE_PATH:-$STAGING_BASE_PATH}" \
+  "$ASTRO_BIN" preview --host "$STAGING_HOST" --port "$STAGING_PORT" >>"$LOG_FILE" 2>&1 &
 pid=$!
 echo "$pid" > "$PID_FILE"
 

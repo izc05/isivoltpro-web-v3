@@ -1,0 +1,83 @@
+name: Propuesta editorial aprobada V4
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: read
+  issues: write
+
+tools: {}
+
+concurrency:
+  group: v4-editorial-proposal-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  proposal:
+    if: >-
+      github.event.issue.pull_request == null &&
+      github.event.comment.body == '/prepare-publication' &&
+      (github.event.comment.author_association == 'OWNER' ||
+       github.event.comment.author_association == 'MEMBER' ||
+       github.event.comment.author_association == 'COLLABORATOR')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validar sintaxis
+        run: python -m py_compile scripts/v4-editorial-proposal.py
+
+      - name: Recuperar radar aprobado
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          mkdir -p editorial-proposal-input
+          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,author,labels > editorial-proposal-input/issue.json
+
+      - name: Construir propuesta de publicación
+        env:
+          V4_EDITORIAL_PROPOSAL_INPUT: editorial-proposal-input/issue.json
+          V4_EDITORIAL_PROPOSAL_DIR: editorial-proposal-output
+        run: python scripts/v4-editorial-proposal.py
+
+      - name: Guardar propuesta como evidencia
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-editorial-proposal-${{ github.event.issue.number }}-${{ github.run_id }}
+          path: editorial-proposal-output
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Crear o actualizar issue de propuesta
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          TITLE="$(tr -d '\n' < editorial-proposal-output/title.txt)"
+          EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file editorial-proposal-output/proposal.md
+            TARGET="$EXISTING"
+          else
+            TARGET="$(gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file editorial-proposal-output/proposal.md --json number --jq '.number')"
+          fi
+          gh issue comment "$SOURCE_ISSUE" --repo "$GITHUB_REPOSITORY" --body "✅ Propuesta interna preparada en issue #$TARGET. No se ha publicado en la web ni en redes."
+
+      - name: Confirmar que no existe publicación automática
+        run: |
+          test ! -f editorial-proposal-output/publish.flag
+          test ! -f editorial-proposal-output/social-publish.flag
+          echo 'OK: se genera una propuesta revisable; no se toca contenido público.'

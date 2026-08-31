@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EXPECTED_BRANCH="feat/v3-smb-commercial-redesign"
+EXPECTED_BRANCH="${EXPECTED_BRANCH:-feat/v3-smb-commercial-redesign}"
 EXPECTED_SHA="${EXPECTED_SHA:-}"
 STAGING_PORT="${STAGING_PORT:-4322}"
 PUBLIC_SITE_URL="${PUBLIC_SITE_URL:-}"

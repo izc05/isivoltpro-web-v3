@@ -1,0 +1,116 @@
+name: Crear PR editorial aprobado V4
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: v4-editorial-content-pr-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  content-pr:
+    if: >-
+      github.event.issue.pull_request == null &&
+      github.event.comment.body == '/create-content-pr' &&
+      (github.event.comment.author_association == 'OWNER' ||
+       github.event.comment.author_association == 'MEMBER' ||
+       github.event.comment.author_association == 'COLLABORATOR')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Recuperar propuesta aprobada
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          mkdir -p editorial-content-input
+          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json number,title,body,url,author,labels > editorial-content-input/issue.json
+
+      - name: Construir archivo de contenido
+        env:
+          V4_EDITORIAL_CONTENT_INPUT: editorial-content-input/issue.json
+          V4_EDITORIAL_CONTENT_DIR: editorial-content-output
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/v4-editorial-content-pr.py
+          python scripts/v4-editorial-content-pr.py
+
+      - name: Crear rama editorial y commit
+        id: branch
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          SLUG="$(tr -d '\n' < editorial-content-output/slug.txt)"
+          BRANCH="content/editorial-${ISSUE_NUMBER}-${SLUG}"
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "La rama ya existe: $BRANCH" >&2
+            exit 1
+          fi
+          git switch -c "$BRANCH"
+          cp editorial-content-output/article.ts "src/data/generated/${SLUG}.ts"
+          git config user.name "IsiVoltPro Editorial Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "src/data/generated/${SLUG}.ts"
+          git commit -m "content: propose ${SLUG}"
+          git push --set-upstream origin "$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
+      - name: Abrir PR de contenido
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.branch.outputs.branch }}
+        run: |
+          set -euo pipefail
+          TITLE="$(tr -d '\n' < editorial-content-output/title.txt)"
+          PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" --title "Contenido editorial: $TITLE" --body-file editorial-content-output/pr-body.md)"
+          echo "url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Lanzar QA sobre la rama
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.branch.outputs.branch }}
+        run: |
+          set -euo pipefail
+          gh workflow run v3-commercial-check.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+          gh workflow run v3-mobile-preview.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+          gh workflow run v3-mobile-qa.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+          gh workflow run v3-wide-qa.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+
+      - name: Dejar trazabilidad en la propuesta
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+        run: |
+          set -euo pipefail
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body "✅ PR de contenido creado: $PR_URL\n\nSe han lanzado los QA de validación comercial, preview móvil, móvil y tablet/escritorio. **No se ha hecho merge ni publicación social automática.**"
+
+      - name: Confirmar límite de automatización
+        run: |
+          test -f editorial-content-output/article.ts
+          test ! -f editorial-content-output/merge.flag
+          test ! -f editorial-content-output/social-publish.flag
+          echo 'OK: el circuito termina en un PR revisable.'

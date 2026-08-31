@@ -9,8 +9,6 @@ permissions:
   contents: read
   issues: write
 
-tools: {}
-
 concurrency:
   group: v4-editorial-proposal-${{ github.event.issue.number }}
   cancel-in-progress: false
@@ -72,8 +70,12 @@ jobs:
             gh issue edit "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file editorial-proposal-output/proposal.md
             TARGET="$EXISTING"
           else
-            TARGET="$(gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file editorial-proposal-output/proposal.md --json number --jq '.number')"
+            CREATED_URL="$(gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file editorial-proposal-output/proposal.md)"
+            TARGET="${CREATED_URL##*/}"
           fi
+          case "$TARGET" in
+            ''|*[!0-9]*) echo "Número de issue de propuesta inválido: $TARGET" >&2; exit 1 ;;
+          esac
           gh issue comment "$SOURCE_ISSUE" --repo "$GITHUB_REPOSITORY" --body "✅ Propuesta interna preparada en issue #$TARGET. No se ha publicado en la web ni en redes."
 
       - name: Confirmar que no existe publicación automática

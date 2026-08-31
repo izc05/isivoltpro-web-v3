@@ -1,4 +1,5 @@
 ---
+import hospitalPhotoPayload from '../../../public/media/v4/sector-hospital-facility.webp.b64?raw';
 import '../../styles/v3-pages.css';
 import V3CommercialHeader from '../../components/V3CommercialHeader.astro';
 import V3CommercialFooter from '../../components/V3CommercialFooter.astro';
@@ -7,7 +8,7 @@ const base = import.meta.env.BASE_URL;
 const demo = `${base}preview-v4/demo/`;
 const solutions = `${base}preview-v4/soluciones/`;
 const apps = `${base}preview-v4/apps/`;
-const heroPhoto = `${base}media/v4/home-maintenance-tablet.webp`;
+const heroPhoto = `data:image/webp;base64,${hospitalPhotoPayload.trim()}`;
 const fieldPhoto = `${base}media/v4/app-qr-mobile.webp`;
 const sectors = [
   { icon:'⚙', title:'Empresas mantenedoras', copy:'Coordina clientes, ubicaciones, activos, avisos y técnicos sin perder el contexto entre oficina y campo.', bullets:['Asignación y seguimiento de OT','Evidencias de intervención','Histórico por activo'] },
@@ -27,12 +28,9 @@ const sectors = [
   <V3CommercialHeader />
   <div class="strip"><div class="page-shell"><strong>Preview V4 · Fase 5 · Sectores</strong><span>Casos de uso → contexto real · <a href={`${base}preview-v4/`}>Mapa V4</a></span></div></div>
   <main class="page-main">
-    <section class="hero"><div class="page-shell hero-grid"><div><span class="eyebrow">Una plataforma · diferentes operaciones</span><h1>El mismo núcleo.<br/><span class="gradient-text">Distinto trabajo real.</span></h1><p>IsiVoltPro no debería hablar igual a una empresa mantenedora, a un responsable de instalaciones o a un técnico eléctrico. La V4 presenta cada sector desde sus problemas, activos y decisiones habituales.</p><div class="actions"><a class="btn btn--primary" href={demo}>Solicitar demo →</a><a class="btn" href={solutions}>Ver Soluciones V4</a></div></div><figure class="hero-photo"><img src={heroPhoto} alt="Técnico de mantenimiento usando una tablet en una sala de instalaciones" width="836" height="470" loading="eager"/><figcaption>Mantenimiento real · producto en contexto</figcaption></figure></div></section>
-
+    <section class="hero"><div class="page-shell hero-grid"><div><span class="eyebrow">Una plataforma · diferentes operaciones</span><h1>El mismo núcleo.<br/><span class="gradient-text">Distinto trabajo real.</span></h1><p>IsiVoltPro no debería hablar igual a una empresa mantenedora, a un responsable de instalaciones o a un técnico eléctrico. La V4 presenta cada sector desde sus problemas, activos y decisiones habituales.</p><div class="actions"><a class="btn btn--primary" href={demo}>Solicitar demo →</a><a class="btn" href={solutions}>Ver Soluciones V4</a></div></div><figure class="hero-photo"><img src={heroPhoto} alt="Edificio técnico y sanitario de gran tamaño como ejemplo de una instalación propia con múltiples activos" width="640" height="360" loading="eager"/><figcaption>Instalaciones propias · edificios · operaciones multisede</figcaption></figure></div></section>
     <section class="page-section page-section--soft"><div class="page-shell"><div class="page-section__head"><div><span class="eyebrow">Sectores prioritarios</span><h2>Que cada visitante se reconozca<br/><span class="gradient-text">antes de ver una lista de funciones.</span></h2></div><p>La página deja de ser un catálogo genérico y pasa a explicar para quién encaja IsiVoltPro y qué parte del trabajo ayuda a ordenar.</p></div><div class="sector-grid">{sectors.map((sector)=><article class="sector-card"><i aria-hidden="true">{sector.icon}</i><h3>{sector.title}</h3><p>{sector.copy}</p><ul>{sector.bullets.map((item)=><li>{item}</li>)}</ul></article>)}</div></div></section>
-
     <section class="page-section"><div class="page-shell method"><div><span class="eyebrow">Campo + coordinación + histórico</span><h2>No vendemos cinco programas.<br/><span class="gradient-text">Adaptamos un mismo contexto.</span></h2><p>El activo, la ubicación, la OT, las evidencias y el histórico siguen conectados. Lo que cambia es qué información ponemos primero según el tipo de operación.</p><div class="principles"><article><strong>Empieza por el problema</strong><small>Avisos, preventivos, activos o inspecciones según el caso.</small></article><article><strong>Trabaja en campo</strong><small>QR/NFC, móvil, fotos y cierre junto al equipo.</small></article><article><strong>Conserva contexto</strong><small>El trabajo realizado alimenta el histórico del activo.</small></article></div><div class="actions"><a class="btn btn--primary" href={apps}>Ver Apps V4 →</a></div></div><figure class="method-photo"><img src={fieldPhoto} alt="Técnico identificando un equipo mediante un código QR con el móvil" width="700" height="525" loading="lazy"/></figure></div></section>
-
     <section class="page-section page-section--soft"><div class="page-shell"><div class="cta"><div><h2>Tu sector cambia.<br/>El contexto no debería perderse.</h2><p>La demo debe partir de cómo trabajas hoy y enseñar solo lo que tiene sentido para tu operación. Sin cifras inventadas ni promesas que no podamos demostrar.</p></div><a class="btn" href={demo}>Hablar de mi caso →</a></div></div></section>
   </main>
   <V3CommercialFooter />

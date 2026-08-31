@@ -1,0 +1,67 @@
+name: QA propuesta editorial V4
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proposal-gate-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validar sintaxis
+        run: python -m py_compile scripts/v4-editorial-proposal.py
+
+      - name: Preparar radar aprobado de prueba
+        run: |
+          mkdir -p editorial-proposal-input
+          cat > editorial-proposal-input/issue.json <<'JSON'
+          {
+            "number": 123,
+            "title": "Radar editorial · 2026-08-31 · normativa",
+            "url": "https://github.com/izc05/isivoltpro-web-v3/issues/123",
+            "body": "**Tipo del día:** `normativa`\n**Modo:** `ai_draft`\n\n# Borrador editorial\n## Candidato recomendado\nCambio técnico relevante detectado para revisión.\n\n## Por qué puede importar a mantenimiento\nEl responsable debe revisar la fuente original y confirmar alcance y fecha antes de aplicar nada.\n\n## Fuentes utilizadas\nhttps://www.boe.es/boe/dias/2026/08/31/\n\n## Puerta de publicación\n- [x] Fuente primaria abierta y revisada manualmente.\n- [x] Fecha de fuente confirmada.\n- [x] Estado regulatorio confirmado cuando aplique.\n- [x] Título y resumen no exageran el alcance.\n- [x] Aplicación práctica diferenciada de los hechos.\n- [x] Imagen/ALT y procedencia preparados.\n- [x] Aprobación editorial antes de pasar a la web.\n- [x] Publicación social confirmada por proveedor; `scheduled` no equivale a `published`."
+          }
+          JSON
+
+      - name: Aceptar solo un radar realmente aprobado
+        env:
+          V4_EDITORIAL_PROPOSAL_INPUT: editorial-proposal-input/issue.json
+          V4_EDITORIAL_PROPOSAL_DIR: editorial-proposal-output
+        run: |
+          python scripts/v4-editorial-proposal.py
+          test -s editorial-proposal-output/proposal.md
+          test -s editorial-proposal-output/proposal.json
+          grep -q 'automaticPublish' editorial-proposal-output/proposal.json
+          grep -q 'false' editorial-proposal-output/proposal.json
+
+      - name: Bloquear checklist incompleto
+        env:
+          V4_EDITORIAL_PROPOSAL_INPUT: editorial-proposal-input/issue-incomplete.json
+          V4_EDITORIAL_PROPOSAL_DIR: editorial-proposal-output-incomplete
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src=json.loads(Path('editorial-proposal-input/issue.json').read_text())
+          src['body']=src['body'].replace('- [x] Fecha de fuente confirmada.', '- [ ] Fecha de fuente confirmada.')
+          Path('editorial-proposal-input/issue-incomplete.json').write_text(json.dumps(src), encoding='utf-8')
+          PY
+          if python scripts/v4-editorial-proposal.py; then
+            echo 'ERROR: el checklist incompleto no fue bloqueado' >&2
+            exit 1
+          fi
+          echo 'OK: checklist incompleto bloqueado'

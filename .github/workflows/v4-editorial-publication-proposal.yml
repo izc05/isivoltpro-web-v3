@@ -33,7 +33,9 @@ jobs:
           python-version: '3.12'
 
       - name: Validar sintaxis
-        run: python -m py_compile scripts/v4-editorial-proposal.py
+        run: |
+          python -m py_compile scripts/v4-editorial-proposal.py
+          python -m py_compile scripts/v4-editorial-proposal-structure.py
 
       - name: Recuperar radar aprobado
         env:
@@ -48,7 +50,10 @@ jobs:
         env:
           V4_EDITORIAL_PROPOSAL_INPUT: editorial-proposal-input/issue.json
           V4_EDITORIAL_PROPOSAL_DIR: editorial-proposal-output
-        run: python scripts/v4-editorial-proposal.py
+        run: |
+          set -euo pipefail
+          python scripts/v4-editorial-proposal.py
+          python scripts/v4-editorial-proposal-structure.py
 
       - name: Guardar propuesta como evidencia
         uses: actions/upload-artifact@v4
@@ -76,7 +81,7 @@ jobs:
           case "$TARGET" in
             ''|*[!0-9]*) echo "Número de issue de propuesta inválido: $TARGET" >&2; exit 1 ;;
           esac
-          gh issue comment "$SOURCE_ISSUE" --repo "$GITHUB_REPOSITORY" --body "✅ Propuesta interna preparada en issue #$TARGET. No se ha publicado en la web ni en redes."
+          gh issue comment "$SOURCE_ISSUE" --repo "$GITHUB_REPOSITORY" --body "✅ Propuesta interna preparada en issue #$TARGET. Incluye la ficha estructurada para crear un PR de contenido después de una segunda aprobación humana. No se ha publicado en la web ni en redes."
 
       - name: Confirmar que no existe publicación automática
         run: |

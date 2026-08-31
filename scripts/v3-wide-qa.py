@@ -36,36 +36,36 @@ def capture_entry(browser, width: int, height: int, name: str) -> None:
     page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
     response = page.goto(BASE_URL, wait_until="networkidle")
     if response is None or response.status >= 400:
-        failures.append(f"entrada estática {name}: HTTP inválido"); page.close(); return
+        failures.append(f"entrada vectorial {name}: HTTP inválido"); page.close(); return
     page.wait_for_timeout(500)
     metrics = page.evaluate(
         """() => {
           const root=document.documentElement;
           const visible=(el)=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};
           const intro=document.querySelector('.entry3d');
-          const art=document.querySelector('.entry3d__static-art');
+          const visual=document.querySelector('.entry3d__visual');
+          const mark=document.querySelector('.entry3d__core img');
           const skip=document.querySelector('#skip-intro');
-          const ar=art?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
+          const ar=visual?.getBoundingClientRect(); const kr=skip?.getBoundingClientRect();
           const introStyle=intro?getComputedStyle(intro):null;
           return {
             introVisible:visible(intro)&&!intro.classList.contains('is-done'),
-            artVisible:visible(art),artW:ar?.width||0,artH:ar?.height||0,
-            artComplete:art?.complete===true,artNaturalW:art?.naturalWidth||0,artNaturalH:art?.naturalHeight||0,
+            visualVisible:visible(visual),visualW:ar?.width||0,visualH:ar?.height||0,
+            markLoaded:mark?.complete===true&&mark?.naturalWidth>0,signalCount:document.querySelectorAll('.entry3d__signal').length,
             skipVisible:visible(skip),skipH:kr?.height||0,
             oldEffectCount:document.querySelectorAll('#entry3d-scene,.entry3d__logo,.entry3d__halo,.entry3d__cube-frame,.entry3d__premium-cube,#entry3d-canvas').length,
-            bgColor:introStyle?.backgroundColor||'',
+            bgImage:introStyle?.backgroundImage||'',
             scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,
           };
         }"""
     )
-    if not metrics["introVisible"]: failures.append(f"entrada estática {name}: no está visible")
-    if not metrics["artVisible"] or metrics["artW"] < width - 1 or metrics["artH"] < height - 1: failures.append(f"entrada estática {name}: imagen no cubre viewport · {metrics['artW']}x{metrics['artH']}")
-    # El master aprobado de la entrada es 1200×617. Mantener 600 px como umbral evita aceptar placeholders pequeños sin rechazar el arte aprobado.
-    if not metrics["artComplete"] or metrics["artNaturalW"] < 1200 or metrics["artNaturalH"] < 600: failures.append(f"entrada estática {name}: imagen aprobada sin píxeles reales · {metrics['artNaturalW']}x{metrics['artNaturalH']}")
-    if metrics["oldEffectCount"] != 0: failures.append(f"entrada estática {name}: siguen presentes capas/efectos antiguos · {metrics['oldEffectCount']}")
-    if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada estática {name}: control Saltar intro no accesible · {metrics['skipH']}px")
-    if metrics["bgColor"] in {"rgba(0, 0, 0, 0)", "transparent"}: failures.append(f"entrada estática {name}: fondo transparente")
-    if metrics["scrollWidth"] > metrics["clientWidth"] + 1: failures.append(f"entrada estática {name}: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
+    if not metrics["introVisible"]: failures.append(f"entrada vectorial {name}: no está visible")
+    if not metrics["visualVisible"] or metrics["visualW"] < 280 or metrics["visualH"] < 280: failures.append(f"entrada vectorial {name}: composición insuficiente · {metrics['visualW']}x{metrics['visualH']}")
+    if not metrics["markLoaded"] or metrics["signalCount"] != 3: failures.append(f"entrada vectorial {name}: marca o señales incompletas")
+    if metrics["oldEffectCount"] != 0: failures.append(f"entrada vectorial {name}: siguen presentes capas antiguas · {metrics['oldEffectCount']}")
+    if not metrics["skipVisible"] or metrics["skipH"] < 43: failures.append(f"entrada vectorial {name}: control Entrar ahora no accesible · {metrics['skipH']}px")
+    if metrics["bgImage"] == "none": failures.append(f"entrada vectorial {name}: fondo visual ausente")
+    if metrics["scrollWidth"] > metrics["clientWidth"] + 1: failures.append(f"entrada vectorial {name}: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
     page.screenshot(path=str(OUT / f"entrada-3d-{name}.png"), full_page=False)
     page.close()
 
@@ -118,4 +118,4 @@ if failures:
     print("\nQA tablet/escritorio V4: FALLÓ",file=sys.stderr)
     for item in failures: print(f"- {item}",file=sys.stderr)
     raise SystemExit(1)
-print("QA tablet/escritorio V4: OK · entrada estática aprobada + 19 rutas × 4 viewports")
+print("QA tablet/escritorio V4: OK · entrada vectorial responsive + 19 rutas × 4 viewports")

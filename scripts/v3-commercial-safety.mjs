@@ -69,12 +69,13 @@ for (const route of sourcedEditorialRoutes) {
 const home = readFileSync(htmlPath(''), 'utf8');
 const entryContract = [
   'class="intro entry3d"',
-  'class="entry3d__static-art"',
-  'isivoltpro-entry-static-approved.webp',
+  'class="entry3d__visual"',
+  'brand/isivoltpro-mark-v4.svg',
+  'Tu mantenimiento,',
   'id="skip-intro"',
 ];
 for (const marker of entryContract) {
-  if (!home.includes(marker)) failures.push(`Home ha perdido el contrato de entrada estática aprobada: ${marker}`);
+  if (!home.includes(marker)) failures.push(`Home ha perdido el contrato de entrada vectorial: ${marker}`);
 }
 const forbiddenEntryLayers = [
   'entry3d-canvas', 'entry3d-scene', 'entry3d__logo', 'entry3d__halo',
@@ -116,4 +117,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + ${sourcedEditorialRoutes.length} artículo(s) con fuente + entrada estática aprobada + sitemap + gestor bloqueado + sin heroes orbitales legacy`);
+console.log(`Seguridad comercial V3: OK · ${routes.length} rutas públicas + ${deepVisualRoutes.length} landings profundas + ${sourcedEditorialRoutes.length} artículo(s) con fuente + entrada vectorial responsive + sitemap + gestor bloqueado + sin heroes orbitales legacy`);

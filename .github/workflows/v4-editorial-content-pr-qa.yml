@@ -1,0 +1,98 @@
+name: QA PR editorial V4
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/v4-editorial-content-pr.py'
+      - 'scripts/v4-editorial-proposal-structure.py'
+      - '.github/workflows/v4-editorial-content-pr.yml'
+      - '.github/workflows/v4-editorial-publication-proposal.yml'
+      - '.github/workflows/v4-editorial-content-pr-qa.yml'
+      - 'src/data/v3-blog-feed.ts'
+      - 'src/data/generated/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-content-pr-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validar sintaxis
+        run: |
+          python -m py_compile scripts/v4-editorial-content-pr.py
+          python -m py_compile scripts/v4-editorial-proposal-structure.py
+
+      - name: Preparar propuesta válida de prueba
+        run: |
+          mkdir -p editorial-content-input
+          python - <<'PY'
+          import json
+          meta = {
+              "title": "Prueba editorial segura para mantenimiento técnico",
+              "slug": "qa-editorial-seguro-2026",
+              "description": "Artículo de prueba para validar que el circuito editorial genera contenido estructurado sin publicar ni fusionar automáticamente.",
+              "excerpt": "Esta pieza de prueba comprueba que una propuesta revisada puede transformarse en un archivo de artículo únicamente después de completar todas las puertas humanas.",
+              "publishedAt": "2026-08-31",
+              "sourceName": "MITECO",
+              "sourceUrl": "https://www.miteco.gob.es/es/prensa/ultimas-noticias.html",
+              "sourcePublishedAt": "2026-08-30",
+              "checkedAt": "2026-08-31T12:00:00+02:00",
+              "regulationState": "no_aplica",
+              "image": "/media/v4/home-maintenance-tablet.webp",
+              "imageAlt": "Técnico de mantenimiento revisando una instalación con una tablet en una sala técnica.",
+              "keywords": ["mantenimiento", "prueba editorial"],
+              "takeaway": "La automatización termina en un PR revisable y nunca sustituye la aprobación humana.",
+              "relatedRoutes": [{"label":"Ver activos","href":"/modulos/activos/"}]
+          }
+          article = """### Qué valida esta prueba\n\nEl circuito editorial necesita demostrar que una propuesta revisada puede convertirse en contenido estructurado sin saltarse la revisión. Esta sección aporta texto suficiente para verificar el parser, el cálculo de lectura y la conservación de una estructura útil para el Blog de IsiVoltPro. También confirma que los metadatos, la fuente y la imagen se validan antes de generar el archivo TypeScript.\n\n### Qué debe ocurrir después\n\nEl resultado correcto es un archivo de artículo dentro de la salida temporal. Ese archivo todavía no está publicado: el workflow real lo colocará en una rama separada, abrirá un pull request y lanzará los controles de calidad. El merge seguirá requiriendo una decisión humana y la publicación social continuará separada del contenido web para evitar estados falsos o acciones accidentales.\n\n- Debe existir una fuente permitida.\n- La imagen debe existir en el repositorio.\n- El slug no puede duplicar contenido previo.\n"""
+          body = "# Propuesta de publicación · radar #999\n\n- Categoría pública propuesta: `actualidad`\n\n## Ficha estructurada para PR\n```json\n" + json.dumps(meta, ensure_ascii=False, indent=2) + "\n```\n\n## Artículo final para PR\n\n" + article + "\n## Puerta de PR de contenido\n\n" + "\n".join([
+              "- [x] Ficha JSON completa y válida.",
+              "- [x] Título, slug, descripción y extracto revisados.",
+              "- [x] Fecha y organismo de la fuente confirmados.",
+              "- [x] Estado regulatorio usa un valor canónico del proyecto.",
+              "- [x] Imagen existe en `/public/media/` y ALT revisado.",
+              "- [x] Artículo final contiene al menos dos secciones útiles.",
+              "- [x] Palabras clave y enlaces relacionados revisados.",
+              "- [x] Aprobación humana para crear PR de contenido.",
+          ])
+          json.dump({"number":999,"title":"Propuesta de publicación · radar #999","body":body,"url":"https://github.com/izc05/isivoltpro-web-v3/issues/999"}, open("editorial-content-input/issue.json","w",encoding="utf-8"), ensure_ascii=False)
+          PY
+
+      - name: Aceptar propuesta completa
+        env:
+          V4_EDITORIAL_CONTENT_INPUT: editorial-content-input/issue.json
+          V4_EDITORIAL_CONTENT_DIR: editorial-content-output
+        run: |
+          python scripts/v4-editorial-content-pr.py
+          test -f editorial-content-output/article.ts
+          grep -q 'v3DailyGeneratedPost' editorial-content-output/article.ts
+          grep -q 'qa-editorial-seguro-2026' editorial-content-output/article.ts
+          test ! -f editorial-content-output/merge.flag
+          test ! -f editorial-content-output/social-publish.flag
+
+      - name: Rechazar propuesta con gate incompleto
+        run: |
+          python - <<'PY'
+          import json
+          path = 'editorial-content-input/issue.json'
+          data = json.load(open(path, encoding='utf-8'))
+          data['body'] = data['body'].replace('- [x] Aprobación humana para crear PR de contenido.', '- [ ] Aprobación humana para crear PR de contenido.')
+          json.dump(data, open(path,'w',encoding='utf-8'), ensure_ascii=False)
+          PY
+          rm -rf editorial-content-negative
+          if V4_EDITORIAL_CONTENT_INPUT=editorial-content-input/issue.json V4_EDITORIAL_CONTENT_DIR=editorial-content-negative python scripts/v4-editorial-content-pr.py; then
+            echo 'ERROR: un gate incompleto no debe generar contenido' >&2
+            exit 1
+          fi
+          test ! -f editorial-content-negative/article.ts

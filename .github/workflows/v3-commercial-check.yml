@@ -267,7 +267,7 @@ jobs:
           echo "Presupuesto público: ${public_kb} KiB / ${public_max_kb} KiB"
           echo "Presupuesto laboratorio V4: ${preview_kb} KiB / ${preview_max_kb} KiB"
       - name: Guardar build V3
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: isivoltpro-v3-commercial-dist
           path: dist

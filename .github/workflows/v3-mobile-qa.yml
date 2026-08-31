@@ -51,7 +51,7 @@ jobs:
 
       - name: Guardar capturas móviles
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: isivoltpro-v3-mobile-qa
           path: mobile-qa
@@ -100,7 +100,7 @@ jobs:
 
       - name: Guardar capturas del gestor seguro
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: isivoltpro-v3-content-admin-qa
           path: content-admin-qa

@@ -52,6 +52,13 @@ def main() -> int:
                     robots = (page.locator('meta[name="robots"]').get_attribute("content") or "").lower().replace(" ", "")
                     if "noindex" not in robots or "nofollow" not in robots:
                         failures.append(f"{viewport_name} {name}: falta noindex,nofollow")
+                    # Fuerza la carga de imágenes lazy antes de comprobar su decodificación.
+                    # Un recurso fuera del viewport puede estar pendiente sin estar roto.
+                    images = page.locator("img").all()
+                    for image in images:
+                        image.scroll_into_view_if_needed()
+                    page.wait_for_function("() => [...document.images].every((img) => img.complete)", timeout=10_000)
+                    page.evaluate("() => window.scrollTo(0, 0)")
                     metrics = page.evaluate("() => ({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyWidth:document.body.scrollWidth})")
                     widest = max(metrics["scrollWidth"], metrics["bodyWidth"])
                     if widest > metrics["clientWidth"] + 2:

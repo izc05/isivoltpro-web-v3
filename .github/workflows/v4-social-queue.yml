@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 2
 
       - name: Preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -76,7 +76,7 @@ jobs:
 
       - name: Guardar evidencia
         if: steps.files.outputs.count != '0'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v4-social-queue-${{ github.run_id }}
           path: social-queue-output

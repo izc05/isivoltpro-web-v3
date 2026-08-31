@@ -13,26 +13,6 @@
     else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
   };
 
-  const repairExistingVisuals = () => {
-    document.querySelectorAll('img').forEach((img) => {
-      const raw = img.getAttribute('src') || '';
-      let replacement = '';
-      if (raw.startsWith('data:image/webp;base64,')) replacement = visuals.dashboard;
-      else {
-        try {
-          const url = new URL(raw, window.location.href);
-          if (url.pathname.endsWith('/media/v4/home-maintenance-tablet.webp')) replacement = visuals.maintenance;
-          else if (url.pathname.endsWith('/media/v4/app-qr-mobile.webp')) replacement = visuals.qr;
-          else if (url.pathname.endsWith('/media/v4/home-dashboard-premium.webp') || url.pathname.endsWith('/media/home-dashboard.svg')) replacement = visuals.dashboard;
-        } catch {}
-      }
-      if (replacement) {
-        img.src = replacement;
-        setLoaded(img);
-      }
-    });
-  };
-
   const mountPhoto = (section, img, src) => {
     img.src = src;
     setLoaded(img);
@@ -75,7 +55,6 @@
   };
 
   const run = () => {
-    repairExistingVisuals();
     productVisual();
     demoVisual();
     blogRadar();

@@ -1,0 +1,40 @@
+name: QA final V4
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  final-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar y construir
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Validar script final
+        run: python -m py_compile scripts/v4-final-readiness.py
+      - name: Auditar laboratorio completo
+        run: python scripts/v4-final-readiness.py dist
+      - name: Confirmar límites de publicación
+        run: |
+          set -euo pipefail
+          test -f public/media/isivoltpro-entry-static-approved.webp
+          grep -q 'entry3d__static-art' dist/index.html
+          grep -q 'isivoltpro-entry-static-approved.webp' dist/index.html
+          ! grep -q 'scripts/v4-analytics-contract.js' dist/index.html
+          grep -q 'scripts/v4-analytics-contract.js' dist/preview-v4/home/index.html
+          grep -q 'Disallow: /preview-v4' dist/robots.txt
+          echo 'OK: laboratorio V4 aislado de la web estable y preparado para revisión final.'

@@ -1,6 +1,8 @@
 name: QA analítica local V4
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -19,7 +21,7 @@ jobs:
           node-version: '22'
       - name: Instalar y construir
         run: |
-          npm install --no-audit --no-fund
+          npm ci --no-audit --no-fund
           npm run build
       - name: Validar eventos permitidos
         run: |

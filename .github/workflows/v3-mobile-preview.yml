@@ -22,7 +22,7 @@ jobs:
           node-version: '22'
 
       - name: Instalar proyecto
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Construir preview V3 aislado
         env:

@@ -2,11 +2,12 @@
   const script = document.currentScript;
   const base = script?.dataset.base || '/';
   const pathname = window.location.pathname.replace(/\/+$/, '') + '/';
+  const cleanPayload = (value) => value.replace(/\s+/g, '');
 
   const photoData = async (name) => {
     const response = await fetch(`${base}media/v4/${name}.webp.b64`, { cache: 'force-cache' });
     if (!response.ok) throw new Error(`No se pudo cargar ${name}`);
-    const payload = (await response.text()).trim();
+    const payload = cleanPayload(await response.text());
     if (!payload.startsWith('UklGR')) throw new Error(`Payload visual inválido: ${name}`);
     return `data:image/webp;base64,${payload}`;
   };
@@ -14,12 +15,47 @@
   const mountPhoto = async (section, img, asset) => {
     try {
       img.src = await photoData(asset);
-      if (img.complete) img.classList.add('is-loaded');
+      if (img.complete && img.naturalWidth > 0) img.classList.add('is-loaded');
       else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
     } catch (error) {
       console.warn('[V4 visual]', error);
       section.remove();
     }
+  };
+
+  const repairExistingVisuals = async () => {
+    document.querySelectorAll('img[src^="data:image/webp;base64,"]').forEach((img) => {
+      const raw = img.getAttribute('src');
+      if (raw) img.src = cleanPayload(raw);
+    });
+
+    document.querySelectorAll('img').forEach((img) => {
+      try {
+        const url = new URL(img.getAttribute('src') || '', window.location.href);
+        if (url.pathname.endsWith('/media/home-dashboard.svg')) {
+          img.src = `${base}media/v4/home-dashboard-premium.webp`;
+        }
+      } catch {}
+    });
+
+    const repairs = [
+      ['/media/v4/home-maintenance-tablet.webp', 'hvac-inspection-tablet'],
+      ['/media/v4/app-qr-mobile.webp', 'team-plant-review'],
+    ];
+
+    await Promise.all(repairs.map(async ([suffix, asset]) => {
+      const targets = [...document.querySelectorAll('img')].filter((img) => {
+        try { return new URL(img.getAttribute('src') || '', window.location.href).pathname.endsWith(suffix); }
+        catch { return false; }
+      });
+      if (!targets.length) return;
+      try {
+        const src = await photoData(asset);
+        targets.forEach((img) => { img.src = src; });
+      } catch (error) {
+        console.warn('[V4 visual repair]', error);
+      }
+    }));
   };
 
   const productVisual = () => {
@@ -57,7 +93,12 @@
     hero.insertAdjacentElement('afterend', section);
   };
 
-  const run = () => { productVisual(); demoVisual(); blogRadar(); };
+  const run = () => {
+    repairExistingVisuals();
+    productVisual();
+    demoVisual();
+    blogRadar();
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
   else run();
 })();

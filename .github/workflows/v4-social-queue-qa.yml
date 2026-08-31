@@ -1,0 +1,100 @@
+name: QA cola social V4
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/v4-social-queue.py'
+      - '.github/workflows/v4-social-queue.yml'
+      - '.github/workflows/v4-social-queue-qa.yml'
+      - 'src/pages/preview-v4/social.astro'
+      - 'src/pages/preview-v4/fase-10.astro'
+      - 'src/data/v3-daily-social.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  social-queue-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validar sintaxis
+        run: python -m py_compile scripts/v4-social-queue.py
+
+      - name: Preparar artículo generado de prueba
+        run: |
+          mkdir -p social-qa
+          cat > social-qa/article.ts <<'EOF'
+          import type { V3DailyPublishedPost } from '../v3-daily-published';
+
+          export const v3DailyGeneratedPost = {
+            "slug": "qa-cola-social-segura",
+            "title": "Cómo convertir un artículo técnico en una cola social segura",
+            "description": "Prueba automatizada de la cola social de IsiVoltPro para comprobar que las adaptaciones se preparan sin publicar contenido ni usar credenciales de proveedores.",
+            "excerpt": "La cola social separa la adaptación del contenido, la aprobación humana y el envío real a cada proveedor para evitar publicaciones accidentales o estados falsos.",
+            "category": "actualidad",
+            "status": "published",
+            "publishedAt": "2026-08-31",
+            "updatedAt": "2026-08-31",
+            "readMinutes": 4,
+            "author": "Equipo IsiVoltPro",
+            "image": "/media/v4/home-maintenance-tablet.webp",
+            "imageAlt": "Técnico de mantenimiento revisando una instalación con una tablet en una sala técnica.",
+            "keywords": ["mantenimiento", "digitalización", "redes sociales"],
+            "source": {
+              "name": "MITECO",
+              "url": "https://www.miteco.gob.es/es/prensa/ultimas-noticias.html",
+              "publishedAt": "2026-08-30",
+              "checkedAt": "2026-08-31T12:00:00+02:00",
+              "authority": "official_primary"
+            },
+            "regulationState": "no_aplica",
+            "sections": [
+              {"heading":"Prueba","paragraphs":["Contenido de prueba suficiente para el circuito social."]},
+              {"heading":"Control","paragraphs":["La publicación real permanece desactivada."]}
+            ],
+            "takeaway": "Preparar una cola no significa publicar: cada canal debe revisarse y confirmarse después por su proveedor oficial.",
+            "relatedRoutes": [{"label":"Ver blog","href":"/blog/"}]
+          } satisfies V3DailyPublishedPost;
+          EOF
+
+      - name: Generar tres adaptaciones sin publicar
+        env:
+          V4_SOCIAL_ARTICLE_FILE: social-qa/article.ts
+          V4_SOCIAL_QUEUE_DIR: social-qa/output
+        run: |
+          python scripts/v4-social-queue.py
+          test -f social-qa/output/queue.json
+          test -f social-qa/output/queue.md
+          python - <<'PY'
+          import json
+          data = json.load(open('social-qa/output/queue.json', encoding='utf-8'))
+          assert data['status'] == 'ready_for_review'
+          assert data['approvalRequired'] is True
+          assert data['automaticPublish'] is False
+          assert data['providerStatus'] == 'disconnected'
+          assert [item['channel'] for item in data['channels']] == ['linkedin','instagram','facebook']
+          assert all(item['status'] == 'draft' for item in data['channels'])
+          PY
+          grep -q 'scheduled.*published' social-qa/output/queue.md
+          test ! -e social-qa/output/publish.flag
+          test ! -e social-qa/output/provider-token.txt
+
+      - name: Rechazar imagen inexistente
+        run: |
+          sed 's#/media/v4/home-maintenance-tablet.webp#/media/v4/no-existe.webp#' social-qa/article.ts > social-qa/bad.ts
+          rm -rf social-qa/bad-output
+          if V4_SOCIAL_ARTICLE_FILE=social-qa/bad.ts V4_SOCIAL_QUEUE_DIR=social-qa/bad-output python scripts/v4-social-queue.py; then
+            echo 'ERROR: una imagen inexistente no debe producir cola social' >&2
+            exit 1
+          fi
+          test ! -f social-qa/bad-output/queue.json

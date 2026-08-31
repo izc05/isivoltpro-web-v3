@@ -1,0 +1,43 @@
+name: QA analítica local V4
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analytics-contract-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar y construir
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Validar eventos permitidos
+        run: |
+          set -euo pipefail
+          for event in intent_demo intent_plans intent_apps intent_contact intent_blog; do
+            grep -q "$event" public/scripts/v4-analytics-contract.js
+          done
+          grep -q "local_contract_only" public/scripts/v4-analytics-contract.js
+          grep -q "transportEnabled: false" public/scripts/v4-analytics-contract.js
+      - name: Bloquear telemetría y almacenamiento
+        run: |
+          set -euo pipefail
+          ! grep -Eq 'fetch\s*\(|XMLHttpRequest|sendBeacon\s*\(|document\.cookie\s*=|localStorage\.(setItem|getItem)|sessionStorage\.(setItem|getItem)' public/scripts/v4-analytics-contract.js
+          ! grep -Eq 'posthog|sentry|google-analytics|googletagmanager|gtag\s*\(' public/scripts/v4-analytics-contract.js
+          ! grep -Eq 'location\.search|document\.referrer|FormData|\.value\b' public/scripts/v4-analytics-contract.js
+      - name: Limitar contrato a Preview V4
+        run: |
+          set -euo pipefail
+          grep -q 'scripts/v4-analytics-contract.js' dist/preview-v4/home/index.html
+          ! grep -q 'scripts/v4-analytics-contract.js' dist/index.html
+          grep -q 'noindex,nofollow' dist/preview-v4/home/index.html

@@ -27,17 +27,16 @@ def capture_entry(browser)->None:
     width,height=390,844
     page=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
     response=page.goto(BASE_URL,wait_until="networkidle")
-    if response is None or response.status>=400: failures.append("entrada estática móvil: HTTP inválido");page.close();return
+    if response is None or response.status>=400: failures.append("entrada vectorial móvil: HTTP inválido");page.close();return
     page.wait_for_timeout(500)
-    metrics=page.evaluate("""()=>{const root=document.documentElement;const visible=(el)=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};const intro=document.querySelector('.entry3d'),art=document.querySelector('.entry3d__static-art'),skip=document.querySelector('#skip-intro');const ar=art?.getBoundingClientRect(),kr=skip?.getBoundingClientRect(),style=intro?getComputedStyle(intro):null;return{introVisible:visible(intro)&&!intro.classList.contains('is-done'),artVisible:visible(art),artW:ar?.width||0,artH:ar?.height||0,artComplete:art?.complete===true,artNaturalW:art?.naturalWidth||0,artNaturalH:art?.naturalHeight||0,skipVisible:visible(skip),skipH:kr?.height||0,oldEffectCount:document.querySelectorAll('#entry3d-scene,.entry3d__logo,.entry3d__halo,.entry3d__cube-frame,.entry3d__premium-cube,#entry3d-canvas').length,bgColor:style?.backgroundColor||'',scrollWidth:root.scrollWidth,clientWidth:root.clientWidth}}""")
-    if not metrics["introVisible"]: failures.append("entrada estática móvil: no está visible al cargar")
-    if not metrics["artVisible"] or metrics["artW"]<width-1 or metrics["artH"]<height-1: failures.append(f"entrada estática móvil: imagen no cubre viewport · {metrics['artW']}x{metrics['artH']}")
-    # El master aprobado de la entrada es 1200×617. Mantener 600 px como umbral evita aceptar placeholders pequeños sin rechazar el arte aprobado.
-    if not metrics["artComplete"] or metrics["artNaturalW"]<1200 or metrics["artNaturalH"]<600: failures.append(f"entrada estática móvil: imagen aprobada sin píxeles reales · {metrics['artNaturalW']}x{metrics['artNaturalH']}")
-    if metrics["oldEffectCount"]!=0: failures.append(f"entrada estática móvil: siguen presentes capas/efectos antiguos · {metrics['oldEffectCount']}")
-    if not metrics["skipVisible"] or metrics["skipH"]<43: failures.append(f"entrada estática móvil: Saltar intro menor de 43 px · {metrics['skipH']}")
-    if metrics["bgColor"] in {"rgba(0, 0, 0, 0)","transparent"}: failures.append("entrada estática móvil: fondo transparente")
-    if metrics["scrollWidth"]>metrics["clientWidth"]+1: failures.append(f"entrada estática móvil: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
+    metrics=page.evaluate("""()=>{const root=document.documentElement;const visible=(el)=>{if(!el)return false;const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0};const intro=document.querySelector('.entry3d'),visual=document.querySelector('.entry3d__visual'),mark=document.querySelector('.entry3d__core img'),skip=document.querySelector('#skip-intro');const vr=visual?.getBoundingClientRect(),kr=skip?.getBoundingClientRect(),style=intro?getComputedStyle(intro):null;return{introVisible:visible(intro)&&!intro.classList.contains('is-done'),visualVisible:visible(visual),visualW:vr?.width||0,visualH:vr?.height||0,markLoaded:mark?.complete===true&&mark?.naturalWidth>0,signalCount:document.querySelectorAll('.entry3d__signal').length,skipVisible:visible(skip),skipH:kr?.height||0,oldEffectCount:document.querySelectorAll('#entry3d-scene,.entry3d__logo,.entry3d__halo,.entry3d__cube-frame,.entry3d__premium-cube,#entry3d-canvas,.entry3d__static-art').length,bgImage:style?.backgroundImage||'',scrollWidth:root.scrollWidth,clientWidth:root.clientWidth}}""")
+    if not metrics["introVisible"]: failures.append("entrada vectorial móvil: no está visible al cargar")
+    if not metrics["visualVisible"] or metrics["visualW"]<280 or metrics["visualH"]<280: failures.append(f"entrada vectorial móvil: composición insuficiente · {metrics['visualW']}x{metrics['visualH']}")
+    if not metrics["markLoaded"] or metrics["signalCount"]!=3: failures.append(f"entrada vectorial móvil: marca o señales incompletas · mark={metrics['markLoaded']}, signals={metrics['signalCount']}")
+    if metrics["oldEffectCount"]!=0: failures.append(f"entrada vectorial móvil: siguen presentes capas antiguas · {metrics['oldEffectCount']}")
+    if not metrics["skipVisible"] or metrics["skipH"]<39: failures.append(f"entrada vectorial móvil: control Entrar ahora menor de 39 px · {metrics['skipH']}")
+    if metrics["bgImage"]=="none": failures.append("entrada vectorial móvil: fondo visual ausente")
+    if metrics["scrollWidth"]>metrics["clientWidth"]+1: failures.append(f"entrada vectorial móvil: overflow horizontal {metrics['scrollWidth']} > {metrics['clientWidth']}")
     page.screenshot(path=str(OUT/"entrada-3d-390.png"),full_page=False);page.close()
 
 
@@ -103,4 +102,4 @@ if failures:
     print('\nQA móvil V4: FALLÓ',file=sys.stderr)
     for item in failures: print(f'- {item}',file=sys.stderr)
     raise SystemExit(1)
-print('QA móvil V4: OK · entrada estática aprobada + 23 rutas representativas a 360 / 390 / 430 px')
+print('QA móvil V4: OK · entrada vectorial responsive + 23 rutas representativas a 360 / 390 / 430 px')

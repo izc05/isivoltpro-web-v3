@@ -68,7 +68,7 @@ jobs:
             dist/contacto/index.html
             dist/sitemap.xml
             dist/images/home/isivoltpro-industrial-core.webp
-            dist/media/isivoltpro-entry-static-approved.webp
+            dist/brand/isivoltpro-mark-v4.svg
           )
 
           for file in "${required[@]}"; do
@@ -84,8 +84,8 @@ jobs:
             exit 1
           fi
 
-          if ! grep -q 'entry3d__static-art' dist/index.html || ! grep -q 'isivoltpro-entry-static-approved.webp' dist/index.html; then
-            echo "::error::La Home no contiene la imagen estática de entrada aprobada."
+          if ! grep -q 'entry3d__visual' dist/index.html || ! grep -q 'brand/isivoltpro-mark-v4.svg' dist/index.html; then
+            echo "::error::La Home no contiene la entrada vectorial responsive."
             exit 1
           fi
           if grep -qE 'entry3d-canvas|entry3d-scene|entry3d__premium-cube|entry3d__halo|entry3d__cube-frame|isivoltpro-cube-ultrareal-v4' dist/index.html; then
@@ -135,7 +135,7 @@ jobs:
           )
 
           for page in "${non_home_pages[@]}"; do
-            if grep -qE 'entry3d__static-art|isivoltpro-entry-static-approved|V3Entry3D' "$page"; then
+            if grep -qE 'entry3d__visual|entry3d__progress|V3Entry3D' "$page"; then
               echo "::error::La página comercial $page está cargando la entrada de Home de forma inesperada."
               exit 1
             fi

@@ -33,9 +33,9 @@ jobs:
       - name: Confirmar límites de publicación
         run: |
           set -euo pipefail
-          test -f public/media/isivoltpro-entry-static-approved.webp
-          grep -q 'entry3d__static-art' dist/index.html
-          grep -q 'isivoltpro-entry-static-approved.webp' dist/index.html
+          test -f public/brand/isivoltpro-mark-v4.svg
+          grep -q 'entry3d__visual' dist/index.html
+          grep -q 'brand/isivoltpro-mark-v4.svg' dist/index.html
           ! grep -q 'scripts/v4-analytics-contract.js' dist/index.html
           grep -q 'scripts/v4-analytics-contract.js' dist/preview-v4/home/index.html
           grep -q 'Disallow: /preview-v4' dist/robots.txt

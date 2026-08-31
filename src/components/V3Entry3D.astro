@@ -2,25 +2,15 @@
 import '../styles/v4-entry-minimal.css';
 import V3Brand from './V3Brand.astro';
 
-interface Props {
-  accessHref: string;
-  demoHref: string;
-}
-
-const base = import.meta.env.BASE_URL;
-const introArtwork = `${base}media/isivoltpro-entry-static-approved.webp`;
+interface Props { accessHref: string; demoHref: string; }
+const { accessHref, demoHref } = Astro.props;
 ---
-<div class="intro entry3d" id="intro" aria-label="Presentación de IsiVoltPro">
-  <img
-    class="entry3d__static-art"
-    src={introArtwork}
-    alt="Presentación visual de IsiVoltPro"
-    width="1440"
-    height="740"
-    loading="eager"
-    decoding="sync"
-    fetchpriority="high"
-  />
-  <div class="entry3d__brand" aria-label="IsiVoltPro"><V3Brand context="intro" /></div>
-  <button class="intro__skip entry3d__skip" id="skip-intro" type="button">Saltar intro</button>
+<div class="intro entry3d" id="intro" aria-label="Bienvenida a IsiVoltPro">
+  <div class="entry3d__aurora entry3d__aurora--one" aria-hidden="true"></div><div class="entry3d__aurora entry3d__aurora--two" aria-hidden="true"></div><div class="entry3d__grid" aria-hidden="true"></div>
+  <div class="entry3d__topbar"><div class="entry3d__brand"><V3Brand context="intro" /></div><button class="intro__skip entry3d__skip" id="skip-intro" type="button">Entrar ahora <span aria-hidden="true">→</span></button></div>
+  <div class="entry3d__layout">
+    <div class="entry3d__copy"><span class="entry3d__eyebrow"><i aria-hidden="true"></i> Operaciones técnicas conectadas</span><h1>Tu mantenimiento,<br/><strong>en perfecto orden.</strong></h1><p>Activos, avisos, órdenes, preventivos y documentación en un único sistema.</p><div class="entry3d__actions"><a href={demoHref}>Ver demostración</a><a href={accessHref}>Acceso clientes</a></div></div>
+    <div class="entry3d__visual" aria-hidden="true"><div class="entry3d__orbit entry3d__orbit--outer"></div><div class="entry3d__orbit entry3d__orbit--inner"></div><div class="entry3d__core"><div class="entry3d__core-shine"></div><img src={`${import.meta.env.BASE_URL}brand/isivoltpro-mark-v4.svg`} alt="" width="128" height="128" /></div><div class="entry3d__signal entry3d__signal--a"><i>✓</i><span><b>Órdenes</b><small>Todo bajo control</small></span></div><div class="entry3d__signal entry3d__signal--b"><i>▣</i><span><b>Activos</b><small>Histórico conectado</small></span></div><div class="entry3d__signal entry3d__signal--c"><i>⚙</i><span><b>Preventivos</b><small>Siempre a tiempo</small></span></div><div class="entry3d__pulse"></div></div>
+  </div>
+  <div class="entry3d__progress" aria-hidden="true"><span></span></div>
 </div>

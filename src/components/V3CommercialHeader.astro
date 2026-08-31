@@ -92,6 +92,7 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
 <link rel="stylesheet" href={`${base}styles/v3-commercial-header.css`} />
 <link rel="stylesheet" href={`${base}styles/v3-reference-pages.css`} />
 <link rel="stylesheet" href={`${base}styles/v3-board-density.css`} />
+{isV4Preview && <link rel="stylesheet" href={`${base}styles/v4-contextual-visuals.css`} />}
 <a class="v3-skip-link" href="#v3-main-content">Saltar al contenido</a>
 <header class="site-header">
   <div class="site-header__inner shell">
@@ -142,3 +143,4 @@ const previewRewriteMap = isV4Preview ? JSON.stringify({
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rewrite, { once: true }); else rewrite();
   })();
 </script>}
+{isV4Preview && <script is:inline src={`${base}scripts/v4-contextual-visuals.js`} data-base={base}></script>}

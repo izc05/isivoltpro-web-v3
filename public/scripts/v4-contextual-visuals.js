@@ -46,7 +46,18 @@
     mountPhoto(section, section.querySelector('img'), 'support-demo-call');
   };
 
-  const run = () => { productVisual(); demoVisual(); };
+  const blogRadar = () => {
+    if (!pathname.endsWith('/preview-v4/blog/')) return;
+    const hero = document.querySelector('main .hero');
+    if (!hero || document.querySelector('[data-v4-contextual="blog-radar"]')) return;
+    const section = document.createElement('section');
+    section.className = 'v4-radar';
+    section.dataset.v4Contextual = 'blog-radar';
+    section.innerHTML = `<div class="page-shell"><div class="v4-radar__top"><div><span class="eyebrow" style="color:#9fb7ff">Fase 10B · Radar IsiVoltPro</span><h2>Una noticia útil al día.<br/>No siete artículos de relleno.</h2><p>La automatización prevista revisará fuentes técnicas prioritarias, preparará un borrador con IA y dejará visible qué se ha verificado antes de publicar. La normativa y los cambios regulatorios no se publicarán automáticamente sin control.</p><div class="v4-radar__social"><span>LinkedIn · por conectar</span><span>Instagram · por conectar</span><span>Facebook · por conectar</span></div></div><div class="v4-radar__status"><article><b>Fuentes prioritarias</b><strong>BOE · MITECO · INSST</strong><small>Más IDAE, CNMC y EUR-Lex cuando el tema lo requiera.</small></article><article><b>Cadencia objetivo</b><strong>1 pieza útil / día</strong><small>Si no hay una noticia relevante, no se fuerza una publicación vacía.</small></article><article><b>Estado editorial</b><strong>Borrador → verificado → publicado</strong><small>La IA redacta; las reglas editoriales deciden si el contenido puede salir.</small></article><article><b>Salida social</b><strong>3 adaptaciones</strong><small>Una versión específica para LinkedIn, Instagram y Facebook.</small></article></div></div><div class="v4-radar__week"><div class="v4-radar__day"><b>LUN</b><strong>Normativa</strong></div><div class="v4-radar__day"><b>MAR</b><strong>Actualidad</strong></div><div class="v4-radar__day"><b>MIÉ</b><strong>Seguridad</strong></div><div class="v4-radar__day"><b>JUE</b><strong>Energía</strong></div><div class="v4-radar__day"><b>VIE</b><strong>Práctico</strong></div><div class="v4-radar__day"><b>SÁB</b><strong>Curiosidad técnica</strong></div><div class="v4-radar__day"><b>DOM</b><strong>Radar semanal</strong></div></div><div class="v4-radar__pipeline"><div class="v4-radar__step"><b>01</b><strong>Buscar</strong><small>Fuentes oficiales y técnicas.</small></div><div class="v4-radar__step"><b>02</b><strong>Seleccionar</strong><small>Solo cambios con utilidad real.</small></div><div class="v4-radar__step"><b>03</b><strong>Redactar con IA</strong><small>Resumen, contexto y aplicación.</small></div><div class="v4-radar__step"><b>04</b><strong>Verificar</strong><small>Fuente, fecha, estado y alcance.</small></div><div class="v4-radar__step"><b>05</b><strong>Publicar + redes</strong><small>Web y adaptaciones sociales.</small></div></div><div class="v4-radar__guard"><strong>Regla de seguridad editorial: una IA no declara por sí sola que una norma está vigente, modificada o derogada.</strong><span>Verificación obligatoria</span></div></div>`;
+    hero.insertAdjacentElement('afterend', section);
+  };
+
+  const run = () => { productVisual(); demoVisual(); blogRadar(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
   else run();
 })();

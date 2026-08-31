@@ -1,0 +1,107 @@
+name: Cola social editorial V4
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/data/generated/*.ts'
+  workflow_dispatch:
+    inputs:
+      article_file:
+        description: 'Ruta del artículo generado, por ejemplo src/data/generated/mi-articulo.ts'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: v4-social-queue-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  social-queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Seleccionar artículos nuevos
+        id: files
+        env:
+          MANUAL_FILE: ${{ inputs.article_file }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p social-queue-files
+          : > social-queue-files/list.txt
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            case "$MANUAL_FILE" in
+              src/data/generated/*.ts) ;;
+              *) echo "Ruta manual no permitida: $MANUAL_FILE" >&2; exit 1 ;;
+            esac
+            test -f "$MANUAL_FILE"
+            printf '%s\n' "$MANUAL_FILE" > social-queue-files/list.txt
+          else
+            if [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+              git diff --name-only --diff-filter=AM "$BEFORE_SHA" "$CURRENT_SHA" -- 'src/data/generated/*.ts' > social-queue-files/list.txt
+            fi
+          fi
+          if [ ! -s social-queue-files/list.txt ]; then
+            echo 'No hay artículos generados nuevos para preparar.'
+          fi
+          echo "count=$(grep -c . social-queue-files/list.txt || true)" >> "$GITHUB_OUTPUT"
+
+      - name: Generar colas de revisión
+        if: steps.files.outputs.count != '0'
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/v4-social-queue.py
+          while IFS= read -r ARTICLE; do
+            [ -n "$ARTICLE" ] || continue
+            SLUG="$(basename "$ARTICLE" .ts)"
+            V4_SOCIAL_ARTICLE_FILE="$ARTICLE" V4_SOCIAL_QUEUE_DIR="social-queue-output/$SLUG" python scripts/v4-social-queue.py
+          done < social-queue-files/list.txt
+
+      - name: Guardar evidencia
+        if: steps.files.outputs.count != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-social-queue-${{ github.run_id }}
+          path: social-queue-output
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Crear o actualizar issues de cola social
+        if: steps.files.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for DIR in social-queue-output/*; do
+            [ -d "$DIR" ] || continue
+            TITLE="$(tr -d '\n' < "$DIR/title.txt")"
+            EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')"
+            if [ -n "$EXISTING" ]; then
+              gh issue edit "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file "$DIR/queue.md"
+            else
+              gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file "$DIR/queue.md"
+            fi
+          done
+
+      - name: Confirmar que no se publica en redes
+        run: |
+          test ! -e social-queue-output/publish.flag
+          test ! -e social-queue-output/provider-token.txt
+          echo 'OK: 10D.1 solo prepara una cola revisable; no conecta ni publica en proveedores.'

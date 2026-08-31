@@ -177,9 +177,7 @@ const phase64Url = `${base}lab-3d-phase64/`;
           const style = parsed.createElement('style');
           style.textContent = productStyles;
           parsed.head.appendChild(style);
-          document.open();
-          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
-          document.close();
+          document.replaceChild(parsed.documentElement, document.documentElement);
         } catch (error) {
           console.error('[ISIVOLTPRO] No se pudo componer Fase 6.5', error);
           document.querySelector('.phase-loader')?.classList.add('phase-loader--error');

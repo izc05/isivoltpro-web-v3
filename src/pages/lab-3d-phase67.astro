@@ -201,9 +201,7 @@ const ecosystemUrl = `${base}lab-3d-ecosystem-v1/`;
           style.textContent = ecosystemStyles;
           parsed.head.appendChild(style);
 
-          document.open();
-          document.write('<!doctype html>' + parsed.documentElement.outerHTML);
-          document.close();
+          document.replaceChild(parsed.documentElement, document.documentElement);
 
           requestAnimationFrame(() => wireLiveScene(document));
         } catch (error) {

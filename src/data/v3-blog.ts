@@ -107,7 +107,7 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-22',
     readMinutes: 4,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v4/app-qr-mobile.webp',
+    image: '/media/v4/field-qr-scan-v2.webp',
     imageAlt: 'Técnico de mantenimiento identificando un equipo industrial mediante un código QR con el teléfono móvil.',
     keywords: ['QR mantenimiento', 'NFC', 'activos', 'mantenimiento preventivo'],
     sections: [
@@ -155,7 +155,7 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-19',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v4/home-maintenance-tablet.webp',
+    image: '/media/v4/preventive-hvac-technician-v2.webp',
     imageAlt: 'Técnico de mantenimiento revisando una instalación con una tablet durante una tarea preventiva.',
     keywords: ['mantenimiento preventivo', 'plan de mantenimiento', 'orden de trabajo', 'digitalización'],
     sections: [
@@ -216,7 +216,7 @@ export const v3SocialAdaptations: V3SocialAdaptation[] = [
     postSlug: 'qr-mantenimiento-valor-despues-escanear',
     channels: ['instagram', 'facebook', 'linkedin'],
     status: 'ready',
-    media: '/media/v4/app-qr-mobile.webp',
+    media: '/media/v4/field-qr-scan-v2.webp',
     captions: {
       instagram: 'Un QR en una máquina no digitaliza nada por sí solo. El valor está en lo que ocurre después: identificar el activo, ver incidencias, histórico, documentos y la siguiente acción. #mantenimiento #QR #activos',
       facebook: 'La etiqueta QR es solo la puerta de entrada. El verdadero ahorro aparece cuando el técnico escanea y llega directamente al contexto del activo sin buscar códigos, carpetas o mensajes antiguos.',

@@ -59,8 +59,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-25',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v5/maintenance-planning-team.webp',
-    imageAlt: 'Equipo de mantenimiento revisando documentación, planos y fotografías de intervenciones.',
+    image: '/media/v5/work-order-closeout-pump.webp',
+    imageAlt: 'Técnico cerrando la documentación de una intervención junto a la bomba reparada.',
     keywords: ['orden de trabajo', 'OT', 'histórico de mantenimiento', 'mantenimiento digital'],
     featured: true,
     sections: [
@@ -107,8 +107,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-22',
     readMinutes: 4,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v4/field-qr-scan-v2.webp',
-    imageAlt: 'Técnico de mantenimiento identificando un equipo industrial mediante un código QR con el teléfono móvil.',
+    image: '/media/v5/qr-equipment-identification.webp',
+    imageAlt: 'Técnico identificando mediante QR una unidad de tratamiento de aire.',
     keywords: ['QR mantenimiento', 'NFC', 'activos', 'mantenimiento preventivo'],
     sections: [
       {
@@ -155,8 +155,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-19',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v4/preventive-hvac-technician-v2.webp',
-    imageAlt: 'Técnico de mantenimiento revisando una instalación con una tablet durante una tarea preventiva.',
+    image: '/media/v5/preventive-planning-pump-room.webp',
+    imageAlt: 'Responsable y técnico planificando tareas preventivas junto a una sala de bombas.',
     keywords: ['mantenimiento preventivo', 'plan de mantenimiento', 'orden de trabajo', 'digitalización'],
     sections: [
       {

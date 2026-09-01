@@ -10,24 +10,21 @@ import V3Entry3D from '../components/V3Entry3D.astro';
 import V3HomeDailySolutions from '../components/V3HomeDailySolutions.astro';
 
 const base = import.meta.env.BASE_URL;
-const demo = `${base}demo/`;
 const access = `${base}acceso/`;
-const experience = `${base}experiencia/`;
-const product = `${base}producto/`;
-const modules = `${base}aplicaciones/`;
-const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
+const solutions = `${base}soluciones/`;
+const resources = `${base}recursos/`;
 ---
 <!doctype html>
 <html lang="es">
 <head>
-  <V3Seo title="IsiVoltPro · Todo tu mantenimiento en un solo sistema" description="IsiVoltPro conecta activos, avisos, órdenes de trabajo, preventivos, fotos y documentación para autónomos y pequeñas empresas de mantenimiento." path={base} />
+  <V3Seo title="Mantenimiento técnico · Problemas, soluciones y conocimiento" description="Información práctica sobre averías, preventivo, activos, seguridad, documentación, energía, repuestos y coordinación del mantenimiento." path={base} />
   <script is:inline>
     try { if (sessionStorage.getItem('isivoltpro-intro-seen') === '1') document.documentElement.classList.add('skip-intro'); } catch (_) {}
   </script>
   <style is:inline>html.skip-intro .intro{display:none}</style>
 </head>
 <body class="intro-lock">
-  <V3Entry3D accessHref={access} demoHref={demo} />
+  <V3Entry3D accessHref={access} demoHref={solutions} />
 
   <V3CommercialHeader />
 
@@ -35,50 +32,33 @@ const moduleUrl = (slug: string) => `${base}modulos/${slug}/`;
     <section class="saas-hero" id="inicio">
       <div class="saas-shell saas-hero__grid">
         <div class="saas-hero__copy reveal">
-          <span class="saas-badge"><i aria-hidden="true"></i> Plataforma de mantenimiento para equipos técnicos</span>
-          <h1>Todo tu mantenimiento.<span>Un solo sistema.</span></h1>
-          <p class="saas-hero__lead">Conecta activos, avisos, órdenes de trabajo, preventivos, fotos y documentación en una experiencia clara, visual y preparada para trabajar desde escritorio, móvil o tablet.</p>
-          <div class="saas-actions"><a class="btn btn--primary" href={demo}>Ver demo</a><a class="btn" href={experience}>Ver cómo funciona</a></div>
-          <div class="saas-trust"><small>Pensado para operaciones pequeñas que necesitan orden sin montar un ERP</small><div class="saas-trust__row"><span>Autónomos</span><span>Pequeñas mantenedoras</span><span>Instalaciones propias</span><span>Multisede</span></div></div>
+          <span class="saas-badge"><i aria-hidden="true"></i> Mantenimiento técnico · personas, equipos y decisiones</span>
+          <h1>Mantener es anticiparse.<span>No solo reparar.</span></h1>
+          <p class="saas-hero__lead">Hablamos de los problemas que condicionan el mantenimiento real: averías, preventivos, seguridad, documentación, repuestos, coordinación, energía y conocimiento técnico.</p>
+          <div class="saas-actions"><a class="btn btn--primary" href={solutions}>Explorar problemas</a><a class="btn" href={resources}>Consultar recursos</a></div>
+          <div class="saas-trust"><small>Una visión práctica para quienes mantienen instalaciones cada día</small><div class="saas-trust__row"><span>Climatización</span><span>Electricidad</span><span>Instalaciones</span><span>Industria</span></div></div>
         </div>
 
-        <div class="saas-stage reveal" aria-label="Dashboard conceptual de IsiVoltPro con datos ficticios">
-          <div class="saas-dot saas-dot--a" aria-hidden="true"></div><div class="saas-dot saas-dot--b" aria-hidden="true"></div><div class="saas-dot saas-dot--c" aria-hidden="true"></div>
-          <div class="saas-dashboard">
-            <div class="saas-dashboard__top"><div class="saas-mini-brand"><i aria-hidden="true"></i><span>IsiVoltPro</span></div><small>INTERFAZ CONCEPTUAL · DATOS ILUSTRATIVOS</small></div>
-            <div class="saas-dashboard__body">
-              <aside class="saas-rail" aria-label="Módulos de ejemplo"><i>⌂</i><i>▣</i><i>✓</i><i>⚙</i><i>▤</i></aside>
-              <div class="saas-dashboard__main">
-                <div class="saas-greeting"><div><strong>Buenos días</strong><span>Resumen general de tu operativa</span></div><small>Hoy · ejemplo</small></div>
-                <div class="saas-kpis"><article class="saas-kpi"><span>Órdenes abiertas</span><strong>12</strong><small>+2 hoy</small></article><article class="saas-kpi"><span>Preventivos pendientes</span><strong>8</strong><small>Planificados</small></article><article class="saas-kpi"><span>Incidencias</span><strong>3</strong><small>1 prioritaria</small></article></div>
-                <article class="saas-asset"><div><small>ACTIVO DESTACADO</small><h3>UTA-02</h3><p>Climatización · Planta 1<br/>Última actuación: ejemplo<br/>Próximo preventivo: programado</p><span class="saas-status">Operativo</span></div><div class="saas-asset__visual"><img src={`${base}media/equipo-hvac-isivoltpro.svg`} alt="Ilustración conceptual del equipo HVAC UTA-02 dentro de IsiVoltPro"/></div></article>
-              </div>
-            </div>
-          </div>
-          <article class="saas-chart-float" aria-label="Gráfica demostrativa de órdenes completadas"><small>Órdenes completadas</small><strong><b>+28</b> este mes</strong><svg class="saas-spark" viewBox="0 0 150 66" aria-hidden="true"><path d="M3 57 C17 50 22 44 31 48 S46 59 55 42 S71 24 80 35 S94 46 104 28 S125 24 147 7"/></svg></article>
-        </div>
+        <figure class="saas-hero-photo reveal"><img src={`${base}media/v5/maintenance-hvac-inspection.webp`} alt="Técnico de mantenimiento inspeccionando una unidad de tratamiento de aire y comprobando su funcionamiento" width="1600" height="900" loading="eager" decoding="async"/><figcaption><strong>Diagnosticar antes de intervenir</strong><span>Observación, medición y conocimiento del equipo</span></figcaption></figure>
       </div>
     </section>
 
-    <section class="saas-benefits" aria-label="Ventajas de uso"><div class="saas-shell saas-benefits__grid reveal"><article class="saas-benefit"><i>◇</i><div><strong>Implantación gradual</strong><span>Empieza por un flujo y amplía después</span></div></article><article class="saas-benefit"><i>✦</i><div><strong>Fácil de entender</strong><span>Diseñado alrededor del trabajo técnico</span></div></article><article class="saas-benefit"><i>▣</i><div><strong>Desde cualquier lugar</strong><span>Web, móvil y tablet</span></div></article><article class="saas-benefit"><i>✓</i><div><strong>Información trazable</strong><span>Activo, OT, fotos e histórico conectados</span></div></article></div></section>
+    <section class="saas-benefits" aria-label="Claves del mantenimiento"><div class="saas-shell saas-benefits__grid reveal"><article class="saas-benefit"><i>◇</i><div><strong>Fiabilidad</strong><span>Evitar que el fallo se repita</span></div></article><article class="saas-benefit"><i>✦</i><div><strong>Seguridad</strong><span>Intervenir con método y control</span></div></article><article class="saas-benefit"><i>▣</i><div><strong>Planificación</strong><span>Priorizar recursos y tiempos</span></div></article><article class="saas-benefit"><i>✓</i><div><strong>Conocimiento</strong><span>Conservar lo aprendido en cada actuación</span></div></article></div></section>
 
     <V3HomeDailySolutions />
 
-    <section class="saas-modules" id="modulos"><div class="saas-shell"><header class="saas-modules__head reveal"><h2>Una plataforma. Todos los módulos.</h2><p>IsiVoltPro reúne las piezas del mantenimiento en una única experiencia. Entra por el problema que hoy te hace perder más tiempo y conecta el resto cuando lo necesites.</p></header><div class="saas-modules__body"><div class="reveal"><div class="saas-module-grid">
-      <a class="saas-module" href={moduleUrl('activos')}><i>▣</i><h3>Activos</h3><p>Equipos, ubicaciones, fotos e histórico.</p></a>
-      <a class="saas-module" href={moduleUrl('mantenimiento-preventivo')}><i>⚙</i><h3>Mantenimiento</h3><p>Preventivo, planificación y revisiones.</p></a>
-      <a class="saas-module" href={moduleUrl('ordenes-de-trabajo')}><i>✓</i><h3>Órdenes de trabajo</h3><p>Del aviso al cierre con evidencias.</p></a>
-      <a class="saas-module" href={moduleUrl('qr-nfc')}><i>⌁</i><h3>QR / NFC</h3><p>Acceso rápido al contexto del activo.</p></a>
-      <a class="saas-module" href={moduleUrl('inventario')}><i>▦</i><h3>Inventario</h3><p>Materiales y herramientas vinculados.</p></a>
-      <a class="saas-module" href={moduleUrl('inspecciones')}><i>☑</i><h3>Inspecciones</h3><p>Checklists, observaciones y fotos.</p></a>
-      <a class="saas-module" href={moduleUrl('documentacion')}><i>▤</i><h3>Documentación</h3><p>Informes, manuales y archivos.</p></a>
-    </div><a class="saas-modules__link" href={modules}>Explorar todos los módulos →</a></div><figure class="saas-field-photo reveal"><img src={`${base}media/v4/field-technician-tablet-v2.webp`} alt="Técnico de mantenimiento consultando una orden de trabajo en una tablet" width="1600" height="900" loading="lazy" decoding="async"/><figcaption><strong>Información en campo</strong><span>Activos, OT y documentación donde ocurre el trabajo</span></figcaption></figure></div></div></section>
+    <section class="saas-modules" id="frentes"><div class="saas-shell"><header class="saas-modules__head reveal"><h2>Los frentes del mantenimiento.</h2><p>Una operación fiable depende de muchas disciplinas conectadas. Cada una tiene riesgos, decisiones y problemas propios que merecen ser entendidos antes de elegir cualquier herramienta.</p></header><div class="saas-modules__body"><div class="reveal"><div class="saas-module-grid">
+      <article class="saas-module"><i>▣</i><h3>Activos</h3><p>Estado, criticidad, ubicación e histórico.</p></article>
+      <article class="saas-module"><i>⚙</i><h3>Preventivo</h3><p>Frecuencias, tareas y cumplimiento real.</p></article>
+      <article class="saas-module"><i>!</i><h3>Averías</h3><p>Diagnóstico, prioridad y recurrencia.</p></article>
+      <article class="saas-module"><i>⌁</i><h3>Energía</h3><p>Consumos anómalos y rendimiento.</p></article>
+      <article class="saas-module"><i>▦</i><h3>Repuestos</h3><p>Disponibilidad, rotación y obsolescencia.</p></article>
+      <article class="saas-module"><i>☑</i><h3>Inspecciones</h3><p>Seguridad, calidad y cumplimiento.</p></article>
+      <article class="saas-module"><i>▤</i><h3>Documentación</h3><p>Planos, manuales y conocimiento técnico.</p></article>
+    </div><a class="saas-modules__link" href={solutions}>Explorar los problemas →</a></div><figure class="saas-field-photo reveal"><img src={`${base}media/v5/preventive-planning-pump-room.webp`} alt="Responsable y técnico planificando mantenimiento preventivo junto a una sala de bombas" width="1600" height="900" loading="lazy" decoding="async"/><figcaption><strong>Planificar con contexto</strong><span>Equipo, documentación y experiencia en el mismo lugar</span></figcaption></figure></div></div></section>
 
     <section class="saas-flow" aria-label="Flujo del aviso al histórico"><div class="saas-shell reveal"><h2>Del aviso al cierre. Todo el ciclo en control.</h2><p>Un flujo de trabajo claro, trazable y fácil de seguir.</p><div class="saas-flow__track"><article class="saas-flow-step"><i>!</i><strong>Incidencia</strong><span>Se detecta y registra el problema</span></article><article class="saas-flow-step"><i>✓</i><strong>Orden de trabajo</strong><span>Se planifica la intervención</span></article><article class="saas-flow-step"><i>♙</i><strong>Técnico asignado</strong><span>Recibe el contexto y ejecuta</span></article><article class="saas-flow-step"><i>✦</i><strong>Actuación</strong><span>Registra notas, tiempos y evidencias</span></article><article class="saas-flow-step"><i>▤</i><strong>Informe</strong><span>La información queda preparada</span></article><article class="saas-flow-step"><i>⌁</i><strong>Histórico</strong><span>Todo queda unido al activo</span></article></div></div></section>
 
-    <section class="saas-results"><div class="saas-shell saas-results__grid"><div class="reveal"><h2>Más control.<br/>Menos imprevistos.<span>Mejores decisiones.</span></h2><p>La demo muestra cómo una operación pequeña puede visualizar pendientes, preventivos, activos e histórico sin saltar entre hojas de cálculo, chats y carpetas.</p><ul class="saas-checks"><li>Reduce información dispersa</li><li>Da contexto al técnico antes de actuar</li><li>Hace visible qué está pendiente y qué está cerrado</li><li>Deja evidencias junto al activo correcto</li></ul><div class="saas-actions"><a class="btn btn--primary" href={demo}>Ver demo</a></div></div><div class="saas-metric-grid reveal" aria-label="Indicadores demostrativos"><article class="saas-metric"><small>Preventivo ejecutado</small><strong>76%</strong><em>Dato ficticio para mostrar la interfaz</em><div class="saas-ring" aria-hidden="true"></div></article><article class="saas-metric"><small>OT abiertas</small><strong>12</strong><em>Ejemplo de panel operativo</em><svg class="saas-mini-line" viewBox="0 0 180 72" aria-hidden="true"><path d="M3 60 C18 56 25 39 38 44 S61 63 73 41 S96 23 108 32 S129 43 142 22 S162 20 177 8"/></svg></article><article class="saas-metric"><small>Trabajos cerrados</small><strong>28</strong><em>Últimos 30 días · ejemplo</em><svg class="saas-mini-line" viewBox="0 0 180 72" aria-hidden="true"><path d="M3 62 C26 55 27 45 41 48 S68 61 79 39 S102 18 115 31 S143 46 177 10" style="stroke:#34bd87"/></svg></article><article class="saas-metric"><small>Órdenes por tipo</small><strong>Demo</strong><em>Distribución ilustrativa</em><div class="saas-donut" aria-hidden="true"></div></article></div></div></section>
-
-    <section class="saas-dark"><div class="saas-shell saas-dark__grid"><div class="reveal"><h2>Tu mantenimiento.<br/>Todo conectado.</h2><p>Prueba el recorrido comercial de IsiVoltPro con información ficticia y comprueba cómo encajaría en tu forma de trabajar antes de hablar de implantación.</p><div class="saas-actions"><a class="btn btn--primary" href={experience}>Probar IsiVoltPro</a><a class="btn" href={product}>Conocer el producto</a></div></div><div class="saas-dark-metrics reveal" aria-label="Métricas ficticias del ejemplo"><article class="saas-dark-metric"><small>Activos gestionados</small><strong>124</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Órdenes este mes</small><strong>28</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Preventivos</small><strong>8</strong><em>Ejemplo</em></article><article class="saas-dark-metric"><small>Técnicos</small><strong>4</strong><em>Ejemplo</em></article></div></div></section>
   </main>
 
   <V3CommercialFooter />

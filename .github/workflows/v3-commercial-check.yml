@@ -241,7 +241,8 @@ jobs:
           fi
           public_kb=$((total_kb - preview_kb))
           # La fotografía real optimizada añade un margen controlado sin introducir vídeo ni recursos remotos.
-          public_max_kb=3648
+          # Las nuevas fotografías editoriales WebP añaden contexto real sin cargar UI de producto.
+          public_max_kb=4160
           preview_max_kb=512
           if (( public_kb > public_max_kb )); then
             echo "::error::La superficie pública ocupa ${public_kb} KiB y supera el presupuesto de ${public_max_kb} KiB."

@@ -59,8 +59,8 @@ export const v3BlogPosts: V3BlogPost[] = [
     updatedAt: '2026-08-25',
     readMinutes: 5,
     author: 'Equipo IsiVoltPro',
-    image: '/media/v4/home-dashboard-premium.webp',
-    imageAlt: 'Panel premium de IsiVoltPro con órdenes de trabajo, activos y seguimiento operativo de mantenimiento.',
+    image: '/media/v5/maintenance-planning-team.webp',
+    imageAlt: 'Equipo de mantenimiento revisando documentación, planos y fotografías de intervenciones.',
     keywords: ['orden de trabajo', 'OT', 'histórico de mantenimiento', 'mantenimiento digital'],
     featured: true,
     sections: [

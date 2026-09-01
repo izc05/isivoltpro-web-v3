@@ -3,9 +3,6 @@ import '../styles/v3-home-daily-solutions.css';
 import { v3BlogPosts } from '../data/v3-blog';
 const base = import.meta.env.BASE_URL;
 const solutions = `${base}soluciones/`;
-const maintenanceApp = `${base}app-mantenimiento/`;
-const orders = `${base}modulos/ordenes-de-trabajo/`;
-const qr = `${base}modulos/qr-nfc/`;
 const blog = `${base}blog/`;
 const editorialPosts = v3BlogPosts.filter((post) => post.status === 'published').slice(0, 3);
 const categoryLabel = (category: string) => ({ operativa: 'Operativa', mantenimiento: 'Mantenimiento', digitalizacion: 'Digitalización', activos: 'Activos' }[category] ?? category);
@@ -17,57 +14,30 @@ const mediaHref = (path: string) => `${base}${path.replace(/^\//, '')}`;
     <header class="daily-solutions__head reveal">
       <span class="daily-solutions__eyebrow">SOLUCIONES PARA EL DÍA A DÍA</span>
       <h2 id="daily-solutions-title">Menos tiempo buscando.<br/><span>Más tiempo resolviendo.</span></h2>
-      <p>IsiVoltPro no empieza por una lista infinita de funciones. Empieza por los problemas que más tiempo roban a un autónomo o a un pequeño equipo de mantenimiento.</p>
+      <p>El mantenimiento empieza por entender dónde se pierde tiempo, información o fiabilidad. Antes de hablar de herramientas hay que reconocer bien el problema.</p>
     </header>
 
     <div class="daily-solutions__grid">
       <div class="daily-solutions__problems reveal">
-        <a href={maintenanceApp} class="daily-problem daily-problem--active">
+        <a href={solutions} class="daily-problem daily-problem--active">
           <i aria-hidden="true">!</i>
-          <div><small>01 · AVISOS</small><strong>“Se me pierden incidencias entre llamadas y WhatsApp.”</strong><span>Registra el aviso, vincúlalo al cliente o activo y conviértelo en trabajo trazable.</span></div>
+          <div><small>01 · AVISOS</small><strong>“Las incidencias llegan por demasiados canales.”</strong><span>El primer reto es capturar qué ocurre, dónde, con qué urgencia y quién necesita saberlo.</span></div>
           <b aria-hidden="true">→</b>
         </a>
-        <a href={orders} class="daily-problem">
+        <a href={solutions} class="daily-problem">
           <i aria-hidden="true">✓</i>
-          <div><small>02 · SEGUIMIENTO</small><strong>“No sé qué trabajos siguen abiertos ni quién los lleva.”</strong><span>OT, prioridad, técnico, estado, evidencias y cierre dentro del mismo recorrido.</span></div>
+          <div><small>02 · SEGUIMIENTO</small><strong>“No sabemos qué sigue abierto ni qué bloquea el trabajo.”</strong><span>Prioridades, responsabilidades, materiales y ventanas de intervención deben estar claros.</span></div>
           <b aria-hidden="true">→</b>
         </a>
-        <a href={qr} class="daily-problem">
+        <a href={solutions} class="daily-problem">
           <i aria-hidden="true">⌁</i>
-          <div><small>03 · CONTEXTO</small><strong>“Cada vez que vuelvo a un equipo tengo que buscarlo todo otra vez.”</strong><span>Escanea QR/NFC y recupera activo, histórico, documentación y trabajos relacionados.</span></div>
+          <div><small>03 · CONOCIMIENTO</small><strong>“Cada intervención empieza reconstruyendo lo que ya sabíamos.”</strong><span>Histórico, manuales, mediciones y experiencia deben sobrevivir al cambio de turno o técnico.</span></div>
           <b aria-hidden="true">→</b>
         </a>
         <a class="daily-solutions__more" href={solutions}>Ver todas las soluciones →</a>
       </div>
 
-      <div class="daily-workspace reveal" aria-label="Workspace conceptual de un día de trabajo en IsiVoltPro">
-        <div class="daily-workspace__top">
-          <div><span class="daily-workspace__mark" aria-hidden="true"></span><strong>Mi jornada</strong><small>Interfaz conceptual · datos ilustrativos</small></div>
-          <span class="daily-workspace__live"><i aria-hidden="true"></i> Operativa activa</span>
-        </div>
-
-        <div class="daily-workspace__body">
-          <aside class="daily-workspace__rail" aria-hidden="true"><i>⌂</i><i>!</i><i>✓</i><i>▣</i><i>⌁</i></aside>
-          <div class="daily-workspace__main">
-            <div class="daily-workspace__summary">
-              <div><small>HOY</small><strong>5 trabajos en curso</strong><span>2 requieren atención antes de cerrar la jornada</span></div>
-              <div class="daily-workspace__score"><small>PLAN</small><strong>3 / 5</strong><span>completados</span></div>
-            </div>
-
-            <div class="daily-workspace__timeline">
-              <article class="is-done"><time>08:10</time><i>✓</i><div><strong>Preventivo · UTA-02</strong><span>Checklist y fotos guardadas</span></div><em>Cerrado</em></article>
-              <article class="is-active"><time>10:35</time><i>!</i><div><strong>Incidencia · Cámara frigorífica</strong><span>OT asignada · técnico en desplazamiento</span></div><em>En curso</em></article>
-              <article><time>12:20</time><i>⌁</i><div><strong>Revisión · Cuadro Q-07</strong><span>Acceso mediante QR · histórico disponible</span></div><em>Planificado</em></article>
-            </div>
-
-            <div class="daily-workspace__bottom">
-              <article><small>PRÓXIMO PREVENTIVO</small><strong>Climatizadora · Zona Norte</strong><span>Programado para mañana</span></article>
-              <article class="daily-workspace__qr"><div aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p><small>ACTIVO</small><strong>UTA-02</strong><span>Escanear y continuar</span></p></article>
-            </div>
-          </div>
-        </div>
-        <a class="daily-workspace__cta" href={maintenanceApp}>Explorar App Mantenimiento <span aria-hidden="true">→</span></a>
-      </div>
+      <figure class="daily-photo reveal"><img src={`${base}media/v5/maintenance-planning-team.webp`} alt="Equipo de mantenimiento coordinando prioridades con planos y documentación técnica" width="1600" height="900" loading="lazy" decoding="async"/><figcaption><strong>Coordinar también es mantener</strong><span>Prioridades, recursos y conocimiento compartido antes de intervenir</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -85,7 +55,7 @@ const mediaHref = (path: string) => `${base}${path.replace(/^\//, '')}`;
       </div>
     </header>
 
-    <div class="home-editorial__trust reveal" aria-label="Compromisos editoriales de IsiVoltPro">
+    <div class="home-editorial__trust reveal" aria-label="Compromisos editoriales">
       <span><i aria-hidden="true">✓</i> Fuente identificada cuando aplica</span>
       <span><i aria-hidden="true">◷</i> Fecha y estado visibles</span>
       <span><i aria-hidden="true">↗</i> Aplicación práctica para mantenimiento</span>
